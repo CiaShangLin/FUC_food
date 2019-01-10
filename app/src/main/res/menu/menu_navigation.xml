@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="使用者">
+        <menu>
+            <item android:id="@+id/menu_user_setting"
+                  android:icon="@drawable/ic_user"
+                  android:title="使用者設定" />
+            <item android:id="@+id/menu_logout"
+                  android:icon="@drawable/ic_logout"
+                  android:title="登出"/>
+        </menu>
+    </item>
+
+    <group android:id="@+id/group_menu">
+        <item android:id="@+id/nav_item_four"
+              android:title="Item 4" />
+        <item android:id="@+id/nav_item_five"
+              android:title="Item 5" />
+    </group>
+
+
+
+</menu>

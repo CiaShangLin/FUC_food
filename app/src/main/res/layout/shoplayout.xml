@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<android.support.v7.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="@dimen/cardview_width"
+        android:layout_height="@dimen/cardview_height" app:cardElevation="8dp" app:cardCornerRadius="6dp"
+        app:contentPadding="4dp"
+        android:layout_margin="4dp" app:cardBackgroundColor="@color/colorPrimary">
+    <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        <TextView
+                android:text="店名"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/breakfastName"
+                app:layout_constraintTop_toBottomOf="@+id/breakfastImg"
+                app:layout_constraintStart_toStartOf="@+id/breakfastImg"
+                app:layout_constraintEnd_toEndOf="@+id/breakfastImg" android:textSize="18dp"
+                android:layout_marginTop="8dp"/>
+        <TextView
+                android:text="星數"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/breakfastStar"
+                app:layout_constraintTop_toBottomOf="@+id/breakfastName"
+                app:layout_constraintStart_toStartOf="@+id/breakfastName"
+                app:layout_constraintEnd_toEndOf="@+id/breakfastName" android:textSize="18dp"/>
+        <ImageView
+                android:layout_width="100dp"
+                android:layout_height="80dp" app:srcCompat="@drawable/ic_shop"
+                android:id="@+id/breakfastImg" app:layout_constraintTop_toTopOf="parent"
+                android:scaleType="fitXY" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+                app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"/>
+
+        <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@android:color/darker_gray"
+                app:layout_constraintTop_toBottomOf="@+id/breakfastImg" app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+    </android.support.constraint.ConstraintLayout>
+
+</android.support.v7.widget.CardView>
+
