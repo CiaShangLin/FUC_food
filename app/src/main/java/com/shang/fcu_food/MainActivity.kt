@@ -80,6 +80,7 @@ class MainActivity : AppCompatActivity() {
                         toast("登出成功")
                     }
             }
+            drawer_layout.closeDrawers()
             true
         }
 
