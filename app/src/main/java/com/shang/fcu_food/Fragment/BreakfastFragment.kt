@@ -13,8 +13,9 @@ import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.google.firebase.database.FirebaseDatabase
 import com.shang.fcu_food.Data.BreakfastShop
 import com.shang.fcu_food.R
-import com.shang.fcu_food.ShopViewHolder
+import com.shang.fcu_food.Main.SimpleShopVH
 import kotlinx.android.synthetic.main.shoplayout.view.*
+import org.jetbrains.anko.support.v4.toast
 
 class BreakfastFragment : Fragment() {
 
@@ -26,7 +27,6 @@ class BreakfastFragment : Fragment() {
             if (breakfastFragment == null) {
                 breakfastFragment = BreakfastFragment()
             }
-
             return breakfastFragment as BreakfastFragment
         }
     }
@@ -39,7 +39,7 @@ class BreakfastFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        var breakfastShop=view.findViewById<RecyclerView>(R.id.breakfastRecyc)
+        var breakfastShop = view.findViewById<RecyclerView>(R.id.breakfastRecyc)
         var query = FirebaseDatabase.getInstance().getReference().child("breakfast")
 
         var options = FirebaseRecyclerOptions
@@ -47,23 +47,29 @@ class BreakfastFragment : Fragment() {
             .setQuery(query, BreakfastShop::class.java)
             .build()
 
-        var adpter = object : FirebaseRecyclerAdapter<BreakfastShop, ShopViewHolder>(options) {
-            override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShopViewHolder {
+        var adpter = object : FirebaseRecyclerAdapter<BreakfastShop, SimpleShopVH>(options) {
+            override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SimpleShopVH {
                 var view = LayoutInflater.from(parent.context).inflate(R.layout.shoplayout, parent, false)
-                return ShopViewHolder(view)
+                return SimpleShopVH(view)
             }
 
-            override fun onBindViewHolder(holder: ShopViewHolder, position: Int, model: BreakfastShop) {
+            override fun onBindViewHolder(holder: SimpleShopVH, position: Int, model: BreakfastShop) {
                 holder.itemView.breakfastName.text = model.name
                 holder.itemView.breakfastStar.text = model.address
+                holder.itemView.setOnClickListener {
+                    toast("${model.name} ${model.address}")
+
+                }
 
 
                 Log.d("TAG", snapshots.getSnapshot(position).key + " " + model.name + " " + model.address)
             }
         }
 
-        breakfastShop.layoutManager=GridLayoutManager(activity?.baseContext,2)
-        breakfastShop.adapter=adpter
+
+
+        breakfastShop.layoutManager = GridLayoutManager(activity?.baseContext, 2)
+        breakfastShop.adapter = adpter
         adpter.startListening()
     }
 

@@ -1,6 +1,5 @@
-package com.shang.fcu_food
+package com.shang.fcu_food.Main
 
-import android.animation.Animator
 import android.app.Activity
 import android.content.Intent
 import android.net.Uri
@@ -10,20 +9,15 @@ import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import org.jetbrains.anko.toast
 import android.support.v7.app.ActionBarDrawerToggle
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.IdpResponse
-import com.firebase.ui.database.FirebaseRecyclerAdapter
-import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.google.firebase.database.*
 import com.google.firebase.storage.FirebaseStorage
-import com.shang.fcu_food.Data.Shop
+import com.shang.fcu_food.FirebaseUnits
+import com.shang.fcu_food.NetworkDialog
+import com.shang.fcu_food.PermissionUnit
+import com.shang.fcu_food.R
 import kotlinx.android.synthetic.main.drawer_layout.*
-import kotlinx.android.synthetic.main.shoplayout.view.*
 import kotlinx.android.synthetic.main.toolbar_layout.*
 import java.io.File
 
@@ -67,15 +61,20 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         toolbar.setNavigationIcon(R.drawable.ic_navigation)
 
-        val toggle = ActionBarDrawerToggle(this, drawer_layout, toolbar, R.string.app_name, R.string.app_name)
+        val toggle = ActionBarDrawerToggle(this, drawer_layout, toolbar,
+            R.string.app_name,
+            R.string.app_name
+        )
         drawer_layout.addDrawerListener(toggle)
         toggle.syncState()
 
         nav_view.setNavigationItemSelectedListener {
             when(it.itemId){
-                R.id.menu_user_setting->
-                    FirebaseUnits.auth(this)
-                R.id.menu_logout->
+                R.id.menu_user_setting ->
+                    FirebaseUnits.database_addShop()
+                    //FirebaseUnits.auth(this)
+
+                R.id.menu_logout ->
                     AuthUI.getInstance().signOut(this).addOnCompleteListener {
                         toast("登出成功")
                     }
@@ -91,14 +90,18 @@ class MainActivity : AppCompatActivity() {
         if (!PermissionUnit.checkPermission(this)) {        //已通過權限
             if (NetworkDialog.checkNetworkStatus(this)) {   //網路已開啟
                 if(FirebaseUnits.checkHasAuth()){
-                    var adapter = ViewPagerAdapter(supportFragmentManager, resources.getStringArray(R.array.ShopType))
+                    var adapter = ViewPagerAdapter(
+                        supportFragmentManager,
+                        resources.getStringArray(R.array.ShopType)
+                    )
                     viewPager.adapter = adapter
                     slidingTab.setViewPager(viewPager)
                 }else{
                     FirebaseUnits.auth(this)
                 }
             } else {
-                NetworkDialog.getInstance(handler).show(supportFragmentManager, NetworkDialog.TAG)
+                NetworkDialog.getInstance(handler)
+                    .show(supportFragmentManager, NetworkDialog.TAG)
             }
         }
     }

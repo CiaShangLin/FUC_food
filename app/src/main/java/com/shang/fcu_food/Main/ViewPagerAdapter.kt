@@ -1,4 +1,4 @@
-package com.shang.fcu_food
+package com.shang.fcu_food.Main
 
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
