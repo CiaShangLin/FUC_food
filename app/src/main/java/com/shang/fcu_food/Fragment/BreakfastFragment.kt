@@ -1,5 +1,6 @@
 package com.shang.fcu_food.Fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.GridLayoutManager
@@ -12,6 +13,7 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.google.firebase.database.FirebaseDatabase
 import com.shang.fcu_food.Data.BreakfastShop
+import com.shang.fcu_food.DetailShopActivity
 import com.shang.fcu_food.R
 import com.shang.fcu_food.Main.SimpleShopVH
 import kotlinx.android.synthetic.main.shoplayout.view.*
@@ -57,20 +59,27 @@ class BreakfastFragment : Fragment() {
                 holder.itemView.breakfastName.text = model.name
                 holder.itemView.breakfastStar.text = model.address
                 holder.itemView.setOnClickListener {
-                    toast("${model.name} ${model.address}")
-
+                    goDetailShop_Activity(model.tag,position)
                 }
-
-
                 Log.d("TAG", snapshots.getSnapshot(position).key + " " + model.name + " " + model.address)
             }
         }
 
-
-
-        breakfastShop.layoutManager = GridLayoutManager(activity?.baseContext, 2)
+        breakfastShop.layoutManager = GridLayoutManager(activity?.baseContext, 2) as RecyclerView.LayoutManager?
         breakfastShop.adapter = adpter
         adpter.startListening()
     }
+
+    fun goDetailShop_Activity(tag:String,position:Int){
+        var bundle=Bundle().apply {
+            this.putString(DetailShopActivity.TAG,tag)
+            this.putInt(DetailShopActivity.POSITION,position)
+        }
+        var intent= Intent(activity,DetailShopActivity::class.java).apply {
+            this.putExtras(bundle)
+        }
+        activity?.startActivity(intent)
+    }
+
 
 }

@@ -4,7 +4,7 @@
     <string name="networkTv">請打開網路或是WIFI</string>
     <string name="networkBt">重試</string>
 
-    <string-array name="ShopType" >
+    <string-array name="ShopType">
         <item>早餐</item>
         <item>晚餐</item>
         <item>小吃</item>
