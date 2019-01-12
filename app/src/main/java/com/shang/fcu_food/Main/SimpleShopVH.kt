@@ -9,5 +9,5 @@ import com.shang.fcu_food.R
 class SimpleShopVH(itemView: View): RecyclerView.ViewHolder(itemView) {
     var img:ImageView=itemView.findViewById<ImageView>(R.id.breakfastImg)
     var name:TextView=itemView.findViewById(R.id.breakfastName)
-    var address:TextView=itemView.findViewById(R.id.breakfastStar)
+    var star:TextView=itemView.findViewById(R.id.breakfastStar)
 }

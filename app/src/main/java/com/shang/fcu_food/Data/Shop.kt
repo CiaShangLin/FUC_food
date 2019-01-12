@@ -11,8 +11,24 @@ open class Shop {
     var star: Double = -1.0           //這個應該從Menu計算出來
     var picture: String = ""          //可能從name去storage讀取 可能是個LIST
     var menuPicture: String = ""     //菜單照片
-    var dishesList: MutableList<Dishes> = mutableListOf<Dishes>()       //這個店的菜品
+    var menu: MutableList<Menu> = mutableListOf<Menu>()       //這個店的菜品
 
     constructor()
+
+    fun getStars(): Double {
+        var total: Double = 0.0
+        var count = 0
+        for (m in menu) {
+            for (s in m.usercomment) {
+                count++
+                total += s.star
+            }
+        }
+        if (count == 0) {
+            return 0.0
+        }
+        star = total / count
+        return star
+    }
 
 }

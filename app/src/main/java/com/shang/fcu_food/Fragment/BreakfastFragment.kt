@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +12,7 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.google.firebase.database.FirebaseDatabase
 import com.shang.fcu_food.Data.BreakfastShop
-import com.shang.fcu_food.DetailShopActivity
+import com.shang.fcu_food.DetailShop.DetailShopActivity
 import com.shang.fcu_food.FirebaseUnits
 import com.shang.fcu_food.R
 import com.shang.fcu_food.Main.SimpleShopVH
@@ -57,13 +56,13 @@ class BreakfastFragment : Fragment() {
 
             override fun onBindViewHolder(holder: SimpleShopVH, position: Int, model: BreakfastShop) {
                 holder.itemView.breakfastName.text = model.name
-                holder.itemView.breakfastStar.text = model.address
+                holder.itemView.breakfastStar.text = model.getStars().toString()
 
                 FirebaseUnits.storage_loadImg(activity!!,holder.itemView.breakfastImg,model.tag,model.name)
                 holder.itemView.setOnClickListener {
                     goDetailShop_Activity(model.tag,position)
                 }
-                Log.d("TAG", snapshots.getSnapshot(position).key + " " + model.name + " " + model.address)
+                //Log.d("TAG", snapshots.getSnapshot(position).key + " " + model.name + " " + model.address)
             }
         }
 
@@ -77,7 +76,7 @@ class BreakfastFragment : Fragment() {
             this.putString(DetailShopActivity.TAG,tag)
             this.putInt(DetailShopActivity.POSITION,position)
         }
-        var intent= Intent(activity,DetailShopActivity::class.java).apply {
+        var intent= Intent(activity, DetailShopActivity::class.java).apply {
             this.putExtras(bundle)
         }
         activity?.startActivity(intent)

@@ -6,6 +6,6 @@
     <dimen name="nav_header_height">176dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
 
-    <dimen name="cardview_height">146dp</dimen>
+    <dimen name="cardview_height">160dp</dimen>
     <dimen name="cardview_width">195dp</dimen>
 </resources>
