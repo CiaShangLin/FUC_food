@@ -14,10 +14,10 @@ import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.google.firebase.database.FirebaseDatabase
 import com.shang.fcu_food.Data.BreakfastShop
 import com.shang.fcu_food.DetailShopActivity
+import com.shang.fcu_food.FirebaseUnits
 import com.shang.fcu_food.R
 import com.shang.fcu_food.Main.SimpleShopVH
-import kotlinx.android.synthetic.main.shoplayout.view.*
-import org.jetbrains.anko.support.v4.toast
+import kotlinx.android.synthetic.main.cardview_simpleshop.view.*
 
 class BreakfastFragment : Fragment() {
 
@@ -51,13 +51,15 @@ class BreakfastFragment : Fragment() {
 
         var adpter = object : FirebaseRecyclerAdapter<BreakfastShop, SimpleShopVH>(options) {
             override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SimpleShopVH {
-                var view = LayoutInflater.from(parent.context).inflate(R.layout.shoplayout, parent, false)
+                var view = LayoutInflater.from(parent.context).inflate(R.layout.cardview_simpleshop, parent, false)
                 return SimpleShopVH(view)
             }
 
             override fun onBindViewHolder(holder: SimpleShopVH, position: Int, model: BreakfastShop) {
                 holder.itemView.breakfastName.text = model.name
                 holder.itemView.breakfastStar.text = model.address
+
+                FirebaseUnits.storage_loadImg(activity!!,holder.itemView.breakfastImg,model.tag,model.name)
                 holder.itemView.setOnClickListener {
                     goDetailShop_Activity(model.tag,position)
                 }

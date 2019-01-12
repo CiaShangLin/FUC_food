@@ -2,13 +2,17 @@ package com.shang.fcu_food
 
 import android.app.Activity
 import android.content.Context
+import android.support.v4.app.FragmentActivity
 import android.util.Log
+import android.widget.ImageView
 import com.firebase.ui.auth.AuthUI
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.storage.FirebaseStorage
+import com.shang.fcu_food.Main.GlideApp
 import org.jetbrains.anko.toast
 
 class FirebaseUnits {
@@ -62,6 +66,12 @@ class FirebaseUnits {
                     Log.d("TAG",p0.key+" "+p0.value)
                 }
             })
+        }
+
+        fun storage_loadImg(activity: FragmentActivity,img:ImageView,tag:String,name:String){
+            var ref=FirebaseStorage.getInstance().getReference(tag).child(name).child("$name.JPG")
+            //var ref=FirebaseStorage.getInstance().getReference(tag).child("御方香.JPG")
+            GlideApp.with(activity).load(ref).into(img)
         }
     }
 }
