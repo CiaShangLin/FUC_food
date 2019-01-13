@@ -46,25 +46,12 @@ class BreakfastFragment : Fragment() {
             .setQuery(query, BreakfastShop::class.java)
             .build()
 
-
-        /*var adapter = object : FirebaseRecyclerAdapter<BreakfastShop, SimpleShopVH>(options) {
-            override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SimpleShopVH {
-                var view = LayoutInflater.from(parent.context).inflate(R.layout.cardview_simpleshop, parent, false)
-                return SimpleShopVH(view)
-            }
-
-            override fun onBindViewHolder(holder: SimpleShopVH, position: Int, model: BreakfastShop) {
-                holder.bind(holder, position, model, activity!!, BreakfastShop.tag)
-
-                //Log.d("TAG", snapshots.getSnapshot(position).key + " " + model.name + " " + model.address)
-            }
-        }*/
         var adapter=SimpleShopAdapter(options as FirebaseRecyclerOptions<Shop>,activity!!,BreakfastShop.tag)
 
         breakfastShop.layoutManager = GridLayoutManager(activity?.baseContext, 2) as RecyclerView.LayoutManager?
         breakfastShop.adapter = adapter
         adapter.startListening()
-
+        //Log.d("TAG", snapshots.getSnapshot(position).key + " " + model.name + " " + model.address)
     }
 
 
