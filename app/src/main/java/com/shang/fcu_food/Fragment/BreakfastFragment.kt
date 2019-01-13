@@ -36,6 +36,7 @@ class BreakfastFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
         var breakfastShop = view.findViewById<RecyclerView>(R.id.breakfastRecyc)
         var query = FirebaseDatabase.getInstance().getReference().child(BreakfastShop.tag)
 
@@ -43,6 +44,7 @@ class BreakfastFragment : Fragment() {
             .Builder<BreakfastShop>()
             .setQuery(query, BreakfastShop::class.java)
             .build()
+
 
         var adpter = object : FirebaseRecyclerAdapter<BreakfastShop, SimpleShopVH>(options) {
             override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SimpleShopVH {
