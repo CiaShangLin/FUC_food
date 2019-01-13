@@ -11,6 +11,8 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.google.firebase.database.FirebaseDatabase
 import com.shang.fcu_food.Data.BreakfastShop
+import com.shang.fcu_food.Data.Shop
+import com.shang.fcu_food.Main.SimpleShopAdapter
 import com.shang.fcu_food.R
 import com.shang.fcu_food.Main.SimpleShopVH
 
@@ -39,14 +41,13 @@ class BreakfastFragment : Fragment() {
 
         var breakfastShop = view.findViewById<RecyclerView>(R.id.breakfastRecyc)
         var query = FirebaseDatabase.getInstance().getReference().child(BreakfastShop.tag)
-
         var options = FirebaseRecyclerOptions
             .Builder<BreakfastShop>()
             .setQuery(query, BreakfastShop::class.java)
             .build()
 
 
-        var adpter = object : FirebaseRecyclerAdapter<BreakfastShop, SimpleShopVH>(options) {
+        /*var adapter = object : FirebaseRecyclerAdapter<BreakfastShop, SimpleShopVH>(options) {
             override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SimpleShopVH {
                 var view = LayoutInflater.from(parent.context).inflate(R.layout.cardview_simpleshop, parent, false)
                 return SimpleShopVH(view)
@@ -57,11 +58,12 @@ class BreakfastFragment : Fragment() {
 
                 //Log.d("TAG", snapshots.getSnapshot(position).key + " " + model.name + " " + model.address)
             }
-        }
+        }*/
+        var adapter=SimpleShopAdapter(options as FirebaseRecyclerOptions<Shop>,activity!!,BreakfastShop.tag)
 
         breakfastShop.layoutManager = GridLayoutManager(activity?.baseContext, 2) as RecyclerView.LayoutManager?
-        breakfastShop.adapter = adpter
-        adpter.startListening()
+        breakfastShop.adapter = adapter
+        adapter.startListening()
 
     }
 
