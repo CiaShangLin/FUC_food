@@ -9,4 +9,6 @@
     <dimen name="cardview_height">160dp</dimen>
     <dimen name="cardview_width">195dp</dimen>
 
+    <dimen name="cardview_image_width">120dp</dimen>
+    <dimen name="cardview_image_height">80dp</dimen>
 </resources>
