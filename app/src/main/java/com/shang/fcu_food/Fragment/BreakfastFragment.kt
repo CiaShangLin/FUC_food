@@ -1,6 +1,5 @@
 package com.shang.fcu_food.Fragment
 
-import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.GridLayoutManager
@@ -12,11 +11,8 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.google.firebase.database.FirebaseDatabase
 import com.shang.fcu_food.Data.BreakfastShop
-import com.shang.fcu_food.DetailShop.DetailShopActivity
-import com.shang.fcu_food.FirebaseUnits
 import com.shang.fcu_food.R
 import com.shang.fcu_food.Main.SimpleShopVH
-import kotlinx.android.synthetic.main.cardview_simpleshop.view.*
 
 class BreakfastFragment : Fragment() {
 
@@ -41,7 +37,7 @@ class BreakfastFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         var breakfastShop = view.findViewById<RecyclerView>(R.id.breakfastRecyc)
-        var query = FirebaseDatabase.getInstance().getReference().child("breakfast")
+        var query = FirebaseDatabase.getInstance().getReference().child(BreakfastShop.tag)
 
         var options = FirebaseRecyclerOptions
             .Builder<BreakfastShop>()
@@ -55,13 +51,8 @@ class BreakfastFragment : Fragment() {
             }
 
             override fun onBindViewHolder(holder: SimpleShopVH, position: Int, model: BreakfastShop) {
-                holder.itemView.breakfastName.text = model.name
-                holder.itemView.breakfastStar.text = model.getStars().toString()
+                holder.bind(holder, position, model, activity!!, BreakfastShop.tag)
 
-                FirebaseUnits.storage_loadImg(activity!!,holder.itemView.breakfastImg,model.tag,model.name)
-                holder.itemView.setOnClickListener {
-                    goDetailShop_Activity(model.tag,position)
-                }
                 //Log.d("TAG", snapshots.getSnapshot(position).key + " " + model.name + " " + model.address)
             }
         }
@@ -69,18 +60,9 @@ class BreakfastFragment : Fragment() {
         breakfastShop.layoutManager = GridLayoutManager(activity?.baseContext, 2) as RecyclerView.LayoutManager?
         breakfastShop.adapter = adpter
         adpter.startListening()
+
     }
 
-    fun goDetailShop_Activity(tag:String,position:Int){
-        var bundle=Bundle().apply {
-            this.putString(DetailShopActivity.TAG,tag)
-            this.putInt(DetailShopActivity.POSITION,position)
-        }
-        var intent= Intent(activity, DetailShopActivity::class.java).apply {
-            this.putExtras(bundle)
-        }
-        activity?.startActivity(intent)
-    }
 
 
 }
