@@ -59,7 +59,7 @@ class DetailShopActivity : AppCompatActivity() {
             }
 
             override fun onBindViewHolder(holder: DetailShopVH, position: Int, model: Shop) {
-                holder.bind(tag, holder, model)
+                holder.bind(tag, holder, model,this@DetailShopActivity)
             }
         }
         detailShopRecyc.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
