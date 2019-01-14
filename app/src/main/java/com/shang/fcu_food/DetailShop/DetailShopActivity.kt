@@ -13,6 +13,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.shang.fcu_food.Data.*
 import com.shang.fcu_food.R
 import kotlinx.android.synthetic.main.activity_detail_shop.*
+import org.jetbrains.anko.toast
 
 
 class DetailShopActivity : AppCompatActivity() {
@@ -38,6 +39,13 @@ class DetailShopActivity : AppCompatActivity() {
 
         detailShopTb.setTitle(R.string.ShopInformation)
         detailShopTb.inflateMenu(R.menu.menu_detailshop)
+        detailShopTb.setOnMenuItemClickListener {
+            when(it.itemId){
+                //R.id.menu_search->break
+                R.id.menu_addShop->toast("ADD SHOP")
+            }
+            true
+        }
 
         var query = FirebaseDatabase.getInstance().getReference().child(tag)
         when (tag) {

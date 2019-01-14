@@ -35,11 +35,7 @@ class DetailShopVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
         itemView.shopPhoneTv.setText(model.phone)
 
         itemView.shopMenu.layoutManager = GridLayoutManager(activity,2)
-        itemView.shopMenu.adapter=SimpleMenuAdapter(let{model.menu})
-
-
-
-
+        itemView.shopMenu.adapter=SimpleMenuAdapter(let{model.menu},activity)
     }
 
 

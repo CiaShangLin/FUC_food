@@ -22,8 +22,8 @@
                 app:layout_constraintTop_toTopOf="parent" app:layout_constraintHorizontal_bias="1.0"
                 android:layout_marginEnd="4dp" android:layout_marginStart="4dp"/>
         <ImageView
-                android:layout_width="128dp"
-                android:layout_height="128dp" app:srcCompat="@drawable/ic_shop"
+                android:layout_width="@dimen/cardview_detailImg_width"
+                android:layout_height="@dimen/cardview_detailImg_height" app:srcCompat="@drawable/ic_shop"
                 android:id="@+id/shopPictureImg" android:layout_marginTop="8dp"
                 app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginStart="8dp" android:scaleType="fitXY"/>
@@ -92,8 +92,8 @@
         <android.support.v7.widget.RecyclerView
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="4dp"
-                app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="4dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/divider2"
                 app:layout_constraintBottom_toBottomOf="parent" android:id="@+id/shopMenu"
                 app:layout_constraintHorizontal_bias="0.0"
