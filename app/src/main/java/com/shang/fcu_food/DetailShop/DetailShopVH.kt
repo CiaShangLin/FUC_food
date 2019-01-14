@@ -10,6 +10,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import com.shang.fcu_food.Data.*
+import com.shang.fcu_food.DataBind
 import com.shang.fcu_food.R
 import kotlinx.android.synthetic.main.cardview_detailshop.view.*
 
@@ -36,6 +37,7 @@ class DetailShopVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         itemView.shopMenu.layoutManager = GridLayoutManager(activity,2)
         itemView.shopMenu.adapter=SimpleMenuAdapter(let{model.menu},activity)
+
     }
 
 

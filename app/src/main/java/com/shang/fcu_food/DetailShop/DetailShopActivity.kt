@@ -11,6 +11,7 @@ import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.firebase.ui.database.FirebaseRecyclerOptions.Builder
 import com.google.firebase.database.FirebaseDatabase
 import com.shang.fcu_food.Data.*
+import com.shang.fcu_food.DataBind
 import com.shang.fcu_food.R
 import kotlinx.android.synthetic.main.activity_detail_shop.*
 import org.jetbrains.anko.toast
@@ -73,6 +74,8 @@ class DetailShopActivity : AppCompatActivity() {
         detailShopRecyc.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         detailShopRecyc.adapter = adapter as FirebaseRecyclerAdapter<Shop, DetailShopVH>
         (adapter as FirebaseRecyclerAdapter<Shop, DetailShopVH>).startListening()
+
+
 
     }
 
