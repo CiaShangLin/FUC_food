@@ -2,9 +2,15 @@ package com.shang.fcu_food
 
 import android.app.Activity
 import android.content.Context
+import android.graphics.drawable.Drawable
 import android.support.v4.app.FragmentActivity
 import android.util.Log
 import android.widget.ImageView
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.RequestOptions
+import com.bumptech.glide.request.target.Target
 import com.firebase.ui.auth.AuthUI
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.ChildEventListener
@@ -71,7 +77,14 @@ class FirebaseUnits {
         fun storage_loadImg(activity: FragmentActivity,img:ImageView,tag:String,name:String){
             var ref=FirebaseStorage.getInstance().getReference(tag).child(name).child("$name.JPG")
             //var ref=FirebaseStorage.getInstance().getReference(tag).child("御方香.JPG")
-            GlideApp.with(activity).load(ref).into(img)
+
+            var option:RequestOptions=RequestOptions().circleCrop()
+            ref.downloadUrl.addOnSuccessListener {
+                GlideApp.with(activity).load(it).apply(option).into(img)
+            }.addOnFailureListener {
+                Log.d("TAG","載入失敗"+it.toString())
+            }
+
         }
     }
 }
