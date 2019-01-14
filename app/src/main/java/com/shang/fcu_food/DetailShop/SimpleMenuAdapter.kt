@@ -38,7 +38,7 @@ class SimpleMenuVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
         holder.itemView.simpleMenuPrice.setText(model.price.toString())
         holder.itemView.simpleMenuStar.setText("3.5")
         holder.itemView.setOnClickListener {
-            
+
         }
 
     }

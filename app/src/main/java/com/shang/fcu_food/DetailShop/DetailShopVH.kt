@@ -1,6 +1,8 @@
 package com.shang.fcu_food.DetailShop
 
 import android.app.Activity
+import android.graphics.Canvas
+import android.graphics.Rect
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
@@ -32,9 +34,7 @@ class DetailShopVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
         itemView.shopStarTv.setText(model.getStars().toString())
         itemView.shopPhoneTv.setText(model.phone)
 
-
         itemView.shopMenu.layoutManager = GridLayoutManager(activity,2)
-
         itemView.shopMenu.adapter=SimpleMenuAdapter(let{model.menu})
 
 
