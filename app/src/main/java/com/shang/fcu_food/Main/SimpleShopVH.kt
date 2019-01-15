@@ -1,5 +1,6 @@
 package com.shang.fcu_food.Main
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.FragmentActivity
@@ -7,6 +8,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import com.bumptech.glide.request.RequestOptions
 import com.shang.fcu_food.Data.*
 import com.shang.fcu_food.DetailShop.DetailShopActivity
 import com.shang.fcu_food.FirebaseUnits
@@ -18,29 +20,30 @@ class SimpleShopVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
     var name: TextView = itemView.findViewById(R.id.simpleShopName)
     var star: TextView = itemView.findViewById(R.id.simpleShopStar)
 
-    fun bind(holder: SimpleShopVH, position: Int, model: Shop, activity: FragmentActivity, tag: String) {
+    fun bind(position: Int, model: Shop, tag: String) {
+
         when (tag) {
             BreakfastShop.tag -> model as BreakfastShop
             DinnerShop.tag -> model as DinnerShop
             SnackShop.tag -> model as SnackShop
             DrinkShop.tag -> model as DrinkShop
         }
-        holder.itemView.simpleShopName.text = model.name
-        holder.itemView.simpleShopStar.text = model.star.toString()
-        FirebaseUnits.storage_loadImg(activity!!, holder.itemView.simpleShopImg, tag, model.name)
-        holder.itemView.setOnClickListener {
-            goDetailShop_Activity(activity, tag, position)
+        itemView.simpleShopName.text = model.name
+        itemView.simpleShopStar.text = model.star.toString()
+        FirebaseUnits.storage_loadImg(itemView.context, itemView.simpleShopImg, tag, model.name, RequestOptions().circleCrop())
+        itemView.setOnClickListener {
+            goDetailShop_Activity(itemView.context, tag, position)
         }
     }
 
-    fun goDetailShop_Activity(activity: FragmentActivity, tag: String, position: Int) {
+    fun goDetailShop_Activity(context: Context, tag: String, position: Int) {
         var bundle = Bundle().apply {
             this.putString(DetailShopActivity.TAG, tag)
             this.putInt(DetailShopActivity.POSITION, position)
         }
-        var intent = Intent(activity, DetailShopActivity::class.java).apply {
+        var intent = Intent(context, DetailShopActivity::class.java).apply {
             this.putExtras(bundle)
         }
-        activity?.startActivity(intent)
+        context.startActivity(intent)
     }
 }

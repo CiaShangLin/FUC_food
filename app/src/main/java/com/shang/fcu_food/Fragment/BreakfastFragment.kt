@@ -46,7 +46,7 @@ class BreakfastFragment : Fragment() {
             .setQuery(query, BreakfastShop::class.java)
             .build()
 
-        var adapter=SimpleShopAdapter(options as FirebaseRecyclerOptions<Shop>,activity!!,BreakfastShop.tag)
+        var adapter=SimpleShopAdapter(options as FirebaseRecyclerOptions<Shop>,BreakfastShop.tag)
 
         breakfastShop.layoutManager = GridLayoutManager(activity?.baseContext, 2) as RecyclerView.LayoutManager?
         breakfastShop.adapter = adapter

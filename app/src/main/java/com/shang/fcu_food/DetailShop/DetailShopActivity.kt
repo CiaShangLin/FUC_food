@@ -30,7 +30,6 @@ class DetailShopActivity : AppCompatActivity() {
     lateinit var adapter: Any
     lateinit var options: Any
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail_shop)
@@ -68,7 +67,7 @@ class DetailShopActivity : AppCompatActivity() {
             }
 
             override fun onBindViewHolder(holder: DetailShopVH, position: Int, model: Shop) {
-                holder.bind(tag, holder, model,this@DetailShopActivity)
+                holder.bind(tag,model)
             }
         }
         detailShopRecyc.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)

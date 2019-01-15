@@ -57,7 +57,7 @@ class DetailMenuActivity : AppCompatActivity() {
             }
 
             override fun onBindViewHolder(holder: DetailMenuVH, position: Int, model: Menu) {
-                holder.bind(holder, position, model)
+                holder.bind(position, model)
             }
         }
         detailMenuRecyc.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)

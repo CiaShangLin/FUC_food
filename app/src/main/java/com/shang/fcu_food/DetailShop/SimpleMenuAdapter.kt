@@ -27,7 +27,7 @@ class SimpleMenuAdapter(var menuList: MutableList<Menu>,var onItemClick:OnItemCl
     override fun getItemCount(): Int = menuList.size
 
     override fun onBindViewHolder(holder: SimpleMenuVH, position: Int) {
-        holder.bind(holder, position, menuList,onItemClick)
+        holder.bind(position, menuList,onItemClick)
     }
 }
 
@@ -37,19 +37,18 @@ class SimpleMenuVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
     var simpleMenuStar = itemView.findViewById<TextView>(R.id.simpleMenuStar)
     var simpleMenuImg = itemView.findViewById<ImageView>(R.id.simpleMenuImg)
 
-    fun bind(holder: SimpleMenuVH, position: Int, model: MutableList<Menu>,onItemClick:OnItemClickHandler) {
-        holder.itemView.simpleMenuName.setText(model.get(position).name)
-        holder.itemView.simpleMenuPrice.setText(model.get(position).price.toString() + "元")
-        holder.itemView.simpleMenuStar.setText(model.get(position).star.toString())
-        holder.itemView.setOnClickListener {
+    fun bind(position: Int, model: MutableList<Menu>,onItemClick:OnItemClickHandler) {
+        itemView.simpleMenuName.setText(model.get(position).name)
+        itemView.simpleMenuPrice.setText(model.get(position).price.toString() + "元")
+        itemView.simpleMenuStar.setText(model.get(position).star.toString())
+        itemView.setOnClickListener {
             DataBind.menu=model //梆定menu資料
             var bundle = Bundle().apply {
                 this.putInt(DetailMenuActivity.POSITION, position)
             }
             onItemClick.onItemClick(bundle)
         }
-
-
     }
+
 }
 

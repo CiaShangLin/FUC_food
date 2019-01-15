@@ -17,13 +17,13 @@ class DetailMenuVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
     var menuCommentRecyc = itemView.findViewById<RecyclerView>(R.id.menuCommentRecyc)
     var menuPictureImg = itemView.findViewById<ImageView>(R.id.menuPictureImg)
 
-    fun bind(holder: DetailMenuVH, position: Int, model: Menu){
-        holder.menuNameTv.setText(model.name)
-        holder.menuPriceTv.setText("${model.price}元")
-        holder.menuStarTv.setText("${model.star}")
-        holder.menuCommentTv.setText("${model.usercomment.size}人")
+    fun bind(position: Int, model: Menu){
+        itemView.menuNameTv.setText(model.name)
+        itemView.menuPriceTv.setText("${model.price}元")
+        itemView.menuStarTv.setText("${model.star}")
+        itemView.menuCommentTv.setText("${model.usercomment.size}人")
 
-        holder.menuCommentRecyc.layoutManager=LinearLayoutManager(holder.itemView.context)
-        holder.menuCommentRecyc.adapter=CommentAdapter(mutableListOf())
+        itemView.menuCommentRecyc.layoutManager=LinearLayoutManager(itemView.context)
+        itemView.menuCommentRecyc.adapter=CommentAdapter(mutableListOf())
     }
 }

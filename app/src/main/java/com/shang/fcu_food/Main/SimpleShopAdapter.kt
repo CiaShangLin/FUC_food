@@ -12,14 +12,14 @@ import com.shang.fcu_food.DetailShop.DetailShopVH
 import com.shang.fcu_food.Main.SimpleShopVH
 import com.shang.fcu_food.R
 
-class SimpleShopAdapter(options: FirebaseRecyclerOptions<Shop>, activity: FragmentActivity, tag:String) :
-    FirebaseRecyclerAdapter<Shop,SimpleShopVH>(options){
+class SimpleShopAdapter(options: FirebaseRecyclerOptions<Shop>, tag: String) :
+    FirebaseRecyclerAdapter<Shop, SimpleShopVH>(options) {
 
-    lateinit var activity:FragmentActivity
-    lateinit var tag:String
+
+    lateinit var tag: String
+
     init {
-        this.activity=activity
-        this.tag=tag
+        this.tag = tag
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, position: Int): SimpleShopVH {
@@ -28,7 +28,7 @@ class SimpleShopAdapter(options: FirebaseRecyclerOptions<Shop>, activity: Fragme
     }
 
     override fun onBindViewHolder(holder: SimpleShopVH, position: Int, model: Shop) {
-        holder.bind(holder,position,model,activity,tag)
+        holder.bind(position, model, tag)
     }
 
 

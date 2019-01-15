@@ -74,13 +74,11 @@ class FirebaseUnits {
             })
         }
 
-        fun storage_loadImg(activity: FragmentActivity,img:ImageView,tag:String,name:String){
+        fun storage_loadImg(context: Context,img:ImageView,tag:String,name:String,option:RequestOptions){
             var ref=FirebaseStorage.getInstance().getReference(tag).child(name).child("$name.JPG")
             //var ref=FirebaseStorage.getInstance().getReference(tag).child("御方香.JPG")
-
-            var option:RequestOptions=RequestOptions().circleCrop()
             ref.downloadUrl.addOnSuccessListener {
-                GlideApp.with(activity).load(it).apply(option).into(img)
+                GlideApp.with(context).load(it).apply(option).into(img)
             }.addOnFailureListener {
                 Log.d("TAG","載入失敗"+it.toString())
             }
