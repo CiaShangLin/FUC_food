@@ -43,6 +43,7 @@ class DetailShopVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
                 SimpleMenuAdapter(let { model.menu }, getItemClick(tag, model.id.toString(), activity))
     }
 
+    //傳遞shop的id和type 還有position
     fun getItemClick(tag: String, id: String, activity: Activity): OnItemClickHandler {
         var itemClick = object : OnItemClickHandler {
             override fun onItemClick(bundle: Bundle) {

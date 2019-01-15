@@ -11,15 +11,26 @@ class DetailMenuActivity : AppCompatActivity() {
     //店家類型TAG 店家的KEY 點選位置POSITION
     //update SHOP_TYPE_TAG+SHOP_ID+"menu"+menu_id+usercomment+"comment_size"
     companion object {
-        val POSITION="POSITION"
-        val SHOP_TYPE_TAG="SHOP_TYPE_TAG"
-        val SHOP_ID="SHOP_ID"
+        val POSITION = "POSITION"
+        val SHOP_TYPE_TAG = "SHOP_TYPE_TAG"
+        val SHOP_ID = "SHOP_ID"
     }
+
+    var shop_type_tag: String = ""
+    var shop_id: String = ""
+    var position: Int = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail_menu)
 
-        Log.d("TAG_B",intent.extras.getString("TAG")+" "+intent.extras.getString("ID")+" "+intent.extras.getInt(POSITION))
+        var intent = intent.extras
+        if (intent != null) {
+            shop_type_tag = intent.getString(SHOP_TYPE_TAG)
+            shop_id = intent.getString(SHOP_ID)
+            position = intent.getInt(POSITION)
+        }
+
 
     }
 }
