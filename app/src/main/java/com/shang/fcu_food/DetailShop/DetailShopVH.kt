@@ -35,7 +35,7 @@ class DetailShopVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
         }
         itemView.shopNameTv.setText(model.name)
         itemView.shopOpenTv.setText(model.time)
-        itemView.shopStarTv.setText(model.getStars().toString())
+        itemView.shopStarTv.setText(model.star.toString())
         itemView.shopPhoneTv.setText(model.phone)
 
         itemView.shopMenu.layoutManager = GridLayoutManager(activity, 2)

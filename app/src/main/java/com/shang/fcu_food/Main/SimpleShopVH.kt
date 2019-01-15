@@ -26,7 +26,7 @@ class SimpleShopVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
             DrinkShop.tag -> model as DrinkShop
         }
         holder.itemView.simpleShopName.text = model.name
-        holder.itemView.simpleShopStar.text = model.getStars().toString()
+        holder.itemView.simpleShopStar.text = model.star.toString()
         FirebaseUnits.storage_loadImg(activity!!, holder.itemView.simpleShopImg, tag, model.name)
         holder.itemView.setOnClickListener {
             goDetailShop_Activity(activity, tag, position)
