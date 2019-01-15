@@ -16,7 +16,7 @@ import com.shang.fcu_food.DetailMenu.DetailMenuActivity
 import com.shang.fcu_food.R
 import kotlinx.android.synthetic.main.cardview_simplemenu.view.*
 
-class SimpleMenuAdapter(var menuList: MutableList<Menu>, var activity: Activity) :
+class SimpleMenuAdapter(var menuList: MutableList<Menu>,var onItemClick:OnItemClickHandler) :
     RecyclerView.Adapter<SimpleMenuVH>() {
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): SimpleMenuVH {
@@ -27,7 +27,7 @@ class SimpleMenuAdapter(var menuList: MutableList<Menu>, var activity: Activity)
     override fun getItemCount(): Int = menuList.size
 
     override fun onBindViewHolder(holder: SimpleMenuVH, position: Int) {
-        holder.bind(holder, position, menuList, activity)
+        holder.bind(holder, position, menuList,onItemClick)
     }
 }
 
@@ -37,7 +37,7 @@ class SimpleMenuVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
     var simpleMenuStar = itemView.findViewById<TextView>(R.id.simpleMenuStar)
     var simpleMenuImg = itemView.findViewById<ImageView>(R.id.simpleMenuImg)
 
-    fun bind(holder: SimpleMenuVH, position: Int, model: MutableList<Menu>, activity: Activity) {
+    fun bind(holder: SimpleMenuVH, position: Int, model: MutableList<Menu>,onItemClick:OnItemClickHandler) {
         holder.itemView.simpleMenuName.setText(model.get(position).name)
         holder.itemView.simpleMenuPrice.setText(model.get(position).price.toString() + "元")
         holder.itemView.simpleMenuStar.setText(model.get(position).star.toString())
@@ -46,11 +46,10 @@ class SimpleMenuVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
             var bundle = Bundle().apply {
                 this.putInt(DetailMenuActivity.POSITION, position)
             }
-            var intent = Intent(activity, DetailMenuActivity::class.java).apply {
-                this.putExtras(bundle)
-            }
-            activity?.startActivity(intent)
+            onItemClick.onItemClick(bundle)
         }
+
 
     }
 }
+

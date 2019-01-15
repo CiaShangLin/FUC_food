@@ -1,5 +1,6 @@
 package com.shang.fcu_food.DetailShop
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
@@ -73,12 +74,16 @@ class DetailShopActivity : AppCompatActivity() {
         }
         detailShopRecyc.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         detailShopRecyc.adapter = adapter as FirebaseRecyclerAdapter<Shop, DetailShopVH>
-        (adapter as FirebaseRecyclerAdapter<Shop, DetailShopVH>).startListening()
-
-
-
     }
 
+    override fun onStart() {
+        super.onStart()
+        (adapter as FirebaseRecyclerAdapter<Shop, DetailShopVH>).startListening()
+    }
 
+    override fun onStop() {
+        super.onStop()
+        (adapter as FirebaseRecyclerAdapter<Shop, DetailShopVH>).stopListening()
+    }
 }
 
