@@ -48,11 +48,11 @@ class DetailMenuActivity : AppCompatActivity() {
                 }
 
                 override fun onDataChange(p0: DataSnapshot) {
-                    for(data in p0.children){
-                        var menu=data.value as Menu
-                        Log.d("TAG",menu.name+" "+menu.price+" "+menu.usercomment)
+                    Log.d("TAG",p0.value.toString())
+                    for(p in p0.children){
+                        var menu=p.getValue(Menu::class.java)
+                        Log.d("TAG","${menu?.name} ${menu?.price} ${menu?.star}")
                     }
-
                 }
             })
 
