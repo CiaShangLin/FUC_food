@@ -5,7 +5,7 @@
     <string name="networkBt">重試</string>
 
     <string name="ShopInformation">店家資訊</string>
-
+    <string name="MenuInformation">菜單資訊</string>
     <string-array name="ShopType">
         <item>早餐</item>
         <item>晚餐</item>

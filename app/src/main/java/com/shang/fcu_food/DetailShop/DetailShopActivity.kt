@@ -39,7 +39,6 @@ class DetailShopActivity : AppCompatActivity() {
         tag = intent.extras.getString(TAG)
         Log.v("TAG", "$position $tag")
 
-        detailShopTb.setTitle(R.string.ShopInformation)
         detailShopTb.inflateMenu(R.menu.menu_detailshop)
         detailShopTb.setOnMenuItemClickListener {
             when(it.itemId){
