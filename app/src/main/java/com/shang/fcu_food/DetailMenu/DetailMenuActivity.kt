@@ -3,6 +3,12 @@ package com.shang.fcu_food.DetailMenu
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import com.firebase.ui.database.FirebaseRecyclerAdapter
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+import com.shang.fcu_food.Data.Menu
 import com.shang.fcu_food.DataBind
 import com.shang.fcu_food.R
 
@@ -20,6 +26,9 @@ class DetailMenuActivity : AppCompatActivity() {
     var shop_id: String = ""
     var position: Int = 0
 
+    lateinit var adapter: Any
+    lateinit var options: Any
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail_menu)
@@ -30,6 +39,22 @@ class DetailMenuActivity : AppCompatActivity() {
             shop_id = intent.getString(SHOP_ID)
             position = intent.getInt(POSITION)
         }
+
+        Log.d("TAG","REF:"+"$shop_type_tag/$shop_id/menu")
+        var query=FirebaseDatabase.getInstance().getReference().child("$shop_type_tag/$shop_id/menu")
+            .addListenerForSingleValueEvent(object :ValueEventListener{
+                override fun onCancelled(p0: DatabaseError) {
+
+                }
+
+                override fun onDataChange(p0: DataSnapshot) {
+                    for(data in p0.children){
+                        var menu=data.value as Menu
+                        Log.d("TAG",menu.name+" "+menu.price+" "+menu.usercomment)
+                    }
+
+                }
+            })
 
 
     }
