@@ -29,7 +29,7 @@ class DetailShopActivity : AppCompatActivity() {
     var tag: String = ""
     lateinit var adapter: Any
     lateinit var options: Any
-    lateinit var layoutManager: LinearLayoutManager
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,22 +71,20 @@ class DetailShopActivity : AppCompatActivity() {
                 holder.bind(tag,model)
             }
         }
-        layoutManager=LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-        detailShopRecyc.layoutManager = layoutManager
+
+        detailShopRecyc.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         detailShopRecyc.adapter = adapter as FirebaseRecyclerAdapter<Shop, DetailShopVH>
 
     }
 
     override fun onResume() {
         super.onResume()
-        Log.d("TAG","onResume $position")
-        layoutManager.scrollToPositionWithOffset(position,0)
-        layoutManager.stackFromEnd=true
+
+        detailShopRecyc.smoothScrollToPosition(position)
     }
 
     override fun onStart() {
         super.onStart()
-        Log.d("TAG","onStart")
         (adapter as FirebaseRecyclerAdapter<Shop, DetailShopVH>).startListening()
     }
 

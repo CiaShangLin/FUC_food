@@ -47,7 +47,6 @@ class DetailMenuActivity : AppCompatActivity() {
             position = intent.getInt(POSITION)
         }
         Log.d("TAG", "$position")
-
         Log.d("TAG", "REF:" + "$shop_type_tag/$shop_id/menu")
 
         var query = FirebaseDatabase.getInstance().getReference().child("$shop_type_tag/$shop_id/menu")
@@ -63,17 +62,20 @@ class DetailMenuActivity : AppCompatActivity() {
             }
         }
 
-        detailMenuRecyc.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        var layoutManager=LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        detailMenuRecyc.layoutManager = layoutManager
         detailMenuRecyc.adapter = adapter as FirebaseRecyclerAdapter<Menu, DetailMenuVH>
-        (detailMenuRecyc.layoutManager as LinearLayoutManager).scrollToPositionWithOffset(position, 0)
-        (detailMenuRecyc.layoutManager as LinearLayoutManager).stackFromEnd = true
+    }
 
+    override fun onResume() {
+        super.onResume()
+        detailMenuRecyc.smoothScrollToPosition(position)
     }
 
     override fun onStart() {
         super.onStart()
         (adapter as FirebaseRecyclerAdapter<Menu, DetailMenuVH>).startListening()
-
+        
     }
 
     override fun onStop() {
