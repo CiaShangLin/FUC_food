@@ -7,4 +7,8 @@ class User {
     var uid:String=""
 
     constructor()
+
+    override fun toString(): String {
+        return "$name $sex $uid $picture"
+    }
 }

@@ -11,11 +11,10 @@ import org.jetbrains.anko.toast
 import android.support.v7.app.ActionBarDrawerToggle
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.IdpResponse
+import com.firebase.ui.auth.data.model.User
 import com.google.firebase.database.*
 import com.google.firebase.storage.FirebaseStorage
-import com.shang.fcu_food.FirebaseUnits
-import com.shang.fcu_food.NetworkDialog
-import com.shang.fcu_food.PermissionUnit
+import com.shang.fcu_food.*
 import com.shang.fcu_food.R
 import kotlinx.android.synthetic.main.drawer_layout.*
 import kotlinx.android.synthetic.main.toolbar_layout.*
@@ -71,13 +70,31 @@ class MainActivity : AppCompatActivity() {
         nav_view.setNavigationItemSelectedListener {
             when(it.itemId){
                 R.id.menu_user_setting ->
-                    FirebaseUnits.database_addShop()
+                    FirebaseDatabase.getInstance().getReference().child("user").addValueEventListener(
+                        object :ValueEventListener{
+                            override fun onCancelled(p0: DatabaseError) {
+                                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                            }
+
+                            override fun onDataChange(p0: DataSnapshot) {
+                                for(p in p0.children){
+                                    var user=p.getValue(com.shang.fcu_food.Data.User::class.java)
+                                    user?.uid=p.key!!
+                                    Log.d("TAG","${user.toString()}")
+                                }
+                            }
+
+                        }
+                    )
                     //FirebaseUnits.auth(this)
 
                 R.id.menu_logout ->
-                    AuthUI.getInstance().signOut(this).addOnCompleteListener {
+                    CommentDialog().show(supportFragmentManager,"")
+
+                    /*AuthUI.getInstance().signOut(this).addOnCompleteListener {
                         toast("登出成功")
-                    }
+                        finish()
+                    }*/
             }
             drawer_layout.closeDrawers()
             true

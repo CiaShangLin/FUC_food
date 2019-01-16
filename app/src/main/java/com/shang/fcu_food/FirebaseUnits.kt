@@ -13,6 +13,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.Target
 import com.firebase.ui.auth.AuthUI
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -32,7 +33,7 @@ class FirebaseUnits {
             return FirebaseAuth.getInstance().currentUser != null
         }
 
-        fun auth_Login(activity: Activity) {
+        fun auth_Login(activity: Activity) {   //註冊與登入
             val providers =
                 arrayListOf<AuthUI.IdpConfig>(AuthUI.IdpConfig.EmailBuilder().build())
 
@@ -44,6 +45,12 @@ class FirebaseUnits {
             )
         }
 
+        //取得user
+        fun auth_getUser(): FirebaseUser? {
+            return  FirebaseAuth.getInstance().currentUser
+        }
+
+        //storage載入圖片
         fun storage_loadImg(context: Context, img: ImageView, tag: String, name: String, option: RequestOptions) {
             var ref = FirebaseStorage.getInstance().getReference(tag).child(name).child("$name.JPG")
             //var ref=FirebaseStorage.getInstance().getReference(tag).child("御方香.JPG")
@@ -54,15 +61,20 @@ class FirebaseUnits {
             }
         }
 
+        //database更新評論
         fun database_addCommemt(tag: String, shop_id: String, menu_id: String, comment_size: String, comment: String) {
             val ref_path = "$tag/$shop_id/menu/$menu_id/usercomment/$comment_size"
             val ref = FirebaseDatabase.getInstance().getReference().child(ref_path)
-            Log.d("TAG",ref_path)
+            Log.d("TAG", ref_path)
             var map = mutableMapOf<String, Any>()
-            map.put("comment",comment)
-            map.put("uid","XXX")
-            map.put("star",4.0)
-            ref.updateChildren(map)
+            map.put("comment", comment)
+            map.put("uid", "XXX")
+            map.put("star", 4.0)
+            ref.updateChildren(map).addOnSuccessListener {
+
+            }.addOnFailureListener {
+
+            }
         }
     }
 }

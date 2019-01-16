@@ -9,7 +9,7 @@ class UserComment {
     var star: Double = -1.0        //使用者給予的星數
     constructor()
 
-    @Exclude
+
     fun toMap():MutableMap<String,Any>{
 
         var map= mutableMapOf<String,Any>()
