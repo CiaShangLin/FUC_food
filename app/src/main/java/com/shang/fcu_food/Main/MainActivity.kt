@@ -97,7 +97,7 @@ class MainActivity : AppCompatActivity() {
                     viewPager.adapter = adapter
                     slidingTab.setViewPager(viewPager)
                 }else{
-                    FirebaseUnits.auth(this)
+                    FirebaseUnits.auth_Login(this)
                 }
             } else {
                 NetworkDialog.getInstance(handler)

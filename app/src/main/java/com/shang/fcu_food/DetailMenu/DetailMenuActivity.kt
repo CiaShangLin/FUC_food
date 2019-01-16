@@ -26,15 +26,14 @@ class DetailMenuActivity : AppCompatActivity() {
         val POSITION = "POSITION"
         val SHOP_TYPE_TAG = "SHOP_TYPE_TAG"
         val SHOP_ID = "SHOP_ID"
-    }
 
-    var shop_type_tag: String = ""
-    var shop_id: String = ""
-    var position: Int = 0
+        var shop_type_tag: String = ""
+        var shop_id: String = ""
+        var position: Int = 0
+    }
 
     lateinit var adapter: Any
     lateinit var options: Any
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

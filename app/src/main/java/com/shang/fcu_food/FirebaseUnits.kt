@@ -18,6 +18,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
+import com.shang.fcu_food.Data.UserComment
 import com.shang.fcu_food.Main.GlideApp
 import org.jetbrains.anko.toast
 
@@ -31,7 +32,7 @@ class FirebaseUnits {
             return FirebaseAuth.getInstance().currentUser != null
         }
 
-        fun auth(activity: Activity) {
+        fun auth_Login(activity: Activity) {
             val providers =
                 arrayListOf<AuthUI.IdpConfig>(AuthUI.IdpConfig.EmailBuilder().build())
 
@@ -43,37 +44,6 @@ class FirebaseUnits {
             )
         }
 
-        fun database_addShop() {
-            val database = FirebaseDatabase.getInstance()
-            val myRef = database.getReference("breakfast/4")
-            var map = mutableMapOf<String, Any>()
-            map.put("address", "EEE")
-            map.put("name", "EEE")
-            myRef.updateChildren(map)
-
-            myRef.addChildEventListener(object : ChildEventListener {
-                override fun onCancelled(p0: DatabaseError) {
-                    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-                }
-
-                override fun onChildMoved(p0: DataSnapshot, p1: String?) {
-                    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-                }
-
-                override fun onChildChanged(p0: DataSnapshot, p1: String?) {
-                    Log.d("TAG Change", p1 + " " + p0.key + " " + p0.value)
-                }
-
-                override fun onChildRemoved(p0: DataSnapshot) {
-                    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-                }
-
-                override fun onChildAdded(p0: DataSnapshot, p1: String?) {
-                    Log.d("TAG", p0.key + " " + p0.value)
-                }
-            })
-        }
-
         fun storage_loadImg(context: Context, img: ImageView, tag: String, name: String, option: RequestOptions) {
             var ref = FirebaseStorage.getInstance().getReference(tag).child(name).child("$name.JPG")
             //var ref=FirebaseStorage.getInstance().getReference(tag).child("御方香.JPG")
@@ -82,7 +52,17 @@ class FirebaseUnits {
             }.addOnFailureListener {
                 Log.d("TAG", "載入失敗" + it.toString())
             }
+        }
 
+        fun database_addCommemt(tag: String, shop_id: String, menu_id: String, comment_size: String, comment: String) {
+            val ref_path = "$tag/$shop_id/menu/$menu_id/usercomment/$comment_size"
+            val ref = FirebaseDatabase.getInstance().getReference().child(ref_path)
+            Log.d("TAG",ref_path)
+            var map = mutableMapOf<String, Any>()
+            map.put("comment",comment)
+            map.put("uid","XXX")
+            map.put("star",4.0)
+            ref.updateChildren(map)
         }
     }
 }

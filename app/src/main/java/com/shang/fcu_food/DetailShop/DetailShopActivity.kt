@@ -79,7 +79,6 @@ class DetailShopActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-
         detailShopRecyc.smoothScrollToPosition(position)
     }
 
