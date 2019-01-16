@@ -17,6 +17,7 @@ class DetailMenuVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
     var menuCommentRecyc = itemView.findViewById<RecyclerView>(R.id.menuCommentRecyc)
     var menuPictureImg = itemView.findViewById<ImageView>(R.id.menuPictureImg)
 
+
     fun bind(position: Int, model: Menu){
         itemView.menuNameTv.setText(model.name)
         itemView.menuPriceTv.setText("${model.price}元")
@@ -24,7 +25,7 @@ class DetailMenuVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
         itemView.menuCommentTv.setText("${model.usercomment.size}人")
 
         itemView.menuCommentRecyc.layoutManager=LinearLayoutManager(itemView.context)
-        itemView.menuCommentRecyc.adapter=CommentAdapter(mutableListOf())
+        itemView.menuCommentRecyc.adapter=CommentAdapter(model.usercomment)
 
     }
 }

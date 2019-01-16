@@ -75,7 +75,7 @@ class DetailMenuActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         (adapter as FirebaseRecyclerAdapter<Menu, DetailMenuVH>).startListening()
-        
+
     }
 
     override fun onStop() {
