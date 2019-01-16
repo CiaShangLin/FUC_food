@@ -25,6 +25,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".DetailShop.DetailShopActivity">
+
         </activity>
         <activity android:name=".DetailMenu.DetailMenuActivity">
         </activity>
