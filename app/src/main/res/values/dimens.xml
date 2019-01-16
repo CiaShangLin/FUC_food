@@ -17,4 +17,9 @@
 
 
     <dimen name="cardview_comment_height">100dp</dimen>
+
+    <dimen name="cardview_small_icon_width">24dp</dimen>
+    <dimen name="cardview_small_icon_height">24dp</dimen>
+
+
 </resources>

@@ -43,7 +43,7 @@ class FirebaseUnits {
             )
         }
 
-        fun database_addShop(){
+        fun database_addShop() {
             val database = FirebaseDatabase.getInstance()
             val myRef = database.getReference("breakfast/4")
             var map = mutableMapOf<String, Any>()
@@ -69,18 +69,18 @@ class FirebaseUnits {
                 }
 
                 override fun onChildAdded(p0: DataSnapshot, p1: String?) {
-                    Log.d("TAG",p0.key+" "+p0.value)
+                    Log.d("TAG", p0.key + " " + p0.value)
                 }
             })
         }
 
-        fun storage_loadImg(context: Context,img:ImageView,tag:String,name:String,option:RequestOptions){
-            var ref=FirebaseStorage.getInstance().getReference(tag).child(name).child("$name.JPG")
+        fun storage_loadImg(context: Context, img: ImageView, tag: String, name: String, option: RequestOptions) {
+            var ref = FirebaseStorage.getInstance().getReference(tag).child(name).child("$name.JPG")
             //var ref=FirebaseStorage.getInstance().getReference(tag).child("御方香.JPG")
             ref.downloadUrl.addOnSuccessListener {
                 GlideApp.with(context).load(it).apply(option).into(img)
             }.addOnFailureListener {
-                Log.d("TAG","載入失敗"+it.toString())
+                Log.d("TAG", "載入失敗" + it.toString())
             }
 
         }

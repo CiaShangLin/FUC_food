@@ -35,6 +35,7 @@ class DetailMenuActivity : AppCompatActivity() {
     lateinit var adapter: Any
     lateinit var options: Any
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail_menu)
@@ -45,6 +46,7 @@ class DetailMenuActivity : AppCompatActivity() {
             shop_id = intent.getString(SHOP_ID)
             position = intent.getInt(POSITION)
         }
+        Log.d("TAG", "$position")
 
         Log.d("TAG", "REF:" + "$shop_type_tag/$shop_id/menu")
 
@@ -60,13 +62,18 @@ class DetailMenuActivity : AppCompatActivity() {
                 holder.bind(position, model)
             }
         }
+
         detailMenuRecyc.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-        detailMenuRecyc.adapter=adapter as FirebaseRecyclerAdapter<Menu, DetailMenuVH>
+        detailMenuRecyc.adapter = adapter as FirebaseRecyclerAdapter<Menu, DetailMenuVH>
+        (detailMenuRecyc.layoutManager as LinearLayoutManager).scrollToPositionWithOffset(position, 0)
+        (detailMenuRecyc.layoutManager as LinearLayoutManager).stackFromEnd = true
+
     }
 
     override fun onStart() {
         super.onStart()
         (adapter as FirebaseRecyclerAdapter<Menu, DetailMenuVH>).startListening()
+
     }
 
     override fun onStop() {

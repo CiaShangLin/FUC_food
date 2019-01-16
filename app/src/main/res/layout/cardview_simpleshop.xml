@@ -37,14 +37,16 @@
                 android:id="@+id/simpleShopImg" app:layout_constraintTop_toTopOf="parent"
                 android:scaleType="fitXY" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
                 app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
-                android:layout_marginTop="4dp"/>
+                android:layout_marginTop="4dp" android:layout_marginBottom="4dp"
+                app:layout_constraintBottom_toTopOf="@+id/divider"/>
 
         <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" app:srcCompat="@drawable/ic_star"
+                android:layout_width="@dimen/cardview_small_icon_width"
+                android:layout_height="@dimen/cardview_small_icon_height" app:srcCompat="@drawable/ic_star"
                 android:id="@+id/imageView2" app:layout_constraintStart_toEndOf="@+id/simpleShopStar"
                 android:layout_marginStart="4dp"
-                app:layout_constraintTop_toTopOf="@+id/simpleShopStar" android:layout_marginTop="4dp"/>
+                app:layout_constraintTop_toTopOf="@+id/simpleShopStar"
+                app:layout_constraintBottom_toBottomOf="@+id/simpleShopStar"/>
         <View
                 android:id="@+id/divider"
                 android:layout_width="match_parent"

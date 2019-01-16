@@ -12,9 +12,11 @@ import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import com.bumptech.glide.request.RequestOptions
 import com.shang.fcu_food.Data.*
 import com.shang.fcu_food.DataBind
 import com.shang.fcu_food.DetailMenu.DetailMenuActivity
+import com.shang.fcu_food.FirebaseUnits
 import com.shang.fcu_food.R
 import kotlinx.android.synthetic.main.cardview_detailshop.view.*
 
@@ -38,6 +40,13 @@ class DetailShopVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
         itemView.shopOpenTv.setText(model.time)
         itemView.shopStarTv.setText(model.star.toString())
         itemView.shopPhoneTv.setText(model.phone)
+        FirebaseUnits.storage_loadImg(
+            itemView.context,
+            itemView.shopPictureImg,
+            tag,
+            model.name,
+            RequestOptions().fitCenter()
+        )
 
         itemView.shopMenu.layoutManager = GridLayoutManager(itemView.context, 2)
         itemView.shopMenu.adapter =

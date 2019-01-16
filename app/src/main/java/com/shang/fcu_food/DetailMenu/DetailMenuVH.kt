@@ -25,5 +25,6 @@ class DetailMenuVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         itemView.menuCommentRecyc.layoutManager=LinearLayoutManager(itemView.context)
         itemView.menuCommentRecyc.adapter=CommentAdapter(mutableListOf())
+
     }
 }

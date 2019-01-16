@@ -5,7 +5,9 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent" app:cardElevation="8dp" app:cardCornerRadius="8dp"
-        app:cardBackgroundColor="@color/browser_actions_bg_grey" android:layout_margin="4dp">
+        app:cardBackgroundColor="@color/browser_actions_bg_grey" android:layout_margin="4dp"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:clickable="true">
 
     <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
@@ -26,7 +28,8 @@
                 android:layout_height="@dimen/cardview_detailImg_height" app:srcCompat="@drawable/ic_shop"
                 android:id="@+id/shopPictureImg" android:layout_marginTop="8dp"
                 app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="8dp" android:scaleType="fitXY"/>
+                android:layout_marginStart="8dp" android:scaleType="fitXY"
+                android:background="@drawable/imageview_border"/>
         <TextView
                 android:text="店名"
                 android:layout_width="wrap_content"
@@ -64,26 +67,26 @@
                 android:textColor="@color/browser_actions_text_color"
                 app:layout_constraintBottom_toBottomOf="@+id/imageView5"/>
         <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp" app:srcCompat="@drawable/ic_phone"
+                android:layout_width="@dimen/cardview_small_icon_width"
+                android:layout_height="@dimen/cardview_small_icon_height" app:srcCompat="@drawable/ic_phone"
                 android:id="@+id/imageView4" android:layout_marginTop="8dp"
                 app:layout_constraintTop_toBottomOf="@+id/imageView8"
                 app:layout_constraintStart_toEndOf="@+id/shopPictureImg" android:layout_marginStart="8dp"/>
         <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp" app:srcCompat="@drawable/ic_star"
+                android:layout_width="@dimen/cardview_small_icon_width"
+                android:layout_height="@dimen/cardview_small_icon_height" app:srcCompat="@drawable/ic_star"
                 android:id="@+id/imageView5"
                 app:layout_constraintStart_toEndOf="@+id/shopPictureImg" android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/imageView6"/>
         <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp" app:srcCompat="@drawable/ic_open"
+                android:layout_width="@dimen/cardview_small_icon_width"
+                android:layout_height="@dimen/cardview_small_icon_height" app:srcCompat="@drawable/ic_open"
                 android:id="@+id/imageView6" android:layout_marginTop="8dp"
                 app:layout_constraintTop_toBottomOf="@+id/imageView4"
                 app:layout_constraintStart_toEndOf="@+id/shopPictureImg" android:layout_marginStart="8dp"/>
         <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp" app:srcCompat="@drawable/ic_shop"
+                android:layout_width="@dimen/cardview_small_icon_width"
+                android:layout_height="@dimen/cardview_small_icon_height" app:srcCompat="@drawable/ic_shop"
                 android:id="@+id/imageView8"
                 app:layout_constraintTop_toTopOf="@+id/shopPictureImg"
                 app:layout_constraintStart_toEndOf="@+id/shopPictureImg"
@@ -92,8 +95,8 @@
                 android:layout_width="36dp"
                 android:layout_height="36dp" app:srcCompat="@drawable/ic_googlemap"
                 android:id="@+id/shopMapIg"
-                android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/shopPictureImg"
-                app:layout_constraintStart_toStartOf="@+id/shopPictureImg"/>
+                app:layout_constraintTop_toBottomOf="@+id/shopPictureImg"
+                app:layout_constraintStart_toStartOf="@+id/shopPictureImg" android:layout_marginTop="4dp"/>
         <android.support.v7.widget.RecyclerView
                 android:layout_width="0dp"
                 android:layout_height="0dp"

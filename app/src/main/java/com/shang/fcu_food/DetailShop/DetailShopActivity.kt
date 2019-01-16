@@ -41,7 +41,7 @@ class DetailShopActivity : AppCompatActivity() {
         detailShopTb.inflateMenu(R.menu.menu_detailshop)
         detailShopTb.setOnMenuItemClickListener {
             when(it.itemId){
-                //R.id.menu_search->break
+                R.id.menu_search->toast("SEARCH")
                 R.id.menu_addShop->toast("ADD SHOP")
             }
             true
@@ -72,6 +72,8 @@ class DetailShopActivity : AppCompatActivity() {
         }
         detailShopRecyc.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         detailShopRecyc.adapter = adapter as FirebaseRecyclerAdapter<Shop, DetailShopVH>
+        (detailShopRecyc.layoutManager as LinearLayoutManager)?.scrollToPositionWithOffset(position,0)
+        (detailShopRecyc.layoutManager as LinearLayoutManager)?.stackFromEnd=true
     }
 
     override fun onStart() {
