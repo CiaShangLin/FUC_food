@@ -7,8 +7,6 @@ open class Shop {
     var latlng: String = " "         //經緯度
     var phone: String = "尚無提供"         //電話
     var time: String = "尚無提供"          //營業時間
-
-
     var picture: String = "尚無提供"          //可能從name去storage讀取 可能是個LIST
     var menuPicture: String = ""     //菜單照片
     var menu: MutableList<Menu> = mutableListOf<Menu>()       //這個店的菜品
