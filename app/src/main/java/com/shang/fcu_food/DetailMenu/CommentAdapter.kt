@@ -9,6 +9,7 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import com.shang.fcu_food.Data.UserComment
+import com.shang.fcu_food.DataBind
 import com.shang.fcu_food.FirebaseUnits
 import com.shang.fcu_food.R
 import kotlinx.android.synthetic.main.cardview_comment.view.*
@@ -38,13 +39,14 @@ class CommentVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
 
     fun bind(position: Int, model: UserComment) {
-        itemView.commentNameTv.setText(model.uid)
+        itemView.commentNameTv.setText(getName(model.uid))
         itemView.commentContentTv.setText(model.comment)
         itemView.commentStarTv.setText(model.star.toString())
 
         commentCardView.setOnClickListener {
             if (commentContentTv.maxLines != 1) {
-                it.layoutParams.height = itemView.context.resources.getDimension(R.dimen.cardview_comment_height).toInt()
+                it.layoutParams.height =
+                        itemView.context.resources.getDimension(R.dimen.cardview_comment_height).toInt()
                 commentContentTv.maxLines = 1
             } else {
                 it.layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT
@@ -52,5 +54,22 @@ class CommentVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
             }
         }
 
+        itemView.commentImg.setImageResource(getPicture(model.uid))
+    }
+
+    fun getName(uid: String): String {
+        var name = DataBind.allUser.get(uid)?.name
+        if (name != null)
+            return name
+        return "小明"
+    }
+
+    fun getPicture(uid: String): Int {
+        var user = DataBind.allUser.get(uid)
+        when (user?.picture) {
+            "1" -> return R.drawable.ic_cat
+            "2" -> return R.drawable.ic_dog
+        }
+        return R.drawable.ic_user
     }
 }
