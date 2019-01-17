@@ -30,7 +30,6 @@ class DetailShopActivity : AppCompatActivity() {
     lateinit var adapter: Any
     lateinit var options: Any
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail_shop)

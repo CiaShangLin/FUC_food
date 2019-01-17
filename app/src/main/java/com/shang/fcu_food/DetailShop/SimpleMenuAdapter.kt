@@ -10,14 +10,20 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import com.bumptech.glide.request.RequestOptions
 import com.shang.fcu_food.Data.Menu
 import com.shang.fcu_food.DataBind
 import com.shang.fcu_food.DetailMenu.DetailMenuActivity
+import com.shang.fcu_food.FirebaseUnits
 import com.shang.fcu_food.R
 import kotlinx.android.synthetic.main.cardview_simplemenu.view.*
 
-class SimpleMenuAdapter(var menuList: MutableList<Menu>,var onItemClick:OnItemClickHandler) :
-    RecyclerView.Adapter<SimpleMenuVH>() {
+class SimpleMenuAdapter(
+    var menuList: MutableList<Menu>,
+    var shop_tag: String,
+    var shop_name: String,
+    var onItemClick: OnItemClickHandler
+) : RecyclerView.Adapter<SimpleMenuVH>() {
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): SimpleMenuVH {
         var view = LayoutInflater.from(p0.context).inflate(R.layout.cardview_simplemenu, p0, false)
@@ -27,7 +33,7 @@ class SimpleMenuAdapter(var menuList: MutableList<Menu>,var onItemClick:OnItemCl
     override fun getItemCount(): Int = menuList.size
 
     override fun onBindViewHolder(holder: SimpleMenuVH, position: Int) {
-        holder.bind(position, menuList,onItemClick)
+        holder.bind(position, menuList, shop_tag, shop_name, onItemClick)
     }
 }
 
@@ -37,16 +43,30 @@ class SimpleMenuVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
     var simpleMenuStar = itemView.findViewById<TextView>(R.id.simpleMenuStar)
     var simpleMenuImg = itemView.findViewById<ImageView>(R.id.simpleMenuImg)
 
-    fun bind(position: Int, model: MutableList<Menu>,onItemClick:OnItemClickHandler) {
+    fun bind(
+        position: Int,
+        model: MutableList<Menu>,
+        shop_tag: String,
+        shop_name: String,
+        onItemClick: OnItemClickHandler
+    ) {
         itemView.simpleMenuName.setText(model.get(position).name)
         itemView.simpleMenuPrice.setText(model.get(position).price.toString() + "元")
-        itemView.simpleMenuStar.setText(String.format("%.1f",model.get(position).star))
+        itemView.simpleMenuStar.setText(String.format("%.1f", model.get(position).star))
         itemView.setOnClickListener {
             var bundle = Bundle().apply {
                 this.putInt(DetailMenuActivity.POSITION, position)
             }
             onItemClick.onItemClick(bundle)
         }
+        FirebaseUnits.storage_loadImg(
+            itemView.context,
+            itemView.simpleMenuImg,
+            shop_tag,
+            shop_name,
+            model.get(position).name,
+            RequestOptions().circleCrop()
+        )
     }
 
 }

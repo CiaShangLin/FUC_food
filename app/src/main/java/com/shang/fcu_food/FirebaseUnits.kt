@@ -51,28 +51,38 @@ class FirebaseUnits {
 
         //綁定使用者資料 即時更新
         fun database_BindAllUser() {
-            val userRef = FirebaseDatabase.getInstance().getReference().child("user").addValueEventListener(
-                object : ValueEventListener {
-                    override fun onCancelled(p0: DatabaseError) {
-                        Log.d("database_BindAllUser",p0.toString())
-                    }
-                    override fun onDataChange(snapshot: DataSnapshot) {
-                        var userList = mutableMapOf<String, User>()
-                        for (data in snapshot.children) {
-                            var user = data.getValue(User::class.java)
-                            user?.uid = data.key!!
-                            userList.put(user!!.uid, user)
+            val userRef = FirebaseDatabase.getInstance()
+                .getReference().child("user").addValueEventListener(
+                    object : ValueEventListener {
+                        override fun onCancelled(p0: DatabaseError) {
+                            Log.d("database_BindAllUser", p0.toString())
                         }
-                        DataBind.allUser=userList
+
+                        override fun onDataChange(snapshot: DataSnapshot) {
+                            var userList = mutableMapOf<String, User>()
+                            for (data in snapshot.children) {
+                                var user = data.getValue(User::class.java)
+                                user?.uid = data.key!!
+                                userList.put(user!!.uid, user)
+                            }
+                            DataBind.allUser = userList
+                        }
                     }
-                }
-            )
+                )
         }
 
-        //storage載入圖片
-        fun storage_loadImg(context: Context, img: ImageView, tag: String, name: String, option: RequestOptions) {
-            var ref = FirebaseStorage.getInstance().getReference(tag).child(name).child("$name.JPG")
-            //var ref=FirebaseStorage.getInstance().getReference(tag).child("御方香.JPG")
+
+        fun storage_loadImg(
+            context: Context,
+            img: ImageView,
+            tag: String,
+            shop_name: String,
+            name: String,
+            option: RequestOptions
+        ) {
+            var ref = FirebaseStorage.getInstance()
+                .getReference(tag).child(shop_name).child("$name.jpg")
+            Log.d("TAG",ref.toString())
             ref.downloadUrl.addOnSuccessListener {
                 GlideApp.with(context).load(it).apply(option).into(img)
             }.addOnFailureListener {
@@ -97,5 +107,6 @@ class FirebaseUnits {
                 activity.toast(R.string.CommentDialog_Fail)
             }
         }
+
     }
 }

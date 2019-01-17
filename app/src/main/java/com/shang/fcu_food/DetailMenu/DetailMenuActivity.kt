@@ -23,13 +23,17 @@ class DetailMenuActivity : AppCompatActivity() {
     //店家類型TAG 店家的KEY 點選位置POSITION
     //update SHOP_TYPE_TAG+SHOP_ID+"menu"+menu_id+usercomment+"comment_size"
     companion object {
+        val TAG="DetailMenuActivity"
         val POSITION = "POSITION"
+
         val SHOP_TYPE_TAG = "SHOP_TYPE_TAG"
         val SHOP_ID = "SHOP_ID"
+        val SHOP_NAME = "SHOP_NAME"
 
         var shop_type_tag: String = ""
         var shop_id: String = ""
         var position: Int = 0
+        var shop_name:String=""
     }
 
     lateinit var adapter: Any
@@ -41,12 +45,13 @@ class DetailMenuActivity : AppCompatActivity() {
 
         var intent = intent.extras
         if (intent != null) {
+            shop_name=intent.getString(SHOP_NAME)
             shop_type_tag = intent.getString(SHOP_TYPE_TAG)
             shop_id = intent.getString(SHOP_ID)
             position = intent.getInt(POSITION)
         }
-        Log.d("TAG", "$position")
-        Log.d("TAG", "REF:" + "$shop_type_tag/$shop_id/menu")
+        Log.d(TAG, "$position $shop_name")
+        Log.d(TAG, "REF:" + "$shop_type_tag/$shop_id/menu")
 
         var query = FirebaseDatabase.getInstance().getReference().child("$shop_type_tag/$shop_id/menu")
         options = FirebaseRecyclerOptions.Builder<Menu>().setQuery(query, Menu::class.java).build()

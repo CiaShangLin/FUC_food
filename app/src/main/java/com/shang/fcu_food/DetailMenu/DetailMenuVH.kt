@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import com.bumptech.glide.request.RequestOptions
 import com.shang.fcu_food.CommentDialog
 import com.shang.fcu_food.Data.Menu
 import com.shang.fcu_food.FirebaseUnits
@@ -25,7 +26,7 @@ class DetailMenuVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
     fun bind(position: Int, model: Menu, activity: DetailMenuActivity) {
         itemView.menuNameTv.setText(model.name)
         itemView.menuPriceTv.setText("${model.price}元")
-        itemView.menuStarTv.setText(String.format("%.1f",model.star))
+        itemView.menuStarTv.setText(String.format("%.1f", model.star))
         itemView.menuCommentTv.setText("${model.usercomment.size}人")
         itemView.menuAddCommentBt.setOnClickListener {
             CommentDialog.getInstace(
@@ -36,5 +37,14 @@ class DetailMenuVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         itemView.menuCommentRecyc.layoutManager = LinearLayoutManager(itemView.context)
         itemView.menuCommentRecyc.adapter = CommentAdapter(model.usercomment)
+
+        FirebaseUnits.storage_loadImg(
+            itemView.context,
+            itemView.menuPictureImg,
+            DetailMenuActivity.shop_type_tag,
+            DetailMenuActivity.shop_name,
+            model.name,
+            RequestOptions().fitCenter()
+        )
     }
 }

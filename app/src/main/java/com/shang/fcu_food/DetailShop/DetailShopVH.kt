@@ -28,6 +28,7 @@ class DetailShopVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
     var shopStarTv = itemView.findViewById<TextView>(R.id.shopStarTv)
     var shopMapImg = itemView.findViewById<ImageView>(R.id.shopMapIg)
     var shopMenu = itemView.findViewById<RecyclerView>(R.id.shopMenu)
+    var shopPictureImg=itemView.findViewById<ImageView>(R.id.shopPictureImg)
 
     fun bind(tag: String, model: Shop) {
         when (tag) {
@@ -45,18 +46,24 @@ class DetailShopVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
             itemView.shopPictureImg,
             tag,
             model.name,
+            model.name,
             RequestOptions().fitCenter()
         )
 
         itemView.shopMenu.layoutManager = GridLayoutManager(itemView.context, 2)
         itemView.shopMenu.adapter =
-                SimpleMenuAdapter(let { model.menu }, getItemClick(tag, model.id.toString(), itemView.context))
+                SimpleMenuAdapter(let { model.menu },
+                    tag,
+                    model.name,
+                    getItemClick(tag, model.id.toString(),model.name, itemView.context)
+                )
     }
 
     //傳遞shop的id和type 還有position
-    fun getItemClick(tag: String, id: String, context: Context): OnItemClickHandler {
+    fun getItemClick(tag: String, id: String, name:String,context: Context): OnItemClickHandler {
         var itemClick = object : OnItemClickHandler {
             override fun onItemClick(bundle: Bundle) {
+                bundle.putString(DetailMenuActivity.SHOP_NAME, name)
                 bundle.putString(DetailMenuActivity.SHOP_TYPE_TAG, tag)
                 bundle.putString(DetailMenuActivity.SHOP_ID, id)
                 var intent = Intent(context, DetailMenuActivity::class.java).apply { this.putExtras(bundle) }
