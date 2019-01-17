@@ -39,7 +39,7 @@ class CommentVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     fun bind(position: Int, model: UserComment) {
         itemView.commentNameTv.setText(model.uid)
-        itemView.commentContentTv.setText("真的好吃 真的好吃 真的好吃 真的好吃 真的好吃 真的好吃 真的好吃 ")
+        itemView.commentContentTv.setText(model.comment)
         itemView.commentStarTv.setText(model.star.toString())
 
         commentCardView.setOnClickListener {

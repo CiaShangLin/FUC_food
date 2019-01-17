@@ -40,9 +40,8 @@ class SimpleMenuVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
     fun bind(position: Int, model: MutableList<Menu>,onItemClick:OnItemClickHandler) {
         itemView.simpleMenuName.setText(model.get(position).name)
         itemView.simpleMenuPrice.setText(model.get(position).price.toString() + "元")
-        itemView.simpleMenuStar.setText(model.get(position).star.toString())
+        itemView.simpleMenuStar.setText(String.format("%.1f",model.get(position).star))
         itemView.setOnClickListener {
-
             var bundle = Bundle().apply {
                 this.putInt(DetailMenuActivity.POSITION, position)
             }

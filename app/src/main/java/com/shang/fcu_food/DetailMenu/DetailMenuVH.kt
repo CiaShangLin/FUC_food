@@ -25,7 +25,7 @@ class DetailMenuVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
     fun bind(position: Int, model: Menu, activity: DetailMenuActivity) {
         itemView.menuNameTv.setText(model.name)
         itemView.menuPriceTv.setText("${model.price}元")
-        itemView.menuStarTv.setText("${model.star}")
+        itemView.menuStarTv.setText(String.format("%.1f",model.star))
         itemView.menuCommentTv.setText("${model.usercomment.size}人")
         itemView.menuAddCommentBt.setOnClickListener {
             CommentDialog.getInstace(

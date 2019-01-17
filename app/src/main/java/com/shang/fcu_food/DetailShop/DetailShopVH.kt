@@ -38,7 +38,7 @@ class DetailShopVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
         }
         itemView.shopNameTv.setText(model.name)
         itemView.shopOpenTv.setText(model.time)
-        itemView.shopStarTv.setText(model.star.toString())
+        itemView.shopStarTv.setText(String.format("%.1f",model.star))
         itemView.shopPhoneTv.setText(model.phone)
         FirebaseUnits.storage_loadImg(
             itemView.context,

@@ -16,4 +16,6 @@
     <string name="CommentDialog_PositiveButton">發送</string>
     <string name="CommentDialog_NegativeButton">取消</string>
     <string name="CommentDialog_Title">輸入評論</string>
+    <string name="CommentDialog_Success">新增成功</string>
+    <string name="CommentDialog_Fail">新增失敗</string>
 </resources>

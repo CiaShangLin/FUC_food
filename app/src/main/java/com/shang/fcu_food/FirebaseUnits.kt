@@ -21,6 +21,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import com.shang.fcu_food.Data.UserComment
 import com.shang.fcu_food.Main.GlideApp
+import org.jetbrains.anko.support.v4.toast
 import org.jetbrains.anko.toast
 
 class FirebaseUnits {
@@ -62,18 +63,14 @@ class FirebaseUnits {
         }
 
         //database更新評論
-        fun database_addCommemt(tag: String, shop_id: String, menu_id: String, comment_size: String, comment: String) {
-            val ref_path = "$tag/$shop_id/menu/$menu_id/usercomment/$comment_size"
+        fun database_addCommemt(ref_path:String,rating:String,comment:String,uid:String,activity: FragmentActivity) {
+
             val ref = FirebaseDatabase.getInstance().getReference().child(ref_path)
-            Log.d("TAG", ref_path)
-            var map = mutableMapOf<String, Any>()
-            map.put("comment", comment)
-            map.put("uid", "XXX")
-            map.put("star", 4.0)
+            var map = UserComment(uid,comment,rating).toMap()
             ref.updateChildren(map).addOnSuccessListener {
-
+                activity.toast(R.string.CommentDialog_Success)
             }.addOnFailureListener {
-
+                activity.toast(R.string.CommentDialog_Fail)
             }
         }
     }

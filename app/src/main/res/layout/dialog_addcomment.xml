@@ -9,8 +9,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:id="@+id/comment_RatingBar"
             app:layout_constraintTop_toBottomOf="@+id/textView4"
-            app:layout_constraintStart_toStartOf="@+id/textView4" android:numStars="5" android:stepSize="0"
-            android:rating="0.5" android:max="5"/>
+            app:layout_constraintStart_toStartOf="@+id/textView4" android:numStars="5" android:stepSize="0.5"
+            android:max="5" android:rating="0"/>
     <TextView
             android:text="評論"
             android:layout_width="wrap_content"
@@ -30,7 +30,7 @@
         <android.support.design.widget.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="好吃"/>
+        />
     </android.support.design.widget.TextInputLayout>
     <TextView
             android:text="評價星數"
