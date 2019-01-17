@@ -57,7 +57,7 @@ class DetailMenuActivity : AppCompatActivity() {
             }
 
             override fun onBindViewHolder(holder: DetailMenuVH, position: Int, model: Menu) {
-                holder.bind(position, model)
+                holder.bind(position, model,this@DetailMenuActivity)
             }
         }
 

@@ -42,7 +42,7 @@ class SimpleMenuVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
         itemView.simpleMenuPrice.setText(model.get(position).price.toString() + "元")
         itemView.simpleMenuStar.setText(model.get(position).star.toString())
         itemView.setOnClickListener {
-            DataBind.menu=model //梆定menu資料
+
             var bundle = Bundle().apply {
                 this.putInt(DetailMenuActivity.POSITION, position)
             }

@@ -12,4 +12,8 @@
         <item>小吃</item>
         <item>飲料</item>
     </string-array>
+
+    <string name="CommentDialog_PositiveButton">發送</string>
+    <string name="CommentDialog_NegativeButton">取消</string>
+    <string name="CommentDialog_Title">輸入評論</string>
 </resources>

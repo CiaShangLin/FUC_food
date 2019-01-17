@@ -44,8 +44,7 @@ class CommentVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         commentCardView.setOnClickListener {
             if (commentContentTv.maxLines != 1) {
-                it.layoutParams.height =
-                        itemView.context.resources.getDimension(R.dimen.cardview_comment_height).toInt()
+                it.layoutParams.height = itemView.context.resources.getDimension(R.dimen.cardview_comment_height).toInt()
                 commentContentTv.maxLines = 1
             } else {
                 it.layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT
