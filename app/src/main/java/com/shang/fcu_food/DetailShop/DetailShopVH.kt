@@ -28,7 +28,7 @@ class DetailShopVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
     var shopStarTv = itemView.findViewById<TextView>(R.id.shopStarTv)
     var shopMapImg = itemView.findViewById<ImageView>(R.id.shopMapIg)
     var shopMenu = itemView.findViewById<RecyclerView>(R.id.shopMenu)
-    var shopPictureImg=itemView.findViewById<ImageView>(R.id.shopPictureImg)
+    var shopPictureImg = itemView.findViewById<ImageView>(R.id.shopPictureImg)
 
     fun bind(tag: String, model: Shop) {
         when (tag) {
@@ -37,10 +37,10 @@ class DetailShopVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
             SnackShop.tag -> model as SnackShop
             DrinkShop.tag -> model as DrinkShop
         }
-        itemView.shopNameTv.setText(model.name)
-        itemView.shopOpenTv.setText(model.time)
-        itemView.shopStarTv.setText(String.format("%.1f",model.star))
-        itemView.shopPhoneTv.setText(model.phone)
+        itemView.shopNameTv.text = model.name
+        itemView.shopOpenTv.text = model.time
+        itemView.shopStarTv.text = String.format("%.1f", model.star)
+        itemView.shopPhoneTv.text = model.phone
         FirebaseUnits.storage_loadImg(
             itemView.context,
             itemView.shopPictureImg,
@@ -52,15 +52,16 @@ class DetailShopVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         itemView.shopMenu.layoutManager = GridLayoutManager(itemView.context, 2)
         itemView.shopMenu.adapter =
-                SimpleMenuAdapter(let { model.menu },
+                SimpleMenuAdapter(
+                    let { model.menu },
                     tag,
                     model.name,
-                    getItemClick(tag, model.id.toString(),model.name, itemView.context)
+                    getItemClick(tag, model.id.toString(), model.name, itemView.context)
                 )
     }
 
     //傳遞shop的id和type 還有position
-    fun getItemClick(tag: String, id: String, name:String,context: Context): OnItemClickHandler {
+    fun getItemClick(tag: String, id: String, name: String, context: Context): OnItemClickHandler {
         var itemClick = object : OnItemClickHandler {
             override fun onItemClick(bundle: Bundle) {
                 bundle.putString(DetailMenuActivity.SHOP_NAME, name)

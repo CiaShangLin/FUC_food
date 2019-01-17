@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.support.v4.app.FragmentActivity
+import android.text.method.TransformationMethod
 import android.util.Log
 import android.widget.ImageView
 import com.bumptech.glide.load.DataSource
@@ -19,6 +20,10 @@ import com.google.firebase.storage.FirebaseStorage
 import com.shang.fcu_food.Data.User
 import com.shang.fcu_food.Data.UserComment
 import com.shang.fcu_food.Main.GlideApp
+import com.shang.fcu_food.Main.GlideRequests
+import jp.wasabeef.glide.transformations.BitmapTransformation
+import jp.wasabeef.glide.transformations.CropTransformation
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation
 import org.jetbrains.anko.support.v4.toast
 import org.jetbrains.anko.toast
 
@@ -80,9 +85,9 @@ class FirebaseUnits {
             name: String,
             option: RequestOptions
         ) {
+            //option.transform(RoundedCornersTransformation(20,0))
             var ref = FirebaseStorage.getInstance()
                 .getReference(tag).child(shop_name).child("$name.jpg")
-            Log.d("TAG",ref.toString())
             ref.downloadUrl.addOnSuccessListener {
                 GlideApp.with(context).load(it).apply(option).into(img)
             }.addOnFailureListener {

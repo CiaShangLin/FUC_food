@@ -11,6 +11,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.shang.fcu_food.CommentDialog
 import com.shang.fcu_food.Data.Menu
 import com.shang.fcu_food.FirebaseUnits
+import com.shang.fcu_food.ImageViewDialog
 import com.shang.fcu_food.R
 import kotlinx.android.synthetic.main.cardview_detailmenu.view.*
 
@@ -46,5 +47,13 @@ class DetailMenuVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
             model.name,
             RequestOptions().fitCenter()
         )
+
+        itemView.menuPictureImg.setOnClickListener {
+            ImageViewDialog.getInstance(
+                DetailMenuActivity.shop_type_tag,
+                DetailMenuActivity.shop_name,
+                model.name
+            ).show(activity.supportFragmentManager,ImageViewDialog.TAG)
+        }
     }
 }

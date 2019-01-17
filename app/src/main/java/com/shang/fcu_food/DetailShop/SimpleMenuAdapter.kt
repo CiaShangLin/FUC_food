@@ -33,7 +33,7 @@ class SimpleMenuAdapter(
     override fun getItemCount(): Int = menuList.size
 
     override fun onBindViewHolder(holder: SimpleMenuVH, position: Int) {
-        holder.bind(position, menuList, shop_tag, shop_name, onItemClick)
+        holder.bind(position, menuList.get(position), shop_tag, shop_name, onItemClick)
     }
 }
 
@@ -45,14 +45,14 @@ class SimpleMenuVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     fun bind(
         position: Int,
-        model: MutableList<Menu>,
+        model: Menu,
         shop_tag: String,
         shop_name: String,
         onItemClick: OnItemClickHandler
     ) {
-        itemView.simpleMenuName.setText(model.get(position).name)
-        itemView.simpleMenuPrice.setText(model.get(position).price.toString() + "元")
-        itemView.simpleMenuStar.setText(String.format("%.1f", model.get(position).star))
+        itemView.simpleMenuName.text = model.name
+        itemView.simpleMenuPrice.text = model.price.toString() + "元"
+        itemView.simpleMenuStar.text = String.format("%.1f", model.star)
         itemView.setOnClickListener {
             var bundle = Bundle().apply {
                 this.putInt(DetailMenuActivity.POSITION, position)
@@ -64,7 +64,7 @@ class SimpleMenuVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
             itemView.simpleMenuImg,
             shop_tag,
             shop_name,
-            model.get(position).name,
+            model.name,
             RequestOptions().circleCrop()
         )
     }

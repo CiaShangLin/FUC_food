@@ -1,22 +1,17 @@
 package com.shang.fcu_food.DetailMenu
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.firebase.ui.database.FirebaseRecyclerOptions
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
 import com.shang.fcu_food.Data.Menu
-import com.shang.fcu_food.DataBind
 import com.shang.fcu_food.R
 import kotlinx.android.synthetic.main.activity_detail_menu.*
-import kotlinx.android.synthetic.main.activity_detail_shop.*
 
 class DetailMenuActivity : AppCompatActivity() {
 
