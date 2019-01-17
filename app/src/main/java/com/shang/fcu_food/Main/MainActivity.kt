@@ -70,23 +70,8 @@ class MainActivity : AppCompatActivity() {
         nav_view.setNavigationItemSelectedListener {
             when(it.itemId){
                 R.id.menu_user_setting ->
-                    FirebaseDatabase.getInstance().getReference().child("user").addValueEventListener(
-                        object :ValueEventListener{
-                            override fun onCancelled(p0: DatabaseError) {
-                                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-                            }
 
-                            override fun onDataChange(p0: DataSnapshot) {
-                                for(p in p0.children){
-                                    var user=p.getValue(com.shang.fcu_food.Data.User::class.java)
-                                    user?.uid=p.key!!
-                                    Log.d("TAG","${user.toString()}")
-                                }
-                            }
-
-                        }
-                    )
-                    //FirebaseUnits.auth(this)
+                    FirebaseUnits.auth_Login(this)
 
                 R.id.menu_logout ->
                     CommentDialog().show(supportFragmentManager,"")
@@ -107,6 +92,7 @@ class MainActivity : AppCompatActivity() {
         if (!PermissionUnit.checkPermission(this)) {        //已通過權限
             if (NetworkDialog.checkNetworkStatus(this)) {   //網路已開啟
                 if(FirebaseUnits.checkHasAuth()){
+                    FirebaseUnits.database_BindAllUser()  //取得所有使用者的資訊
                     var adapter = ViewPagerAdapter(
                         supportFragmentManager,
                         resources.getStringArray(R.array.ShopType)

@@ -14,11 +14,9 @@ import com.bumptech.glide.request.target.Target
 import com.firebase.ui.auth.AuthUI
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.database.ChildEventListener
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.*
 import com.google.firebase.storage.FirebaseStorage
+import com.shang.fcu_food.Data.User
 import com.shang.fcu_food.Data.UserComment
 import com.shang.fcu_food.Main.GlideApp
 import org.jetbrains.anko.support.v4.toast
@@ -48,7 +46,27 @@ class FirebaseUnits {
 
         //取得user
         fun auth_getUser(): FirebaseUser? {
-            return  FirebaseAuth.getInstance().currentUser
+            return FirebaseAuth.getInstance().currentUser
+        }
+
+        //綁定使用者資料 即時更新
+        fun database_BindAllUser() {
+            val userRef = FirebaseDatabase.getInstance().getReference().child("user").addValueEventListener(
+                object : ValueEventListener {
+                    override fun onCancelled(p0: DatabaseError) {
+                        Log.d("database_BindAllUser",p0.toString())
+                    }
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        var userList = mutableMapOf<String, User>()
+                        for (data in snapshot.children) {
+                            var user = data.getValue(User::class.java)
+                            user?.uid = data.key!!
+                            userList.put(user!!.uid, user)
+                        }
+                        DataBind.allUser=userList
+                    }
+                }
+            )
         }
 
         //storage載入圖片
@@ -63,10 +81,16 @@ class FirebaseUnits {
         }
 
         //database更新評論
-        fun database_addCommemt(ref_path:String,rating:String,comment:String,uid:String,activity: FragmentActivity) {
+        fun database_addCommemt(
+            ref_path: String,
+            rating: String,
+            comment: String,
+            uid: String,
+            activity: FragmentActivity
+        ) {
 
             val ref = FirebaseDatabase.getInstance().getReference().child(ref_path)
-            var map = UserComment(uid,comment,rating).toMap()
+            var map = UserComment(uid, comment, rating).toMap()
             ref.updateChildren(map).addOnSuccessListener {
                 activity.toast(R.string.CommentDialog_Success)
             }.addOnFailureListener {
