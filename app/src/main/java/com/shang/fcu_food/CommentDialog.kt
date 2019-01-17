@@ -42,14 +42,14 @@ class CommentDialog : DialogFragment() {
 
         var commentRatingBar=view.findViewById<RatingBar>(R.id.comment_RatingBar)
         var commentInputTextLayout=view.findViewById<TextInputLayout>(R.id.textInputLayout)
-        
+
         var alertDialog = AlertDialog.Builder(context)
             .setTitle(R.string.CommentDialog_Title)
             .setView(view)
             .setPositiveButton(R.string.CommentDialog_PositiveButton, object : DialogInterface.OnClickListener {
                 override fun onClick(p0: DialogInterface?, p1: Int) {
                     //FirebaseUnits.database_addCommemt()
-                    Log.v(TAG,commentRatingBar.numStars.toString())
+                    Log.v(TAG,commentRatingBar.rating.toString())
                     Log.v(TAG,commentInputTextLayout.editText?.text.toString())
                 }
             })
