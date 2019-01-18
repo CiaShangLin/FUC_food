@@ -4,6 +4,8 @@ import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.LinearSnapHelper
+import android.support.v7.widget.PagerSnapHelper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -74,6 +76,8 @@ class DetailShopActivity : AppCompatActivity() {
         detailShopRecyc.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         detailShopRecyc.adapter = adapter as FirebaseRecyclerAdapter<Shop, DetailShopVH>
 
+        var pagerSnapHelper=PagerSnapHelper()
+        pagerSnapHelper.attachToRecyclerView(detailShopRecyc)
     }
 
     override fun onResume() {

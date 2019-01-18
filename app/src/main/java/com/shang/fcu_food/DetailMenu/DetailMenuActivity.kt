@@ -3,6 +3,8 @@ package com.shang.fcu_food.DetailMenu
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.LinearSnapHelper
+import android.support.v7.widget.PagerSnapHelper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -64,6 +66,9 @@ class DetailMenuActivity : AppCompatActivity() {
         var layoutManager=LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         detailMenuRecyc.layoutManager = layoutManager
         detailMenuRecyc.adapter = adapter as FirebaseRecyclerAdapter<Menu, DetailMenuVH>
+
+        var pagerSnapHelper= PagerSnapHelper()
+        pagerSnapHelper.attachToRecyclerView(detailMenuRecyc)
     }
 
     override fun onResume() {
