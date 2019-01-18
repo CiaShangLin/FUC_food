@@ -1,4 +1,4 @@
-package com.shang.fcu_food
+package com.shang.fcu_food.Dialog
 
 import android.app.AlertDialog
 import android.app.Dialog
@@ -10,7 +10,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.widget.RatingBar
 import com.shang.fcu_food.DetailMenu.DetailMenuActivity
-import org.jetbrains.anko.support.v4.toast
+import com.shang.fcu_food.FirebaseUnits
+import com.shang.fcu_food.R
 
 class CommentDialog : DialogFragment() {
 
@@ -26,7 +27,8 @@ class CommentDialog : DialogFragment() {
             bundle.putString(COMMENT_SIZE, comment_size)
 
             if (commentDialog == null) {
-                commentDialog = CommentDialog()
+                commentDialog =
+                        CommentDialog()
                 commentDialog?.arguments = bundle
             }
             return commentDialog!!

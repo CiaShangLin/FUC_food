@@ -1,4 +1,4 @@
-package com.shang.fcu_food
+package com.shang.fcu_food.Dialog
 
 import android.os.Bundle
 import android.support.design.widget.TextInputLayout
@@ -8,16 +8,20 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.RatingBar
+import com.shang.fcu_food.R
 
 class AddMenuDialog : DialogFragment() {
 
     companion object {
         val TAG="AddMenuDialog"
 
-        var addMenuDialog:AddMenuDialog?=null
-        fun getInstance() : AddMenuDialog{
-            if(addMenuDialog==null){
-                addMenuDialog= AddMenuDialog()
+        var addMenuDialog: AddMenuDialog?=null
+        fun getInstance(shopName:String,menuName:String) : AddMenuDialog {
+            var bundle=Bundle().apply {
+
+            }
+            if(addMenuDialog ==null){
+                addMenuDialog = AddMenuDialog()
             }
             return addMenuDialog!!
         }

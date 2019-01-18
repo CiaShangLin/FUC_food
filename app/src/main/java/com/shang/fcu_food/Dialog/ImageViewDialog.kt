@@ -1,9 +1,7 @@
-package com.shang.fcu_food
+package com.shang.fcu_food.Dialog
 
-import android.app.Dialog
 import android.os.Bundle
 import android.support.v4.app.DialogFragment
-import android.support.v4.app.Fragment
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +10,7 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import com.google.firebase.storage.FirebaseStorage
 import com.shang.fcu_food.Main.GlideApp
+import com.shang.fcu_food.R
 
 class ImageViewDialog : DialogFragment() {
 
@@ -30,7 +29,8 @@ class ImageViewDialog : DialogFragment() {
             bundle.putString(NAME,name)
 
             if (imageViewDialog == null) {
-                imageViewDialog = ImageViewDialog()
+                imageViewDialog =
+                        ImageViewDialog()
                 imageViewDialog?.arguments=bundle
             }
             return imageViewDialog as ImageViewDialog

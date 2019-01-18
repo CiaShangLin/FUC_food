@@ -11,14 +11,14 @@ import org.jetbrains.anko.toast
 import android.support.v7.app.ActionBarDrawerToggle
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.IdpResponse
-import com.firebase.ui.auth.data.model.User
 import com.google.firebase.database.*
 import com.google.firebase.storage.FirebaseStorage
 import com.shang.fcu_food.*
+import com.shang.fcu_food.Dialog.AddMenuDialog
+import com.shang.fcu_food.Dialog.NetworkDialog
 import com.shang.fcu_food.R
 import kotlinx.android.synthetic.main.drawer_layout.*
 import kotlinx.android.synthetic.main.toolbar_layout.*
-import org.jetbrains.anko.alert
 import java.io.File
 
 
@@ -80,7 +80,8 @@ class MainActivity : AppCompatActivity() {
                     }
 
                 R.id.menu_question->
-                    AddMenuDialog.getInstance().show(supportFragmentManager,AddMenuDialog.TAG)
+                    AddMenuDialog.getInstance().show(supportFragmentManager,
+                        AddMenuDialog.TAG)
                     //alert(R.string.Menu_Question_Message,R.string.Menu_Question_Title).show()
             }
             drawer_layout.closeDrawers()

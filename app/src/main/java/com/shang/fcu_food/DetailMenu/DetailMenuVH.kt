@@ -1,6 +1,5 @@
 package com.shang.fcu_food.DetailMenu
 
-import android.app.Activity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.View
@@ -8,10 +7,10 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.request.RequestOptions
-import com.shang.fcu_food.CommentDialog
+import com.shang.fcu_food.Dialog.CommentDialog
 import com.shang.fcu_food.Data.Menu
 import com.shang.fcu_food.FirebaseUnits
-import com.shang.fcu_food.ImageViewDialog
+import com.shang.fcu_food.Dialog.ImageViewDialog
 import com.shang.fcu_food.R
 import kotlinx.android.synthetic.main.cardview_detailmenu.view.*
 
@@ -53,7 +52,7 @@ class DetailMenuVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
                 DetailMenuActivity.shop_type_tag,
                 DetailMenuActivity.shop_name,
                 model.name
-            ).show(activity.supportFragmentManager,ImageViewDialog.TAG)
+            ).show(activity.supportFragmentManager, ImageViewDialog.TAG)
         }
     }
 }

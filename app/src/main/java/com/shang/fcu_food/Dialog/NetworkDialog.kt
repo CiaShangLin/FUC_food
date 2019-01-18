@@ -1,4 +1,4 @@
-package com.shang.fcu_food
+package com.shang.fcu_food.Dialog
 
 import android.content.Context
 import android.os.Bundle
@@ -6,15 +6,12 @@ import android.support.v4.app.DialogFragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.net.NetworkInfo
-import android.content.Context.CONNECTIVITY_SERVICE
-import android.support.v4.content.ContextCompat.getSystemService
 import android.net.ConnectivityManager
 import android.os.Handler
 import android.os.Message
 import android.util.Log
 import android.widget.Button
-import org.jetbrains.anko.support.v4.toast
+import com.shang.fcu_food.R
 
 
 class NetworkDialog : DialogFragment() {
@@ -28,9 +25,10 @@ class NetworkDialog : DialogFragment() {
 
         fun getInstance(handler: Handler): NetworkDialog {
             if (networkDialog == null) {
-                networkDialog = NetworkDialog()
+                networkDialog =
+                        NetworkDialog()
             }
-            this.handler = handler
+            Companion.handler = handler
             return networkDialog!!
         }
 
