@@ -71,6 +71,6 @@ class ImageViewDialog : DialogFragment() {
             var height=ViewGroup.LayoutParams.MATCH_PARENT
             dialog.window.setLayout(width,height)
         }
-
     }
+
 }

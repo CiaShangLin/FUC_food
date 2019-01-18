@@ -88,6 +88,10 @@ class FirebaseUnits {
         }
 
         //database更新評論
+        //database.getReference("breakfast") 一開始就是fucfood了
+        //上傳資料用update 就算沒有那個節點他也會自己幫你生出來 ex:breakfast/3
+        //setValue會把你整個節點都改掉
+        //push他會自己生出一個hashID這個不是我要用的
         fun database_addCommemt(
             ref_path: String,
             rating: String,

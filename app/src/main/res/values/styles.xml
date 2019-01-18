@@ -8,8 +8,10 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="text">
-
+    <style name="dialog_theme" >
+        <item name="android:windowNoTitle">false</item>
+        <item name="android:windowIsFloating">false</item>
     </style>
+
 
 </resources>

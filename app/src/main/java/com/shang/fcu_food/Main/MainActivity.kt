@@ -71,7 +71,6 @@ class MainActivity : AppCompatActivity() {
         nav_view.setNavigationItemSelectedListener {
             when(it.itemId){
                 R.id.menu_user_setting ->
-
                     FirebaseUnits.auth_Login(this)
 
                 R.id.menu_logout ->
@@ -79,8 +78,10 @@ class MainActivity : AppCompatActivity() {
                         toast("登出成功")
                         finish()
                     }
+
                 R.id.menu_question->
-                    alert(R.string.Menu_Question_Message,R.string.Menu_Question_Title).show()
+                    AddMenuDialog.getInstance().show(supportFragmentManager,AddMenuDialog.TAG)
+                    //alert(R.string.Menu_Question_Message,R.string.Menu_Question_Title).show()
             }
             drawer_layout.closeDrawers()
             true
@@ -112,10 +113,7 @@ class MainActivity : AppCompatActivity() {
 
 
     fun realtimeDatabase() {
-        //database.getReference("breakfast") 一開始就是fucfood了
-        //上傳資料用update 就算沒有那個節點他也會自己幫你生出來 ex:breakfast/3
-        //setValue會把你整個節點都改掉
-        //push他會自己生出一個hashID這個不是我要用的
+
         val database = FirebaseDatabase.getInstance()
         val myRef = database.getReference("breakfast/4")
         var map = mutableMapOf<String, Any>()
@@ -161,23 +159,6 @@ class MainActivity : AppCompatActivity() {
                 Log.w("TAG", "Failed to read value.", error.toException())
             }
         })
-    }
-
-    fun storage() {
-        var storageRef = FirebaseStorage.getInstance().getReference()
-        var riversRef = storageRef.child("image/surf369.jpeg")
-
-        riversRef.downloadUrl.addOnSuccessListener {
-            Log.d("TAG", it.path)
-
-        }.addOnCompleteListener {
-
-        }.addOnFailureListener {
-            it.printStackTrace()
-        }
-
-        //GlideApp.with(this).load(storageRef.child("image/surf369.jpeg")).into(imageView2)
-
     }
 
     fun update() {
