@@ -53,6 +53,9 @@ class ImageViewDialog : DialogFragment() {
 
         var dialogImg=view.findViewById<ImageView>(R.id.dialog_image)
         var closeBt=view.findViewById<ImageButton>(R.id.closeImgBt)
+        closeBt.setOnClickListener {
+            dismiss()
+        }
 
         var ref=FirebaseStorage.getInstance()
             .getReference(shop_tag!!).child(shop_name!!).child("$name.jpg")
@@ -62,6 +65,12 @@ class ImageViewDialog : DialogFragment() {
     override fun onResume() {
         super.onResume()
 
+        var dialog=dialog
+        if(dialog!=null){
+            var width=ViewGroup.LayoutParams.MATCH_PARENT
+            var height=ViewGroup.LayoutParams.MATCH_PARENT
+            dialog.window.setLayout(width,height)
+        }
 
     }
 }

@@ -2,29 +2,21 @@ package com.shang.fcu_food
 
 import android.app.Activity
 import android.content.Context
-import android.graphics.drawable.Drawable
 import android.support.v4.app.FragmentActivity
-import android.text.method.TransformationMethod
 import android.util.Log
 import android.widget.ImageView
-import com.bumptech.glide.load.DataSource
-import com.bumptech.glide.load.engine.GlideException
-import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.RequestOptions
-import com.bumptech.glide.request.target.Target
 import com.firebase.ui.auth.AuthUI
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.database.*
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
 import com.shang.fcu_food.Data.User
 import com.shang.fcu_food.Data.UserComment
 import com.shang.fcu_food.Main.GlideApp
-import com.shang.fcu_food.Main.GlideRequests
-import jp.wasabeef.glide.transformations.BitmapTransformation
-import jp.wasabeef.glide.transformations.CropTransformation
-import jp.wasabeef.glide.transformations.RoundedCornersTransformation
-import org.jetbrains.anko.support.v4.toast
 import org.jetbrains.anko.toast
 
 class FirebaseUnits {
