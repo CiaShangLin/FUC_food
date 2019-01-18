@@ -9,6 +9,10 @@
             <item android:id="@+id/menu_logout"
                   android:icon="@drawable/ic_logout"
                   android:title="登出"/>
+            <item android:id="@+id/menu_question"
+                  android:icon="@drawable/ic_question"
+                  android:title="關於我們"/>
+
         </menu>
     </item>
 

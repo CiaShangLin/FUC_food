@@ -18,6 +18,7 @@ import com.shang.fcu_food.*
 import com.shang.fcu_food.R
 import kotlinx.android.synthetic.main.drawer_layout.*
 import kotlinx.android.synthetic.main.toolbar_layout.*
+import org.jetbrains.anko.alert
 import java.io.File
 
 
@@ -74,12 +75,12 @@ class MainActivity : AppCompatActivity() {
                     FirebaseUnits.auth_Login(this)
 
                 R.id.menu_logout ->
-                    CommentDialog().show(supportFragmentManager,"")
-
-                    /*AuthUI.getInstance().signOut(this).addOnCompleteListener {
+                    AuthUI.getInstance().signOut(this).addOnCompleteListener {
                         toast("登出成功")
                         finish()
-                    }*/
+                    }
+                R.id.menu_question->
+                    alert(R.string.Menu_Question_Message,R.string.Menu_Question_Title).show()
             }
             drawer_layout.closeDrawers()
             true

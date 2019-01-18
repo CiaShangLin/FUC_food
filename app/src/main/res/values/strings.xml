@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">FCU_Food</string>
+    <string name="app_name">Food甲</string>
 
     <string name="networkTv">請打開網路或是WIFI</string>
     <string name="networkBt">重試</string>
@@ -18,4 +18,14 @@
     <string name="CommentDialog_Title">輸入評論</string>
     <string name="CommentDialog_Success">新增成功</string>
     <string name="CommentDialog_Fail">新增失敗</string>
+    
+    <string name="Menu_Question_Title">關於我們</string>
+    <string name="Menu_Question_Message">
+        逢甲大學資工系四年級\n
+        誠徵會寫IOS和美工人員的同學\n
+        此APP只是本人開發好玩的\n
+        APP發表之所有言論，都是使用者自行發出\n
+        與開發者本人毫無相關\n
+        目前版本1.0版\n
+    </string>
 </resources>
