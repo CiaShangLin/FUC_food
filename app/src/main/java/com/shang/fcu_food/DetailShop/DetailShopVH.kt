@@ -64,9 +64,9 @@ class DetailShopVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
     fun getItemClick(tag: String, id: String, name: String, context: Context): OnItemClickHandler {
         var itemClick = object : OnItemClickHandler {
             override fun onItemClick(bundle: Bundle) {
-                bundle.putString(DetailMenuActivity.SHOP_NAME, name)
-                bundle.putString(DetailMenuActivity.SHOP_TYPE_TAG, tag)
-                bundle.putString(DetailMenuActivity.SHOP_ID, id)
+                bundle.putString(DataConstant.SHOP_NAME, name)
+                bundle.putString(DataConstant.SHOP_TYPE_TAG, tag)
+                bundle.putString(DataConstant.SHOP_ID, id)
                 var intent = Intent(context, DetailMenuActivity::class.java).apply { this.putExtras(bundle) }
                 context.startActivity(intent)
             }

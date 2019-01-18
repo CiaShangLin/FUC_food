@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.request.RequestOptions
+import com.shang.fcu_food.Data.DataConstant
 import com.shang.fcu_food.Data.Menu
 import com.shang.fcu_food.DataBind
 import com.shang.fcu_food.DetailMenu.DetailMenuActivity
@@ -55,7 +56,7 @@ class SimpleMenuVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
         itemView.simpleMenuStar.text = String.format("%.1f", model.star)
         itemView.setOnClickListener {
             var bundle = Bundle().apply {
-                this.putInt(DetailMenuActivity.POSITION, position)
+                this.putInt(DataConstant.POSITION, position)
             }
             onItemClick.onItemClick(bundle)
         }

@@ -80,7 +80,7 @@ class MainActivity : AppCompatActivity() {
                     }
 
                 R.id.menu_question->
-                    AddMenuDialog.getInstance().show(supportFragmentManager,
+                    AddMenuDialog.getInstance("","").show(supportFragmentManager,
                         AddMenuDialog.TAG)
                     //alert(R.string.Menu_Question_Message,R.string.Menu_Question_Title).show()
             }

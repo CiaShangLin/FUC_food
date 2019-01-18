@@ -1,20 +1,16 @@
 package com.shang.fcu_food.DetailShop
 
-import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.LinearSnapHelper
 import android.support.v7.widget.PagerSnapHelper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.firebase.ui.database.FirebaseRecyclerOptions
-import com.firebase.ui.database.FirebaseRecyclerOptions.Builder
 import com.google.firebase.database.FirebaseDatabase
 import com.shang.fcu_food.Data.*
-import com.shang.fcu_food.DataBind
 import com.shang.fcu_food.R
 import kotlinx.android.synthetic.main.activity_detail_shop.*
 import org.jetbrains.anko.toast
@@ -22,13 +18,8 @@ import org.jetbrains.anko.toast
 
 class DetailShopActivity : AppCompatActivity() {
 
-    companion object {
-        val TAG = "TAG"     //傳遞店家TAG參數
-        val POSITION = "POSITION"  //傳遞哪一個位置
-    }
-
     var position: Int = 0
-    var tag: String = ""
+    var shop_tag: String = ""
     lateinit var adapter: Any
     lateinit var options: Any
 
@@ -36,9 +27,9 @@ class DetailShopActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail_shop)
 
-        position = intent.extras.getInt(POSITION)
-        tag = intent.extras.getString(TAG)
-        Log.v("TAG", "$position $tag")
+        position = intent.extras.getInt(DataConstant.POSITION)
+        shop_tag = intent.extras.getString(DataConstant.SHOP_TYPE_TAG)
+        Log.v("TAG", "$position $shop_tag")
 
         detailShopTb.inflateMenu(R.menu.menu_detailshop)
         detailShopTb.setOnMenuItemClickListener {
@@ -49,8 +40,8 @@ class DetailShopActivity : AppCompatActivity() {
             true
         }
 
-        var query = FirebaseDatabase.getInstance().getReference().child(tag)
-        when (tag) {
+        var query = FirebaseDatabase.getInstance().getReference().child(shop_tag)
+        when (shop_tag) {
             BreakfastShop.tag ->
                 options = FirebaseRecyclerOptions.Builder<BreakfastShop>().setQuery(query, BreakfastShop::class.java).build()
             DinnerShop.tag ->
@@ -69,7 +60,7 @@ class DetailShopActivity : AppCompatActivity() {
             }
 
             override fun onBindViewHolder(holder: DetailShopVH, position: Int, model: Shop) {
-                holder.bind(tag,model)
+                holder.bind(shop_tag,model)
             }
         }
 

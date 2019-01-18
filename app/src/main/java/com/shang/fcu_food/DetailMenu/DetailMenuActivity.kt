@@ -11,6 +11,8 @@ import android.view.ViewGroup
 import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.google.firebase.database.FirebaseDatabase
+import com.shang.fcu_food.Data.DataConstant
+import com.shang.fcu_food.Data.DataConstant.Companion.SHOP_TYPE_TAG
 import com.shang.fcu_food.Data.Menu
 import com.shang.fcu_food.R
 import kotlinx.android.synthetic.main.activity_detail_menu.*
@@ -21,11 +23,7 @@ class DetailMenuActivity : AppCompatActivity() {
     //update SHOP_TYPE_TAG+SHOP_ID+"menu"+menu_id+usercomment+"comment_size"
     companion object {
         val TAG="DetailMenuActivity"
-        val POSITION = "POSITION"
 
-        val SHOP_TYPE_TAG = "SHOP_TYPE_TAG"
-        val SHOP_ID = "SHOP_ID"
-        val SHOP_NAME = "SHOP_NAME"
 
         var shop_type_tag: String = ""
         var shop_id: String = ""
@@ -42,10 +40,10 @@ class DetailMenuActivity : AppCompatActivity() {
 
         var intent = intent.extras
         if (intent != null) {
-            shop_name=intent.getString(SHOP_NAME)
-            shop_type_tag = intent.getString(SHOP_TYPE_TAG)
-            shop_id = intent.getString(SHOP_ID)
-            position = intent.getInt(POSITION)
+            shop_name=intent.getString(DataConstant.SHOP_NAME)
+            shop_type_tag = intent.getString(DataConstant.SHOP_TYPE_TAG)
+            shop_id = intent.getString(DataConstant.SHOP_ID)
+            position = intent.getInt(DataConstant.POSITION)
         }
         Log.d(TAG, "$position $shop_name")
         Log.d(TAG, "REF:" + "$shop_type_tag/$shop_id/menu")

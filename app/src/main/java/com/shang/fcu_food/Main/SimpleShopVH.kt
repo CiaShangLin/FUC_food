@@ -45,8 +45,8 @@ class SimpleShopVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     fun goDetailShop_Activity(context: Context, tag: String, position: Int) {
         var bundle = Bundle().apply {
-            this.putString(DetailShopActivity.TAG, tag)
-            this.putInt(DetailShopActivity.POSITION, position)
+            this.putString(DataConstant.SHOP_TYPE_TAG, tag)
+            this.putInt(DataConstant.POSITION, position)
         }
         var intent = Intent(context, DetailShopActivity::class.java).apply {
             this.putExtras(bundle)
