@@ -31,8 +31,9 @@ class ImageViewDialog : DialogFragment() {
             if (imageViewDialog == null) {
                 imageViewDialog =
                         ImageViewDialog()
-                imageViewDialog?.arguments=bundle
+
             }
+            imageViewDialog?.arguments=bundle
             return imageViewDialog as ImageViewDialog
         }
     }

@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.RatingBar
+import com.shang.fcu_food.Data.DataConstant
 import com.shang.fcu_food.R
 
 class AddMenuDialog : DialogFragment() {
@@ -15,14 +16,18 @@ class AddMenuDialog : DialogFragment() {
     companion object {
         val TAG="AddMenuDialog"
 
+
+
         var addMenuDialog: AddMenuDialog?=null
         fun getInstance(shopName:String,menuName:String) : AddMenuDialog {
             var bundle=Bundle().apply {
-
+                this.putString(DataConstant.SHOP_NAME,shopName)
+                this.putString(DataConstant.MENU_NAME,menuName)
             }
             if(addMenuDialog ==null){
                 addMenuDialog = AddMenuDialog()
             }
+            addMenuDialog?.arguments=bundle
             return addMenuDialog!!
         }
     }
@@ -40,6 +45,9 @@ class AddMenuDialog : DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        var shop_name=arguments?.getString(DataConstant.SHOP_NAME)
+        var menu_name=arguments?.getString(DataConstant.MENU_NAME)
 
         var addMenuNameTvEt=view.findViewById<TextInputLayout>(R.id.addMenuNameTvEt)
         var addMenuPriceTvEt=view.findViewById<TextInputLayout>(R.id.addMenuPriceTvEt)

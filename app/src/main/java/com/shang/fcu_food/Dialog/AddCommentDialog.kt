@@ -13,24 +13,23 @@ import com.shang.fcu_food.DetailMenu.DetailMenuActivity
 import com.shang.fcu_food.FirebaseUnits
 import com.shang.fcu_food.R
 
-class CommentDialog : DialogFragment() {
+class AddCommentDialog : DialogFragment() {
 
     companion object {
-        val TAG: String = "CommentDialog"
+        val TAG: String = "AddCommentDialog"
         val MENU_ID: String = "MENU_ID"
         val COMMENT_SIZE: String = "COMMENT_SIZE"
-        var commentDialog: CommentDialog? = null
+        var commentDialog: AddCommentDialog? = null
 
-        fun getInstace(menu_id: String, comment_size: String): CommentDialog {
+        fun getInstace(menu_id: String, comment_size: String): AddCommentDialog {
             var bundle = Bundle()
             bundle.putString(MENU_ID, menu_id)
             bundle.putString(COMMENT_SIZE, comment_size)
 
             if (commentDialog == null) {
-                commentDialog =
-                        CommentDialog()
-                commentDialog?.arguments = bundle
+                commentDialog = AddCommentDialog()
             }
+            commentDialog?.arguments = bundle
             return commentDialog!!
         }
     }

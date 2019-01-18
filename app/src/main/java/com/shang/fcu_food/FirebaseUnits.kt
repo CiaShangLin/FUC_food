@@ -109,5 +109,14 @@ class FirebaseUnits {
             }
         }
 
+        fun database_addMenu(
+            ref_path: String,
+            rating: String,
+            comment: String,
+            uid: String
+        ) {
+
+        }
+
     }
 }

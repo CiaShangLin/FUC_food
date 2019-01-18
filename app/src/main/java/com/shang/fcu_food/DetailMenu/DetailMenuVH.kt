@@ -7,7 +7,7 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.request.RequestOptions
-import com.shang.fcu_food.Dialog.CommentDialog
+import com.shang.fcu_food.Dialog.AddCommentDialog
 import com.shang.fcu_food.Data.Menu
 import com.shang.fcu_food.FirebaseUnits
 import com.shang.fcu_food.Dialog.ImageViewDialog
@@ -29,10 +29,10 @@ class DetailMenuVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
         itemView.menuStarTv.setText(String.format("%.1f", model.star))
         itemView.menuCommentTv.setText("${model.usercomment.size}人")
         itemView.menuAddCommentBt.setOnClickListener {
-            CommentDialog.getInstace(
+            AddCommentDialog.getInstace(
                 model.id.toString(),
                 model.usercomment.size.toString()
-            ).show(activity.supportFragmentManager, CommentDialog.TAG)
+            ).show(activity.supportFragmentManager, AddCommentDialog.TAG)
         }
 
         itemView.menuCommentRecyc.layoutManager = LinearLayoutManager(itemView.context)
