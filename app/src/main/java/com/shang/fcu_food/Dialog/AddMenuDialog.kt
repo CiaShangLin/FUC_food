@@ -25,6 +25,7 @@ import com.shang.fcu_food.R
 import kotlinx.android.synthetic.main.dialog_addmenu.*
 import org.jetbrains.anko.imageBitmap
 import org.jetbrains.anko.support.v4.toast
+import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
 import java.lang.Exception
@@ -110,9 +111,27 @@ class AddMenuDialog : DialogFragment() {
             GlideApp.with(context!!)
                 .load(uri)
                 .into(addMenuPictureIg)
-            
 
+            Log.d(TAG,b.byteCount.toString())
 
+            var option=BitmapFactory.Options()
+            option.inJustDecodeBounds=true
+            var len=Math.min(b.width,b.height)
+            var s=0
+            if(len>720){
+                var r=len/720.0
+                s=r.toInt()
+            }
+            option.inJustDecodeBounds=false
+            option.inSampleSize=s
+
+            var byteArrayOutputStream=ByteArrayOutputStream()
+            b.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream)
+            var byte=byteArrayOutputStream.toByteArray()
+            var c=BitmapFactory.decodeByteArray(byte,0,byte.size,option)
+
+            Log.d(TAG,c.width.toString()+" "+c.height.toString())
+            Log.d(TAG,c.byteCount.toString())
         }
     }
 
