@@ -110,20 +110,21 @@ class FirebaseUnits {
             }
         }
 
+        //新增菜單
         fun database_addMenu(
             ref_path: String,
-            tempMenu:TempMenu
+            tempMenu: TempMenu,
+            activity: Activity
         ) {
-            var f=FirebaseDatabase.getInstance().getReference(ref_path).push().setValue(tempMenu)
+            var f = FirebaseDatabase.getInstance().getReference(ref_path).push().setValue(tempMenu)
                 .addOnSuccessListener {
-
+                    activity.toast("新增成功")
                 }.addOnFailureListener {
-
+                    activity.toast("新增失敗:${it.message}")
                 }
-
         }
 
-        fun storage_addMenuImage(){
+        fun storage_addMenuImage() {
 
         }
 
