@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
@@ -19,10 +20,14 @@ import android.widget.RatingBar
 import com.shang.fcu_food.Data.DataConstant
 import com.shang.fcu_food.Data.TempMenu
 import com.shang.fcu_food.FirebaseUnits
+import com.shang.fcu_food.Main.GlideApp
 import com.shang.fcu_food.R
 import kotlinx.android.synthetic.main.dialog_addmenu.*
+import org.jetbrains.anko.imageBitmap
+import org.jetbrains.anko.support.v4.toast
 import java.io.File
 import java.io.FileOutputStream
+import java.lang.Exception
 
 class AddMenuDialog : DialogFragment() {
 
@@ -42,6 +47,7 @@ class AddMenuDialog : DialogFragment() {
         }
     }
 
+    lateinit var b:Bitmap
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -66,15 +72,23 @@ class AddMenuDialog : DialogFragment() {
         var addMenuAddBt=view.findViewById<Button>(R.id.addMenuAddBt)
 
         addMenuAddBt.setOnClickListener {
-            var ref="tempMenu"
-            var menu_name=addMenuNameTvEt.editText?.text.toString()
-            var star=addMenuRatingBar.rating.toDouble()
-            var price=addMenuPriceTvEt.editText?.text.toString().toInt()
-            var uid=FirebaseUnits.auth_getUser()?.uid
-            var comment=addMenuCommentTvEt.editText?.text.toString()
-            var tempMenu=TempMenu(shop_name!!,menu_name!!,star,price,uid!!,comment)
+            try{
+                var ref="tempMenu"
+                var menu_name=addMenuNameTvEt.editText?.text.toString()
+                var star=addMenuRatingBar.rating.toDouble()
+                var price=addMenuPriceTvEt.editText?.text.toString().toInt()
+                var uid=FirebaseUnits.auth_getUser()?.uid
+                var comment=addMenuCommentTvEt.editText?.text.toString()
+                var tempMenu=TempMenu(shop_name!!,menu_name!!,star,price,uid!!,comment)
 
-            FirebaseUnits.database_addMenu(ref,tempMenu,activity as Activity)
+                //FirebaseUnits.database_addMenu(ref,tempMenu,activity as Activity)
+
+
+                Log.d("TAG",b.width.toString()+" "+b.height.toString())
+            }catch (e:Exception){
+                toast("輸入錯誤")
+            }
+
         }
 
         addMenuPictureIg.setOnClickListener {
@@ -91,7 +105,14 @@ class AddMenuDialog : DialogFragment() {
 
         if (requestCode==1){
             var uri=data?.data
-            var bitmap=MediaStore.Images.Media.getBitmap(activity?.getContentResolver(),uri)
+            b=MediaStore.Images.Media.getBitmap(activity?.getContentResolver(),uri)
+
+            GlideApp.with(context!!)
+                .load(uri)
+                .into(addMenuPictureIg)
+            
+
+
         }
     }
 
