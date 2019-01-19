@@ -8,7 +8,5 @@ interface DataConstant {
         val SHOP_ID = "SHOP_ID"
         val SHOP_NAME = "SHOP_NAME"
 
-        //新增菜單用
-        val MENU_NAME="MENU_NAME"
     }
 }

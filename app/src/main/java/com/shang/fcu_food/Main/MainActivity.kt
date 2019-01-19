@@ -80,7 +80,7 @@ class MainActivity : AppCompatActivity() {
                     }
 
                 R.id.menu_question->
-                    AddMenuDialog.getInstance("","").show(supportFragmentManager,
+                    AddMenuDialog.getInstance("黑盒子").show(supportFragmentManager,
                         AddMenuDialog.TAG)
                     //alert(R.string.Menu_Question_Message,R.string.Menu_Question_Title).show()
             }
@@ -112,55 +112,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
-    fun realtimeDatabase() {
-
-        val database = FirebaseDatabase.getInstance()
-        val myRef = database.getReference("breakfast/4")
-        var map = mutableMapOf<String, Any>()
-        map.put("店名", "EEE")
-        map.put("地址", "EEE")
-        myRef.updateChildren(map)
-
-        myRef.addChildEventListener(object : ChildEventListener {
-            override fun onCancelled(p0: DatabaseError) {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-            }
-
-            override fun onChildMoved(p0: DataSnapshot, p1: String?) {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-            }
-
-            override fun onChildChanged(p0: DataSnapshot, p1: String?) {
-                Log.d("TAG Change", p1 + " " + p0.key + " " + p0.value)
-            }
-
-            override fun onChildRemoved(p0: DataSnapshot) {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-            }
-
-            override fun onChildAdded(p0: DataSnapshot, p1: String?) {
-                toast("新增成功")
-            }
-        })
-
-
-        myRef.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                for (d in dataSnapshot.children) {
-                    //Log.d("TAG", "Value is: " + d.value+" key:"+d.key)
-                }
-
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                // Failed to read value
-                Log.w("TAG", "Failed to read value.", error.toException())
-            }
-        })
-    }
 
     fun update() {
         var storageRef = FirebaseStorage.getInstance().getReference()

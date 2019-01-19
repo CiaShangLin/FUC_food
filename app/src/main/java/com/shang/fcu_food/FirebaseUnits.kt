@@ -14,6 +14,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
+import com.shang.fcu_food.Data.TempMenu
 import com.shang.fcu_food.Data.User
 import com.shang.fcu_food.Data.UserComment
 import com.shang.fcu_food.Main.GlideApp
@@ -111,10 +112,18 @@ class FirebaseUnits {
 
         fun database_addMenu(
             ref_path: String,
-            rating: String,
-            comment: String,
-            uid: String
+            tempMenu:TempMenu
         ) {
+            var f=FirebaseDatabase.getInstance().getReference(ref_path).push().setValue(tempMenu)
+                .addOnSuccessListener {
+
+                }.addOnFailureListener {
+
+                }
+
+        }
+
+        fun storage_addMenuImage(){
 
         }
 

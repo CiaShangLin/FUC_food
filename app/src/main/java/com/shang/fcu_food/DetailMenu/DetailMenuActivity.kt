@@ -14,6 +14,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.shang.fcu_food.Data.DataConstant
 import com.shang.fcu_food.Data.DataConstant.Companion.SHOP_TYPE_TAG
 import com.shang.fcu_food.Data.Menu
+import com.shang.fcu_food.Dialog.AddMenuDialog
 import com.shang.fcu_food.R
 import kotlinx.android.synthetic.main.activity_detail_menu.*
 
@@ -45,8 +46,18 @@ class DetailMenuActivity : AppCompatActivity() {
             shop_id = intent.getString(DataConstant.SHOP_ID)
             position = intent.getInt(DataConstant.POSITION)
         }
-        Log.d(TAG, "$position $shop_name")
-        Log.d(TAG, "REF:" + "$shop_type_tag/$shop_id/menu")
+
+        detailMenuTb.inflateMenu(R.menu.menu_detailmenu)
+        detailMenuTb.setOnMenuItemClickListener {
+            when(it.itemId){
+                R.id.menu_addMenu->AddMenuDialog.getInstance(shop_name).show(supportFragmentManager,AddMenuDialog.TAG)
+            }
+            true
+        }
+
+
+
+
 
         var query = FirebaseDatabase.getInstance().getReference().child("$shop_type_tag/$shop_id/menu")
         options = FirebaseRecyclerOptions.Builder<Menu>().setQuery(query, Menu::class.java).build()
