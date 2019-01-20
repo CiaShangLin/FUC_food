@@ -55,10 +55,6 @@ class DetailMenuActivity : AppCompatActivity() {
             true
         }
 
-
-
-
-
         var query = FirebaseDatabase.getInstance().getReference().child("$shop_type_tag/$shop_id/menu")
         options = FirebaseRecyclerOptions.Builder<Menu>().setQuery(query, Menu::class.java).build()
         adapter = object : FirebaseRecyclerAdapter<Menu, DetailMenuVH>(options as FirebaseRecyclerOptions<Menu>) {

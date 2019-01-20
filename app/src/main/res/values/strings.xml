@@ -18,6 +18,12 @@
     <string name="CommentDialog_Title">輸入評論</string>
     <string name="CommentDialog_Success">新增成功</string>
     <string name="CommentDialog_Fail">新增失敗</string>
+
+    <string name="dialog_addmenu_Title">新增菜單</string>
+    <string name="dialog_addmenu_Picture">食物照片</string>
+
+    <string name="dialog_addshop_Title">新增店家</string>
+    <string name="dialog_addshop_Picture">菜單照片</string>
     
     <string name="Menu_Question_Title">關於我們</string>
     <string name="Menu_Question_Message">
@@ -27,5 +33,9 @@
         APP發表之所有言論，都是使用者自行發出\n
         與開發者本人毫無相關\n
         目前版本1.0版\n
+    </string>
+
+    <string name="Add_Message">
+        新增後並不會馬上顯示\n需要通過審核後才會新增\n請耐心等待，謝謝
     </string>
 </resources>

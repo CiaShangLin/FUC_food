@@ -103,7 +103,6 @@ class FirebaseUnits {
             uid: String,
             activity: FragmentActivity
         ) {
-
             val ref = FirebaseDatabase.getInstance().getReference().child(ref_path)
             var map = UserComment(uid, comment, rating).toMap()
             ref.updateChildren(map).addOnSuccessListener {
@@ -116,33 +115,57 @@ class FirebaseUnits {
         //新增菜單
         fun database_addMenu(
             ref_path: String,
-            tempMenu: TempMenu,
-            activity: Activity
+            tempMenu: TempMenu
         ) {
-            var f = FirebaseDatabase.getInstance().getReference(ref_path).push().setValue(tempMenu)
+            var task = FirebaseDatabase.getInstance().getReference(ref_path).push().setValue(tempMenu)
                 .addOnSuccessListener {
-                    activity.toast("新增成功")
+
                 }.addOnFailureListener {
-                    activity.toast("新增失敗:${it.message}")
+
                 }
         }
 
-        fun storage_addMenuImage(imageByte: ByteArray) {
+        fun storage_addMenuImage(imageByte: ByteArray, ref_path: String, callback: FirebaseCallback) {
             var ref = FirebaseStorage.getInstance().getReference().child("tempMenu/temp.jpeg")
-            var mataData=StorageMetadata.Builder()
+            var mataData = StorageMetadata.Builder()
                 .setContentType("image/jpeg")
                 .setContentDisposition("TEST")
                 .build()
-            ref.putBytes(imageByte,mataData)
+            ref.putBytes(imageByte, mataData)
                 .addOnSuccessListener {
-                    Log.d("TAG","SUCCESS")
-
+                    Log.d("TAG", "SUCCESS")
                 }.addOnFailureListener {
-                    Log.d("TAG","Fail")
-                }.addOnProgressListener{taskSnapshot ->
+                    Log.d("TAG", "Fail")
+                }.addOnProgressListener { taskSnapshot ->
                     val progress = (100.0 * taskSnapshot.bytesTransferred) / taskSnapshot.totalByteCount
                     System.out.println("Upload is $progress% done")
                 }
+        }
+
+        fun add(ref_path: String, value: Any, imageByte: ByteArray, callback: FirebaseCallback) {
+            var database = FirebaseDatabase.getInstance().getReference().child(ref_path)
+            var storage = FirebaseStorage.getInstance().getReference().child(ref_path)
+            var database_status = false
+            var storage_status = if (imageByte.size == 0) true else false
+
+            database.push().setValue(value).addOnSuccessListener {
+                database_status = true
+                callback.statusCallBack(database_status, storage_status)
+            }.addOnFailureListener {
+                database_status = false
+                callback.statusCallBack(database_status, storage_status)
+            }
+
+            if (imageByte.size != 0) {  //代表有上傳照片
+                storage.putBytes(imageByte).addOnSuccessListener {
+                    storage_status = true
+                    callback.statusCallBack(database_status, storage_status)
+                }.addOnFailureListener {
+                    storage_status = false
+                    callback.statusCallBack(database_status, storage_status)
+                }
+            }
+
 
         }
 
