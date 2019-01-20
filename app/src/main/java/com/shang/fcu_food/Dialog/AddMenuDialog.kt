@@ -19,6 +19,7 @@ import com.shang.fcu_food.Data.TempMenu
 import com.shang.fcu_food.FirebaseUnits
 import com.shang.fcu_food.Main.GlideApp
 import com.shang.fcu_food.R
+import com.shang.fcu_food.UploadAsy
 import kotlinx.android.synthetic.main.dialog_addmenu.*
 import org.jetbrains.anko.support.v4.toast
 import java.io.ByteArrayOutputStream
@@ -79,6 +80,7 @@ class AddMenuDialog : DialogFragment() {
 
                 //FirebaseUnits.database_addMenu(ref,tempMenu,activity as Activity)
 
+                UploadAsy(context!!, byteArrayOf()).execute()
             }catch (e:Exception){
                 toast("輸入錯誤")
             }
