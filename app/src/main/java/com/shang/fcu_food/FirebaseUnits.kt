@@ -14,6 +14,9 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.OnProgressListener
+import com.google.firebase.storage.StorageMetadata
+import com.google.firebase.storage.UploadTask
 import com.shang.fcu_food.Data.TempMenu
 import com.shang.fcu_food.Data.User
 import com.shang.fcu_food.Data.UserComment
@@ -124,7 +127,22 @@ class FirebaseUnits {
                 }
         }
 
-        fun storage_addMenuImage() {
+        fun storage_addMenuImage(imageByte: ByteArray) {
+            var ref = FirebaseStorage.getInstance().getReference().child("tempMenu/temp.jpeg")
+            var mataData=StorageMetadata.Builder()
+                .setContentType("image/jpeg")
+                .setContentDisposition("TEST")
+                .build()
+            ref.putBytes(imageByte,mataData)
+                .addOnSuccessListener {
+                    Log.d("TAG","SUCCESS")
+
+                }.addOnFailureListener {
+                    Log.d("TAG","Fail")
+                }.addOnProgressListener{taskSnapshot ->
+                    val progress = (100.0 * taskSnapshot.bytesTransferred) / taskSnapshot.totalByteCount
+                    System.out.println("Upload is $progress% done")
+                }
 
         }
 

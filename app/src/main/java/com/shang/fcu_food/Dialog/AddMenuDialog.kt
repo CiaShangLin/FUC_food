@@ -1,10 +1,7 @@
 package com.shang.fcu_food.Dialog
 
-import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
@@ -23,10 +20,8 @@ import com.shang.fcu_food.FirebaseUnits
 import com.shang.fcu_food.Main.GlideApp
 import com.shang.fcu_food.R
 import kotlinx.android.synthetic.main.dialog_addmenu.*
-import org.jetbrains.anko.imageBitmap
 import org.jetbrains.anko.support.v4.toast
 import java.io.ByteArrayOutputStream
-import java.io.File
 import java.io.FileOutputStream
 import java.lang.Exception
 
@@ -48,7 +43,7 @@ class AddMenuDialog : DialogFragment() {
         }
     }
 
-    lateinit var b:Bitmap
+    var bitmap:Bitmap?=null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -84,8 +79,6 @@ class AddMenuDialog : DialogFragment() {
 
                 //FirebaseUnits.database_addMenu(ref,tempMenu,activity as Activity)
 
-
-                Log.d("TAG",b.width.toString()+" "+b.height.toString())
             }catch (e:Exception){
                 toast("輸入錯誤")
             }
@@ -97,7 +90,7 @@ class AddMenuDialog : DialogFragment() {
                 this.setType("image/*")
                 this.action=Intent.ACTION_GET_CONTENT
             }
-            startActivityForResult(Intent.createChooser(intent,"請選擇食物圖片"),1)
+            startActivityForResult(intent,1)
         }
     }
 
@@ -106,32 +99,28 @@ class AddMenuDialog : DialogFragment() {
 
         if (requestCode==1){
             var uri=data?.data
-            b=MediaStore.Images.Media.getBitmap(activity?.getContentResolver(),uri)
+            bitmap=MediaStore.Images.Media.getBitmap(activity?.getContentResolver(),uri)
+            Log.d(TAG,bitmap?.byteCount.toString())
 
             GlideApp.with(context!!)
                 .load(uri)
                 .into(addMenuPictureIg)
 
-            Log.d(TAG,b.byteCount.toString())
-
-            var option=BitmapFactory.Options()
-            option.inJustDecodeBounds=true
-            var len=Math.min(b.width,b.height)
-            var s=0
-            if(len>720){
-                var r=len/720.0
-                s=r.toInt()
-            }
-            option.inJustDecodeBounds=false
-            option.inSampleSize=s
-
-            var byteArrayOutputStream=ByteArrayOutputStream()
-            b.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream)
-            var byte=byteArrayOutputStream.toByteArray()
-            var c=BitmapFactory.decodeByteArray(byte,0,byte.size,option)
-
-            Log.d(TAG,c.width.toString()+" "+c.height.toString())
+            var c=Bitmap.createScaledBitmap(bitmap,480,720,true)
             Log.d(TAG,c.byteCount.toString())
+
+
+
+            var file=FileOutputStream(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).toString()
+            +"/temp.jpeg")
+            c.compress(Bitmap.CompressFormat.JPEG,100,file)
+
+            var byteArrayOutputStream = ByteArrayOutputStream()
+            c.compress(Bitmap.CompressFormat.JPEG,100,byteArrayOutputStream)
+            var byte=byteArrayOutputStream.toByteArray()
+
+            FirebaseUnits.storage_addMenuImage(byte)
+
         }
     }
 
