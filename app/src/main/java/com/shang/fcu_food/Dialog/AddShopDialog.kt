@@ -1,7 +1,9 @@
 package com.shang.fcu_food.Dialog
 
+import android.app.ProgressDialog
+import android.content.Intent
+import android.graphics.Bitmap
 import android.os.Bundle
-import android.support.design.widget.TextInputEditText
 import android.support.design.widget.TextInputLayout
 import android.support.v4.app.DialogFragment
 import android.util.Log
@@ -10,7 +12,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
+import com.shang.fcu_food.Main.GlideApp
+import com.shang.fcu_food.PickPictureUnit
 import com.shang.fcu_food.R
+import kotlinx.android.synthetic.main.dialog_addshop.*
 import java.lang.Exception
 
 class AddShopDialog :DialogFragment() {
@@ -26,6 +31,9 @@ class AddShopDialog :DialogFragment() {
             return addShopDialog as AddShopDialog
         }
     }
+
+    var bitmap: Bitmap? = null
+    lateinit var progressDialog: ProgressDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,7 +52,7 @@ class AddShopDialog :DialogFragment() {
         var addShopOpenTvEt=view.findViewById<TextInputLayout>(R.id.addShopNameTvEt)
         var addShopPhoneTvEt=view.findViewById<TextInputLayout>(R.id.addShopPhoneTvEt)
         var addShopAddressTvEt=view.findViewById<TextInputLayout>(R.id.addShopAddressTvEt)
-        var addShopPictureImg=view.findViewById<ImageView>(R.id.addShopPictureIg)
+        var addShopPictureImg=view.findViewById<ImageView>(R.id.addShopPictureImg)
         var addShopAddBt=view.findViewById<Button>(R.id.addShopAddBt)
 
         addShopAddBt.setOnClickListener {
@@ -54,13 +62,27 @@ class AddShopDialog :DialogFragment() {
                 var phone=addShopPhoneTvEt.editText!!.text.toString()
                 var address=addShopAddressTvEt.editText!!.text.toString()
                 Log.d(TAG,"$shopName $open $phone $address")
+                Log.d(TAG,PickPictureUnit.bitmapToByte(bitmap).size.toString())
             }catch (e:Exception){
                 e.printStackTrace()
             }
         }
 
+        addShopPictureImg.setOnClickListener {
+            startActivityForResult(PickPictureUnit.pickIntent(), PickPictureUnit.REQUEST_CODE)
+        }
 
+    }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode ==  PickPictureUnit.REQUEST_CODE) {
+            bitmap=PickPictureUnit.uriToBitmap(activity!!,data)
+            GlideApp.with(context!!)
+                .load(data?.data)
+                .into(addShopPictureImg)
+        }
     }
 
 

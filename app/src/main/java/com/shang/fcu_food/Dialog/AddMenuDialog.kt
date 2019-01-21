@@ -18,6 +18,7 @@ import com.shang.fcu_food.Data.TempMenu
 import com.shang.fcu_food.FirebaseCallback
 import com.shang.fcu_food.FirebaseUnits
 import com.shang.fcu_food.Main.GlideApp
+import com.shang.fcu_food.PickPictureUnit
 import com.shang.fcu_food.R
 import kotlinx.android.synthetic.main.dialog_addmenu.*
 import org.jetbrains.anko.support.v4.toast
@@ -78,7 +79,7 @@ class AddMenuDialog : DialogFragment() {
         var addMenuPriceTvEt = view.findViewById<TextInputLayout>(R.id.addMenuPriceTvEt)
         var addMenuCommentTvEt = view.findViewById<TextInputLayout>(R.id.addMenuCommentTvEt)
         var addMenuRatingBar = view.findViewById<RatingBar>(R.id.addMenuRatingBar)
-        var addMenuPictureIg = view.findViewById<ImageView>(R.id.addShopPictureIg)
+        var addMenuPictureIg = view.findViewById<ImageView>(R.id.addMenuPictureIg)
         var addMenuAddBt = view.findViewById<Button>(R.id.addMenuAddBt)
 
         progressDialog=ProgressDialog(context).apply {
@@ -102,28 +103,22 @@ class AddMenuDialog : DialogFragment() {
             } catch (e: Exception) {
                 toast("輸入錯誤")
             }
-
         }
 
         addMenuPictureIg.setOnClickListener {
-            var intent = Intent().apply {
-                this.setType("image/*")
-                this.action = Intent.ACTION_GET_CONTENT
-            }
-            startActivityForResult(intent, 1)
+            startActivityForResult(PickPictureUnit.pickIntent(), PickPictureUnit.REQUEST_CODE)
         }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (requestCode == 1) {
-            var uri = data?.data
-            bitmap = MediaStore.Images.Media.getBitmap(activity?.getContentResolver(), uri)
+        if (requestCode == PickPictureUnit.REQUEST_CODE) {
 
+            bitmap = PickPictureUnit.uriToBitmap(activity!!,data)
             GlideApp.with(context!!)
-                .load(uri)
-                .into(addShopPictureIg)
+                .load(data?.data)
+                .into(addMenuPictureIg)
         }
     }
 

@@ -82,7 +82,7 @@ class MainActivity : AppCompatActivity() {
                     }
 
                 R.id.menu_question->
-                    AddShopDialog.getInstance().show(supportFragmentManager,"")
+                    AddShopDialog.getInstance().show(supportFragmentManager,AddShopDialog.TAG)
 
                     //alert(R.string.Menu_Question_Message,R.string.Menu_Question_Title).show()
             }
