@@ -48,6 +48,10 @@ class DetailMenuActivity : AppCompatActivity() {
         }
 
         detailMenuTb.inflateMenu(R.menu.menu_detailmenu)
+        detailMenuTb.setNavigationIcon(R.drawable.ic_arrow_back)
+        detailMenuTb.setNavigationOnClickListener {
+            finish()
+        }
         detailMenuTb.setOnMenuItemClickListener {
             when(it.itemId){
                 R.id.menu_addMenu->AddMenuDialog.getInstance(shop_name).show(supportFragmentManager,AddMenuDialog.TAG)

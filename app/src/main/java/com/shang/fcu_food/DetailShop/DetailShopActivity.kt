@@ -11,6 +11,7 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.google.firebase.database.FirebaseDatabase
 import com.shang.fcu_food.Data.*
+import com.shang.fcu_food.Dialog.AddShopDialog
 import com.shang.fcu_food.R
 import kotlinx.android.synthetic.main.activity_detail_shop.*
 import org.jetbrains.anko.toast
@@ -33,17 +34,23 @@ class DetailShopActivity : AppCompatActivity() {
 
         detailShopTb.inflateMenu(R.menu.menu_detailshop)
         detailShopTb.setOnMenuItemClickListener {
-            when(it.itemId){
-                R.id.menu_search->toast("SEARCH")
-                R.id.menu_addShop->toast("ADD SHOP")
+            when (it.itemId) {
+                R.id.menu_search -> toast("功能尚未實作")
+                R.id.menu_addShop ->
+                    AddShopDialog.getInstance(shop_tag).show(supportFragmentManager, AddShopDialog.TAG)
             }
             true
+        }
+        detailShopTb.setNavigationIcon(R.drawable.ic_arrow_back)
+        detailShopTb.setNavigationOnClickListener {
+            finish()
         }
 
         var query = FirebaseDatabase.getInstance().getReference().child(shop_tag)
         when (shop_tag) {
             BreakfastShop.tag ->
-                options = FirebaseRecyclerOptions.Builder<BreakfastShop>().setQuery(query, BreakfastShop::class.java).build()
+                options = FirebaseRecyclerOptions.Builder<BreakfastShop>().setQuery(query, BreakfastShop::class.java)
+                    .build()
             DinnerShop.tag ->
                 options = FirebaseRecyclerOptions.Builder<DinnerShop>().setQuery(query, DinnerShop::class.java).build()
             SnackShop.tag ->
@@ -60,14 +67,14 @@ class DetailShopActivity : AppCompatActivity() {
             }
 
             override fun onBindViewHolder(holder: DetailShopVH, position: Int, model: Shop) {
-                holder.bind(shop_tag,model)
+                holder.bind(shop_tag, model)
             }
         }
 
         detailShopRecyc.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         detailShopRecyc.adapter = adapter as FirebaseRecyclerAdapter<Shop, DetailShopVH>
 
-        var pagerSnapHelper=PagerSnapHelper()
+        var pagerSnapHelper = PagerSnapHelper()
         pagerSnapHelper.attachToRecyclerView(detailShopRecyc)
     }
 

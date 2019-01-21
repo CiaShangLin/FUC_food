@@ -82,9 +82,7 @@ class MainActivity : AppCompatActivity() {
                     }
 
                 R.id.menu_question->
-                    AddShopDialog.getInstance("breakfast").show(supportFragmentManager,AddShopDialog.TAG)
-
-                    //alert(R.string.Menu_Question_Message,R.string.Menu_Question_Title).show()
+                    alert(R.string.Menu_Question_Message,R.string.Menu_Question_Title).show()
             }
             drawer_layout.closeDrawers()
             true

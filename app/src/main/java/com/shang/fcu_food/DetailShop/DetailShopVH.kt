@@ -19,6 +19,7 @@ import com.shang.fcu_food.DetailMenu.DetailMenuActivity
 import com.shang.fcu_food.FirebaseUnits
 import com.shang.fcu_food.R
 import kotlinx.android.synthetic.main.cardview_detailshop.view.*
+import org.jetbrains.anko.toast
 
 class DetailShopVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
@@ -49,6 +50,10 @@ class DetailShopVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
             model.name,
             RequestOptions().fitCenter()
         )
+
+        itemView.shopMapIg.setOnClickListener {
+            itemView.context.toast("功能尚未實作")
+        }
 
         itemView.shopMenu.layoutManager = GridLayoutManager(itemView.context, 2)
         itemView.shopMenu.adapter =
