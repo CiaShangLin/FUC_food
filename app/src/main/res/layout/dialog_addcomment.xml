@@ -25,7 +25,7 @@
             android:id="@+id/textInputLayout"
             app:counterMaxLength="50" app:counterEnabled="true" app:layout_constraintEnd_toEndOf="parent"
             app:helperText="超過字數了" app:layout_constraintStart_toStartOf="@+id/textView"
-            android:layout_marginEnd="16dp">
+            android:layout_marginEnd="16dp" android:hint="好吃">
 
         <android.support.design.widget.TextInputEditText
                 android:layout_width="match_parent"

@@ -15,10 +15,12 @@ import com.google.firebase.database.*
 import com.google.firebase.storage.FirebaseStorage
 import com.shang.fcu_food.*
 import com.shang.fcu_food.Dialog.AddMenuDialog
+import com.shang.fcu_food.Dialog.AddShopDialog
 import com.shang.fcu_food.Dialog.NetworkDialog
 import com.shang.fcu_food.R
 import kotlinx.android.synthetic.main.drawer_layout.*
 import kotlinx.android.synthetic.main.toolbar_layout.*
+import org.jetbrains.anko.alert
 import java.io.File
 
 
@@ -80,8 +82,8 @@ class MainActivity : AppCompatActivity() {
                     }
 
                 R.id.menu_question->
-                    AddMenuDialog.getInstance("黑盒子").show(supportFragmentManager,
-                        AddMenuDialog.TAG)
+                    AddShopDialog.getInstance().show(supportFragmentManager,"")
+
                     //alert(R.string.Menu_Question_Message,R.string.Menu_Question_Title).show()
             }
             drawer_layout.closeDrawers()

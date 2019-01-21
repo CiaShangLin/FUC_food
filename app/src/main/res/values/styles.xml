@@ -9,7 +9,7 @@
     </style>
 
     <style name="dialog_theme" >
-        <item name="android:windowNoTitle">false</item>
+        <item name="android:windowNoTitle">true</item>
         <item name="android:windowIsFloating">false</item>
     </style>
 

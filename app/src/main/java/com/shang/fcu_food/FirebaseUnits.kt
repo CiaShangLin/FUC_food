@@ -18,6 +18,7 @@ import com.google.firebase.storage.OnProgressListener
 import com.google.firebase.storage.StorageMetadata
 import com.google.firebase.storage.UploadTask
 import com.shang.fcu_food.Data.TempMenu
+import com.shang.fcu_food.Data.TempShop
 import com.shang.fcu_food.Data.User
 import com.shang.fcu_food.Data.UserComment
 import com.shang.fcu_food.Main.GlideApp
@@ -143,10 +144,14 @@ class FirebaseUnits {
         }
 
         fun add(ref_path: String, value: Any, imageByte: ByteArray, callback: FirebaseCallback) {
+            var fileName:String=if(ref_path.equals("tempMenu"))
+                (value as TempMenu).menuname else (value as TempShop).shopname
+
             var database = FirebaseDatabase.getInstance().getReference().child(ref_path)
-            var storage = FirebaseStorage.getInstance().getReference().child(ref_path)
+            var storage = FirebaseStorage
+                .getInstance().getReference(ref_path).child(fileName+fileName.hashCode()+".jpeg")
             var database_status = false
-            var storage_status = if (imageByte.size == 0) true else false
+            var storage_status = false
 
             database.push().setValue(value).addOnSuccessListener {
                 database_status = true
@@ -157,16 +162,18 @@ class FirebaseUnits {
             }
 
             if (imageByte.size != 0) {  //代表有上傳照片
-                storage.putBytes(imageByte).addOnSuccessListener {
+                var metadata=StorageMetadata.Builder().setContentDisposition("TEST").build()
+                storage.putBytes(imageByte,metadata).addOnSuccessListener {
                     storage_status = true
                     callback.statusCallBack(database_status, storage_status)
                 }.addOnFailureListener {
                     storage_status = false
                     callback.statusCallBack(database_status, storage_status)
                 }
+            }else{
+                storage_status=true
+                callback.statusCallBack(database_status, storage_status)
             }
-
-
         }
 
     }

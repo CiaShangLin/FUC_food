@@ -1,5 +1,6 @@
 package com.shang.fcu_food.Dialog
 
+import android.app.ProgressDialog
 import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
@@ -42,12 +43,16 @@ class AddMenuDialog : DialogFragment() {
     }
 
     var bitmap: Bitmap? = null
+    lateinit var progressDialog: ProgressDialog
+
     var callback = object : FirebaseCallback {
         override fun statusCallBack(database_status: Boolean, storage_status: Boolean) {
             if (database_status && storage_status) {
                 toast("新增成功")
+                progressDialog.dismiss()
                 dismiss()
-            } else if (database_status == false || storage_status == false) {
+            } else if (database_status == false && storage_status == false) {
+                progressDialog.dismiss()
                 toast("新增失敗")
             }
         }
@@ -76,8 +81,15 @@ class AddMenuDialog : DialogFragment() {
         var addMenuPictureIg = view.findViewById<ImageView>(R.id.addShopPictureIg)
         var addMenuAddBt = view.findViewById<Button>(R.id.addMenuAddBt)
 
+        progressDialog=ProgressDialog(context).apply {
+            this.setCancelable(false)
+            this.setTitle("上傳中...")
+            this.setMessage("努力上傳中")
+        }
+
         addMenuAddBt.setOnClickListener {
             try {
+                progressDialog.show()
                 var ref = "tempMenu"
                 var menu_name = addMenuNameTvEt.editText?.text.toString()
                 var star = addMenuRatingBar.rating.toDouble()
@@ -86,7 +98,7 @@ class AddMenuDialog : DialogFragment() {
                 var comment = addMenuCommentTvEt.editText?.text.toString()
                 var tempMenu = TempMenu(shop_name!!, menu_name!!, star, price, uid!!, comment)
 
-                //FirebaseUnits.add(ref,bitmapTobyte(bitmap),callback)
+                FirebaseUnits.add(ref, tempMenu, bitmapTobyte(bitmap), callback)
             } catch (e: Exception) {
                 toast("輸入錯誤")
             }
@@ -117,10 +129,13 @@ class AddMenuDialog : DialogFragment() {
 
     fun bitmapTobyte(bitmap: Bitmap?): ByteArray {
         var byteArrayOutputStream = ByteArrayOutputStream()
-        if(bitmap==null){
+        if (bitmap == null) {
             return byteArrayOf()
-        }else{
-            var tempBitmap = Bitmap.createScaledBitmap(bitmap, 480, 720, true)
+        } else {
+            //有可能是長得或是橫的
+            var width = if (bitmap.width > bitmap.height) 720 else 480
+            var height = if (bitmap.height > bitmap.width) 720 else 480
+            var tempBitmap = Bitmap.createScaledBitmap(bitmap, width, height, true)
             tempBitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream)
         }
         return byteArrayOutputStream.toByteArray()
