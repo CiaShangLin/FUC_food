@@ -4,7 +4,6 @@ import android.app.ProgressDialog
 import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
-import android.provider.MediaStore
 import android.support.design.widget.TextInputLayout
 import android.support.v4.app.DialogFragment
 import android.view.LayoutInflater
@@ -90,7 +89,8 @@ class AddMenuDialog : DialogFragment() {
 
         addMenuAddBt.setOnClickListener {
             try {
-                progressDialog.show()
+
+
                 var ref = "tempMenu"
                 var menu_name = addMenuNameTvEt.editText?.text.toString()
                 var star = addMenuRatingBar.rating.toDouble()
@@ -99,9 +99,15 @@ class AddMenuDialog : DialogFragment() {
                 var comment = addMenuCommentTvEt.editText?.text.toString()
                 var tempMenu = TempMenu(shop_name!!, menu_name, star, price, uid!!, comment)
 
-                FirebaseUnits.add(ref, tempMenu, bitmapTobyte(bitmap), callback)
+                if(menu_name.length==0 || comment.length==0){
+                    throw Exception("輸入錯誤")
+                }else{
+                    progressDialog.show()
+                    FirebaseUnits.addTempData(ref, tempMenu, bitmapTobyte(bitmap), callback)
+                }
+
             } catch (e: Exception) {
-                toast("輸入錯誤")
+                toast(e.message+"")
             }
         }
 

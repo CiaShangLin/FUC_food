@@ -113,37 +113,7 @@ class FirebaseUnits {
             }
         }
 
-        //新增菜單
-        fun database_addMenu(
-            ref_path: String,
-            tempMenu: TempMenu
-        ) {
-            var task = FirebaseDatabase.getInstance().getReference(ref_path).push().setValue(tempMenu)
-                .addOnSuccessListener {
-
-                }.addOnFailureListener {
-
-                }
-        }
-
-        fun storage_addMenuImage(imageByte: ByteArray, ref_path: String, callback: FirebaseCallback) {
-            var ref = FirebaseStorage.getInstance().getReference().child("tempMenu/temp.jpeg")
-            var mataData = StorageMetadata.Builder()
-                .setContentType("image/jpeg")
-                .setContentDisposition("TEST")
-                .build()
-            ref.putBytes(imageByte, mataData)
-                .addOnSuccessListener {
-                    Log.d("TAG", "SUCCESS")
-                }.addOnFailureListener {
-                    Log.d("TAG", "Fail")
-                }.addOnProgressListener { taskSnapshot ->
-                    val progress = (100.0 * taskSnapshot.bytesTransferred) / taskSnapshot.totalByteCount
-                    System.out.println("Upload is $progress% done")
-                }
-        }
-
-        fun add(ref_path: String, value: Any, imageByte: ByteArray, callback: FirebaseCallback) {
+        fun addTempData(ref_path: String, value: Any, imageByte: ByteArray, callback: FirebaseCallback) {
             var fileName:String=if(ref_path.equals("tempMenu"))
                 (value as TempMenu).menuname else (value as TempShop).shopname
 
