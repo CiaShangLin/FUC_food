@@ -8,6 +8,13 @@ class TempShop {
     var latlng:String="無提供"
 
     constructor()
+    constructor(shopname: String, phone: String, open: String, uid: String, latlng: String) {
+        this.shopname = shopname
+        this.phone = phone
+        this.open = open
+        this.uid = uid
+        this.latlng = latlng
+    }
 
 
 }

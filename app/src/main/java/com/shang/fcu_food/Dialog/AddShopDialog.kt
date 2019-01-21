@@ -12,10 +12,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
+import com.shang.fcu_food.Data.TempShop
+import com.shang.fcu_food.FirebaseUnits
 import com.shang.fcu_food.Main.GlideApp
 import com.shang.fcu_food.PickPictureUnit
 import com.shang.fcu_food.R
 import kotlinx.android.synthetic.main.dialog_addshop.*
+import org.jetbrains.anko.support.v4.toast
 import java.lang.Exception
 
 class AddShopDialog :DialogFragment() {
@@ -57,14 +60,19 @@ class AddShopDialog :DialogFragment() {
 
         addShopAddBt.setOnClickListener {
             try{
+                var ref="tempShop"
                 var shopName=addShopNameTvEt.editText?.text.toString()
-                var open=addShopOpenTvEt.editText!!.text.toString()
-                var phone=addShopPhoneTvEt.editText!!.text.toString()
-                var address=addShopAddressTvEt.editText!!.text.toString()
-                Log.d(TAG,"$shopName $open $phone $address")
-                Log.d(TAG,PickPictureUnit.bitmapToByte(bitmap).size.toString())
+                var open=addShopOpenTvEt.editText?.text.toString()
+                var phone=addShopPhoneTvEt.editText?.text.toString()
+                var address=addShopAddressTvEt.editText?.text.toString()
+                var uid = FirebaseUnits.auth_getUser()?.uid
+
+                var tempShop=TempShop(shopName,phone,open,uid!!,address)
+
             }catch (e:Exception){
+                toast("輸入錯誤")
                 e.printStackTrace()
+
             }
         }
 

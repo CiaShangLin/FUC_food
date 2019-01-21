@@ -97,7 +97,7 @@ class AddMenuDialog : DialogFragment() {
                 var price = addMenuPriceTvEt.editText?.text.toString().toInt()
                 var uid = FirebaseUnits.auth_getUser()?.uid
                 var comment = addMenuCommentTvEt.editText?.text.toString()
-                var tempMenu = TempMenu(shop_name!!, menu_name!!, star, price, uid!!, comment)
+                var tempMenu = TempMenu(shop_name!!, menu_name, star, price, uid!!, comment)
 
                 FirebaseUnits.add(ref, tempMenu, bitmapTobyte(bitmap), callback)
             } catch (e: Exception) {
