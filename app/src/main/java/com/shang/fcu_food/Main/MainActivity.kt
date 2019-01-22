@@ -38,9 +38,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-            //bbbb.setRippleColorResource(R.color.colorAccent)
-        }
         /*lottie.addAnimatorListener(object :Animator.AnimatorListener{
             override fun onAnimationRepeat(p0: Animator?) {
 
@@ -73,16 +70,15 @@ class MainActivity : AppCompatActivity() {
         nav_view.setNavigationItemSelectedListener {
             when(it.itemId){
                 R.id.menu_user_setting ->
-                    FirebaseUnits.auth_Login(this)
-
+                    toast("尚未實作")
+                    //FirebaseUnits.auth_Login(this)
+                R.id.menu_question->
+                    alert(R.string.Menu_Question_Message,R.string.Menu_Question_Title).show()
                 R.id.menu_logout ->
                     AuthUI.getInstance().signOut(this).addOnCompleteListener {
                         toast("登出成功")
                         finish()
                     }
-
-                R.id.menu_question->
-                    alert(R.string.Menu_Question_Message,R.string.Menu_Question_Title).show()
             }
             drawer_layout.closeDrawers()
             true

@@ -28,7 +28,7 @@
             app:tl_textsize="22dp"
 
             app:tl_tab_space_equal="true"
-            app:tl_textSelectColor="#D81B60"
+            app:tl_textSelectColor="@color/select_SlidingTabLayout"
             app:tl_textUnselectColor="#000000"
             app:tl_underline_color="#EEEEEE"
             app:tl_underline_height="1dp"
