@@ -7,15 +7,13 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.request.RequestOptions
-import com.google.android.gms.ads.AdView
-import com.shang.fcu_food.AdmobUnit
+import com.shang.fcu_food.Unit.AdmobUnit
 import com.shang.fcu_food.Dialog.AddCommentDialog
 import com.shang.fcu_food.Data.Menu
-import com.shang.fcu_food.FirebaseUnits
+import com.shang.fcu_food.Unit.FirebaseUnits
 import com.shang.fcu_food.Dialog.ImageViewDialog
 import com.shang.fcu_food.R
 import kotlinx.android.synthetic.main.cardview_detailmenu.view.*
-import kotlinx.android.synthetic.main.cardview_detailshop.view.*
 
 class DetailMenuVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
     var menuNameTv = itemView.findViewById<TextView>(R.id.menuNameTv)

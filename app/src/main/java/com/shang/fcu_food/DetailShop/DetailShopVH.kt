@@ -9,11 +9,10 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.request.RequestOptions
-import com.google.android.gms.ads.AdView
-import com.shang.fcu_food.AdmobUnit
+import com.shang.fcu_food.Unit.AdmobUnit
 import com.shang.fcu_food.Data.*
 import com.shang.fcu_food.DetailMenu.DetailMenuActivity
-import com.shang.fcu_food.FirebaseUnits
+import com.shang.fcu_food.Unit.FirebaseUnits
 import com.shang.fcu_food.R
 import kotlinx.android.synthetic.main.cardview_detailshop.view.*
 import org.jetbrains.anko.toast

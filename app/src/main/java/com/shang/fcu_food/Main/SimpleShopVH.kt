@@ -3,7 +3,6 @@ package com.shang.fcu_food.Main
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.support.v4.app.FragmentActivity
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.widget.ImageView
@@ -11,7 +10,7 @@ import android.widget.TextView
 import com.bumptech.glide.request.RequestOptions
 import com.shang.fcu_food.Data.*
 import com.shang.fcu_food.DetailShop.DetailShopActivity
-import com.shang.fcu_food.FirebaseUnits
+import com.shang.fcu_food.Unit.FirebaseUnits
 import com.shang.fcu_food.R
 import kotlinx.android.synthetic.main.cardview_simpleshop.view.*
 

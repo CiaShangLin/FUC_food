@@ -1,4 +1,4 @@
-package com.shang.fcu_food
+package com.shang.fcu_food.Unit
 
 import android.app.Activity
 import android.content.Context
@@ -14,14 +14,15 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.OnProgressListener
 import com.google.firebase.storage.StorageMetadata
-import com.google.firebase.storage.UploadTask
 import com.shang.fcu_food.Data.TempMenu
 import com.shang.fcu_food.Data.TempShop
 import com.shang.fcu_food.Data.User
 import com.shang.fcu_food.Data.UserComment
+import com.shang.fcu_food.DataBind
+import com.shang.fcu_food.FirebaseCallback
 import com.shang.fcu_food.Main.GlideApp
+import com.shang.fcu_food.R
 import org.jetbrains.anko.toast
 
 class FirebaseUnits {

@@ -5,15 +5,12 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import com.shang.fcu_food.Data.UserComment
 import com.shang.fcu_food.DataBind
-import com.shang.fcu_food.FirebaseUnits
 import com.shang.fcu_food.R
 import kotlinx.android.synthetic.main.cardview_comment.view.*
-import org.jetbrains.anko.toast
 
 class CommentAdapter(var commentList: MutableList<UserComment>) : RecyclerView.Adapter<CommentVH>() {
 

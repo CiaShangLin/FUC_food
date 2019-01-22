@@ -6,23 +6,20 @@ import android.graphics.Bitmap
 import android.os.Bundle
 import android.support.design.widget.TextInputLayout
 import android.support.v4.app.DialogFragment
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
-import com.google.firebase.database.FirebaseDatabase
 import com.shang.fcu_food.Data.DataConstant
 import com.shang.fcu_food.Data.TempShop
 import com.shang.fcu_food.FirebaseCallback
-import com.shang.fcu_food.FirebaseUnits
+import com.shang.fcu_food.Unit.FirebaseUnits
 import com.shang.fcu_food.Main.GlideApp
-import com.shang.fcu_food.PickPictureUnit
+import com.shang.fcu_food.Unit.PickPictureUnit
 import com.shang.fcu_food.R
 import kotlinx.android.synthetic.main.dialog_addshop.*
 import org.jetbrains.anko.support.v4.toast
-import java.io.IOException
 import java.lang.Exception
 
 class AddShopDialog : DialogFragment() {

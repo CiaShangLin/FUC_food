@@ -1,11 +1,9 @@
-package com.shang.fcu_food
+package com.shang.fcu_food.Unit
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.provider.MediaStore
-import android.support.v4.app.FragmentActivity
 import java.io.ByteArrayOutputStream
 
 class PickPictureUnit {

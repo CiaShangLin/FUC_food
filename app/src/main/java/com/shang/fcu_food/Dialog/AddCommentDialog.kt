@@ -10,7 +10,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.widget.RatingBar
 import com.shang.fcu_food.DetailMenu.DetailMenuActivity
-import com.shang.fcu_food.FirebaseUnits
+import com.shang.fcu_food.Unit.FirebaseUnits
 import com.shang.fcu_food.R
 
 class AddCommentDialog : DialogFragment() {

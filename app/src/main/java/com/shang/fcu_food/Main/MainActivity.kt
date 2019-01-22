@@ -2,7 +2,6 @@ package com.shang.fcu_food.Main
 
 import android.app.Activity
 import android.content.Intent
-import android.net.Uri
 import android.os.*
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
@@ -11,20 +10,13 @@ import org.jetbrains.anko.toast
 import android.support.v7.app.ActionBarDrawerToggle
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.IdpResponse
-import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.InterstitialAd
-import com.google.android.gms.ads.MobileAds
-import com.google.firebase.database.*
-import com.google.firebase.storage.FirebaseStorage
-import com.shang.fcu_food.*
-import com.shang.fcu_food.Dialog.AddMenuDialog
-import com.shang.fcu_food.Dialog.AddShopDialog
 import com.shang.fcu_food.Dialog.NetworkDialog
 import com.shang.fcu_food.R
+import com.shang.fcu_food.Unit.FirebaseUnits
+import com.shang.fcu_food.Unit.PermissionUnit
 import kotlinx.android.synthetic.main.drawer_layout.*
 import kotlinx.android.synthetic.main.toolbar_layout.*
 import org.jetbrains.anko.alert
-import java.io.File
 
 
 class MainActivity : AppCompatActivity() {
