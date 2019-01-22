@@ -10,8 +10,13 @@ import org.jetbrains.anko.toast
 import android.support.v7.app.ActionBarDrawerToggle
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.IdpResponse
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.InterstitialAd
+import com.google.android.gms.ads.MobileAds
+import com.shang.fcu_food.Data.User
 import com.shang.fcu_food.Dialog.NetworkDialog
 import com.shang.fcu_food.R
+import com.shang.fcu_food.Unit.AdmobUnit
 import com.shang.fcu_food.Unit.FirebaseUnits
 import com.shang.fcu_food.Unit.PermissionUnit
 import kotlinx.android.synthetic.main.drawer_layout.*
@@ -121,11 +126,20 @@ class MainActivity : AppCompatActivity() {
             val response = IdpResponse.fromResultIntent(data)
             if (resultCode == Activity.RESULT_OK) {
                 init()
-                val user = FirebaseAuth.getInstance().currentUser
-                Log.d("TAG", user?.email + " " + user?.uid+" "+user?.displayName)
+                if(response?.isNewUser!!){
+                    FirebaseUnits.database_addUser(User().getUser(FirebaseAuth.getInstance().currentUser!!))
+                    toast("註冊成功")
+                }else{
+                    toast("登入成功")
+                }
             } else {
-                Log.d("TAG", "FALL")
+                toast("註冊失敗")
             }
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        AdmobUnit.getInstance(this)?.InterstitialAd_show()
     }
 }

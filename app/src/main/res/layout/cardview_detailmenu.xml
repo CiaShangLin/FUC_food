@@ -116,7 +116,7 @@
                 ads:adSize="BANNER"
                 ads:adUnitId="@string/admob_test_id"
                 android:id="@+id/menuAdView" android:layout_marginTop="8dp"
-                app:layout_constraintTop_toBottomOf="@+id/menuPictureImg" android:layout_marginStart="16dp"
+                app:layout_constraintTop_toBottomOf="@+id/menuPictureImg" android:layout_marginStart="8dp"
                 app:layout_constraintStart_toStartOf="parent"/>
     </android.support.constraint.ConstraintLayout>
 
