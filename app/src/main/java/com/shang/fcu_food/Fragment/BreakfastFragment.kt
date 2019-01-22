@@ -30,6 +30,8 @@ class BreakfastFragment : Fragment() {
         }
     }
 
+    lateinit var adapter:FirebaseRecyclerAdapter<Shop, SimpleShopVH>
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         var view = inflater.inflate(R.layout.fragment_breakfast, container, false)
         return view
@@ -46,14 +48,21 @@ class BreakfastFragment : Fragment() {
             .setQuery(query, BreakfastShop::class.java)
             .build()
 
-        var adapter=SimpleShopAdapter(options as FirebaseRecyclerOptions<Shop>,BreakfastShop.tag)
+        adapter=SimpleShopAdapter(options as FirebaseRecyclerOptions<Shop>,BreakfastShop.tag)
 
         breakfastShop.layoutManager = GridLayoutManager(activity?.baseContext, 2) as RecyclerView.LayoutManager?
         breakfastShop.adapter = adapter
-        adapter.startListening()
+
         //Log.d("TAG", snapshots.getSnapshot(position).key + " " + model.name + " " + model.address)
     }
 
+    override fun onStart() {
+        super.onStart()
+        adapter.startListening()
+    }
 
-
+    override fun onStop() {
+        super.onStop()
+        adapter.stopListening()
+    }
 }

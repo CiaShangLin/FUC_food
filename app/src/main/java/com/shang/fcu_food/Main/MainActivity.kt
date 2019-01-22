@@ -112,33 +112,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
-    fun update() {
-        var storageRef = FirebaseStorage.getInstance().getReference()
-        val file = Uri.fromFile(
-            File(
-                Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
-                    .path + "/surf369.jpeg"
-            )
-        )
-
-
-        Log.d("TAG", file.path)
-        val riversRef = storageRef.child("image/surf369.jpeg")
-        riversRef.putFile(file)
-            .addOnSuccessListener { taskSnapshot ->
-                // Get a URL to the uploaded content
-                taskSnapshot.uploadSessionUri!!.path
-                toast("SUCCESS")
-            }
-            .addOnFailureListener {
-                // Handle unsuccessful uploads
-                // ...
-                toast("Fail")
-                it.printStackTrace()
-            }
-    }
-
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (!PermissionUnit.checkPermission(this)) {

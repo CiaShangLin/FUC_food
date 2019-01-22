@@ -2,10 +2,12 @@ package com.shang.fcu_food.Main
 
 import android.support.v4.app.FragmentActivity
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.firebase.ui.database.FirebaseRecyclerOptions
+import com.firebase.ui.database.ObservableSnapshotArray
 import com.shang.fcu_food.Data.BreakfastShop
 import com.shang.fcu_food.Data.Shop
 import com.shang.fcu_food.DetailShop.DetailShopVH
@@ -14,8 +16,6 @@ import com.shang.fcu_food.R
 
 class SimpleShopAdapter(options: FirebaseRecyclerOptions<Shop>, tag: String) :
     FirebaseRecyclerAdapter<Shop, SimpleShopVH>(options) {
-
-
     lateinit var tag: String
 
     init {
@@ -31,5 +31,7 @@ class SimpleShopAdapter(options: FirebaseRecyclerOptions<Shop>, tag: String) :
         holder.bind(position, model, tag)
     }
 
-
+    override fun getItemCount(): Int {
+        return super.getItemCount()
+    }
 }
