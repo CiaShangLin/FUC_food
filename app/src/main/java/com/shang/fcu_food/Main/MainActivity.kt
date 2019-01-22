@@ -11,6 +11,9 @@ import org.jetbrains.anko.toast
 import android.support.v7.app.ActionBarDrawerToggle
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.IdpResponse
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.InterstitialAd
+import com.google.android.gms.ads.MobileAds
 import com.google.firebase.database.*
 import com.google.firebase.storage.FirebaseStorage
 import com.shang.fcu_food.*

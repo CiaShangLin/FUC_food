@@ -20,7 +20,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="1.0"
-            app:srcCompat="@mipmap/ic_launcher_round"/>
+            app:srcCompat="@drawable/ic_launcher_foreground"/>
 
     <TextView
             android:id="@+id/textView2"
@@ -34,6 +34,7 @@
             android:textSize="30sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent" android:textStyle="bold"
+            android:textColor="@color/browser_actions_title_color"/>
 
 </android.support.constraint.ConstraintLayout>

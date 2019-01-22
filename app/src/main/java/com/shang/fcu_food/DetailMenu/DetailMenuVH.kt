@@ -7,12 +7,15 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.request.RequestOptions
+import com.google.android.gms.ads.AdView
+import com.shang.fcu_food.AdmobUnit
 import com.shang.fcu_food.Dialog.AddCommentDialog
 import com.shang.fcu_food.Data.Menu
 import com.shang.fcu_food.FirebaseUnits
 import com.shang.fcu_food.Dialog.ImageViewDialog
 import com.shang.fcu_food.R
 import kotlinx.android.synthetic.main.cardview_detailmenu.view.*
+import kotlinx.android.synthetic.main.cardview_detailshop.view.*
 
 class DetailMenuVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
     var menuNameTv = itemView.findViewById<TextView>(R.id.menuNameTv)
@@ -22,6 +25,7 @@ class DetailMenuVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
     var menuCommentRecyc = itemView.findViewById<RecyclerView>(R.id.menuCommentRecyc)
     var menuPictureImg = itemView.findViewById<ImageView>(R.id.menuPictureImg)
     var menuAddCommentBt = itemView.findViewById<ImageButton>(R.id.menuAddCommentBt)
+
 
     fun bind(position: Int, model: Menu, activity: DetailMenuActivity) {
         itemView.menuNameTv.setText(model.name)
@@ -54,5 +58,7 @@ class DetailMenuVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
                 model.name
             ).show(activity.supportFragmentManager, ImageViewDialog.TAG)
         }
+
+        AdmobUnit.getInstance(itemView.context)?.show(itemView.menuAdView)
     }
 }

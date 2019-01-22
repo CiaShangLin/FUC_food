@@ -1,20 +1,17 @@
 package com.shang.fcu_food.DetailShop
 
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.graphics.Canvas
-import android.graphics.Rect
 import android.os.Bundle
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.request.RequestOptions
+import com.google.android.gms.ads.AdView
+import com.shang.fcu_food.AdmobUnit
 import com.shang.fcu_food.Data.*
-import com.shang.fcu_food.DataBind
 import com.shang.fcu_food.DetailMenu.DetailMenuActivity
 import com.shang.fcu_food.FirebaseUnits
 import com.shang.fcu_food.R
@@ -30,6 +27,7 @@ class DetailShopVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
     var shopMapImg = itemView.findViewById<ImageView>(R.id.shopMapIg)
     var shopMenu = itemView.findViewById<RecyclerView>(R.id.shopMenu)
     var shopPictureImg = itemView.findViewById<ImageView>(R.id.shopPictureImg)
+
 
     fun bind(tag: String, model: Shop) {
         when (tag) {
@@ -63,6 +61,8 @@ class DetailShopVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
                     model.name,
                     getItemClick(tag, model.id.toString(), model.name, itemView.context)
                 )
+
+        AdmobUnit.getInstance(itemView.context)?.show(itemView.shopAdView)
     }
 
     //傳遞shop的id和type 還有position
@@ -78,6 +78,7 @@ class DetailShopVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
         }
         return itemClick
     }
+
 
 
 }

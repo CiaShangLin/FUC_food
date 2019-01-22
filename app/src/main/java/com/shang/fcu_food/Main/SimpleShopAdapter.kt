@@ -31,7 +31,4 @@ class SimpleShopAdapter(options: FirebaseRecyclerOptions<Shop>, tag: String) :
         holder.bind(position, model, tag)
     }
 
-    override fun getItemCount(): Int {
-        return super.getItemCount()
-    }
 }

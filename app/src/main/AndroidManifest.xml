@@ -32,6 +32,10 @@
         <activity android:name=".DetailMenu.DetailMenuActivity"
                   android:screenOrientation="portrait">
         </activity>
+
+        <meta-data
+                android:name="com.google.android.gms.ads.APPLICATION_ID"
+                android:value="ca-app-pub-3596318314144695~8650129956"/>
     </application>
 
 </manifest>
