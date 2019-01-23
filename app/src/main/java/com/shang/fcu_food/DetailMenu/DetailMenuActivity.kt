@@ -25,7 +25,6 @@ class DetailMenuActivity : AppCompatActivity() {
     companion object {
         val TAG="DetailMenuActivity"
 
-
         var shop_type_tag: String = ""
         var shop_id: String = ""
         var position: Int = 0

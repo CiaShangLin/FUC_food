@@ -11,6 +11,7 @@ import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.IdpResponse
 import com.shang.fcu_food.Data.User
 import com.shang.fcu_food.Dialog.NetworkDialog
+import com.shang.fcu_food.Dialog.UserSettingDialog
 import com.shang.fcu_food.R
 import com.shang.fcu_food.Unit.AdmobUnit
 import com.shang.fcu_food.Unit.FirebaseUnits
@@ -66,8 +67,7 @@ class MainActivity : AppCompatActivity() {
         nav_view.setNavigationItemSelectedListener {
             when(it.itemId){
                 R.id.menu_user_setting ->
-                    toast("尚未實作")
-                    //FirebaseUnits.auth_Login(this)
+                    UserSettingDialog.getInstance().show(supportFragmentManager,UserSettingDialog.TAG)
                 R.id.menu_question->
                     alert(R.string.Menu_Question_Message,R.string.Menu_Question_Title).show()
                 R.id.menu_logout ->

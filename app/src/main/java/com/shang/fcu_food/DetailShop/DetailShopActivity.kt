@@ -84,11 +84,11 @@ class DetailShopActivity : AppCompatActivity() {
 
     }
 
-
-
     override fun onResume() {
-        super.onResume()
         detailShopRecyc.smoothScrollToPosition(position)
+        super.onResume()
+
+        Log.d("TAG",shop_tag+" "+position)
     }
 
     override fun onStart() {

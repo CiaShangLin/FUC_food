@@ -89,7 +89,7 @@ class FirebaseUnits {
         ) {
             //option.transform(RoundedCornersTransformation(20,0))
             var ref = FirebaseStorage.getInstance()
-                .getReference(tag).child(shop_name).child("$name.jpg")
+                .getReference(tag).child(shop_name).child("$name.jepg")
             ref.downloadUrl.addOnSuccessListener {
                 GlideApp.with(context).load(it).apply(option).into(img)
             }.addOnFailureListener {

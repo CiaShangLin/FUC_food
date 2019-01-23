@@ -14,70 +14,90 @@ import com.shang.fcu_food.Unit.FirebaseUnits
 import kotlinx.android.synthetic.main.dialog_user_setting.*
 import org.jetbrains.anko.support.v4.toast
 
-class UserSettingDialog :DialogFragment() {
+class UserSettingDialog : DialogFragment() {
+
+    companion object {
+        val TAG = "UserSettingDialog"
+        var userSettingDialog: UserSettingDialog? = null
+        fun getInstance(): UserSettingDialog {
+            if (userSettingDialog == null) {
+                userSettingDialog = UserSettingDialog()
+            }
+            return userSettingDialog as UserSettingDialog
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setStyle(DialogFragment.STYLE_NORMAL, R.style.dialog_theme)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.dialog_user_setting,container,false)
+        return inflater.inflate(R.layout.dialog_user_setting, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        var userSettingNameTvEt=view.findViewById<TextInputLayout>(R.id.userSettingNameTvEt)
-        var userSettingGenderRg=view.findViewById<RadioGroup>(R.id.userSettingGenderRg)
-        var userSettingPhotoRg=view.findViewById<RadioGroup>(R.id.userSettingPhotoRg)
-        var userSettingUpdateBt=view.findViewById<Button>(R.id.userSettingUpdateBt)
+        var userSettingNameTvEt = view.findViewById<TextInputLayout>(R.id.userSettingNameTvEt)
+        var userSettingGenderRg = view.findViewById<RadioGroup>(R.id.userSettingGenderRg)
+        var userSettingPhotoRg = view.findViewById<RadioGroup>(R.id.userSettingPhotoRg)
+        var userSettingUpdateBt = view.findViewById<Button>(R.id.userSettingUpdateBt)
 
-        var user=FirebaseUnits.auth_uidToUser()
+        var user = FirebaseUnits.auth_uidToUser()
         defaultName(user!!.name)
         defaultGender(user!!.sex)
         defaultPicture(user!!.picture)
-        
+
         userSettingUpdateBt.setOnClickListener {
-            var name=userSettingNameTvEt.editText?.text.toString()
-            var gender=when(userSettingGenderRg.checkedRadioButtonId){
-                R.id.userSettingManRb->"man"
-                R.id.userSettingWomanRb->"woman"
+            var name = userSettingNameTvEt.editText?.text.toString()
+            var gender = when (userSettingGenderRg.checkedRadioButtonId) {
+                R.id.userSettingManRb -> "man"
+                R.id.userSettingWomanRb -> "woman"
                 else -> ""
             }
-            var picture=when(userSettingPhotoRg.checkedRadioButtonId){
-                R.id.userSettingCatRb->"1"
-                R.id.userSettingDogRb->"2"
+            var picture = when (userSettingPhotoRg.checkedRadioButtonId) {
+                R.id.userSettingCatRb -> "1"
+                R.id.userSettingDogRb -> "2"
                 else -> "1"
             }
 
-            var updateUser= User(user.uid,name,picture,gender)
+            var updateUser = User(user.uid, name, picture, gender)
             FirebaseUnits.database_updateUser(updateUser)
             toast("設定成功")
             dismiss()
         }
     }
 
-    fun defaultName(name:String?){
+    fun defaultName(name: String?) {
         userSettingNameTvEt.editText?.setText(name.toString())
     }
 
-    fun defaultGender(gender:String){
-        if(gender.equals("man")){
-            userSettingManRb.isChecked=true
-        }else{
-            userSettingWomanRb.isChecked=true
+    fun defaultGender(gender: String) {
+        if (gender.equals("man")) {
+            userSettingManRb.isChecked = true
+        } else {
+            userSettingWomanRb.isChecked = true
         }
     }
 
-    fun defaultPicture(picture:String){
-        if(picture.equals("1")){
-            userSettingCatRb.isChecked=true
-        }else{
-            userSettingDogRb.isChecked=true
+    fun defaultPicture(picture: String) {
+        if (picture.equals("1")) {
+            userSettingCatRb.isChecked = true
+        } else {
+            userSettingDogRb.isChecked = true
         }
     }
+
 
     override fun onResume() {
         super.onResume()
+
+        var dialog = dialog
+        if (dialog != null) {
+            var width = ViewGroup.LayoutParams.MATCH_PARENT
+            var height = ViewGroup.LayoutParams.MATCH_PARENT
+            dialog.window.setLayout(width, height)
+        }
     }
 }
