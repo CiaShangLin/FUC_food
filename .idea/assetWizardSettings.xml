@@ -87,8 +87,9 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="outputName" value="ic_arrow_back_black_24dp" />
-                            <entry key="sourceFile" value="C:\Users\Shang\Downloads\map.svg" />
+                            <entry key="assetSourceType" value="FILE" />
+                            <entry key="outputName" value="ic_photo" />
+                            <entry key="sourceFile" value="C:\Users\SERS\Downloads\camera.svg" />
                           </map>
                         </option>
                       </PersistentState>
