@@ -4,15 +4,11 @@ import android.app.Activity
 import android.content.Intent
 import android.os.*
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import org.jetbrains.anko.toast
 import android.support.v7.app.ActionBarDrawerToggle
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.IdpResponse
-import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.InterstitialAd
-import com.google.android.gms.ads.MobileAds
 import com.shang.fcu_food.Data.User
 import com.shang.fcu_food.Dialog.NetworkDialog
 import com.shang.fcu_food.R
@@ -123,7 +119,7 @@ class MainActivity : AppCompatActivity() {
             if (resultCode == Activity.RESULT_OK) {
                 init()
                 if(response?.isNewUser!!){
-                    FirebaseUnits.database_addUser(User().getUser(FirebaseAuth.getInstance().currentUser!!))
+                    FirebaseUnits.database_updateUser(User().getUser(FirebaseAuth.getInstance().currentUser!!))
                     toast("註冊成功")
                 }else{
                     toast("登入成功")

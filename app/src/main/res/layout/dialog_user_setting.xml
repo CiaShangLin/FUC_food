@@ -75,12 +75,12 @@
         <RadioButton
                 android:text="男"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:id="@+id/userSettingBoyRb" android:layout_weight="1"
+                android:layout_height="wrap_content" android:id="@+id/userSettingManRb" android:layout_weight="1"
                 android:drawableRight="@drawable/ic_boy"/>
         <RadioButton
                 android:text="女"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:id="@+id/userSettingGirlRb" android:layout_weight="1"
+                android:layout_height="wrap_content" android:id="@+id/userSettingWomanRb" android:layout_weight="1"
                 android:drawableRight="@drawable/ic_girl"/>
     </RadioGroup>
     <ImageView

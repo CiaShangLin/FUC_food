@@ -8,7 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.RadioGroup
+import com.shang.fcu_food.Data.User
 import com.shang.fcu_food.R
+import com.shang.fcu_food.Unit.FirebaseUnits
+import kotlinx.android.synthetic.main.dialog_user_setting.*
+import org.jetbrains.anko.support.v4.toast
 
 class UserSettingDialog :DialogFragment() {
 
@@ -28,11 +32,16 @@ class UserSettingDialog :DialogFragment() {
         var userSettingPhotoRg=view.findViewById<RadioGroup>(R.id.userSettingPhotoRg)
         var userSettingUpdateBt=view.findViewById<Button>(R.id.userSettingUpdateBt)
 
+        var user=FirebaseUnits.auth_uidToUser()
+        defaultName(user!!.name)
+        defaultGender(user!!.sex)
+        defaultPicture(user!!.picture)
+        
         userSettingUpdateBt.setOnClickListener {
             var name=userSettingNameTvEt.editText?.text.toString()
             var gender=when(userSettingGenderRg.checkedRadioButtonId){
-                R.id.userSettingBoyRb->"man"
-                R.id.userSettingGirlRb->"girl"
+                R.id.userSettingManRb->"man"
+                R.id.userSettingWomanRb->"woman"
                 else -> ""
             }
             var picture=when(userSettingPhotoRg.checkedRadioButtonId){
@@ -40,6 +49,31 @@ class UserSettingDialog :DialogFragment() {
                 R.id.userSettingDogRb->"2"
                 else -> "1"
             }
+
+            var updateUser= User(user.uid,name,picture,gender)
+            FirebaseUnits.database_updateUser(updateUser)
+            toast("設定成功")
+            dismiss()
+        }
+    }
+
+    fun defaultName(name:String?){
+        userSettingNameTvEt.editText?.setText(name.toString())
+    }
+
+    fun defaultGender(gender:String){
+        if(gender.equals("man")){
+            userSettingManRb.isChecked=true
+        }else{
+            userSettingWomanRb.isChecked=true
+        }
+    }
+
+    fun defaultPicture(picture:String){
+        if(picture.equals("1")){
+            userSettingCatRb.isChecked=true
+        }else{
+            userSettingDogRb.isChecked=true
         }
     }
 

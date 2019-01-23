@@ -31,7 +31,7 @@ class FirebaseUnits {
     companion object {
         val AUTH_RQEUESTCODE = 100
 
-        fun checkHasAuth(): Boolean {
+        fun checkHasAuth(): Boolean {  //檢查是否已經登入
             return FirebaseAuth.getInstance().currentUser != null
         }
 
@@ -50,6 +50,10 @@ class FirebaseUnits {
         //取得user
         fun auth_getUser(): FirebaseUser? {
             return FirebaseAuth.getInstance().currentUser
+        }
+
+        fun auth_uidToUser():User?{
+            return DataBind.allUser.get(FirebaseUnits.auth_getUser()?.uid)
         }
 
         //綁定使用者資料 即時更新
@@ -148,7 +152,7 @@ class FirebaseUnits {
         }
 
         //新增和修改使用者資料
-        fun database_addUser(user:User){
+        fun database_updateUser(user:User){
             var ref_user=FirebaseDatabase.getInstance().getReference("user").child(user.uid)
             ref_user.updateChildren(user.toMap()).addOnSuccessListener {
 
