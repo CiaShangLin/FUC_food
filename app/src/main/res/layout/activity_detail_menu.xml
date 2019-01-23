@@ -24,5 +24,6 @@
             android:minHeight="?attr/actionBarSize"
             android:id="@+id/detailMenuTb" app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" app:title="@string/MenuInformation"/>
+            app:layout_constraintEnd_toEndOf="parent" app:title="@string/MenuInformation"
+    />
 </android.support.constraint.ConstraintLayout>

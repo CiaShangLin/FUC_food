@@ -9,9 +9,11 @@ import android.support.v4.app.DialogFragment
 import android.util.Log
 import android.view.LayoutInflater
 import android.widget.RatingBar
+import com.google.android.gms.ads.AdView
 import com.shang.fcu_food.DetailMenu.DetailMenuActivity
 import com.shang.fcu_food.Unit.FirebaseUnits
 import com.shang.fcu_food.R
+import com.shang.fcu_food.Unit.AdmobUnit
 
 class AddCommentDialog : DialogFragment() {
 
@@ -46,6 +48,8 @@ class AddCommentDialog : DialogFragment() {
 
         var commentRatingBar = view.findViewById<RatingBar>(R.id.comment_RatingBar)
         var commentInputTextLayout = view.findViewById<TextInputLayout>(R.id.textInputLayout)
+        var adView=view.findViewById<AdView>(R.id.addcomment_adview)
+        AdmobUnit.getInstance(context!!)?.show(adView)
 
         var alertDialog = AlertDialog.Builder(context)
             .setTitle(R.string.CommentDialog_Title)

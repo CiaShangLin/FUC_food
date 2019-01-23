@@ -89,7 +89,7 @@ class FirebaseUnits {
             ref.downloadUrl.addOnSuccessListener {
                 GlideApp.with(context).load(it).apply(option).into(img)
             }.addOnFailureListener {
-                Log.d("TAG", "載入失敗" + it.toString())
+
             }
         }
 
@@ -144,6 +144,16 @@ class FirebaseUnits {
             }else{
                 storage_status=true
                 callback.statusCallBack(database_status, storage_status)
+            }
+        }
+
+        //新增和修改使用者資料
+        fun database_addUser(user:User){
+            var ref_user=FirebaseDatabase.getInstance().getReference("user").child(user.uid)
+            ref_user.updateChildren(user.toMap()).addOnSuccessListener {
+
+            }.addOnFailureListener {
+
             }
         }
 

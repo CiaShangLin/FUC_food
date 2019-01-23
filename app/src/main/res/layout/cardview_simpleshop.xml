@@ -21,7 +21,8 @@
                 app:layout_constraintTop_toBottomOf="@+id/simpleShopImg"
                 app:layout_constraintStart_toStartOf="@+id/simpleShopImg"
                 app:layout_constraintEnd_toEndOf="@+id/simpleShopImg" android:textSize="22dp"
-                android:layout_marginTop="8dp" android:textColor="@color/browser_actions_text_color"/>
+                android:layout_marginTop="8dp" android:textColor="@android:color/black" android:maxLines="1"
+                android:ellipsize="end"/>
         <TextView
                 android:text="星數"
                 android:layout_width="wrap_content"
@@ -30,7 +31,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/simpleShopName"
                 app:layout_constraintStart_toStartOf="@+id/simpleShopName"
                 app:layout_constraintEnd_toEndOf="@+id/simpleShopName" android:textSize="22dp"
-                android:textColor="@color/browser_actions_text_color"/>
+                android:textColor="@android:color/black"/>
         <ImageView
                 android:layout_width="@dimen/cardview_simpleImg_width"
                 android:layout_height="@dimen/cardview_simpleImg_height" app:srcCompat="@drawable/ic_shop"
