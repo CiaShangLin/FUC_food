@@ -3,7 +3,7 @@ package com.shang.fcu_food.Data
 class Menu {
     var id:Int=-1
     var name: String = ""       //菜名
-    var star: Double = -1.0       //這項菜的平均星數 從User裡算出來
+    var star: Double = 0.0       //這項菜的平均星數 從User裡算出來
         get() {
             var total = 0.0
             for (comment in usercomment) {
