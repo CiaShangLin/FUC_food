@@ -25,8 +25,7 @@ class NetworkDialog : DialogFragment() {
 
         fun getInstance(handler: Handler): NetworkDialog {
             if (networkDialog == null) {
-                networkDialog =
-                        NetworkDialog()
+                networkDialog = NetworkDialog()
             }
             Companion.handler = handler
             return networkDialog!!
@@ -35,16 +34,21 @@ class NetworkDialog : DialogFragment() {
         fun checkNetworkStatus(context: Context): Boolean {
             val mConnectivityManager =
                 context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager?
-            val mNetworkInfo = mConnectivityManager!!.activeNetworkInfo
+            val mNetworkInfo = mConnectivityManager?.activeNetworkInfo
 
-            Log.v(TAG, "網路狀態:" + mNetworkInfo.isConnected)
-            return mNetworkInfo.isConnected
+            if(mNetworkInfo!=null && mNetworkInfo.isConnected){
+                return true
+            }
+
+            Log.v(TAG, "網路狀態:" + mNetworkInfo?.isConnected)
+            return false
 
         }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        isCancelable=false
 
     }
 
@@ -55,6 +59,7 @@ class NetworkDialog : DialogFragment() {
             handler.sendMessage(Message().apply {
                 this.what = NETWORK_STATUS
             })
+            dismiss()
         }
         return view
     }

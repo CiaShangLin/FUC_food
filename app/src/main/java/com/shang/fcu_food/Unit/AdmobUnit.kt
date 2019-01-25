@@ -6,6 +6,7 @@ import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.InterstitialAd
 import com.google.android.gms.ads.MobileAds
+import com.shang.fcu_food.R
 
 class AdmobUnit {
     companion object {
@@ -16,7 +17,7 @@ class AdmobUnit {
                 admobUnit = AdmobUnit()
                 MobileAds.initialize(context,"ca-app-pub-3596318314144695~8650129956")
                 mInterstitialAd = InterstitialAd(context)
-                mInterstitialAd?.setAdUnitId("ca-app-pub-3940256099942544/1033173712")
+                mInterstitialAd?.setAdUnitId(context.resources.getString(R.string.admob_interstitial))
                 mInterstitialAd?.loadAd(AdRequest.Builder().build())
             }
             return admobUnit
@@ -29,7 +30,6 @@ class AdmobUnit {
     }
 
     fun InterstitialAd_show(){
-
         if (mInterstitialAd!!.isLoaded()) {
             mInterstitialAd?.show()
         } else {
