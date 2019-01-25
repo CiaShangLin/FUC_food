@@ -3,11 +3,14 @@ package com.shang.fcu_food.DetailShop
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.LinearSmoothScroller
 import android.support.v7.widget.PagerSnapHelper
+import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AbsListView
 import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.google.ads.AdSize
@@ -33,8 +36,11 @@ class DetailShopActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail_shop)
 
-        position = intent.extras.getInt(DataConstant.POSITION)
-        shop_tag = intent.extras.getString(DataConstant.SHOP_TYPE_TAG)
+        if (intent.extras != null) {
+            position = intent.extras.getInt(DataConstant.POSITION)
+            shop_tag = intent.extras.getString(DataConstant.SHOP_TYPE_TAG)
+        }
+
         Log.v("TAG", "$position $shop_tag")
 
         detailShopTb.inflateMenu(R.menu.menu_detailshop)
@@ -54,7 +60,8 @@ class DetailShopActivity : AppCompatActivity() {
         var query = FirebaseDatabase.getInstance().getReference().child(shop_tag)
         when (shop_tag) {
             BreakfastShop.tag ->
-                options = FirebaseRecyclerOptions.Builder<BreakfastShop>().setQuery(query, BreakfastShop::class.java).build()
+                options = FirebaseRecyclerOptions.Builder<BreakfastShop>().setQuery(query, BreakfastShop::class.java)
+                    .build()
             DinnerShop.tag ->
                 options = FirebaseRecyclerOptions.Builder<DinnerShop>().setQuery(query, DinnerShop::class.java).build()
             SnackShop.tag ->
@@ -81,14 +88,13 @@ class DetailShopActivity : AppCompatActivity() {
         var pagerSnapHelper = PagerSnapHelper()
         pagerSnapHelper.attachToRecyclerView(detailShopRecyc)
 
-
     }
 
     override fun onResume() {
-        detailShopRecyc.smoothScrollToPosition(position)
         super.onResume()
 
-        Log.d("TAG",shop_tag+" "+position)
+        detailShopRecyc.smoothScrollToPosition(position)
+        Log.d("TAG", shop_tag + " resume " + position)
     }
 
     override fun onStart() {
@@ -100,5 +106,7 @@ class DetailShopActivity : AppCompatActivity() {
         super.onStop()
         (adapter as FirebaseRecyclerAdapter<Shop, DetailShopVH>).stopListening()
     }
+
+
 }
 
