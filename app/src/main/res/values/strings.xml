@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Food甲</string>
 
-    
+
     <string name="admob_id">ca-app-pub-3596318314144695/8124027094</string>
     <string name="admob_Interstitial_test">ca-app-pub-3940256099942544/1033173712</string>
     <string name="admob_interstitial">ca-app-pub-3596318314144695/6431408148</string>
