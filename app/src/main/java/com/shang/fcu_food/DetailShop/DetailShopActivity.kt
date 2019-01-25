@@ -29,6 +29,7 @@ class DetailShopActivity : AppCompatActivity() {
 
     var position: Int = 0
     var shop_tag: String = ""
+    lateinit var linearLinearManager:LinearLayoutManager
     lateinit var adapter: Any
     lateinit var options: Any
 
@@ -82,8 +83,11 @@ class DetailShopActivity : AppCompatActivity() {
             }
         }
 
-        detailShopRecyc.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        linearLinearManager=LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        detailShopRecyc.layoutManager = linearLinearManager
         detailShopRecyc.adapter = adapter as FirebaseRecyclerAdapter<Shop, DetailShopVH>
+
+
 
         var pagerSnapHelper = PagerSnapHelper()
         pagerSnapHelper.attachToRecyclerView(detailShopRecyc)
@@ -91,6 +95,7 @@ class DetailShopActivity : AppCompatActivity() {
     }
 
     override fun onResume() {
+
         super.onResume()
 
         detailShopRecyc.smoothScrollToPosition(position)
