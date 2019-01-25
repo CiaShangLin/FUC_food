@@ -9,6 +9,7 @@ import org.jetbrains.anko.toast
 import android.support.v7.app.ActionBarDrawerToggle
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.IdpResponse
+import com.google.android.gms.ads.MobileAds
 import com.shang.fcu_food.Data.User
 import com.shang.fcu_food.Dialog.NetworkDialog
 import com.shang.fcu_food.Dialog.UserSettingDialog
@@ -94,6 +95,7 @@ class MainActivity : AppCompatActivity() {
                     )
                     viewPager.adapter = adapter
                     slidingTab.setViewPager(viewPager)
+
                 }else{
                     FirebaseUnits.auth_Login(this)
                 }

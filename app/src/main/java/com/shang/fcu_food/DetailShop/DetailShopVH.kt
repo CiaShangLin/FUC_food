@@ -9,6 +9,8 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.request.RequestOptions
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
 import com.shang.fcu_food.Unit.AdmobUnit
 import com.shang.fcu_food.Data.*
 import com.shang.fcu_food.DetailMenu.DetailMenuActivity
@@ -26,6 +28,8 @@ class DetailShopVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
     var shopMapImg = itemView.findViewById<ImageView>(R.id.shopMapIg)
     var shopMenu = itemView.findViewById<RecyclerView>(R.id.shopMenu)
     var shopPictureImg = itemView.findViewById<ImageView>(R.id.shopPictureImg)
+
+    var adView=itemView.findViewById<AdView>(R.id.shopAdView)
 
 
     fun bind(tag: String, model: Shop) {
@@ -60,8 +64,7 @@ class DetailShopVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
                     model.name,
                     getItemClick(tag, model.id.toString(), model.name, itemView.context)
                 )
-
-        AdmobUnit.getInstance(itemView.context)?.show(itemView.shopAdView)
+        AdmobUnit.getInstance(itemView.context)?.show(adView)
     }
 
     //傳遞shop的id和type 還有position

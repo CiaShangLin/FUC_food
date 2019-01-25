@@ -23,6 +23,14 @@
           }
         },
         {
+          "client_id": "468932304343-mr212cfudr01fpfecot4npufsasjt12v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.shang.fcu_food",
+            "certificate_hash": "8394f5ff6e5f19475dc49e5086c788eb2d84069d"
+          }
+        },
+        {
           "client_id": "468932304343-vtpon1au0mv376qr24lmdiaeppjhha8r.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -48,7 +56,8 @@
         "ads_service": {
           "status": 2
         }
-      }
+      },
+      "admob_app_id": "ca-app-pub-3596318314144695~8650129956"
     }
   ],
   "configuration_version": "1"
