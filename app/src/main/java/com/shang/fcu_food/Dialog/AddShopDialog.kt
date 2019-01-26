@@ -6,6 +6,7 @@ import android.graphics.Bitmap
 import android.os.Bundle
 import android.support.design.widget.TextInputLayout
 import android.support.v4.app.DialogFragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -81,8 +82,8 @@ class AddShopDialog : DialogFragment() {
         }
 
         addShopAddBt.setOnClickListener {
+            Log.d(TAG,"TAG:"+arguments?.getString(DataConstant.SHOP_TYPE_TAG))
             try {
-
                 var ref = "tempShop"
                 var tag = arguments?.getString(DataConstant.SHOP_TYPE_TAG)
                 var shopName = addShopNameTvEt.editText?.text.toString()
