@@ -25,6 +25,7 @@ class AdmobUnit {
         }
     }
 
+    //cardview_detailshop cardview_detailmenu dialog_addcomment
     fun show(adView: AdView) {
         val adRequest = AdRequest.Builder().build()
         adView.loadAd(adRequest)
