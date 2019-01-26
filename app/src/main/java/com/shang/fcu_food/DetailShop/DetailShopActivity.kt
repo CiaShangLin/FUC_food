@@ -21,15 +21,14 @@ import com.shang.fcu_food.Dialog.AddShopDialog
 import com.shang.fcu_food.R
 import kotlinx.android.synthetic.main.activity_detail_shop.*
 import org.jetbrains.anko.toast
-import com.google.android.gms.ads.AdView
-import com.google.android.gms.ads.MobileAds
+
 
 
 class DetailShopActivity : AppCompatActivity() {
 
     var position: Int = 0
     var shop_tag: String = ""
-    lateinit var linearLinearManager:LinearLayoutManager
+    lateinit var linearLinearManager: LinearLayoutManager
     lateinit var adapter: Any
     lateinit var options: Any
 
@@ -41,8 +40,6 @@ class DetailShopActivity : AppCompatActivity() {
             position = intent.extras.getInt(DataConstant.POSITION)
             shop_tag = intent.extras.getString(DataConstant.SHOP_TYPE_TAG)
         }
-
-        Log.v("TAG", "$position $shop_tag")
 
         detailShopTb.inflateMenu(R.menu.menu_detailshop)
         detailShopTb.setOnMenuItemClickListener {
@@ -83,11 +80,9 @@ class DetailShopActivity : AppCompatActivity() {
             }
         }
 
-        linearLinearManager=LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        linearLinearManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         detailShopRecyc.layoutManager = linearLinearManager
         detailShopRecyc.adapter = adapter as FirebaseRecyclerAdapter<Shop, DetailShopVH>
-
-
 
         var pagerSnapHelper = PagerSnapHelper()
         pagerSnapHelper.attachToRecyclerView(detailShopRecyc)
@@ -97,7 +92,6 @@ class DetailShopActivity : AppCompatActivity() {
     override fun onResume() {
 
         super.onResume()
-
         detailShopRecyc.smoothScrollToPosition(position)
         Log.d("TAG", shop_tag + " resume " + position)
     }
