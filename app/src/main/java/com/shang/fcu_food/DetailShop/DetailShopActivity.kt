@@ -1,5 +1,6 @@
 package com.shang.fcu_food.DetailShop
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
@@ -31,6 +32,7 @@ class DetailShopActivity : AppCompatActivity() {
     lateinit var linearLinearManager: LinearLayoutManager
     lateinit var adapter: Any
     lateinit var options: Any
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -90,7 +92,6 @@ class DetailShopActivity : AppCompatActivity() {
     }
 
     override fun onResume() {
-
         super.onResume()
         detailShopRecyc.smoothScrollToPosition(position)
         Log.d("TAG", shop_tag + " resume " + position)
@@ -103,9 +104,12 @@ class DetailShopActivity : AppCompatActivity() {
 
     override fun onStop() {
         super.onStop()
-        (adapter as FirebaseRecyclerAdapter<Shop, DetailShopVH>).stopListening()
     }
 
-
+    override fun onDestroy() {
+        super.onDestroy()
+        //放在onStop裡的話　跳轉回來時他不會定位
+        (adapter as FirebaseRecyclerAdapter<Shop, DetailShopVH>).stopListening()
+    }
 }
 

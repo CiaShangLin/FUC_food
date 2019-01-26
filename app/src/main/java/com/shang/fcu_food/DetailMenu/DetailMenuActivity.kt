@@ -1,11 +1,13 @@
 package com.shang.fcu_food.DetailMenu
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.LinearSnapHelper
 import android.support.v7.widget.PagerSnapHelper
 import android.util.Log
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.firebase.ui.database.FirebaseRecyclerAdapter
@@ -94,4 +96,5 @@ class DetailMenuActivity : AppCompatActivity() {
         super.onStop()
         (adapter as FirebaseRecyclerAdapter<Menu, DetailMenuVH>).stopListening()
     }
+
 }
