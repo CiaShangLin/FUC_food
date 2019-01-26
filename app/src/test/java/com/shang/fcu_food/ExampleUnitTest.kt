@@ -15,11 +15,5 @@ class ExampleUnitTest {
         assertEquals(4, 2 + 2)
     }
 
-    @Test
-    fun randomPicture() {
-        for(i in 1..100){
-            var p=(Math.random()*2).toInt()+1
-            assertTrue(p==1 || p==2)
-        }
-    }
+
 }

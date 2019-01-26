@@ -2,10 +2,13 @@ package com.shang.fcu_food
 
 import com.google.android.gms.common.internal.Asserts
 import com.shang.fcu_food.Data.*
+import com.shang.fcu_food.Unit.PermissionUnit
 import org.junit.Assert
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Test
+
+
 
 class DataTest {
     @Test
@@ -51,6 +54,37 @@ class DataTest {
             this.add(UserComment("uid","comment","5"))
         }
         Assert.assertEquals("3.0",menu.star.toString())
-
     }
+
+    @Test
+    fun User_Test(){
+        var user=User("uid","name","1","man")
+        var map=user.toMap()
+        Assert.assertEquals("name",map.get("name"))
+        Assert.assertEquals("1",map.get("picture"))
+        Assert.assertEquals("man",map.get("sex"))
+
+        var flag=true
+        for(i in 1..100){
+            var p=user.randomPicture()
+            if(!p.equals("1") && !p.equals("2")){
+                flag=false
+            }
+        }
+        Assert.assertTrue(flag)
+    }
+
+    @Test
+    fun UserComment_Test(){
+        var userComment=UserComment("uid","comment","1")
+        var map=userComment.toMap()
+        Assert.assertEquals("uid",map.get("uid"))
+        Assert.assertEquals("1.0",map.get("star").toString())
+        Assert.assertEquals("comment",map.get("comment"))
+    }
+
+
+
+
+
 }
