@@ -24,6 +24,7 @@ import com.shang.fcu_food.FirebaseCallback
 import com.shang.fcu_food.Main.GlideApp
 import com.shang.fcu_food.R
 import org.jetbrains.anko.toast
+import java.lang.Exception
 
 class FirebaseUnits {
 
@@ -52,7 +53,7 @@ class FirebaseUnits {
             return FirebaseAuth.getInstance().currentUser
         }
 
-        fun auth_uidToUser():User?{
+        fun auth_uidToUser(): User? {
             return DataBind.allUser.get(FirebaseUnits.auth_getUser()?.uid)
         }
 
@@ -90,10 +91,11 @@ class FirebaseUnits {
             //option.transform(RoundedCornersTransformation(20,0))
             var ref = FirebaseStorage.getInstance()
                 .getReference(tag).child(shop_name).child("$name.jpg")
-            ref.downloadUrl.addOnSuccessListener {
-                GlideApp.with(context).load(it).apply(option).into(img)
-            }.addOnFailureListener {
-            }
+
+            GlideApp.with(context).load(ref)
+                .error(if (shop_name.equals(name)) R.drawable.ic_shop else R.drawable.ic_breakfast)
+                .apply(option)
+                .into(img)
         }
 
         //database更新評論
@@ -118,12 +120,12 @@ class FirebaseUnits {
         }
 
         fun addTempData(ref_path: String, value: Any, imageByte: ByteArray, callback: FirebaseCallback) {
-            var fileName:String=if(ref_path.equals("tempMenu"))
+            var fileName: String = if (ref_path.equals("tempMenu"))
                 (value as TempMenu).menuname else (value as TempShop).shopname
 
             var database = FirebaseDatabase.getInstance().getReference().child(ref_path)
             var storage = FirebaseStorage
-                .getInstance().getReference(ref_path).child(fileName+fileName.hashCode()+".jpeg")
+                .getInstance().getReference(ref_path).child(fileName + fileName.hashCode() + ".jpeg")
             var database_status = false
             var storage_status = false
 
@@ -136,23 +138,23 @@ class FirebaseUnits {
             }
 
             if (imageByte.size != 0) {  //代表有上傳照片
-                var metadata=StorageMetadata.Builder().setContentDisposition("TEST").build()
-                storage.putBytes(imageByte,metadata).addOnSuccessListener {
+                var metadata = StorageMetadata.Builder().setContentDisposition("TEST").build()
+                storage.putBytes(imageByte, metadata).addOnSuccessListener {
                     storage_status = true
                     callback.statusCallBack(database_status, storage_status)
                 }.addOnFailureListener {
                     storage_status = false
                     callback.statusCallBack(database_status, storage_status)
                 }
-            }else{
-                storage_status=true
+            } else {
+                storage_status = true
                 callback.statusCallBack(database_status, storage_status)
             }
         }
 
         //新增和修改使用者資料
-        fun database_updateUser(user:User){
-            var ref_user=FirebaseDatabase.getInstance().getReference("user").child(user.uid)
+        fun database_updateUser(user: User) {
+            var ref_user = FirebaseDatabase.getInstance().getReference("user").child(user.uid)
             ref_user.updateChildren(user.toMap()).addOnSuccessListener {
 
             }.addOnFailureListener {

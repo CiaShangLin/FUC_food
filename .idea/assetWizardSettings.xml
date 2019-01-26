@@ -88,8 +88,8 @@
                         <option name="values">
                           <map>
                             <entry key="assetSourceType" value="FILE" />
-                            <entry key="outputName" value="ic_photo" />
-                            <entry key="sourceFile" value="C:\Users\SERS\Downloads\camera.svg" />
+                            <entry key="outputName" value="ic_shop_type" />
+                            <entry key="sourceFile" value="C:\Users\SERS\Downloads\icon.svg" />
                           </map>
                         </option>
                       </PersistentState>

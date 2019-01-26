@@ -12,10 +12,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AbsListView
+import android.widget.ImageView
+import android.widget.TextView
 import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.google.ads.AdSize
 import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
 import com.google.firebase.database.FirebaseDatabase
 import com.shang.fcu_food.Data.*
 import com.shang.fcu_food.Dialog.AddShopDialog
@@ -24,12 +27,11 @@ import kotlinx.android.synthetic.main.activity_detail_shop.*
 import org.jetbrains.anko.toast
 
 
-
 class DetailShopActivity : AppCompatActivity() {
 
     var position: Int = 0
     var shop_tag: String = ""
-    lateinit var linearLinearManager: LinearLayoutManager
+
     lateinit var adapter: Any
     lateinit var options: Any
 
@@ -47,8 +49,6 @@ class DetailShopActivity : AppCompatActivity() {
         detailShopTb.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.menu_search -> toast("功能尚未實作")
-                R.id.menu_addShop ->
-                    AddShopDialog.getInstance(shop_tag).show(supportFragmentManager, AddShopDialog.TAG)
             }
             true
         }
@@ -72,8 +72,7 @@ class DetailShopActivity : AppCompatActivity() {
 
         adapter = object : FirebaseRecyclerAdapter<Shop, DetailShopVH>(options as FirebaseRecyclerOptions<Shop>) {
             override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DetailShopVH {
-                var view = LayoutInflater.from(parent.context)
-                    .inflate(R.layout.cardview_detailshop, parent, false)
+                var view = LayoutInflater.from(parent.context).inflate(R.layout.cardview_detailshop, parent, false)
                 return DetailShopVH(view)
             }
 
@@ -82,8 +81,7 @@ class DetailShopActivity : AppCompatActivity() {
             }
         }
 
-        linearLinearManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-        detailShopRecyc.layoutManager = linearLinearManager
+        detailShopRecyc.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         detailShopRecyc.adapter = adapter as FirebaseRecyclerAdapter<Shop, DetailShopVH>
 
         var pagerSnapHelper = PagerSnapHelper()

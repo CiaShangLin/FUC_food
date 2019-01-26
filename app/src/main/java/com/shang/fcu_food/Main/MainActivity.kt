@@ -11,6 +11,7 @@ import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.IdpResponse
 import com.google.android.gms.ads.MobileAds
 import com.shang.fcu_food.Data.User
+import com.shang.fcu_food.Dialog.AddShopDialog
 import com.shang.fcu_food.Dialog.NetworkDialog
 import com.shang.fcu_food.Dialog.UserSettingDialog
 import com.shang.fcu_food.R
@@ -55,8 +56,16 @@ class MainActivity : AppCompatActivity() {
 
         })*/
 
-        setSupportActionBar(toolbar)
+
         toolbar.setNavigationIcon(R.drawable.ic_navigation)
+        toolbar.inflateMenu(R.menu.menu_main)
+        toolbar.setOnMenuItemClickListener {
+            when(it.itemId){
+                R.id.menu_main_addShop->
+                    AddShopDialog.getInstance().show(supportFragmentManager, AddShopDialog.TAG)
+            }
+            true
+        }
 
         val toggle = ActionBarDrawerToggle(this, drawer_layout, toolbar,
             R.string.app_name,

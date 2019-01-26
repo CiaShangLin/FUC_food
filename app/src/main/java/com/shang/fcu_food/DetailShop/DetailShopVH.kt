@@ -25,12 +25,10 @@ class DetailShopVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
     var shopPhoneTv = itemView.findViewById<TextView>(R.id.shopPhoneTv)
     var shopOpenTv = itemView.findViewById<TextView>(R.id.shopOpenTv)
     var shopStarTv = itemView.findViewById<TextView>(R.id.shopStarTv)
-    var shopMapImg = itemView.findViewById<ImageView>(R.id.shopMapIg)
+    var shopMapIg = itemView.findViewById<ImageView>(R.id.shopMapIg)
     var shopMenu = itemView.findViewById<RecyclerView>(R.id.shopMenu)
     var shopPictureImg = itemView.findViewById<ImageView>(R.id.shopPictureImg)
-
-    var adView=itemView.findViewById<AdView>(R.id.shopAdView)
-
+    var shopAdView=itemView.findViewById<AdView>(R.id.shopAdView)
 
     fun bind(tag: String, model: Shop) {
         when (tag) {
@@ -64,7 +62,7 @@ class DetailShopVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
                     model.name,
                     getItemClick(tag, model.id.toString(), model.name, itemView.context)
                 )
-        AdmobUnit.getInstance(itemView.context)?.show(adView)
+        AdmobUnit.getInstance(itemView.context)?.show(itemView.shopAdView)
     }
 
     //傳遞shop的id和type 還有position

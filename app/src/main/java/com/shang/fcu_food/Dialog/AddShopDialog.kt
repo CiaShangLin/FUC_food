@@ -10,16 +10,18 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.ImageView
-import com.shang.fcu_food.Data.DataConstant
-import com.shang.fcu_food.Data.TempShop
+import android.widget.Spinner
+import com.shang.fcu_food.Data.*
 import com.shang.fcu_food.FirebaseCallback
 import com.shang.fcu_food.Unit.FirebaseUnits
 import com.shang.fcu_food.Main.GlideApp
 import com.shang.fcu_food.Unit.PickPictureUnit
 import com.shang.fcu_food.R
 import kotlinx.android.synthetic.main.dialog_addshop.*
+import kotlinx.android.synthetic.main.dialog_addshop.view.*
 import org.jetbrains.anko.support.v4.toast
 import java.lang.Exception
 
@@ -29,18 +31,15 @@ class AddShopDialog : DialogFragment() {
         val TAG = "AddShopDialog"
         var addShopDialog: AddShopDialog? = null
 
-        fun getInstance(tag: String): AddShopDialog {
-            var bundle = Bundle().apply {
-                putString(DataConstant.SHOP_TYPE_TAG, tag)
-            }
+        fun getInstance(): AddShopDialog {
             if (addShopDialog == null) {
                 addShopDialog = AddShopDialog()
             }
-            addShopDialog?.arguments = bundle
             return addShopDialog as AddShopDialog
         }
     }
 
+    val tag= arrayListOf<String>(BreakfastShop.tag,DinnerShop.tag,SnackShop.tag,DrinkShop.tag)
     var bitmap: Bitmap? = null
     lateinit var progressDialog: ProgressDialog
     var callback = object : FirebaseCallback {
@@ -75,6 +74,12 @@ class AddShopDialog : DialogFragment() {
         var addShopAddressTvEt = view.findViewById<TextInputLayout>(R.id.addShopAddressTvEt)
         var addShopPictureImg = view.findViewById<ImageView>(R.id.addShopPictureImg)
         var addShopAddBt = view.findViewById<Button>(R.id.addShopAddBt)
+        var addShopTagSp=view.findViewById<Spinner>(R.id.addShopTagSp).apply {
+            this.adapter=ArrayAdapter.createFromResource(
+                context,R.array.dialog_addshop_tagSpinner, android.R.layout.simple_spinner_dropdown_item)
+        }
+
+
         progressDialog = ProgressDialog(context).apply {
             this.setCancelable(false)
             this.setTitle("上傳中...")
@@ -82,15 +87,15 @@ class AddShopDialog : DialogFragment() {
         }
 
         addShopAddBt.setOnClickListener {
-            Log.d(TAG,"TAG:"+arguments?.getString(DataConstant.SHOP_TYPE_TAG))
             try {
                 var ref = "tempShop"
-                var tag = arguments?.getString(DataConstant.SHOP_TYPE_TAG)
+                var tag = tag[addShopTagSp.selectedItemPosition]
                 var shopName = addShopNameTvEt.editText?.text.toString()
                 var open = addShopOpenTvEt.editText?.text.toString()
                 var phone = addShopPhoneTvEt.editText?.text.toString()
                 var address = addShopAddressTvEt.editText?.text.toString()
                 var uid = FirebaseUnits.auth_getUser()?.uid
+                Log.d(TAG,tag)
 
                 if (!shopName.equals("")) {
                     progressDialog.show()

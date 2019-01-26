@@ -8,6 +8,8 @@
     <string name="admob_Interstitial_test">ca-app-pub-3940256099942544/1033173712</string>
     <string name="admob_interstitial">ca-app-pub-3596318314144695/6431408148</string>
 
+    <string name="menu_main_addShop">新增店家</string>
+
     <string name="networkTv">請打開網路或是WIFI</string>
     <string name="networkBt">重試</string>
 
@@ -36,6 +38,12 @@
     <string name="dialog_addshop_hint_Phone">電話(可不輸入)</string>
     <string name="dialog_addshop_hint_Adreess">地址(可不輸入)</string>
     <string name="dialog_addshop_hint_Open">營業時間(可不輸入)</string>
+    <string-array name="dialog_addshop_tagSpinner">
+        <item>早餐</item>
+        <item>晚餐</item>
+        <item>小吃宵夜</item>
+        <item>飲料</item>
+    </string-array>
     
     <string name="Menu_Question_Title">關於我們</string>
     <string name="Menu_Question_Message">
@@ -45,6 +53,7 @@
         APP發表之所有言論，都是使用者自行發出\n
         與開發者本人毫無相關\n
         目前版本1.0版\n
+        一切資訊皆以店家為準\n
     </string>
 
     <string name="Add_Message">
