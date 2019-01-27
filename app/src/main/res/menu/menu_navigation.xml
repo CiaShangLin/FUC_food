@@ -5,13 +5,13 @@
         <menu>
             <item android:id="@+id/menu_user_setting"
                   android:icon="@drawable/ic_user"
-                  android:title="使用者設定" />
+                  android:title="@string/Menu_Navigation_User_Setting"/>
             <item android:id="@+id/menu_question"
                   android:icon="@drawable/ic_question"
-                  android:title="關於我們"/>
+                  android:title="@string/Menu_Navigation_User_Question"/>
             <item android:id="@+id/menu_logout"
                   android:icon="@drawable/ic_logout"
-                  android:title="登出"/>
+                  android:title="@string/Menu_Navigation_User_Logout"/>
 
 
         </menu>
