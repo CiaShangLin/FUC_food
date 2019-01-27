@@ -1,10 +1,8 @@
 package com.shang.fcu_food
 
 import android.support.design.widget.NavigationView
-import android.support.design.widget.TextInputLayout
+import android.support.v4.view.ViewPager
 import android.support.v7.widget.Toolbar
-import android.widget.RadioButton
-import android.widget.RadioGroup
 import com.shang.fcu_food.Main.MainActivity
 import org.junit.Assert
 import org.junit.Before
@@ -12,9 +10,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
-import org.robolectric.Shadows.shadowOf
 import org.robolectric.shadows.ShadowAlertDialog
-import org.robolectric.shadows.ShadowDialog
 
 @RunWith(RobolectricTestRunner::class)
 class RoboTest {
@@ -59,6 +55,13 @@ class RoboTest {
         userQuestionDialog.dismiss()
         Assert.assertFalse(userQuestionDialog.isShowing)
         Assert.assertNull(userQuestionDialog)
+
+    }
+
+    @Test
+    fun MainActivity_slidingTab_test(){
+        var viewPager=mainActivity.findViewById<ViewPager>(R.id.viewPager)
+        System.out.print(viewPager.childCount)
 
     }
 

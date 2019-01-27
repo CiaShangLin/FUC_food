@@ -104,7 +104,6 @@ class MainActivity : AppCompatActivity() {
                     )
                     viewPager.adapter = adapter
                     slidingTab.setViewPager(viewPager)
-
                 }else{
                     FirebaseUnits.auth_Login(this)
                 }

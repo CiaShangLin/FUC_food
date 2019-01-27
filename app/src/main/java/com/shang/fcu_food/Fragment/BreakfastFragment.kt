@@ -4,12 +4,13 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.firebase.ui.database.FirebaseRecyclerOptions
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.*
 import com.shang.fcu_food.Data.BreakfastShop
 import com.shang.fcu_food.Data.Shop
 import com.shang.fcu_food.Main.SimpleShopAdapter
@@ -54,6 +55,18 @@ class BreakfastFragment : Fragment() {
         breakfastShop.adapter = adapter
 
         //Log.d("TAG", snapshots.getSnapshot(position).key + " " + model.name + " " + model.address)
+        query.addListenerForSingleValueEvent(object :ValueEventListener{
+            override fun onCancelled(p0: DatabaseError) {
+
+            }
+
+            override fun onDataChange(p0: DataSnapshot) {
+                for(data in p0.children){
+                    var shop=data.getValue(BreakfastShop::class.java)
+                    Log.d("TAG A",shop?.id.toString()+" "+shop?.name)
+                }
+            }
+        })
     }
 
     override fun onStart() {
@@ -65,4 +78,5 @@ class BreakfastFragment : Fragment() {
         super.onStop()
         adapter.stopListening()
     }
+
 }

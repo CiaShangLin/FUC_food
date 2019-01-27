@@ -1,13 +1,10 @@
 package com.shang.fcu_food
 
-import com.google.android.gms.common.internal.Asserts
 import com.shang.fcu_food.Data.*
-import com.shang.fcu_food.Unit.PermissionUnit
 import org.junit.Assert
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Test
-
 
 
 class DataTest {
