@@ -22,6 +22,10 @@
         <item>飲料</item>
     </string-array>
 
+    <string name="Menu_Navigation_User_Setting">使用者設定</string>
+    <string name="Menu_Navigation_User_Question">關於我們</string>
+    <string name="Menu_Navigation_User_Logout">登出</string>
+
     <string name="CommentDialog_PositiveButton">發送</string>
     <string name="CommentDialog_NegativeButton">取消</string>
     <string name="CommentDialog_Title">輸入評論</string>
