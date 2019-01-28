@@ -38,8 +38,8 @@ class DetailShopActivity : AppCompatActivity() {
         detailShopTb.inflateMenu(R.menu.menu_detailshop)
         detailShopTb.setOnMenuItemClickListener {
             when (it.itemId) {
-                R.id.menu_search -> toast("功能尚未實作")
-                R.id.menu_recommend->recommend()
+                R.id.menu_detailshop_search -> toast("功能尚未實作")
+                R.id.menu_detailshop_recommend->recommend()
             }
             true
         }
