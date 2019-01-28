@@ -1,5 +1,6 @@
 package com.shang.fcu_food.DetailShop
 
+import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -23,6 +24,10 @@ class DetailShopAdapter(var shop_tag: String, options: FirebaseRecyclerOptions<A
         Log.d("TAG",(model is DinnerShop).toString())
         Log.d("TAG",(model is SnackShop).toString())
         Log.d("TAG",(model is DrinkShop).toString())
+    }
+
+    fun recommend(detailShopRecyc:RecyclerView){
+        detailShopRecyc.smoothScrollToPosition(0)
     }
 
 

@@ -51,7 +51,7 @@
         <item>小吃宵夜</item>
         <item>飲料</item>
     </string-array>
-    
+
     <string name="Menu_Question_Title">關於我們</string>
     <string name="Menu_Question_Message">
         逢甲大學資工系四年級\n
@@ -66,4 +66,5 @@
     <string name="Add_Message">
         新增後並不會馬上顯示\n需要通過審核後才會新增\n請耐心等待，謝謝
     </string>
+    <string name="title_activity_maps">Map</string>
 </resources>

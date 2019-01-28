@@ -14,6 +14,7 @@ import com.shang.fcu_food.Data.User
 import com.shang.fcu_food.Dialog.AddShopDialog
 import com.shang.fcu_food.Dialog.NetworkDialog
 import com.shang.fcu_food.Dialog.UserSettingDialog
+import com.shang.fcu_food.MapsActivity
 import com.shang.fcu_food.R
 import com.shang.fcu_food.Unit.AdmobUnit
 import com.shang.fcu_food.Unit.FirebaseUnits
@@ -62,7 +63,8 @@ class MainActivity : AppCompatActivity() {
         toolbar.setOnMenuItemClickListener {
             when(it.itemId){
                 R.id.menu_main_addShop->
-                    AddShopDialog.getInstance().show(supportFragmentManager, AddShopDialog.TAG)
+                    startActivity(Intent(this,MapsActivity::class.java))
+                    //AddShopDialog.getInstance().show(supportFragmentManager, AddShopDialog.TAG)
             }
             true
         }
