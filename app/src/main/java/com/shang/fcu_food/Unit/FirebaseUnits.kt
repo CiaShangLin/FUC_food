@@ -7,6 +7,7 @@ import android.util.Log
 import android.widget.ImageView
 import com.bumptech.glide.request.RequestOptions
 import com.firebase.ui.auth.AuthUI
+import com.google.android.gms.auth.api.signin.internal.Storage
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DataSnapshot
@@ -15,6 +16,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageMetadata
+import com.google.firebase.storage.StorageReference
 import com.shang.fcu_food.Data.TempMenu
 import com.shang.fcu_food.Data.TempShop
 import com.shang.fcu_food.Data.User
@@ -79,23 +81,9 @@ class FirebaseUnits {
                 )
         }
 
-
-        fun storage_loadImg(
-            context: Context,
-            img: ImageView,
-            tag: String,
-            shop_name: String,
-            name: String,
-            option: RequestOptions
-        ) {
-            //option.transform(RoundedCornersTransformation(20,0))
-            var ref = FirebaseStorage.getInstance()
-                .getReference(tag).child(shop_name).child("$name.jpg")
-
-            GlideApp.with(context).load(ref)
-                .error(if (shop_name.equals(name)) R.drawable.ic_shop else R.drawable.ic_breakfast)
-                .apply(option)
-                .into(img)
+        //取得圖片的StorageReference
+        fun storage_getImageRef(shop_tag:String,shop_name:String,image_name:String):StorageReference{
+            return FirebaseStorage.getInstance().getReference(shop_tag).child(shop_name).child("$image_name.jpg")
         }
 
         //database更新評論

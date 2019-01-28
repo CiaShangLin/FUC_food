@@ -38,9 +38,8 @@ class DetailShopActivity : AppCompatActivity() {
         detailShopTb.inflateMenu(R.menu.menu_detailshop)
         detailShopTb.setOnMenuItemClickListener {
             when (it.itemId) {
-                R.id.menu_search ->
-                    a()
-                    //toast("功能尚未實作")
+                R.id.menu_search -> toast("功能尚未實作")
+                R.id.menu_recommend->recommend()
             }
             true
         }
@@ -103,11 +102,11 @@ class DetailShopActivity : AppCompatActivity() {
         (adapter as FirebaseRecyclerAdapter<Shop, DetailShopVH>).stopListening()
     }
 
-    fun a(){
-        var position=linearLayoutManager?.findFirstVisibleItemPosition().toInt()
-        var shop
-                =(adapter as FirebaseRecyclerAdapter<Shop, DetailShopVH>)?.getItem(position)
-        toast(shop.name)
+    fun recommend(){ //隨機推薦
+        //var position=linearLayoutManager?.findFirstVisibleItemPosition().toInt()
+        //var shop =(adapter as FirebaseRecyclerAdapter<Shop, DetailShopVH>)?.getItem(position)
+        position=(Math.random()*(adapter as FirebaseRecyclerAdapter<Shop, DetailShopVH>)?.itemCount).toInt()
+        detailShopRecyc.smoothScrollToPosition(position)
     }
 }
 

@@ -55,7 +55,7 @@ class BreakfastFragment : Fragment() {
         breakfastShop.adapter = adapter
 
         //Log.d("TAG", snapshots.getSnapshot(position).key + " " + model.name + " " + model.address)
-        query.addListenerForSingleValueEvent(object :ValueEventListener{
+        /*query.addListenerForSingleValueEvent(object :ValueEventListener{
             override fun onCancelled(p0: DatabaseError) {
 
             }
@@ -66,7 +66,7 @@ class BreakfastFragment : Fragment() {
                     Log.d("TAG A",shop?.id.toString()+" "+shop?.name)
                 }
             }
-        })
+        })*/
     }
 
     override fun onStart() {

@@ -29,14 +29,11 @@ class SimpleShopVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
         }
         itemView.simpleShopName.text = model.name
         itemView.simpleShopStar.text = String.format("%.1f", model.star)
-        FirebaseUnits.storage_loadImg(
-            itemView.context,
-            itemView.simpleShopImg,
-            tag,
-            model.name,
-            model.name,
-            RequestOptions().fitCenter()
-        )
+        GlideApp.with(itemView.context)
+            .load(FirebaseUnits.storage_getImageRef(tag,model.name,model.name))
+            .error(R.drawable.ic_shop)
+            .apply(RequestOptions().fitCenter())
+            .into(itemView.simpleShopImg)
         itemView.setOnClickListener {
             goDetailShop_Activity(itemView.context, tag, position)
         }

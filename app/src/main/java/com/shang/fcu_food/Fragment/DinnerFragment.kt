@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -53,7 +54,7 @@ class DinnerFragment :Fragment() {
 
         dinnerShop.layoutManager = GridLayoutManager(activity?.baseContext, 2) as RecyclerView.LayoutManager?
         dinnerShop.adapter = adapter
-        adapter.startListening()
+        Log.d("TAG",DinnerShop.tag)
     }
 
 

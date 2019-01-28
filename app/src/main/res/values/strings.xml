@@ -26,6 +26,9 @@
     <string name="Menu_Navigation_User_Question">關於我們</string>
     <string name="Menu_Navigation_User_Logout">登出</string>
 
+    <string name="Menu_DetailShop_Search">搜尋</string>
+    <string name="Menu_DetailShop_Recommend">推薦</string>
+
     <string name="CommentDialog_PositiveButton">發送</string>
     <string name="CommentDialog_NegativeButton">取消</string>
     <string name="CommentDialog_Title">輸入評論</string>

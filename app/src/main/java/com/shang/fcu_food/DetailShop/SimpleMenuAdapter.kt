@@ -10,6 +10,7 @@ import android.widget.TextView
 import com.bumptech.glide.request.RequestOptions
 import com.shang.fcu_food.Data.DataConstant
 import com.shang.fcu_food.Data.Menu
+import com.shang.fcu_food.Main.GlideApp
 import com.shang.fcu_food.Unit.FirebaseUnits
 import com.shang.fcu_food.R
 import kotlinx.android.synthetic.main.cardview_simplemenu.view.*
@@ -55,14 +56,12 @@ class SimpleMenuVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
             }
             onItemClick.onItemClick(bundle)
         }
-        FirebaseUnits.storage_loadImg(
-            itemView.context,
-            itemView.simpleMenuImg,
-            shop_tag,
-            shop_name,
-            model.name,
-            RequestOptions().circleCrop()
-        )
+
+        GlideApp.with(itemView.context)
+            .load(FirebaseUnits.storage_getImageRef(shop_tag,shop_name,model.name))
+            .apply(RequestOptions().circleCrop())
+            .error(R.drawable.ic_breakfast)
+            .into(itemView.simpleMenuImg)
     }
 
 }

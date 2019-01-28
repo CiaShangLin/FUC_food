@@ -12,6 +12,7 @@ import com.shang.fcu_food.Dialog.AddCommentDialog
 import com.shang.fcu_food.Data.Menu
 import com.shang.fcu_food.Unit.FirebaseUnits
 import com.shang.fcu_food.Dialog.ImageViewDialog
+import com.shang.fcu_food.Main.GlideApp
 import com.shang.fcu_food.R
 import kotlinx.android.synthetic.main.cardview_detailmenu.view.*
 
@@ -40,14 +41,12 @@ class DetailMenuVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
         itemView.menuCommentRecyc.layoutManager = LinearLayoutManager(itemView.context)
         itemView.menuCommentRecyc.adapter = CommentAdapter(model.usercomment)
 
-        FirebaseUnits.storage_loadImg(
-            itemView.context,
-            itemView.menuPictureImg,
-            DetailMenuActivity.shop_type_tag,
-            DetailMenuActivity.shop_name,
-            model.name,
-            RequestOptions().fitCenter()
-        )
+        GlideApp.with(itemView.context)
+            .load(FirebaseUnits.storage_getImageRef(
+                DetailMenuActivity.shop_type_tag,DetailMenuActivity.shop_name,model.name))
+            .apply(RequestOptions().fitCenter())
+            .error(R.drawable.ic_breakfast)
+            .into(itemView.menuPictureImg)
 
         itemView.menuPictureImg.setOnClickListener {
             ImageViewDialog.getInstance(

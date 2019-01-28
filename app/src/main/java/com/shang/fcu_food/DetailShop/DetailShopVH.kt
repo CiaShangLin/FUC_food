@@ -14,6 +14,7 @@ import com.google.android.gms.ads.AdView
 import com.shang.fcu_food.Unit.AdmobUnit
 import com.shang.fcu_food.Data.*
 import com.shang.fcu_food.DetailMenu.DetailMenuActivity
+import com.shang.fcu_food.Main.GlideApp
 import com.shang.fcu_food.Unit.FirebaseUnits
 import com.shang.fcu_food.R
 import kotlinx.android.synthetic.main.cardview_detailshop.view.*
@@ -41,14 +42,10 @@ class DetailShopVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
         itemView.shopOpenTv.text = model.time
         itemView.shopStarTv.text = String.format("%.1f", model.star)
         itemView.shopPhoneTv.text = model.phone
-        FirebaseUnits.storage_loadImg(
-            itemView.context,
-            itemView.shopPictureImg,
-            tag,
-            model.name,
-            model.name,
-            RequestOptions().fitCenter()
-        )
+        GlideApp.with(itemView.context)
+            .load(FirebaseUnits.storage_getImageRef(tag,model.name,model.name))
+            .error(R.drawable.ic_shop)
+            .into(itemView.shopPictureImg)
 
         itemView.shopMapIg.setOnClickListener {
             itemView.context.toast("功能尚未實作")
