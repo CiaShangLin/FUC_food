@@ -14,6 +14,7 @@ import com.google.android.gms.ads.AdView
 import com.shang.fcu_food.Unit.AdmobUnit
 import com.shang.fcu_food.Data.*
 import com.shang.fcu_food.DetailMenu.DetailMenuActivity
+import com.shang.fcu_food.Dialog.ImageViewDialog
 import com.shang.fcu_food.Main.GlideApp
 import com.shang.fcu_food.Unit.FirebaseUnits
 import com.shang.fcu_food.R
@@ -31,7 +32,7 @@ class DetailShopVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
     var shopPictureImg = itemView.findViewById<ImageView>(R.id.shopPictureImg)
     var shopAdView=itemView.findViewById<AdView>(R.id.shopAdView)
 
-    fun bind(tag: String, model: Shop) {
+    fun bind(tag: String, model: Shop,activity: DetailShopActivity) {
         when (tag) {
             BreakfastShop.tag -> model as BreakfastShop
             DinnerShop.tag -> model as DinnerShop
@@ -49,6 +50,11 @@ class DetailShopVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         itemView.shopMapIg.setOnClickListener {
             itemView.context.toast("功能尚未實作")
+        }
+
+        itemView.shopPictureImg.setOnClickListener {
+            ImageViewDialog.getInstance(tag,model.name,model.name)
+                .show(activity.supportFragmentManager, ImageViewDialog.TAG)
         }
 
         itemView.shopMenu.layoutManager = GridLayoutManager(itemView.context, 2)

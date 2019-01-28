@@ -68,7 +68,7 @@ class DetailShopActivity : AppCompatActivity() {
             }
 
             override fun onBindViewHolder(holder: DetailShopVH, position: Int, model: Shop) {
-                holder.bind(shop_tag, model)
+                holder.bind(shop_tag, model,this@DetailShopActivity)
             }
         }
 
@@ -92,10 +92,6 @@ class DetailShopActivity : AppCompatActivity() {
         (adapter as FirebaseRecyclerAdapter<Shop, DetailShopVH>).startListening()
     }
 
-    override fun onStop() {
-        super.onStop()
-    }
-
     override fun onDestroy() {
         super.onDestroy()
         //放在onStop裡的話　跳轉回來時他不會定位
@@ -105,7 +101,7 @@ class DetailShopActivity : AppCompatActivity() {
     fun recommend(){ //隨機推薦
         //var position=linearLayoutManager?.findFirstVisibleItemPosition().toInt()
         //var shop =(adapter as FirebaseRecyclerAdapter<Shop, DetailShopVH>)?.getItem(position)
-        position=(Math.random()*(adapter as FirebaseRecyclerAdapter<Shop, DetailShopVH>)?.itemCount).toInt()
+        position=(Math.random()*(detailShopRecyc.adapter)?.itemCount!!).toInt()
         detailShopRecyc.smoothScrollToPosition(position)
     }
 }
