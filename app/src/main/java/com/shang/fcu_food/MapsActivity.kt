@@ -1,5 +1,6 @@
 package com.shang.fcu_food
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -29,9 +30,13 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,GoogleMap.OnMapClic
         mapFragment.getMapAsync(this)
     }
 
+    @SuppressLint("MissingPermission")
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
         mMap.setOnMapClickListener(this)
+
+        mMap.uiSettings.isZoomControlsEnabled=true
+        mMap.uiSettings.isZoomGesturesEnabled=true
 
         // Add a marker in Sydney and move the camera
         val fcu = LatLng(24.178827, 120.646460)

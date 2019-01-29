@@ -86,12 +86,12 @@
             app:layout_constraintStart_toEndOf="@+id/editShopGoogleMapImg" android:layout_marginStart="8dp"
             app:layout_constraintTop_toTopOf="@+id/editShopGoogleMapImg"
             app:layout_constraintBottom_toBottomOf="@+id/editShopGoogleMapImg" app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="16dp" android:id="@+id/editShopAddressTvEt" app:helperText="點擊左邊圖示">
+            android:layout_marginEnd="16dp" android:id="@+id/editShopAddressTvEt">
 
         <android.support.design.widget.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="地點"/>
+                android:hint="地點(點擊左邊圖示)"/>
     </android.support.design.widget.TextInputLayout>
     <Spinner
             android:layout_width="wrap_content"

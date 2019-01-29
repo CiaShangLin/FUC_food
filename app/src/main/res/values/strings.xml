@@ -43,8 +43,9 @@
     <string name="dialog_addshop_Picture">菜單照片</string>
     <string name="dialog_addshop_hint_ShopName">店名</string>
     <string name="dialog_addshop_hint_Phone">電話(可不輸入)</string>
-    <string name="dialog_addshop_hint_Adreess">地址(可不輸入)</string>
+    <string name="dialog_addshop_hint_Adreess">地址(點擊左邊圖示)</string>
     <string name="dialog_addshop_hint_Open">營業時間(可不輸入)</string>
+
     <string-array name="dialog_addshop_tagSpinner">
         <item>早餐</item>
         <item>晚餐</item>
