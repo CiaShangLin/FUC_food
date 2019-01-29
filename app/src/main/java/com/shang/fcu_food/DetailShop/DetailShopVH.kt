@@ -8,12 +8,11 @@ import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import com.bumptech.glide.request.RequestOptions
-import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
 import com.shang.fcu_food.Unit.AdmobUnit
 import com.shang.fcu_food.Data.*
 import com.shang.fcu_food.DetailMenu.DetailMenuActivity
+import com.shang.fcu_food.Dialog.EditShopDialog
 import com.shang.fcu_food.Dialog.ImageViewDialog
 import com.shang.fcu_food.Main.GlideApp
 import com.shang.fcu_food.Unit.FirebaseUnits
@@ -31,9 +30,10 @@ class DetailShopVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
     var shopMenu = itemView.findViewById<RecyclerView>(R.id.shopMenu)
     var shopPictureImg = itemView.findViewById<ImageView>(R.id.shopPictureImg)
     var shopAdView=itemView.findViewById<AdView>(R.id.shopAdView)
+    var shopEditImg=itemView.findViewById<ImageView>(R.id.shopEditImg)
 
-    fun bind(tag: String, model: Shop,activity: DetailShopActivity) {
-        when (tag) {
+    fun bind(shop_tag: String, model: Shop, activity: DetailShopActivity) {
+        when (shop_tag) {
             BreakfastShop.tag -> model as BreakfastShop
             DinnerShop.tag -> model as DinnerShop
             SnackShop.tag -> model as SnackShop
@@ -44,7 +44,7 @@ class DetailShopVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
         itemView.shopStarTv.text = String.format("%.1f", model.star)
         itemView.shopPhoneTv.text = model.phone
         GlideApp.with(itemView.context)
-            .load(FirebaseUnits.storage_getImageRef(tag,model.name,model.name))
+            .load(FirebaseUnits.storage_getImageRef(shop_tag,model.name,model.name))
             .error(R.drawable.ic_shop)
             .into(itemView.shopPictureImg)
 
@@ -53,7 +53,7 @@ class DetailShopVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
         }
 
         itemView.shopPictureImg.setOnClickListener {
-            ImageViewDialog.getInstance(tag,model.name,model.name)
+            ImageViewDialog.getInstance(shop_tag,model.name,model.name)
                 .show(activity.supportFragmentManager, ImageViewDialog.TAG)
         }
 
@@ -61,10 +61,15 @@ class DetailShopVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
         itemView.shopMenu.adapter =
                 SimpleMenuAdapter(
                     let { model.menu },
-                    tag,
+                    shop_tag,
                     model.name,
-                    getItemClick(tag, model.id.toString(), model.name, itemView.context)
+                    getItemClick(shop_tag, model.id.toString(), model.name, itemView.context)
                 )
+
+        itemView.shopEditImg.setOnClickListener {
+            EditShopDialog.getInstance(model).show(activity.supportFragmentManager,EditShopDialog.TAG)
+        }
+
         AdmobUnit.getInstance(itemView.context)?.show(itemView.shopAdView)
     }
 
