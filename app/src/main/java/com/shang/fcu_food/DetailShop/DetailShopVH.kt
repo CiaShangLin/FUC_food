@@ -67,7 +67,7 @@ class DetailShopVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
                 )
 
         itemView.shopEditImg.setOnClickListener {
-            EditShopDialog.getInstance(model).show(activity.supportFragmentManager,EditShopDialog.TAG)
+            EditShopDialog.getInstance(model,shop_tag).show(activity.supportFragmentManager,EditShopDialog.TAG)
         }
 
         AdmobUnit.getInstance(itemView.context)?.show(itemView.shopAdView)

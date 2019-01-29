@@ -23,8 +23,6 @@ import com.shang.fcu_food.R
 import com.shang.fcu_food.Unit.FirebaseUnits
 import com.shang.fcu_food.Unit.PickPictureUnit
 import kotlinx.android.synthetic.main.dialog_editshop.*
-import kotlinx.android.synthetic.main.dialog_editshop.view.*
-import org.jetbrains.anko.find
 import org.jetbrains.anko.support.v4.toast
 
 class EditShopDialog : DialogFragment() {
@@ -34,19 +32,20 @@ class EditShopDialog : DialogFragment() {
 
         var editShopDialog: EditShopDialog? = null
 
-        fun getInstance(shop: Shop): EditShopDialog {
+        fun getInstance(shop: Shop,shop_tag:String): EditShopDialog {
             if (editShopDialog == null) {
                 editShopDialog = EditShopDialog()
             }
-            editShopDialog?.arguments = getBundle(shop)
+            editShopDialog?.arguments = getBundle(shop,shop_tag)
             return editShopDialog as EditShopDialog
         }
 
-        private fun getBundle(shop: Shop): Bundle = Bundle().apply {
+        private fun getBundle(shop: Shop,shop_tag:String): Bundle = Bundle().apply {
             this.putString("name", shop.name)
             this.putString("time", shop.time)
             this.putString("phone", shop.phone)
             this.putString("address", shop.address)
+            this.putString("shop_tag", shop_tag)
         }
     }
 
@@ -96,7 +95,6 @@ class EditShopDialog : DialogFragment() {
         editShopOpenTvEt.editText?.setText(arguments?.getString("time"))
         editShopPhoneTvEt.editText?.setText(arguments?.getString("phone"))
         editShopAddressTvEt.editText?.setText(arguments?.getString("address"))
-
 
         return view
     }
@@ -153,5 +151,10 @@ class EditShopDialog : DialogFragment() {
 
         }
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+        editShopTagSp.setSelection(tag.indexOf(arguments?.getString("shop_tag")))
     }
 }

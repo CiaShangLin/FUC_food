@@ -65,11 +65,6 @@ class AddShopDialog : DialogFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         var view = inflater.inflate(R.layout.dialog_addshop, container, false)
-        return view
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
         var addShopNameTvEt = view.findViewById<TextInputLayout>(R.id.addShopNameTvEt)
         var addShopOpenTvEt = view.findViewById<TextInputLayout>(R.id.addShopOpenTvEt)
         var addShopPhoneTvEt = view.findViewById<TextInputLayout>(R.id.addShopPhoneTvEt)
@@ -88,6 +83,11 @@ class AddShopDialog : DialogFragment() {
             this.setTitle("上傳中...")
             this.setMessage("努力上傳中")
         }
+        return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         addShopAddBt.setOnClickListener {
             try {
@@ -98,7 +98,6 @@ class AddShopDialog : DialogFragment() {
                 var phone = addShopPhoneTvEt.editText?.text.toString()
                 var address = addShopAddressTvEt.editText?.text.toString()
                 var uid = FirebaseUnits.auth_getUser()?.uid
-                Log.d(TAG,tag)
 
                 if (!shopName.equals("")) {
                     progressDialog.show()
@@ -135,7 +134,6 @@ class AddShopDialog : DialogFragment() {
             MapsActivity.REQUEST_CODE_LATLNG -> {
                 if (data?.extras != null) {
                     var latlng = data?.extras.get(MapsActivity.LATLNG) as LatLng
-
                     addShopAddressTvEt.editText?.setText(
                         String.format("%.4f,%.4f", latlng.latitude, latlng.longitude)
                     )
@@ -143,18 +141,6 @@ class AddShopDialog : DialogFragment() {
             }
         }
 
-    }
-
-
-    override fun onResume() {
-        super.onResume()
-
-        var dialog = dialog
-        if (dialog != null) {
-            var width = ViewGroup.LayoutParams.MATCH_PARENT
-            var height = ViewGroup.LayoutParams.MATCH_PARENT
-            dialog.window.setLayout(width, height)
-        }
     }
 
 
