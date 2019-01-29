@@ -60,7 +60,7 @@
     <ImageView
             android:layout_width="@dimen/dialog_add_icon_width"
             android:layout_height="@dimen/dialog_add_icon_height" app:srcCompat="@drawable/ic_loaction"
-            android:id="@+id/imageView19" android:layout_marginTop="28dp"
+            android:id="@+id/addShopGoogleMapImg" android:layout_marginTop="28dp"
             app:layout_constraintTop_toBottomOf="@+id/imageView18" app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="16dp" android:visibility="visible"/>
     <android.support.design.widget.TextInputLayout
@@ -109,9 +109,9 @@
     <android.support.design.widget.TextInputLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toEndOf="@+id/imageView19" android:layout_marginStart="8dp"
-            app:layout_constraintTop_toTopOf="@+id/imageView19"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView19" android:layout_marginEnd="16dp"
+            app:layout_constraintStart_toEndOf="@+id/addShopGoogleMapImg" android:layout_marginStart="8dp"
+            app:layout_constraintTop_toTopOf="@+id/addShopGoogleMapImg"
+            app:layout_constraintBottom_toBottomOf="@+id/addShopGoogleMapImg" android:layout_marginEnd="16dp"
             app:layout_constraintEnd_toEndOf="parent" android:hint="@string/dialog_addshop_hint_Adreess"
             android:id="@+id/addShopAddressTvEt"
     >
@@ -127,7 +127,10 @@
             android:layout_height="wrap_content"
             android:id="@+id/textView6"
             android:textColor="@color/browser_actions_text_color"
-            tools:layout_editor_absoluteY="382dp" tools:layout_editor_absoluteX="24dp"/>
+            android:layout_marginTop="24dp"
+            app:layout_constraintTop_toBottomOf="@+id/imageView23"
+            app:layout_constraintStart_toStartOf="@+id/addShopPictureImg"
+            app:layout_constraintEnd_toEndOf="@+id/addShopPictureImg"/>
     <Spinner
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -139,6 +142,6 @@
             android:layout_width="@dimen/dialog_add_icon_width"
             android:layout_height="@dimen/dialog_add_icon_height" app:srcCompat="@drawable/ic_shop_type"
             android:id="@+id/imageView23" android:layout_marginTop="24dp"
-            app:layout_constraintTop_toBottomOf="@+id/imageView19" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/addShopGoogleMapImg" app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="16dp"/>
 </android.support.constraint.ConstraintLayout>

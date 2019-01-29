@@ -64,7 +64,8 @@
     </string>
 
     <string name="Add_Message">
-        新增後並不會馬上顯示\n需要通過審核後才會新增\n請耐心等待，謝謝
+        提交後並不會馬上顯示\n需要通過審核後才會新增\n請耐心等待，謝謝
     </string>
+
     <string name="title_activity_maps">Map</string>
 </resources>

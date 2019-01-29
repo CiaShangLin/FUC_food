@@ -14,6 +14,7 @@ import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.Spinner
+import com.google.android.gms.maps.model.LatLng
 import com.shang.fcu_food.Data.*
 import com.shang.fcu_food.FirebaseCallback
 import com.shang.fcu_food.Main.GlideApp
@@ -30,7 +31,7 @@ class EditShopDialog : DialogFragment() {
 
     companion object {
         val TAG = "EditShopDialog"
-        val LATLNG: Int = 2
+
         var editShopDialog: EditShopDialog? = null
 
         fun getInstance(shop: Shop): EditShopDialog {
@@ -83,7 +84,7 @@ class EditShopDialog : DialogFragment() {
         }
         var editShopMenuImg = view.findViewById<ImageView>(R.id.editShopMenuImg)
         var editShopBt = view.findViewById<Button>(R.id.editShopBt)
-        var editShopGoogleMapImg=view.findViewById<ImageView>(R.id.editShopGoogleMapImg)
+        var editShopGoogleMapImg = view.findViewById<ImageView>(R.id.editShopGoogleMapImg)
 
         progressDialog = ProgressDialog(context).apply {
             this.setCancelable(false)
@@ -104,7 +105,7 @@ class EditShopDialog : DialogFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         editShopGoogleMapImg.setOnClickListener {
-            startActivityForResult(Intent(activity,MapsActivity::class.java),LATLNG)
+            startActivityForResult(Intent(activity, MapsActivity::class.java), MapsActivity.REQUEST_CODE_LATLNG)
         }
 
         editShopMenuImg.setOnClickListener {
@@ -140,9 +141,16 @@ class EditShopDialog : DialogFragment() {
                     .into(editShopMenuImg)
             }
 
-            LATLNG->{
-                Log.d(TAG,data?.extras?.get("latlng").toString()+"")
+            MapsActivity.REQUEST_CODE_LATLNG -> {
+                if (data?.extras != null) {
+                    var latlng = data?.extras.get(MapsActivity.LATLNG) as LatLng
+
+                    editShopAddressTvEt.editText?.setText(
+                        String.format("%.4f,%.4f", latlng.latitude, latlng.longitude)
+                    )
+                }
             }
+
         }
 
     }

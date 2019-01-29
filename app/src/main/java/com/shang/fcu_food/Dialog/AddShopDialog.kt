@@ -14,10 +14,12 @@ import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.Spinner
+import com.google.android.gms.maps.model.LatLng
 import com.shang.fcu_food.Data.*
 import com.shang.fcu_food.FirebaseCallback
 import com.shang.fcu_food.Unit.FirebaseUnits
 import com.shang.fcu_food.Main.GlideApp
+import com.shang.fcu_food.MapsActivity
 import com.shang.fcu_food.Unit.PickPictureUnit
 import com.shang.fcu_food.R
 import kotlinx.android.synthetic.main.dialog_addshop.*
@@ -78,6 +80,7 @@ class AddShopDialog : DialogFragment() {
             this.adapter=ArrayAdapter.createFromResource(
                 context,R.array.dialog_addshop_tagSpinner, android.R.layout.simple_spinner_dropdown_item)
         }
+        var addShopGoogleMapImg=view.findViewById<ImageView>(R.id.addShopGoogleMapImg)
 
 
         progressDialog = ProgressDialog(context).apply {
@@ -113,17 +116,33 @@ class AddShopDialog : DialogFragment() {
             startActivityForResult(PickPictureUnit.pickIntent(), PickPictureUnit.REQUEST_CODE)
         }
 
+        addShopGoogleMapImg.setOnClickListener {
+            startActivityForResult(Intent(activity, MapsActivity::class.java), MapsActivity.REQUEST_CODE_LATLNG)
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (requestCode == PickPictureUnit.REQUEST_CODE) {
-            bitmap = PickPictureUnit.uriToBitmap(activity!!, data)
-            GlideApp.with(context!!)
-                .load(data?.data)
-                .into(addShopPictureImg)
+        when(requestCode){
+            PickPictureUnit.REQUEST_CODE->{
+                bitmap = PickPictureUnit.uriToBitmap(activity!!, data)
+                GlideApp.with(context!!)
+                    .load(data?.data)
+                    .into(addShopPictureImg)
+            }
+
+            MapsActivity.REQUEST_CODE_LATLNG -> {
+                if (data?.extras != null) {
+                    var latlng = data?.extras.get(MapsActivity.LATLNG) as LatLng
+
+                    addShopAddressTvEt.editText?.setText(
+                        String.format("%.4f,%.4f", latlng.latitude, latlng.longitude)
+                    )
+                }
+            }
         }
+
     }
 
 
@@ -138,5 +157,5 @@ class AddShopDialog : DialogFragment() {
         }
     }
 
-    
+
 }
