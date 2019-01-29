@@ -137,4 +137,6 @@ class AddShopDialog : DialogFragment() {
             dialog.window.setLayout(width, height)
         }
     }
+
+    
 }
