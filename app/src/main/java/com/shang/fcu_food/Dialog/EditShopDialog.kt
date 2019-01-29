@@ -6,6 +6,7 @@ import android.graphics.Bitmap
 import android.os.Bundle
 import android.support.design.widget.TextInputLayout
 import android.support.v4.app.DialogFragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,6 +17,7 @@ import android.widget.Spinner
 import com.shang.fcu_food.Data.*
 import com.shang.fcu_food.FirebaseCallback
 import com.shang.fcu_food.Main.GlideApp
+import com.shang.fcu_food.MapsActivity
 import com.shang.fcu_food.R
 import com.shang.fcu_food.Unit.FirebaseUnits
 import com.shang.fcu_food.Unit.PickPictureUnit
@@ -27,27 +29,28 @@ import org.jetbrains.anko.support.v4.toast
 class EditShopDialog : DialogFragment() {
 
     companion object {
-        val TAG="EditShopDialog"
-        var editShopDialog:EditShopDialog?=null
+        val TAG = "EditShopDialog"
+        val LATLNG: Int = 2
+        var editShopDialog: EditShopDialog? = null
 
-        fun getInstance(shop: Shop):EditShopDialog{
-            if(editShopDialog==null) {
+        fun getInstance(shop: Shop): EditShopDialog {
+            if (editShopDialog == null) {
                 editShopDialog = EditShopDialog()
             }
-            editShopDialog?.arguments= getBundle(shop)
+            editShopDialog?.arguments = getBundle(shop)
             return editShopDialog as EditShopDialog
         }
 
-        private fun getBundle(shop:Shop):Bundle=Bundle().apply {
-            this.putString("name",shop.name)
-            this.putString("time",shop.time)
-            this.putString("phone",shop.phone)
-            this.putString("address",shop.address)
+        private fun getBundle(shop: Shop): Bundle = Bundle().apply {
+            this.putString("name", shop.name)
+            this.putString("time", shop.time)
+            this.putString("phone", shop.phone)
+            this.putString("address", shop.address)
         }
     }
 
     var bitmap: Bitmap? = null
-    val tag= arrayListOf<String>(BreakfastShop.tag, DinnerShop.tag, SnackShop.tag, DrinkShop.tag)
+    val tag = arrayListOf<String>(BreakfastShop.tag, DinnerShop.tag, SnackShop.tag, DrinkShop.tag)
     lateinit var progressDialog: ProgressDialog
     var callback = object : FirebaseCallback {
         override fun statusCallBack(database_status: Boolean, storage_status: Boolean) {
@@ -68,18 +71,20 @@ class EditShopDialog : DialogFragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        var view=inflater.inflate(R.layout.dialog_editshop,container,false)
-        var editShopNameTvEt=view.findViewById<TextInputLayout>(R.id.editShopNameTvEt)
-        var editShopOpenTvEt=view.findViewById<TextInputLayout>(R.id.editShopOpenTvEt)
-        var editShopPhoneTvEt=view.findViewById<TextInputLayout>(R.id.editShopPhoneTvEt)
-        var editShopAddressTvEt=view.findViewById<TextInputLayout>(R.id.editShopAddressTvEt)
-        var editShopTagSp=view.findViewById<Spinner>(R.id.editShopTagSp).apply {
-            this.adapter= ArrayAdapter.createFromResource(
-                context,R.array.dialog_addshop_tagSpinner, android.R.layout.simple_spinner_dropdown_item)
+        var view = inflater.inflate(R.layout.dialog_editshop, container, false)
+        var editShopNameTvEt = view.findViewById<TextInputLayout>(R.id.editShopNameTvEt)
+        var editShopOpenTvEt = view.findViewById<TextInputLayout>(R.id.editShopOpenTvEt)
+        var editShopPhoneTvEt = view.findViewById<TextInputLayout>(R.id.editShopPhoneTvEt)
+        var editShopAddressTvEt = view.findViewById<TextInputLayout>(R.id.editShopAddressTvEt)
+        var editShopTagSp = view.findViewById<Spinner>(R.id.editShopTagSp).apply {
+            this.adapter = ArrayAdapter.createFromResource(
+                context, R.array.dialog_addshop_tagSpinner, android.R.layout.simple_spinner_dropdown_item
+            )
         }
+        var editShopMenuImg = view.findViewById<ImageView>(R.id.editShopMenuImg)
+        var editShopBt = view.findViewById<Button>(R.id.editShopBt)
+        var editShopGoogleMapImg=view.findViewById<ImageView>(R.id.editShopGoogleMapImg)
 
-        var editShopMenuImg=view.findViewById<ImageView>(R.id.editShopMenuImg)
-        var editShopBt=view.findViewById<Button>(R.id.editShopBt)
         progressDialog = ProgressDialog(context).apply {
             this.setCancelable(false)
             this.setTitle("上傳中...")
@@ -98,13 +103,17 @@ class EditShopDialog : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        editShopGoogleMapImg.setOnClickListener {
+            startActivityForResult(Intent(activity,MapsActivity::class.java),LATLNG)
+        }
+
         editShopMenuImg.setOnClickListener {
             startActivityForResult(PickPictureUnit.pickIntent(), PickPictureUnit.REQUEST_CODE)
         }
 
         editShopBt.setOnClickListener {
-            try{
-                var tempShop=TempShop(
+            try {
+                var tempShop = TempShop(
                     tag[editShopTagSp.selectedItemPosition],
                     editShopNameTvEt.editText?.text.toString(),
                     editShopPhoneTvEt.editText?.text.toString(),
@@ -114,7 +123,7 @@ class EditShopDialog : DialogFragment() {
                 )
                 progressDialog.show()
                 FirebaseUnits.addTempData("tempShop", tempShop, PickPictureUnit.bitmapToByte(bitmap), callback)
-            }catch (e:Exception){
+            } catch (e: Exception) {
                 e.printStackTrace()
             }
         }
@@ -123,12 +132,16 @@ class EditShopDialog : DialogFragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        when(requestCode){
-            PickPictureUnit.REQUEST_CODE->{
+        when (requestCode) {
+            PickPictureUnit.REQUEST_CODE -> {
                 bitmap = PickPictureUnit.uriToBitmap(activity!!, data)
                 GlideApp.with(context!!)
                     .load(data?.data)
                     .into(editShopMenuImg)
+            }
+
+            LATLNG->{
+                Log.d(TAG,data?.extras?.get("latlng").toString()+"")
             }
         }
 

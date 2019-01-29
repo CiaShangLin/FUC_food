@@ -26,6 +26,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,GoogleMap.OnMapClic
 
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
+        mMap.setOnMapClickListener(this)
 
         // Add a marker in Sydney and move the camera
         val sydney = LatLng(-34.0, 151.0)
@@ -34,7 +35,11 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,GoogleMap.OnMapClic
     }
 
     override fun onMapClick(latlng: LatLng?) {
-
+        var intent=Intent().apply {
+            this.putExtra("latlng",latlng)
+        }
+        setResult(200,intent)
+        finish()
     }
 
 
