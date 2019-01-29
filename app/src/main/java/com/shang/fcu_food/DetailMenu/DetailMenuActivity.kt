@@ -100,6 +100,7 @@ class DetailMenuActivity : AppCompatActivity() {
         //var shop =(adapter as FirebaseRecyclerAdapter<Shop, DetailShopVH>)?.getItem(position)
         position=(Math.random()*(detailMenuRecyc.adapter?.itemCount!!)).toInt()
         detailMenuRecyc.smoothScrollToPosition(position)
+        (detailMenuRecyc.layoutManager as LinearLayoutManager).scrollToPositionWithOffset(position,0)
 
     }
 

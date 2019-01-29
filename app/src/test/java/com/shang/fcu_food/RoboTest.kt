@@ -54,7 +54,6 @@ class RoboTest {
 
         userQuestionDialog.dismiss()
         Assert.assertFalse(userQuestionDialog.isShowing)
-        Assert.assertNull(userQuestionDialog)
 
     }
 

@@ -102,7 +102,8 @@ class DetailShopActivity : AppCompatActivity() {
         //var position=linearLayoutManager?.findFirstVisibleItemPosition().toInt()
         //var shop =(adapter as FirebaseRecyclerAdapter<Shop, DetailShopVH>)?.getItem(position)
         position=(Math.random()*(detailShopRecyc.adapter)?.itemCount!!).toInt()
-        detailShopRecyc.smoothScrollToPosition(position)
+        //detailShopRecyc.smoothScrollToPosition(position)
+        linearLayoutManager.scrollToPositionWithOffset(position,0)
     }
 }
 

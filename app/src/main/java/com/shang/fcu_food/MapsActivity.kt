@@ -2,12 +2,16 @@ package com.shang.fcu_food
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.graphics.Color
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.design.widget.Snackbar
+import android.view.View
 import com.google.android.gms.maps.*
 
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import kotlinx.android.synthetic.main.activity_maps.*
 import org.jetbrains.anko.alert
 import org.jetbrains.anko.noButton
 import org.jetbrains.anko.toast
@@ -42,6 +46,11 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,GoogleMap.OnMapClic
         val fcu = LatLng(24.178827, 120.646460)
         mMap.addMarker(MarkerOptions().position(fcu).title("逢甲"))
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(fcu,17f))
+
+        Snackbar.make(con,"點擊地圖店家的大概位置",Snackbar.LENGTH_INDEFINITE)
+            .setAction("確認", View.OnClickListener { })
+            .setActionTextColor(Color.YELLOW)
+            .show()
 
     }
 
