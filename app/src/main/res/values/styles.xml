@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
@@ -11,6 +11,33 @@
     <style name="dialog_theme" >
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowIsFloating">false</item>
+    </style>
+
+    <style name="cardview_small_icon">
+        <item name="android:layout_weight">@dimen/cardview_small_icon_width</item>
+        <item name="android:layout_height">@dimen/cardview_small_icon_height</item>
+    </style>
+
+    <style name="cardview_small_textview">
+        <item name="android:layout_weight">-2dp</item>
+        <item name="android:layout_height">-2dp</item>
+        <item name="android:textSize">20dp</item>
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
+    <style name="dialog_icon">
+        <item name="android:layout_weight">@dimen/dialog_add_icon_width</item>
+        <item name="android:layout_height">@dimen/dialog_add_icon_height</item>
+    </style>
+    
+    <style name="dialog_button">
+        <item name="android:layout_height">-2dp</item>
+        <item name="android:layout_weight">-2dp</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:background">@color/fui_bgAnonymous</item>
+        <item name="android:elevation" tools:targetApi="lollipop">8dp</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
 

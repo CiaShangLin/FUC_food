@@ -38,7 +38,7 @@
                 app:layout_constraintTop_toTopOf="@+id/imageView8" app:layout_constraintStart_toEndOf="@+id/imageView8"
                 android:layout_marginStart="8dp" android:textSize="20dp"
                 android:textColor="@android:color/black"
-                app:layout_constraintBottom_toBottomOf="@+id/imageView8"/>
+                app:layout_constraintBottom_toBottomOf="@+id/imageView8" style="@style/cardview_small_textview"/>
         <TextView
                 android:text="電話"
                 android:layout_width="wrap_content"
@@ -47,7 +47,7 @@
                 app:layout_constraintTop_toTopOf="@+id/imageView4" app:layout_constraintStart_toEndOf="@+id/imageView4"
                 android:layout_marginStart="8dp" android:textSize="20dp"
                 android:textColor="@android:color/black"
-                app:layout_constraintBottom_toBottomOf="@+id/imageView4"/>
+                app:layout_constraintBottom_toBottomOf="@+id/imageView4" style="@style/cardview_small_textview"/>
         <TextView
                 android:text="開店時間"
                 android:layout_width="wrap_content"
@@ -56,7 +56,7 @@
                 app:layout_constraintTop_toTopOf="@+id/imageView6" app:layout_constraintStart_toEndOf="@+id/imageView6"
                 android:layout_marginStart="8dp" android:textSize="20dp"
                 android:textColor="@android:color/black"
-                app:layout_constraintBottom_toBottomOf="@+id/imageView6"/>
+                app:layout_constraintBottom_toBottomOf="@+id/imageView6" style="@style/cardview_small_textview"/>
         <TextView
                 android:text="3.5"
                 android:layout_width="wrap_content"
@@ -65,32 +65,35 @@
                 app:layout_constraintTop_toTopOf="@+id/imageView5" app:layout_constraintStart_toEndOf="@+id/imageView5"
                 android:layout_marginStart="8dp" android:textSize="20dp"
                 android:textColor="@android:color/black"
-                app:layout_constraintBottom_toBottomOf="@+id/imageView5"/>
+                app:layout_constraintBottom_toBottomOf="@+id/imageView5" style="@style/cardview_small_textview"/>
         <ImageView
                 android:layout_width="@dimen/cardview_small_icon_width"
                 android:layout_height="@dimen/cardview_small_icon_height" app:srcCompat="@drawable/ic_phone"
                 android:id="@+id/imageView4" android:layout_marginTop="8dp"
                 app:layout_constraintTop_toBottomOf="@+id/imageView8"
-                app:layout_constraintStart_toEndOf="@+id/shopPictureImg" android:layout_marginStart="8dp"/>
+                app:layout_constraintStart_toEndOf="@+id/shopPictureImg" android:layout_marginStart="8dp"
+                style="@style/cardview_small_icon"/>
         <ImageView
                 android:layout_width="@dimen/cardview_small_icon_width"
                 android:layout_height="@dimen/cardview_small_icon_height" app:srcCompat="@drawable/ic_star"
                 android:id="@+id/imageView5"
                 app:layout_constraintStart_toEndOf="@+id/shopPictureImg" android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/imageView6"/>
+                android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/imageView6"
+                style="@style/cardview_small_icon"/>
         <ImageView
                 android:layout_width="@dimen/cardview_small_icon_width"
                 android:layout_height="@dimen/cardview_small_icon_height" app:srcCompat="@drawable/ic_open"
                 android:id="@+id/imageView6" android:layout_marginTop="8dp"
                 app:layout_constraintTop_toBottomOf="@+id/imageView4"
-                app:layout_constraintStart_toEndOf="@+id/shopPictureImg" android:layout_marginStart="8dp"/>
+                app:layout_constraintStart_toEndOf="@+id/shopPictureImg" android:layout_marginStart="8dp"
+                style="@style/cardview_small_icon"/>
         <ImageView
                 android:layout_width="@dimen/cardview_small_icon_width"
                 android:layout_height="@dimen/cardview_small_icon_height" app:srcCompat="@drawable/ic_shop"
                 android:id="@+id/imageView8"
                 app:layout_constraintTop_toTopOf="@+id/shopPictureImg"
                 app:layout_constraintStart_toEndOf="@+id/shopPictureImg"
-                android:layout_marginStart="8dp"/>
+                android:layout_marginStart="8dp" style="@style/cardview_small_icon"/>
         <ImageView
                 android:layout_width="36dp"
                 android:layout_height="36dp" app:srcCompat="@drawable/ic_googlemap"
