@@ -3,7 +3,9 @@ package com.shang.fcu_food
 import android.support.design.widget.NavigationView
 import android.support.v4.view.ViewPager
 import android.support.v7.widget.Toolbar
+import com.flyco.tablayout.SlidingTabLayout
 import com.shang.fcu_food.Main.MainActivity
+import com.shang.fcu_food.Main.ViewPagerAdapter
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
@@ -60,7 +62,21 @@ class RoboTest {
     @Test
     fun MainActivity_slidingTab_test(){
         var viewPager=mainActivity.findViewById<ViewPager>(R.id.viewPager)
-        System.out.print(viewPager.childCount)
+        var slidingTab=mainActivity.findViewById<SlidingTabLayout>(R.id.slidingTab)
+
+        var adapter=ViewPagerAdapter(mainActivity.supportFragmentManager
+            ,mainActivity.resources.getStringArray(R.array.ShopType))
+        viewPager.adapter=adapter
+        slidingTab.setViewPager(viewPager)
+
+        Assert.assertEquals(4,adapter.count)
+        Assert.assertEquals(4,slidingTab.tabCount)
+        Assert.assertEquals("早餐",adapter.title[0])
+        Assert.assertEquals("晚餐",adapter.title[1])
+        Assert.assertEquals("小吃",adapter.title[2])
+        Assert.assertEquals("飲料",adapter.title[3])
+
+
 
     }
 
