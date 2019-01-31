@@ -24,6 +24,8 @@
     <dimen name="dialog_add_icon_width">36dp</dimen>
     <dimen name="dialog_add_icon_height">36dp</dimen>
 
+    <dimen name="wrap_content">-2dp</dimen>
+
 
 
 </resources>

@@ -5,4 +5,6 @@
     <color name="colorAccent">#D81B60</color>
 
     <color name="select_SlidingTabLayout">#FFFF00</color>
+
+    <color name="whitesmoke">#DCDCDC</color>
 </resources>
