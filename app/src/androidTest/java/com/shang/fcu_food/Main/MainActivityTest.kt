@@ -2,14 +2,13 @@ package com.shang.fcu_food.Main
 
 
 import android.support.test.espresso.Espresso.onView
+import android.support.test.espresso.Espresso.pressBack
 import android.support.test.espresso.action.ViewActions.*
-import android.support.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition
 import android.support.test.espresso.matcher.ViewMatchers.*
 import android.support.test.filters.LargeTest
 import android.support.test.rule.ActivityTestRule
 import android.support.test.rule.GrantPermissionRule
 import android.support.test.runner.AndroidJUnit4
-import android.support.v7.widget.RecyclerView.ViewHolder
 import android.view.View
 import android.view.ViewGroup
 import com.shang.fcu_food.R
@@ -117,20 +116,7 @@ class MainActivityTest {
         // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
         Thread.sleep(7000)
 
-        val imageButton = onView(
-            allOf(
-                withContentDescription("Interstitial close button"),
-                childAtPosition(
-                    childAtPosition(
-                        withClassName(`is`("com.google.android.gms.ads.internal.overlay.h")),
-                        1
-                    ),
-                    0
-                ),
-                isDisplayed()
-            )
-        )
-        imageButton.perform(click())
+        pressBack()
 
         // Added a sleep statement to match the app's execution delay.
         // The recommended way to handle such scenarios is to use Espresso idling resources:
@@ -174,7 +160,25 @@ class MainActivityTest {
 
         val appCompatRadioButton = onView(
             allOf(
-                withId(R.id.userSettingCatRb), withText("貓"),
+                withId(R.id.userSettingWomanRb), withText("女"),
+                childAtPosition(
+                    allOf(
+                        withId(R.id.userSettingGenderRg),
+                        childAtPosition(
+                            withClassName(`is`("android.support.constraint.ConstraintLayout")),
+                            6
+                        )
+                    ),
+                    1
+                ),
+                isDisplayed()
+            )
+        )
+        appCompatRadioButton.perform(click())
+
+        val appCompatRadioButton2 = onView(
+            allOf(
+                withId(R.id.userSettingDogRb), withText("狗"),
                 childAtPosition(
                     allOf(
                         withId(R.id.userSettingPhotoRg),
@@ -183,12 +187,12 @@ class MainActivityTest {
                             4
                         )
                     ),
-                    0
+                    1
                 ),
                 isDisplayed()
             )
         )
-        appCompatRadioButton.perform(click())
+        appCompatRadioButton2.perform(click())
 
         val appCompatButton3 = onView(
             allOf(
@@ -239,48 +243,6 @@ class MainActivityTest {
             )
         )
         navigationMenuItemView2.perform(click())
-
-        val recyclerView = onView(
-            allOf(
-                withId(R.id.breakfastRecyc),
-                childAtPosition(
-                    withClassName(`is`("android.support.constraint.ConstraintLayout")),
-                    0
-                )
-            )
-        )
-        recyclerView.perform(actionOnItemAtPosition<ViewHolder>(1, click()))
-
-        // Added a sleep statement to match the app's execution delay.
-        // The recommended way to handle such scenarios is to use Espresso idling resources:
-        // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
-        Thread.sleep(7000)
-
-        val appCompatImageView = onView(
-            allOf(
-                withId(R.id.shopMapIg),
-                childAtPosition(
-                    childAtPosition(
-                        withClassName(`is`("android.support.v7.widget.CardView")),
-                        0
-                    ),
-                    10
-                ),
-                isDisplayed()
-            )
-        )
-        appCompatImageView.perform(click())
-
-        val recyclerView2 = onView(
-            allOf(
-                withId(R.id.shopMenu),
-                childAtPosition(
-                    withClassName(`is`("android.support.constraint.ConstraintLayout")),
-                    11
-                )
-            )
-        )
-        recyclerView2.perform(actionOnItemAtPosition<ViewHolder>(0, click()))
     }
 
     private fun childAtPosition(
