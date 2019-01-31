@@ -1,7 +1,5 @@
 package com.shang.fcu_food.Data
 
-import com.google.firebase.database.Exclude
-
 class UserComment {
     var uid: String = ""           //使用者的UID或是帳號
     var comment: String = ""      //使用者給予的評價

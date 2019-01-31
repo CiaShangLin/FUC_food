@@ -1,15 +1,15 @@
 package com.shang.fcu_food.Dialog
 
 import android.content.Context
+import android.net.ConnectivityManager
 import android.os.Bundle
+import android.os.Handler
+import android.os.Message
 import android.support.v4.app.DialogFragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.net.ConnectivityManager
-import android.os.Handler
-import android.os.Message
-import android.util.Log
 import android.widget.Button
 import com.shang.fcu_food.R
 

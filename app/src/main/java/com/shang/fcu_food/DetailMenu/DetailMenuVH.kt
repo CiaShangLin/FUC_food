@@ -7,13 +7,13 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.request.RequestOptions
-import com.shang.fcu_food.Unit.AdmobUnit
-import com.shang.fcu_food.Dialog.AddCommentDialog
 import com.shang.fcu_food.Data.Menu
-import com.shang.fcu_food.Unit.FirebaseUnits
+import com.shang.fcu_food.Dialog.AddCommentDialog
 import com.shang.fcu_food.Dialog.ImageViewDialog
 import com.shang.fcu_food.Main.GlideApp
 import com.shang.fcu_food.R
+import com.shang.fcu_food.Unit.AdmobUnit
+import com.shang.fcu_food.Unit.FirebaseUnits
 import kotlinx.android.synthetic.main.cardview_detailmenu.view.*
 
 class DetailMenuVH(itemView: View) : RecyclerView.ViewHolder(itemView) {

@@ -11,7 +11,6 @@ import android.view.ViewGroup
 import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.google.firebase.database.FirebaseDatabase
-import com.shang.fcu_food.Data.BreakfastShop
 import com.shang.fcu_food.Data.DinnerShop
 import com.shang.fcu_food.Data.Shop
 import com.shang.fcu_food.Main.SimpleShopAdapter

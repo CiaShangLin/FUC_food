@@ -15,14 +15,13 @@ import android.widget.RatingBar
 import com.shang.fcu_food.Data.DataConstant
 import com.shang.fcu_food.Data.TempMenu
 import com.shang.fcu_food.FirebaseCallback
-import com.shang.fcu_food.Unit.FirebaseUnits
 import com.shang.fcu_food.Main.GlideApp
-import com.shang.fcu_food.Unit.PickPictureUnit
 import com.shang.fcu_food.R
+import com.shang.fcu_food.Unit.FirebaseUnits
+import com.shang.fcu_food.Unit.PickPictureUnit
 import kotlinx.android.synthetic.main.dialog_addmenu.*
 import org.jetbrains.anko.support.v4.toast
 import java.io.ByteArrayOutputStream
-import java.lang.Exception
 
 class AddMenuDialog : DialogFragment() {
 

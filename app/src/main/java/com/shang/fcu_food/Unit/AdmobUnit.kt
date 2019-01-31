@@ -1,7 +1,6 @@
 package com.shang.fcu_food.Unit
 
 import android.content.Context
-import android.graphics.Color
 import android.util.Log
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView

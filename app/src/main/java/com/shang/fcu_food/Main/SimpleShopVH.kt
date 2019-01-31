@@ -10,8 +10,8 @@ import android.widget.TextView
 import com.bumptech.glide.request.RequestOptions
 import com.shang.fcu_food.Data.*
 import com.shang.fcu_food.DetailShop.DetailShopActivity
-import com.shang.fcu_food.Unit.FirebaseUnits
 import com.shang.fcu_food.R
+import com.shang.fcu_food.Unit.FirebaseUnits
 import kotlinx.android.synthetic.main.cardview_simpleshop.view.*
 
 class SimpleShopVH(itemView: View) : RecyclerView.ViewHolder(itemView) {

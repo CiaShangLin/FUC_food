@@ -14,7 +14,6 @@ import com.shang.fcu_food.Data.Menu
 import com.shang.fcu_food.Dialog.AddMenuDialog
 import com.shang.fcu_food.R
 import kotlinx.android.synthetic.main.activity_detail_menu.*
-import org.jetbrains.anko.toast
 
 class DetailMenuActivity : AppCompatActivity() {
 

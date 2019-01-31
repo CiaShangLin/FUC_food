@@ -6,7 +6,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.firebase.ui.database.FirebaseRecyclerOptions
-import com.shang.fcu_food.Data.*
+import com.shang.fcu_food.Data.BreakfastShop
+import com.shang.fcu_food.Data.DinnerShop
+import com.shang.fcu_food.Data.DrinkShop
+import com.shang.fcu_food.Data.SnackShop
 import com.shang.fcu_food.R
 
 class DetailShopAdapter(var shop_tag: String, options: FirebaseRecyclerOptions<Any>) :

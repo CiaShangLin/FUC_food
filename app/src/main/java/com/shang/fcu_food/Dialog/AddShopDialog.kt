@@ -6,7 +6,6 @@ import android.graphics.Bitmap
 import android.os.Bundle
 import android.support.design.widget.TextInputLayout
 import android.support.v4.app.DialogFragment
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,15 +16,13 @@ import android.widget.Spinner
 import com.google.android.gms.maps.model.LatLng
 import com.shang.fcu_food.Data.*
 import com.shang.fcu_food.FirebaseCallback
-import com.shang.fcu_food.Unit.FirebaseUnits
 import com.shang.fcu_food.Main.GlideApp
 import com.shang.fcu_food.MapsActivity
-import com.shang.fcu_food.Unit.PickPictureUnit
 import com.shang.fcu_food.R
+import com.shang.fcu_food.Unit.FirebaseUnits
+import com.shang.fcu_food.Unit.PickPictureUnit
 import kotlinx.android.synthetic.main.dialog_addshop.*
-import kotlinx.android.synthetic.main.dialog_addshop.view.*
 import org.jetbrains.anko.support.v4.toast
-import java.lang.Exception
 
 class AddShopDialog : DialogFragment() {
 

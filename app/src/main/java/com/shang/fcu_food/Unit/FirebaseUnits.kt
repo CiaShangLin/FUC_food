@@ -1,13 +1,9 @@
 package com.shang.fcu_food.Unit
 
 import android.app.Activity
-import android.content.Context
 import android.support.v4.app.FragmentActivity
 import android.util.Log
-import android.widget.ImageView
-import com.bumptech.glide.request.RequestOptions
 import com.firebase.ui.auth.AuthUI
-import com.google.android.gms.auth.api.signin.internal.Storage
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DataSnapshot
@@ -23,10 +19,8 @@ import com.shang.fcu_food.Data.User
 import com.shang.fcu_food.Data.UserComment
 import com.shang.fcu_food.DataBind
 import com.shang.fcu_food.FirebaseCallback
-import com.shang.fcu_food.Main.GlideApp
 import com.shang.fcu_food.R
 import org.jetbrains.anko.toast
-import java.lang.Exception
 
 class FirebaseUnits {
 

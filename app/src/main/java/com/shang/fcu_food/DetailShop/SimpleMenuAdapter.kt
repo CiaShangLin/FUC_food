@@ -11,8 +11,8 @@ import com.bumptech.glide.request.RequestOptions
 import com.shang.fcu_food.Data.DataConstant
 import com.shang.fcu_food.Data.Menu
 import com.shang.fcu_food.Main.GlideApp
-import com.shang.fcu_food.Unit.FirebaseUnits
 import com.shang.fcu_food.R
+import com.shang.fcu_food.Unit.FirebaseUnits
 import kotlinx.android.synthetic.main.cardview_simplemenu.view.*
 
 class SimpleMenuAdapter(
