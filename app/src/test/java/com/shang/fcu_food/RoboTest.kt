@@ -1,15 +1,23 @@
 package com.shang.fcu_food
 
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.v4.view.ViewPager
 import android.support.v7.widget.Toolbar
 import com.flyco.tablayout.SlidingTabLayout
+import com.google.firebase.FirebaseApp
+import com.shang.fcu_food.Data.BreakfastShop
+import com.shang.fcu_food.Data.DataConstant
+import com.shang.fcu_food.DetailShop.DetailShopActivity
 import com.shang.fcu_food.Main.MainActivity
 import com.shang.fcu_food.Main.ViewPagerAdapter
 import com.shang.fcu_food.Unit.PermissionUnit
 import com.shang.fcu_food.Unit.PickPictureUnit
+import junit.framework.Assert.assertEquals
+import org.junit.After
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
@@ -18,6 +26,13 @@ import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.shadows.ShadowAlertDialog
 import org.robolectric.shadows.ShadowDialog
+import org.robolectric.RuntimeEnvironment
+import org.robolectric.Shadows
+import org.robolectric.Shadows.shadowOf
+import org.robolectric.shadows.ShadowApplication
+
+
+
 
 @RunWith(RobolectricTestRunner::class)
 class RoboTest {
@@ -91,6 +106,25 @@ class RoboTest {
     fun PickPictureUnit_Test(){
         var bitmap= Bitmap.createBitmap(1080,720,Bitmap.Config.ARGB_8888)
         Assert.assertNotNull(PickPictureUnit.bitmapToByte(bitmap))
+    }
+
+
+
+    @Test
+    fun DetailShopActivity_Test(){
+
+        var detailShopActivity
+                =Robolectric.buildActivity(DetailShopActivity::class.java).visible().get()
+
+        detailShopActivity.intent=Intent().apply{
+            this.putExtras(Bundle().apply {
+                this.putString(DataConstant.SHOP_TYPE_TAG,BreakfastShop.tag)
+                this.putInt(DataConstant.POSITION,0)
+            })
+        }
+
+        Assert.assertEquals(BreakfastShop.tag,detailShopActivity.intent.extras.getString(DataConstant.SHOP_TYPE_TAG))
+        Assert.assertEquals(0,detailShopActivity.intent.extras.getInt(DataConstant.POSITION))
     }
 
 
