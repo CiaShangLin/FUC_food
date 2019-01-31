@@ -19,6 +19,7 @@ import com.shang.fcu_food.R
 import com.shang.fcu_food.Unit.AdmobUnit
 import com.shang.fcu_food.Unit.FirebaseUnits
 import com.shang.fcu_food.Unit.PermissionUnit
+import com.shang.fcu_food.testDialog
 import kotlinx.android.synthetic.main.drawer_layout.*
 import kotlinx.android.synthetic.main.toolbar_layout.*
 import org.jetbrains.anko.alert
@@ -63,7 +64,8 @@ class MainActivity : AppCompatActivity() {
         toolbar.setOnMenuItemClickListener {
             when(it.itemId){
                 R.id.menu_main_addShop->
-                    AddShopDialog.getInstance().show(supportFragmentManager, AddShopDialog.TAG)
+                    testDialog().show(supportFragmentManager,"")
+                    //AddShopDialog.getInstance().show(supportFragmentManager, AddShopDialog.TAG)
             }
             true
         }
