@@ -9,17 +9,14 @@ import org.jetbrains.anko.toast
 import android.support.v7.app.ActionBarDrawerToggle
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.IdpResponse
-import com.google.android.gms.ads.MobileAds
 import com.shang.fcu_food.Data.User
 import com.shang.fcu_food.Dialog.AddShopDialog
 import com.shang.fcu_food.Dialog.NetworkDialog
 import com.shang.fcu_food.Dialog.UserSettingDialog
-import com.shang.fcu_food.MapsActivity
 import com.shang.fcu_food.R
 import com.shang.fcu_food.Unit.AdmobUnit
 import com.shang.fcu_food.Unit.FirebaseUnits
 import com.shang.fcu_food.Unit.PermissionUnit
-import com.shang.fcu_food.testDialog
 import kotlinx.android.synthetic.main.drawer_layout.*
 import kotlinx.android.synthetic.main.toolbar_layout.*
 import org.jetbrains.anko.alert
@@ -63,9 +60,7 @@ class MainActivity : AppCompatActivity() {
         toolbar.inflateMenu(R.menu.menu_main)
         toolbar.setOnMenuItemClickListener {
             when(it.itemId){
-                R.id.menu_main_addShop->
-                    testDialog().show(supportFragmentManager,"")
-                    //AddShopDialog.getInstance().show(supportFragmentManager, AddShopDialog.TAG)
+                R.id.menu_main_addShop-> AddShopDialog.getInstance().show(supportFragmentManager, AddShopDialog.TAG)
             }
             true
         }
