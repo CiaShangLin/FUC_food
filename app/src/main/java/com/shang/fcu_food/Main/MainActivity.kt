@@ -17,12 +17,14 @@ import com.bumptech.glide.request.target.Target
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.IdpResponse
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.storage.FirebaseStorage
 import com.shang.fcu_food.Data.User
 import com.shang.fcu_food.Dialog.AddShopDialog
 import com.shang.fcu_food.Dialog.NetworkDialog
 import com.shang.fcu_food.Dialog.UserSettingDialog
 import com.shang.fcu_food.R
 import com.shang.fcu_food.Unit.AdmobUnit
+import com.shang.fcu_food.Unit.FileStorageUnit
 import com.shang.fcu_food.Unit.FirebaseUnits
 import com.shang.fcu_food.Unit.PermissionUnit
 import kotlinx.android.synthetic.main.drawer_layout.*
@@ -72,10 +74,12 @@ class MainActivity : AppCompatActivity() {
         toolbar.setOnMenuItemClickListener {
             when(it.itemId){
                 R.id.menu_main_addShop->{
+                    var file=File(FileStorageUnit.getPath(this,"breakfast","御方香","御方香"))
 
+                    Log.d("TAG","${file.createNewFile()}")
+
+                    //AddShopDialog.getInstance().show(supportFragmentManager, AddShopDialog.TAG)
                 }
-                //AddShopDialog.getInstance().show(supportFragmentManager, AddShopDialog.TAG)
-
             }
             true
         }

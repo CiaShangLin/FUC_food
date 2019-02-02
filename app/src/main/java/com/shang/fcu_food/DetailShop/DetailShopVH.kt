@@ -19,6 +19,7 @@ import com.shang.fcu_food.R
 import com.shang.fcu_food.Unit.AdmobUnit
 import com.shang.fcu_food.Unit.FileStorageUnit
 import com.shang.fcu_food.Unit.FirebaseUnits
+import kotlinx.android.synthetic.main.activity_maps.view.*
 import kotlinx.android.synthetic.main.cardview_detailshop.view.*
 import org.jetbrains.anko.toast
 import java.io.File
@@ -47,16 +48,14 @@ class DetailShopVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
         itemView.shopStarTv.text = String.format("%.1f", model.star)
         itemView.shopPhoneTv.text = model.phone
 
-
-        var path=Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
-            .toString()+"/${shop_tag}_${model.name}_${model.name}.jpg"
-
-        GlideApp.with(itemView.context)
+        /*GlideApp.with(itemView.context)
             .load(FirebaseUnits.storage_getImageRef(shop_tag,model.name,model.name))
+            .addListener(FileStorageUnit.listener)
             .error(R.drawable.ic_shop)
-            .into(itemView.shopPictureImg)
+            .into(itemView.shopPictureImg)*/
 
-
+        FileStorageUnit.ImageLoader(itemView.context,shop_tag,model.name,model.name
+            ,itemView.shopPictureImg,R.drawable.ic_shop)
 
         itemView.shopMapIg.setOnClickListener {
             itemView.context.toast("功能尚未實作")
