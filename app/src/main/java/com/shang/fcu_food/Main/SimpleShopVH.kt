@@ -11,6 +11,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.shang.fcu_food.Data.*
 import com.shang.fcu_food.DetailShop.DetailShopActivity
 import com.shang.fcu_food.R
+import com.shang.fcu_food.Unit.FileStorageUnit
 import com.shang.fcu_food.Unit.FirebaseUnits
 import kotlinx.android.synthetic.main.cardview_simpleshop.view.*
 
@@ -29,11 +30,23 @@ class SimpleShopVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
         }
         itemView.simpleShopName.text = model.name
         itemView.simpleShopStar.text = String.format("%.1f", model.star)
-        GlideApp.with(itemView.context)
-            .load(FirebaseUnits.storage_getImageRef(tag,model.name,model.name))
+
+        FileStorageUnit.ImageLoader(
+            itemView.context,
+            tag,
+            model.name,
+            model.name,
+            itemView.simpleShopImg,
+            R.drawable.ic_shop,
+            RequestOptions().fitCenter()
+        )
+
+        /*GlideApp.with(itemView.context)
+            .load(FirebaseUnits.storage_getImageRef(tag, model.name, model.name))
             .error(R.drawable.ic_shop)
             .apply(RequestOptions().fitCenter())
-            .into(itemView.simpleShopImg)
+            .into(itemView.simpleShopImg)*/
+
         itemView.setOnClickListener {
             goDetailShop_Activity(itemView.context, tag, position)
         }

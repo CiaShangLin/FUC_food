@@ -13,7 +13,9 @@ import com.shang.fcu_food.Dialog.ImageViewDialog
 import com.shang.fcu_food.Main.GlideApp
 import com.shang.fcu_food.R
 import com.shang.fcu_food.Unit.AdmobUnit
+import com.shang.fcu_food.Unit.FileStorageUnit
 import com.shang.fcu_food.Unit.FirebaseUnits
+import kotlinx.android.synthetic.main.activity_maps.view.*
 import kotlinx.android.synthetic.main.cardview_detailmenu.view.*
 
 class DetailMenuVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -41,12 +43,24 @@ class DetailMenuVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
         itemView.menuCommentRecyc.layoutManager = LinearLayoutManager(itemView.context)
         itemView.menuCommentRecyc.adapter = CommentAdapter(model.usercomment)
 
-        GlideApp.with(itemView.context)
-            .load(FirebaseUnits.storage_getImageRef(
-                DetailMenuActivity.shop_type_tag,DetailMenuActivity.shop_name,model.name))
+        /*GlideApp.with(itemView.context)
+            .load(
+                FirebaseUnits.storage_getImageRef(
+                    DetailMenuActivity.shop_type_tag, DetailMenuActivity.shop_name, model.name
+                )
+            )
             .apply(RequestOptions().fitCenter())
             .error(R.drawable.ic_breakfast)
-            .into(itemView.menuPictureImg)
+            .into(itemView.menuPictureImg) */
+        FileStorageUnit.ImageLoader(
+            itemView.context,
+            DetailMenuActivity.shop_type_tag,
+            DetailMenuActivity.shop_name,
+            model.name,
+            itemView.menuPictureImg,
+            R.drawable.ic_breakfast,
+            RequestOptions().fitCenter()
+        )
 
         itemView.menuPictureImg.setOnClickListener {
             ImageViewDialog.getInstance(

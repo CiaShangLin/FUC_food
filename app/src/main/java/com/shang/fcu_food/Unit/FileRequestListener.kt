@@ -1,4 +1,4 @@
-package com.shang.fcu_food
+package com.shang.fcu_food.Unit
 
 import android.graphics.drawable.Drawable
 import android.util.Log
@@ -11,6 +11,7 @@ import com.google.firebase.storage.StorageReference
 import java.io.File
 
 class FileRequestListener(var file: File) : RequestListener<Drawable> {
+    val TAG="FileRequestListener"
 
     override fun onLoadFailed(
         e: GlideException?,
@@ -28,15 +29,15 @@ class FileRequestListener(var file: File) : RequestListener<Drawable> {
         dataSource: DataSource?,
         isFirstResource: Boolean
     ): Boolean {
-        if(isFirstResource){
-            Log.d("TAG file",file.exists().toString()+" "+file.length().toString())
-            if(!file.exists())
+        if (isFirstResource) {
+
+            if (!file.exists())  //沒有檔案的話
                 file.createNewFile()
 
             (model as StorageReference).getFile(file).addOnSuccessListener {
-                Log.d("TAG file","addOnSuccessListener")
+                Log.d(TAG, "成功下載:"+it.storage.name)
             }.addOnFailureListener {
-                Log.d("TAG file","addOnFailureListener")
+                Log.d(TAG, "下載失敗:"+it.message)
             }
         }
 

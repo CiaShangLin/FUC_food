@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import com.bumptech.glide.request.RequestOptions
 import com.google.android.gms.ads.AdView
 import com.shang.fcu_food.Data.*
 import com.shang.fcu_food.DetailMenu.DetailMenuActivity
@@ -33,8 +34,8 @@ class DetailShopVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
     var shopMapIg = itemView.findViewById<ImageView>(R.id.shopMapIg)
     var shopMenu = itemView.findViewById<RecyclerView>(R.id.shopMenu)
     var shopPictureImg = itemView.findViewById<ImageView>(R.id.shopPictureImg)
-    var shopAdView=itemView.findViewById<AdView>(R.id.shopAdView)
-    var shopEditImg=itemView.findViewById<ImageView>(R.id.shopEditImg)
+    var shopAdView = itemView.findViewById<AdView>(R.id.shopAdView)
+    var shopEditImg = itemView.findViewById<ImageView>(R.id.shopEditImg)
 
     fun bind(shop_tag: String, model: Shop, activity: DetailShopActivity) {
         when (shop_tag) {
@@ -54,15 +55,17 @@ class DetailShopVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
             .error(R.drawable.ic_shop)
             .into(itemView.shopPictureImg)*/
 
-        FileStorageUnit.ImageLoader(itemView.context,shop_tag,model.name,model.name
-            ,itemView.shopPictureImg,R.drawable.ic_shop)
+        FileStorageUnit.ImageLoader(
+            itemView.context, shop_tag, model.name, model.name
+            , itemView.shopPictureImg, R.drawable.ic_shop, RequestOptions()
+        )
 
         itemView.shopMapIg.setOnClickListener {
             itemView.context.toast("功能尚未實作")
         }
 
         itemView.shopPictureImg.setOnClickListener {
-            ImageViewDialog.getInstance(shop_tag,model.name,model.name)
+            ImageViewDialog.getInstance(shop_tag, model.name, model.name)
                 .show(activity.supportFragmentManager, ImageViewDialog.TAG)
         }
 
@@ -76,7 +79,7 @@ class DetailShopVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
                 )
 
         itemView.shopEditImg.setOnClickListener {
-            EditShopDialog.getInstance(model,shop_tag).show(activity.supportFragmentManager,EditShopDialog.TAG)
+            EditShopDialog.getInstance(model, shop_tag).show(activity.supportFragmentManager, EditShopDialog.TAG)
         }
 
         AdmobUnit.getInstance(itemView.context)?.show(itemView.shopAdView)
@@ -95,7 +98,6 @@ class DetailShopVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
         }
         return itemClick
     }
-
 
 
 }

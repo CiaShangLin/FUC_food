@@ -74,11 +74,7 @@ class MainActivity : AppCompatActivity() {
         toolbar.setOnMenuItemClickListener {
             when(it.itemId){
                 R.id.menu_main_addShop->{
-                    var file=File(FileStorageUnit.getPath(this,"breakfast","御方香","御方香"))
-
-                    Log.d("TAG","${file.createNewFile()}")
-
-                    //AddShopDialog.getInstance().show(supportFragmentManager, AddShopDialog.TAG)
+                    AddShopDialog.getInstance().show(supportFragmentManager, AddShopDialog.TAG)
                 }
             }
             true
