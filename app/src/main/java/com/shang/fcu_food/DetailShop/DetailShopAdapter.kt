@@ -78,7 +78,7 @@ class DetailShopAdapter(
         holder.bind(shop_tag, model ,position, activity)
     }
 
-
+    //隨機推薦
     fun recommend(manager: LinearLayoutManager, position: Int) {
         manager.scrollToPositionWithOffset(position, 0)
     }

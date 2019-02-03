@@ -84,12 +84,10 @@ class DetailShopActivity : AppCompatActivity() {
         (adapter as FirebaseRecyclerAdapter<Shop, DetailShopVH>).stopListening()
     }
 
-    fun recommend() { //隨機推薦
+    fun recommend() {
         //var position=linearLayoutManager?.findFirstVisibleItemPosition().toInt()
         //var shop =(adapter as FirebaseRecyclerAdapter<Shop, DetailShopVH>)?.getItem(position)
-        position = (Math.random() * (detailShopRecyc.adapter)?.itemCount!!).toInt()
         //detailShopRecyc.smoothScrollToPosition(position)
-        linearLayoutManager.scrollToPositionWithOffset(position, 0)
     }
 }
 
