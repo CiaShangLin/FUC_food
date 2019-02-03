@@ -39,7 +39,7 @@ class DetailShopVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
     var shopAdView = itemView.findViewById<AdView>(R.id.shopAdView)
     var shopEditImg = itemView.findViewById<ImageView>(R.id.shopEditImg)
 
-    fun bind(shop_tag: String, model: Shop, position: Int,activity: DetailShopActivity) {
+    fun bind(shop_tag: String, model: Shop, position: Int, activity: DetailShopActivity) {
         when (shop_tag) {
             BreakfastShop.tag -> model as BreakfastShop
             DinnerShop.tag -> model as DinnerShop
@@ -59,14 +59,14 @@ class DetailShopVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         FileStorageUnit.ImageLoader(
             itemView.context, shop_tag, model.name, model.name
-            , itemView.shopPictureImg, R.drawable.ic_shop, RequestOptions()
+            , itemView.shopPictureImg, model.errorDrawable, RequestOptions()
         )
 
         itemView.shopMapIg.setOnClickListener {
-            activity.startActivity(Intent(activity,MapsActivity::class.java).apply {
-                this.action=activity.javaClass.simpleName
-                this.putExtra(DataConstant.SHOP_TYPE_TAG,shop_tag)
-                this.putExtra(DataConstant.POSITION,position)
+            activity.startActivity(Intent(activity, MapsActivity::class.java).apply {
+                this.action = activity.javaClass.simpleName
+                this.putExtra(DataConstant.SHOP_TYPE_TAG, shop_tag)
+                this.putExtra(DataConstant.POSITION, position)
             })
         }
 

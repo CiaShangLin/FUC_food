@@ -1,5 +1,7 @@
 package com.shang.fcu_food.Data
 
+import com.shang.fcu_food.R
+
 open class Shop {
     var id: Int = -1                 //根結點 EX:1
     var name: String = ""          //店名
@@ -10,6 +12,7 @@ open class Shop {
     var picture: String = "尚無提供"          //可能從name去storage讀取 可能是個LIST
     var menuPicture: String = ""     //菜單照片
     var menu: MutableList<Menu> = mutableListOf<Menu>()       //這個店的菜品
+    open var errorDrawable:Int= R.drawable.ic_shop
 
     constructor()
 
