@@ -54,18 +54,6 @@ class BreakfastFragment : Fragment() {
         breakfastShop.adapter = adapter
 
         //Log.d("TAG", snapshots.getSnapshot(position).key + " " + model.name + " " + model.address)
-        /*query.addListenerForSingleValueEvent(object :ValueEventListener{
-            override fun onCancelled(p0: DatabaseError) {
-
-            }
-
-            override fun onDataChange(p0: DataSnapshot) {
-                for(data in p0.children){
-                    var shop=data.getValue(BreakfastShop::class.java)
-                    Log.d("TAG A",shop?.id.toString()+" "+shop?.name)
-                }
-            }
-        })*/
     }
 
     override fun onStart() {

@@ -25,6 +25,7 @@ import kotlinx.android.synthetic.main.activity_maps.view.*
 import kotlinx.android.synthetic.main.cardview_detailshop.view.*
 import org.jetbrains.anko.toast
 import java.io.File
+import java.text.FieldPosition
 
 class DetailShopVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
@@ -38,7 +39,7 @@ class DetailShopVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
     var shopAdView = itemView.findViewById<AdView>(R.id.shopAdView)
     var shopEditImg = itemView.findViewById<ImageView>(R.id.shopEditImg)
 
-    fun bind(shop_tag: String, model: Shop, activity: DetailShopActivity) {
+    fun bind(shop_tag: String, model: Shop, position: Int,activity: DetailShopActivity) {
         when (shop_tag) {
             BreakfastShop.tag -> model as BreakfastShop
             DinnerShop.tag -> model as DinnerShop
@@ -64,6 +65,8 @@ class DetailShopVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
         itemView.shopMapIg.setOnClickListener {
             activity.startActivity(Intent(activity,MapsActivity::class.java).apply {
                 this.action=activity.javaClass.simpleName
+                this.putExtra(DataConstant.SHOP_TYPE_TAG,shop_tag)
+                this.putExtra(DataConstant.POSITION,position)
             })
         }
 

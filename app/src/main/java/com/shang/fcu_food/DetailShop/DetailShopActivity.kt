@@ -9,8 +9,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.firebase.ui.database.FirebaseRecyclerOptions
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.shang.fcu_food.Data.*
+import com.shang.fcu_food.DataBind
 import com.shang.fcu_food.R
 import kotlinx.android.synthetic.main.activity_detail_shop.*
 import org.jetbrains.anko.toast
@@ -39,7 +43,7 @@ class DetailShopActivity : AppCompatActivity() {
         detailShopTb.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.menu_detailshop_search -> toast("功能尚未實作")
-                R.id.menu_detailshop_recommend->recommend()
+                R.id.menu_detailshop_recommend -> recommend()
             }
             true
         }
@@ -49,6 +53,27 @@ class DetailShopActivity : AppCompatActivity() {
         }
 
         var query = FirebaseDatabase.getInstance().getReference().child(shop_tag)
+        query.addValueEventListener(object : ValueEventListener {
+            override fun onCancelled(p0: DatabaseError) {
+            }
+
+            override fun onDataChange(snapshot: DataSnapshot) {
+                var allShop = mutableListOf<Shop>()
+                for (data in snapshot.children) {
+                    var shop = data.getValue(Shop::class.java)
+                    allShop.add(shop!!)
+                    Log.d("TAG", shop?.id.toString() + " " + shop?.name)
+                }
+                when (shop_tag) {
+                    BreakfastShop.tag -> DataBind.allBreakfastShop = allShop as MutableList<BreakfastShop>
+                    DinnerShop.tag -> DataBind.allDinnerShop = allShop as MutableList<DinnerShop>
+                    SnackShop.tag -> DataBind.allSanckShop = allShop as MutableList<SnackShop>
+                    DrinkShop.tag -> DataBind.allDrinkShop = allShop as MutableList<DrinkShop>
+                }
+
+            }
+        })
+
         when (shop_tag) {
             BreakfastShop.tag ->
                 options = FirebaseRecyclerOptions.Builder<BreakfastShop>().setQuery(query, BreakfastShop::class.java)
@@ -68,11 +93,11 @@ class DetailShopActivity : AppCompatActivity() {
             }
 
             override fun onBindViewHolder(holder: DetailShopVH, position: Int, model: Shop) {
-                holder.bind(shop_tag, model,this@DetailShopActivity)
+                holder.bind(shop_tag, model, position,this@DetailShopActivity)
             }
         }
 
-        linearLayoutManager=LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        linearLayoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         detailShopRecyc.layoutManager = linearLayoutManager
         detailShopRecyc.adapter = adapter as FirebaseRecyclerAdapter<Shop, DetailShopVH>
 
@@ -98,12 +123,12 @@ class DetailShopActivity : AppCompatActivity() {
         (adapter as FirebaseRecyclerAdapter<Shop, DetailShopVH>).stopListening()
     }
 
-    fun recommend(){ //隨機推薦
+    fun recommend() { //隨機推薦
         //var position=linearLayoutManager?.findFirstVisibleItemPosition().toInt()
         //var shop =(adapter as FirebaseRecyclerAdapter<Shop, DetailShopVH>)?.getItem(position)
-        position=(Math.random()*(detailShopRecyc.adapter)?.itemCount!!).toInt()
+        position = (Math.random() * (detailShopRecyc.adapter)?.itemCount!!).toInt()
         //detailShopRecyc.smoothScrollToPosition(position)
-        linearLayoutManager.scrollToPositionWithOffset(position,0)
+        linearLayoutManager.scrollToPositionWithOffset(position, 0)
     }
 }
 

@@ -12,8 +12,12 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.shang.fcu_food.Data.BreakfastShop
+import com.shang.fcu_food.Data.DataConstant
+import com.shang.fcu_food.Data.Shop
 import com.shang.fcu_food.DetailShop.DetailShopActivity
 import kotlinx.android.synthetic.main.activity_maps.*
 import org.jetbrains.anko.alert
@@ -27,7 +31,11 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapCli
         val REQUEST_CODE_LATLNG: Int = 200
     }
 
+    val TAG:String="MapsActivity"
     private lateinit var mMap: GoogleMap
+    var position: Int = 0
+    var shop_tag: String = BreakfastShop.tag
+    var shopList= mutableListOf<Shop>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,13 +55,12 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapCli
         when (intent.action) {
 
             DetailShopActivity::class.java.simpleName -> {
-
+                initShowShop()
             }
             else -> {
                 initGetLocation()
             }
         }
-
 
         mMap.uiSettings.isZoomControlsEnabled = true
         mMap.uiSettings.isZoomGesturesEnabled = true
@@ -64,16 +71,27 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapCli
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(fcu, 17f))
 
 
-
     }
 
     //只為了取得經緯度
-    fun initGetLocation(){
+    fun initGetLocation() {
         mMap.setOnMapClickListener(this)
         Snackbar.make(con, "點擊地圖店家的大概位置", Snackbar.LENGTH_INDEFINITE)
             .setAction("確認", View.OnClickListener { })
             .setActionTextColor(Color.YELLOW)
             .show()
+    }
+
+    fun initShowShop() {
+        if (intent != null) {
+            position = intent.getIntExtra(DataConstant.POSITION, 0)
+            shop_tag = intent.getStringExtra(DataConstant.SHOP_TYPE_TAG)
+            Log.v(TAG,"position:$position shoptag:$shop_tag")
+        }
+        when(shop_tag){
+
+        }
+
     }
 
     override fun onMapClick(latlng: LatLng?) {
