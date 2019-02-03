@@ -16,6 +16,7 @@ import com.shang.fcu_food.DetailMenu.DetailMenuActivity
 import com.shang.fcu_food.Dialog.EditShopDialog
 import com.shang.fcu_food.Dialog.ImageViewDialog
 import com.shang.fcu_food.Main.GlideApp
+import com.shang.fcu_food.MapsActivity
 import com.shang.fcu_food.R
 import com.shang.fcu_food.Unit.AdmobUnit
 import com.shang.fcu_food.Unit.FileStorageUnit
@@ -61,7 +62,9 @@ class DetailShopVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
         )
 
         itemView.shopMapIg.setOnClickListener {
-            itemView.context.toast("功能尚未實作")
+            activity.startActivity(Intent(activity,MapsActivity::class.java).apply {
+                this.action=activity.javaClass.simpleName
+            })
         }
 
         itemView.shopPictureImg.setOnClickListener {

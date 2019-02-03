@@ -102,7 +102,10 @@ class EditShopDialog : DialogFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         editShopGoogleMapImg.setOnClickListener {
-            startActivityForResult(Intent(activity, MapsActivity::class.java), MapsActivity.REQUEST_CODE_LATLNG)
+            startActivityForResult(Intent(activity, MapsActivity::class.java).apply {
+                this.action=EditShopDialog::class.java.simpleName
+            }
+                , MapsActivity.REQUEST_CODE_LATLNG)
         }
 
         editShopMenuImg.setOnClickListener {

@@ -53,7 +53,7 @@ class DinnerFragment :Fragment() {
 
         dinnerShop.layoutManager = GridLayoutManager(activity?.baseContext, 2) as RecyclerView.LayoutManager?
         dinnerShop.adapter = adapter
-        Log.d("TAG",DinnerShop.tag)
+
     }
 
 

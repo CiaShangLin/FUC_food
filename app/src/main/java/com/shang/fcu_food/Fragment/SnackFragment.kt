@@ -53,7 +53,7 @@ class SnackFragment: Fragment() {
 
         snackShop.layoutManager = GridLayoutManager(activity?.baseContext, 2) as RecyclerView.LayoutManager?
         snackShop.adapter = adapter
-        Log.d("TAG",SnackShop.tag)
+
     }
 
 

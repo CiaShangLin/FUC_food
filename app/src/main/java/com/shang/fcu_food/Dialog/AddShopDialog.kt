@@ -113,7 +113,10 @@ class AddShopDialog : DialogFragment() {
         }
 
         addShopGoogleMapImg.setOnClickListener {
-            startActivityForResult(Intent(activity, MapsActivity::class.java), MapsActivity.REQUEST_CODE_LATLNG)
+            startActivityForResult(Intent(activity, MapsActivity::class.java).apply {
+                this.action=AddShopDialog::class.java.simpleName
+            }
+                , MapsActivity.REQUEST_CODE_LATLNG)
         }
     }
 
