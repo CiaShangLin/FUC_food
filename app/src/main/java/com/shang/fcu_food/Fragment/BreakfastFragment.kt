@@ -50,7 +50,7 @@ class BreakfastFragment : Fragment() {
 
         adapter=SimpleShopAdapter(options as FirebaseRecyclerOptions<Shop>,BreakfastShop.tag)
 
-        breakfastShop.layoutManager = GridLayoutManager(activity?.baseContext, 2) as RecyclerView.LayoutManager?
+        breakfastShop.layoutManager = GridLayoutManager(activity?.baseContext, 2)
         breakfastShop.adapter = adapter
 
         //Log.d("TAG", snapshots.getSnapshot(position).key + " " + model.name + " " + model.address)

@@ -1,5 +1,6 @@
 package com.shang.fcu_food.DetailShop
 
+import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
@@ -13,8 +14,9 @@ import com.shang.fcu_food.R
 
 class DetailShopAdapter(
     var shop_tag: String, var activity: DetailShopActivity,
-    options: FirebaseRecyclerOptions<Any>
-) : FirebaseRecyclerAdapter<Any, DetailShopVH>(options) {
+    options: FirebaseRecyclerOptions<Shop>
+) : FirebaseRecyclerAdapter<Shop, DetailShopVH>(options) {
+
 
     companion object {
         private fun getQuery(shop_tag: String): DatabaseReference {
@@ -39,7 +41,7 @@ class DetailShopAdapter(
             return query
         }
 
-        internal fun getOptions(shop_tag: String): FirebaseRecyclerOptions<Any> {
+        internal fun getOptions(shop_tag: String): FirebaseRecyclerOptions<Shop> {
             var query = getQuery(shop_tag)
             var options: Any? = null
             when (shop_tag) {
@@ -56,7 +58,7 @@ class DetailShopAdapter(
                     options = FirebaseRecyclerOptions.Builder<DrinkShop>()
                         .setQuery(query, DrinkShop::class.java).build()
             }
-            return options as FirebaseRecyclerOptions<Any>
+            return options as FirebaseRecyclerOptions<Shop>
         }
     }
 
@@ -68,13 +70,17 @@ class DetailShopAdapter(
         return DetailShopVH(view)
     }
 
-    override fun onBindViewHolder(holder: DetailShopVH, position: Int, model: Any) {
+    /*override fun onBindViewHolder(holder: DetailShopVH, position: Int, model: Any) {
         holder.bind(shop_tag, model as Shop, position, activity)
+    }*/
+
+    override fun onBindViewHolder(holder: DetailShopVH, position: Int, model: Shop) {
+        holder.bind(shop_tag, model ,position, activity)
     }
 
 
-    fun recommend(detailShopRecyc: RecyclerView, position: Int) {
-        detailShopRecyc.smoothScrollToPosition(0)
+    fun recommend(manager: LinearLayoutManager, position: Int) {
+        manager.scrollToPositionWithOffset(position, 0)
     }
 
 

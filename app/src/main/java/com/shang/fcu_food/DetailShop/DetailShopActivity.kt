@@ -43,7 +43,10 @@ class DetailShopActivity : AppCompatActivity() {
         detailShopTb.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.menu_detailshop_search -> toast("功能尚未實作")
-                R.id.menu_detailshop_recommend -> recommend()
+                R.id.menu_detailshop_recommend -> {
+                    position = (Math.random() * (detailShopRecyc.adapter)?.itemCount!!).toInt()
+                    adapter.recommend(linearLayoutManager,position)
+                }
             }
             true
         }
@@ -52,56 +55,12 @@ class DetailShopActivity : AppCompatActivity() {
             finish()
         }
 
-        /*var query = FirebaseDatabase.getInstance().getReference().child(shop_tag)
-        query.addValueEventListener(object : ValueEventListener {
-            override fun onCancelled(p0: DatabaseError) {
-            }
-
-            override fun onDataChange(snapshot: DataSnapshot) {
-                var allShop = mutableListOf<Shop>()
-                for (data in snapshot.children) {
-                    var shop = data.getValue(Shop::class.java)
-                    allShop.add(shop!!)
-                    Log.d("TAG", shop?.id.toString() + " " + shop?.name)
-                }
-                when (shop_tag) {
-                    BreakfastShop.tag -> DataBind.allBreakfastShop = allShop as MutableList<BreakfastShop>
-                    DinnerShop.tag -> DataBind.allDinnerShop = allShop as MutableList<DinnerShop>
-                    SnackShop.tag -> DataBind.allSanckShop = allShop as MutableList<SnackShop>
-                    DrinkShop.tag -> DataBind.allDrinkShop = allShop as MutableList<DrinkShop>
-                }
-
-            }
-        })
-
-        when (shop_tag) {
-            BreakfastShop.tag ->
-                options = FirebaseRecyclerOptions.Builder<BreakfastShop>()
-                    .setQuery(query, BreakfastShop::class.java).build()
-            DinnerShop.tag ->
-                options = FirebaseRecyclerOptions.Builder<DinnerShop>().setQuery(query, DinnerShop::class.java).build()
-            SnackShop.tag ->
-                options = FirebaseRecyclerOptions.Builder<SnackShop>().setQuery(query, SnackShop::class.java).build()
-            DrinkShop.tag ->
-                options = FirebaseRecyclerOptions.Builder<DrinkShop>().setQuery(query, DrinkShop::class.java).build()
-        }
-
-        adapter = object : FirebaseRecyclerAdapter<Shop, DetailShopVH>(options as FirebaseRecyclerOptions<Shop>) {
-            override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DetailShopVH {
-                var view = LayoutInflater.from(parent.context).inflate(R.layout.cardview_detailshop, parent, false)
-                return DetailShopVH(view)
-            }
-
-            override fun onBindViewHolder(holder: DetailShopVH, position: Int, model: Shop) {
-                holder.bind(shop_tag, model, position,this@DetailShopActivity)
-            }
-        }*/
         adapter=DetailShopAdapter(shop_tag,this,DetailShopAdapter.getOptions(shop_tag))
-
+        detailShopRecyc.adapter = adapter
 
         linearLayoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         detailShopRecyc.layoutManager = linearLayoutManager
-        detailShopRecyc.adapter = adapter
+
 
         var pagerSnapHelper = PagerSnapHelper()
         pagerSnapHelper.attachToRecyclerView(detailShopRecyc)
