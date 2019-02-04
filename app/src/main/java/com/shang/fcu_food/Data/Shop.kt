@@ -1,6 +1,8 @@
 package com.shang.fcu_food.Data
 
+import android.util.Log
 import com.firebase.ui.database.FirebaseRecyclerOptions
+import com.google.android.gms.maps.model.LatLng
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.shang.fcu_food.R
@@ -37,8 +39,17 @@ open class Shop {
         return null
     }
 
-    open fun getOption():FirebaseRecyclerOptions<Shop>?{
+    open fun getOption(): FirebaseRecyclerOptions<Shop>? {
         return null
+    }
+
+    fun getLatLng(): LatLng {
+        //如果地址為空的話 他的size會是1
+        var latlng: List<String> = address.split(",")
+        if (latlng.size==2) {
+            return LatLng(latlng?.get(0)!!.toDouble(), latlng.get(1).toDouble())
+        }
+        return LatLng(0.0, 0.0)
     }
 
 }

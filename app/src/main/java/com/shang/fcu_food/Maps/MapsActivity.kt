@@ -1,14 +1,9 @@
-package com.shang.fcu_food
+package com.shang.fcu_food.Maps
 
 import android.annotation.SuppressLint
-import android.app.PendingIntent
-import android.content.Context
 import android.content.Intent
 import android.graphics.Color
-import android.location.LocationManager
-import android.net.Uri
 import android.os.Bundle
-import android.provider.Settings
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
@@ -17,17 +12,19 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.CameraPosition
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.shang.fcu_food.Data.*
+import com.shang.fcu_food.DataBind
 import com.shang.fcu_food.DetailShop.DetailShopActivity
+import com.shang.fcu_food.R
+import com.shang.fcu_food.Unit.GpsUnit
 import kotlinx.android.synthetic.main.activity_maps.*
 import org.jetbrains.anko.alert
 import org.jetbrains.anko.noButton
 import org.jetbrains.anko.toast
 import org.jetbrains.anko.yesButton
-import java.lang.Exception
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapClickListener {
 
@@ -49,8 +46,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapCli
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
-
-
     }
 
     @SuppressLint("MissingPermission")
@@ -105,6 +100,15 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapCli
             DinnerShop.tag -> shopList = DataBind.allDinnerShop as MutableList<Shop>
             SnackShop.tag -> shopList = DataBind.allSanckShop as MutableList<Shop>
             DrinkShop.tag -> shopList = DataBind.allDrinkShop as MutableList<Shop>
+        }
+        inputMarker()
+    }
+
+    fun inputMarker(){
+        for(shop in shopList){
+            var markerOptions=
+                MarkerOptions().position(shop.getLatLng()).title(shop.name)
+            mMap.addMarker(markerOptions)
         }
     }
 

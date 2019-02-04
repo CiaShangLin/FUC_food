@@ -17,7 +17,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.shang.fcu_food.Data.*
 import com.shang.fcu_food.FirebaseCallback
 import com.shang.fcu_food.Main.GlideApp
-import com.shang.fcu_food.MapsActivity
+import com.shang.fcu_food.Maps.MapsActivity
 import com.shang.fcu_food.R
 import com.shang.fcu_food.Unit.FirebaseUnits
 import com.shang.fcu_food.Unit.PickPictureUnit
