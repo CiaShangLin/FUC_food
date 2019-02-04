@@ -7,13 +7,9 @@ import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.shang.fcu_food.Data.Shop
 import com.shang.fcu_food.R
 
-class SimpleShopAdapter(options: FirebaseRecyclerOptions<Shop>, tag: String) :
+class SimpleShopAdapter(options: FirebaseRecyclerOptions<Shop>, var shop_tag: String) :
     FirebaseRecyclerAdapter<Shop, SimpleShopVH>(options) {
-    lateinit var tag: String
 
-    init {
-        this.tag = tag
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, position: Int): SimpleShopVH {
         var view = LayoutInflater.from(parent.context).inflate(R.layout.cardview_simpleshop, parent, false)
@@ -21,7 +17,7 @@ class SimpleShopAdapter(options: FirebaseRecyclerOptions<Shop>, tag: String) :
     }
 
     override fun onBindViewHolder(holder: SimpleShopVH, position: Int, model: Shop) {
-        holder.bind(position, model, tag)
+        holder.bind(position, model, shop_tag)
     }
 
 }

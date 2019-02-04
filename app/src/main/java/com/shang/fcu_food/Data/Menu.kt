@@ -1,5 +1,7 @@
 package com.shang.fcu_food.Data
 
+import com.shang.fcu_food.R
+
 class Menu {
     var id:Int=-1
     var name: String = ""       //菜名
@@ -15,7 +17,6 @@ class Menu {
         }
 
     var price: Int = 0           //價格
-    var picture: String = ""     //照片 可能是一個List
     var usercomment: MutableList<UserComment> = mutableListOf<UserComment>()
 
     constructor()
