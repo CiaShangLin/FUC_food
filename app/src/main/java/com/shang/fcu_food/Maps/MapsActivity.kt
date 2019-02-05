@@ -26,7 +26,7 @@ import org.jetbrains.anko.noButton
 import org.jetbrains.anko.toast
 import org.jetbrains.anko.yesButton
 
-class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapClickListener {
+class MapsActivity : AppCompatActivity(), OnMapReadyCallback{
 
     companion object {
         val LATLNG = "LATLNG"
@@ -37,7 +37,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapCli
     private lateinit var mMap: GoogleMap
     var position: Int = 0
     var shop_tag: String = BreakfastShop.tag
-    var shopList = mutableListOf<Shop>()
+    var shopList: MutableList<Shop> = mutableListOf<Shop>()
+    lateinit var map: Map
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,81 +53,21 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapCli
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
 
+        map = Map(mMap, this@MapsActivity)
+
         when (intent.action) {
-            DetailShopActivity::class.java.simpleName -> {
-                initShowShop()
-            }
-            else -> {
-                initGetLocation()
-            }
+            DetailShopActivity::class.java.simpleName -> map.initShowShop(intent)
+            else -> map.initGetLocation(con)
         }
 
-        mMap.uiSettings.isZoomControlsEnabled = true
-        mMap.uiSettings.isZoomGesturesEnabled = true
-        mMap.isMyLocationEnabled = true
-
-        // Add a marker in Sydney and move the camera
         val fcu = LatLng(24.178827, 120.646460)
         mMap.addMarker(MarkerOptions().position(fcu).title("逢甲"))
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(fcu, 17f))
 
-
-        mMap.setOnMyLocationButtonClickListener(object : GoogleMap.OnMyLocationButtonClickListener {
-            override fun onMyLocationButtonClick(): Boolean {
-                GpsUnit.OpenGps(this@MapsActivity)
-                return false
-            }
-        })
-
+        mMap.setOnMyLocationButtonClickListener(map)
+        map.mapUiSetting()
     }
 
-    //只為了取得經緯度
-    fun initGetLocation() {
-        mMap.setOnMapClickListener(this)
-        Snackbar.make(con, "點擊地圖店家的大概位置", Snackbar.LENGTH_INDEFINITE)
-            .setAction("確認", View.OnClickListener { })
-            .setActionTextColor(Color.YELLOW)
-            .show()
-    }
-
-    fun initShowShop() {
-        if (intent != null) {
-            position = intent.getIntExtra(DataConstant.POSITION, 0)
-            shop_tag = intent.getStringExtra(DataConstant.SHOP_TYPE_TAG)
-            Log.v(TAG, "position:$position shoptag:$shop_tag")
-        }
-        when (shop_tag) {
-            BreakfastShop.tag -> shopList = DataBind.allBreakfastShop as MutableList<Shop>
-            DinnerShop.tag -> shopList = DataBind.allDinnerShop as MutableList<Shop>
-            SnackShop.tag -> shopList = DataBind.allSanckShop as MutableList<Shop>
-            DrinkShop.tag -> shopList = DataBind.allDrinkShop as MutableList<Shop>
-        }
-        inputMarker()
-    }
-
-    fun inputMarker(){
-        for(shop in shopList){
-            var markerOptions=
-                MarkerOptions().position(shop.getLatLng()).title(shop.name)
-            mMap.addMarker(markerOptions)
-        }
-    }
-
-
-    override fun onMapClick(latlng: LatLng?) {
-        alert("確定是這裡嗎?\n$latlng.", "確認地點") {
-            yesButton {
-                var intent = Intent().apply {
-                    this.putExtra(LATLNG, latlng)
-                }
-                setResult(REQUEST_CODE_LATLNG, intent)
-                finish()
-            }
-            noButton {
-
-            }
-        }.show()
-    }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
