@@ -28,6 +28,7 @@ class DetailShopActivity : AppCompatActivity() {
     lateinit var linearLayoutManager: LinearLayoutManager
     lateinit var adapter: DetailShopAdapter
     lateinit var options: Any
+    lateinit var shop:Shop
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,6 +38,12 @@ class DetailShopActivity : AppCompatActivity() {
         if (intent.extras != null) {
             position = intent.extras.getInt(DataConstant.POSITION)
             shop_tag = intent.extras.getString(DataConstant.SHOP_TYPE_TAG)
+            when (shop_tag) {
+                BreakfastShop.tag -> shop=BreakfastShop()
+                DinnerShop.tag -> shop=DinnerShop()
+                SnackShop.tag -> shop=SnackShop()
+                DrinkShop.tag -> shop=DrinkShop()
+            }
         }
 
         detailShopTb.inflateMenu(R.menu.menu_detailshop)
@@ -55,7 +62,7 @@ class DetailShopActivity : AppCompatActivity() {
             finish()
         }
 
-        adapter=DetailShopAdapter(shop_tag,this,DetailShopAdapter.getOptions(shop_tag))
+        adapter=DetailShopAdapter(shop_tag,this,shop.getOption()!!)
         detailShopRecyc.adapter = adapter
 
         linearLayoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
