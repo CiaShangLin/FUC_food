@@ -1,26 +1,29 @@
 package com.shang.fcu_food.Maps
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.Canvas
 import android.graphics.Color
 import android.support.design.widget.Snackbar
+import android.support.v4.content.ContextCompat
 import android.util.Log
 import android.view.View
 import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.model.BitmapDescriptorFactory
-import com.google.android.gms.maps.model.CameraPosition
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.model.*
 import com.shang.fcu_food.Data.*
 import com.shang.fcu_food.DataBind
+import com.shang.fcu_food.R
 import com.shang.fcu_food.Unit.GpsUnit
 import kotlinx.android.synthetic.main.activity_maps.*
 import org.jetbrains.anko.alert
+import org.jetbrains.anko.dimen
 import org.jetbrains.anko.noButton
 import org.jetbrains.anko.yesButton
 
-class Map(var mMap: GoogleMap, var activity: MapsActivity) :
-    GoogleMap.OnMapClickListener,GoogleMap.OnMyLocationButtonClickListener {
+class MapListener(var mMap: GoogleMap, var activity: MapsActivity) :
+    GoogleMap.OnMapClickListener, GoogleMap.OnMyLocationButtonClickListener {
 
 
     val TAG: String = "MapsActivity"
@@ -57,25 +60,31 @@ class Map(var mMap: GoogleMap, var activity: MapsActivity) :
         inputMarker(shopList)
     }
 
-    private fun inputMarker(shopList:MutableList<Shop>) { //載入店家marker
-        Log.d("TAG S","${shopList.get(0) is BreakfastShop}")
-        Log.d("TAG S","${shopList.get(0) is DinnerShop}")
-        Log.d("TAG S","${shopList.get(0) is DrinkShop}")
-        Log.d("TAG S","${shopList.get(0) is SnackShop}")
-
+    private fun inputMarker(shopList: MutableList<Shop>) { //載入店家marker
         for (shop in shopList) {
             var markerOptions =
-                MarkerOptions().position(shop.getLatLng()).title(shop.name)
+                MarkerOptions().position(shop.getLatLng())
+                    .title(shop.name)
+                    .icon(BitmapDescriptorFactory.fromBitmap(vectorToBitmap(activity,R.drawable.ic_shop)))
             mMap.addMarker(markerOptions)
         }
     }
 
-    private fun vectorToBitmap() {
+    //向量圖轉成Bitmap
+    private fun vectorToBitmap(context: Context, drawableId: Int): Bitmap {
+        var drawable = ContextCompat.getDrawable(context, drawableId)
+        var bitmap =
+            Bitmap.createBitmap(drawable?.intrinsicWidth!!, drawable?.intrinsicHeight!!, Bitmap.Config.ARGB_8888)
+        var canvas = Canvas(bitmap)
+        drawable.setBounds(0, 0, context.dimen(R.dimen.cardview_small_icon_width)
+            , context.dimen(R.dimen.cardview_small_icon_height))
+        drawable.draw(canvas)
 
+        return bitmap
     }
 
     @SuppressLint("MissingPermission")
-    fun mapUiSetting(){
+    fun mapUiSetting() {
         mMap.uiSettings.isZoomControlsEnabled = true
         mMap.uiSettings.isZoomGesturesEnabled = true
         mMap.isMyLocationEnabled = true
@@ -95,9 +104,7 @@ class Map(var mMap: GoogleMap, var activity: MapsActivity) :
                 activity.setResult(MapsActivity.REQUEST_CODE_LATLNG, intent)
                 activity.finish()
             }
-            noButton {
-
-            }
+            noButton {}
         }.show()
     }
 
