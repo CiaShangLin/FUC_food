@@ -10,6 +10,7 @@ class BreakfastShop : Shop() {
         var allBreakfastShop: MutableList<BreakfastShop> = mutableListOf<BreakfastShop>()
     }
 
+    override var menu: MutableList<Menu> = mutableListOf<BreakfastMenu>().toMutableList()
     override var errorDrawable: Int = R.drawable.ic_shop
 
     override fun getQuery(): DatabaseReference? {
@@ -19,8 +20,8 @@ class BreakfastShop : Shop() {
 
             override fun onDataChange(snapshot: DataSnapshot) {
                 allBreakfastShop.clear()
-                for(data in snapshot.children){
-                    var breakfastShop=data.getValue(BreakfastShop::class.java)
+                for (data in snapshot.children) {
+                    var breakfastShop = data.getValue(BreakfastShop::class.java)
                     allBreakfastShop.add(breakfastShop!!)
                 }
             }

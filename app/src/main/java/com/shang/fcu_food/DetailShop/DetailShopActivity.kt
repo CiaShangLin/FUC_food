@@ -28,7 +28,7 @@ class DetailShopActivity : AppCompatActivity() {
     lateinit var linearLayoutManager: LinearLayoutManager
     lateinit var adapter: DetailShopAdapter
     lateinit var options: Any
-    lateinit var shop:Shop
+    lateinit var shop: Shop
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,10 +39,10 @@ class DetailShopActivity : AppCompatActivity() {
             position = intent.extras.getInt(DataConstant.POSITION)
             shop_tag = intent.extras.getString(DataConstant.SHOP_TYPE_TAG)
             when (shop_tag) {
-                BreakfastShop.tag -> shop=BreakfastShop()
-                DinnerShop.tag -> shop=DinnerShop()
-                SnackShop.tag -> shop=SnackShop()
-                DrinkShop.tag -> shop=DrinkShop()
+                BreakfastShop.tag -> shop = BreakfastShop()
+                DinnerShop.tag -> shop = DinnerShop()
+                SnackShop.tag -> shop = SnackShop()
+                DrinkShop.tag -> shop = DrinkShop()
             }
         }
 
@@ -52,7 +52,7 @@ class DetailShopActivity : AppCompatActivity() {
                 R.id.menu_detailshop_search -> toast("功能尚未實作")
                 R.id.menu_detailshop_recommend -> {
                     position = (Math.random() * (detailShopRecyc.adapter)?.itemCount!!).toInt()
-                    adapter.recommend(linearLayoutManager,position)
+                    adapter.recommend(linearLayoutManager, position)
                 }
             }
             true
@@ -62,7 +62,7 @@ class DetailShopActivity : AppCompatActivity() {
             finish()
         }
 
-        adapter=DetailShopAdapter(shop_tag,this,shop.getOption()!!)
+        adapter = DetailShopAdapter(shop_tag, this, shop.getOption()!!)
         detailShopRecyc.adapter = adapter
 
         linearLayoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)

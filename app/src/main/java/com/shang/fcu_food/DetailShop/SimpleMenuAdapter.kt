@@ -2,12 +2,14 @@ package com.shang.fcu_food.DetailShop
 
 import android.os.Bundle
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.request.RequestOptions
+import com.shang.fcu_food.Data.BreakfastMenu
 import com.shang.fcu_food.Data.DataConstant
 import com.shang.fcu_food.Data.Menu
 import com.shang.fcu_food.Main.GlideApp
@@ -58,11 +60,6 @@ class SimpleMenuVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
             onItemClick.onItemClick(bundle)
         }
 
-        /*GlideApp.with(itemView.context)
-            .load(FirebaseUnits.storage_getImageRef(shop_tag, shop_name, model.name))
-            .apply(RequestOptions().circleCrop())
-            .error(R.drawable.ic_breakfast)
-            .into(itemView.simpleMenuImg)*/
 
         FileStorageUnit.ImageLoader(
             itemView.context,
@@ -70,9 +67,10 @@ class SimpleMenuVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
             shop_name,
             model.name,
             itemView.simpleMenuImg,
-            R.drawable.ic_breakfast,
+            model.errorDrawable,
             RequestOptions().circleCrop()
         )
+
     }
 
 }

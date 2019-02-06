@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -39,16 +40,11 @@ class DetailShopVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
             SnackShop.tag -> model as SnackShop
             DrinkShop.tag -> model as DrinkShop
         }
+
         itemView.shopNameTv.text = model.name
         itemView.shopOpenTv.text = model.time
         itemView.shopStarTv.text = String.format("%.1f", model.star)
         itemView.shopPhoneTv.text = model.phone
-
-        /*GlideApp.with(itemView.context)
-            .load(FirebaseUnits.storage_getImageRef(shop_tag,model.name,model.name))
-            .addListener(FileStorageUnit.listener)
-            .error(R.drawable.ic_shop)
-            .into(itemView.shopPictureImg)*/
 
         FileStorageUnit.ImageLoader(
             itemView.context, shop_tag, model.name, model.name
