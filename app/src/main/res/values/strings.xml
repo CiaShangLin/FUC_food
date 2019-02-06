@@ -69,4 +69,9 @@
     </string>
 
     <string name="title_activity_maps">Map</string>
+
+    <string name="ShopName">店名</string>
+    <string name="OpenTime">營業時間</string>
+    <string name="Star">星數</string>
+    <string name="Phone">聯絡電話</string>
 </resources>

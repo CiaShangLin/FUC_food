@@ -66,8 +66,14 @@ class MapListener(var mMap: GoogleMap, var activity: MapsActivity) :
                 MarkerOptions().position(shop.getLatLng())
                     .title(shop.name)
                     .icon(BitmapDescriptorFactory.fromBitmap(vectorToBitmap(activity,R.drawable.ic_shop)))
+                    .snippet(shop.id.toString())
             mMap.addMarker(markerOptions)
         }
+        info(shopList)
+    }
+
+    private fun info(shopList: MutableList<Shop>){
+        mMap.setInfoWindowAdapter(MyInfoWindowAdapter(activity,shopList))
     }
 
     //向量圖轉成Bitmap
@@ -76,8 +82,8 @@ class MapListener(var mMap: GoogleMap, var activity: MapsActivity) :
         var bitmap =
             Bitmap.createBitmap(drawable?.intrinsicWidth!!, drawable?.intrinsicHeight!!, Bitmap.Config.ARGB_8888)
         var canvas = Canvas(bitmap)
-        drawable.setBounds(0, 0, context.dimen(R.dimen.cardview_small_icon_width)
-            , context.dimen(R.dimen.cardview_small_icon_height))
+        drawable.setBounds(0, 0, context.dimen(R.dimen.googlemap_icon_width)
+            , context.dimen(R.dimen.googlemap_icon_height))
         drawable.draw(canvas)
 
         return bitmap

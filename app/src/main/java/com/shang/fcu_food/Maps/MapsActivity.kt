@@ -53,6 +53,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback{
 
         mMap.setOnMyLocationButtonClickListener(mMapListener)
         mMapListener.mapUiSetting()
+
     }
 
 
