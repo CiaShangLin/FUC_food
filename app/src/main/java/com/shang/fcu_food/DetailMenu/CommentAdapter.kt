@@ -66,6 +66,8 @@ class CommentVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
         when (user?.picture) {
             "1" -> return R.drawable.ic_cat
             "2" -> return R.drawable.ic_dog
+            "3" -> return R.drawable.ic_boy
+            "4" -> return R.drawable.ic_girl
         }
         return R.drawable.ic_user
     }

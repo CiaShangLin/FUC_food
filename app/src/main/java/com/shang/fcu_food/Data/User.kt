@@ -41,7 +41,7 @@ class User {
     }
 
     fun randomPicture():String{
-        var p=(Math.random()*2).toInt()+1
+        var p=(Math.random()*4).toInt()+1
         return p.toString()
     }
 }

@@ -74,4 +74,11 @@
     <string name="OpenTime">營業時間</string>
     <string name="Star">星數</string>
     <string name="Phone">聯絡電話</string>
+
+    <string-array name="userSetting_Picture">
+        <item>貓</item>
+        <item>狗</item>
+        <item>男生</item>
+        <item>女生</item>
+    </string-array>
 </resources>
