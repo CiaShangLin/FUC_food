@@ -7,9 +7,13 @@ import android.os.Handler
 import android.os.Message
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.IdpResponse
 import com.google.firebase.auth.FirebaseAuth
+import com.shang.fcu_food.Data.BreakfastMenu
+import com.shang.fcu_food.Data.BreakfastShop
+import com.shang.fcu_food.Data.Menu
 import com.shang.fcu_food.Data.User
 import com.shang.fcu_food.Dialog.AddShopDialog
 import com.shang.fcu_food.Dialog.NetworkDialog
@@ -63,7 +67,7 @@ class MainActivity : AppCompatActivity() {
         toolbar.setOnMenuItemClickListener {
             when(it.itemId){
                 R.id.menu_main_addShop->{
-                    AddShopDialog.getInstance().show(supportFragmentManager, AddShopDialog.TAG)
+                   AddShopDialog.getInstance().show(supportFragmentManager, AddShopDialog.TAG)
                 }
             }
             true

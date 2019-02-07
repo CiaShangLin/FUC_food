@@ -10,7 +10,7 @@ class BreakfastShop : Shop() {
         var allBreakfastShop: MutableList<BreakfastShop> = mutableListOf<BreakfastShop>()
     }
 
-    override var menu: MutableList<Menu> = mutableListOf<BreakfastMenu>().toMutableList()
+    override var menu: MutableList<Menu> = mutableListOf()
     override var errorDrawable: Int = R.drawable.ic_shop
 
     override fun getQuery(): DatabaseReference? {

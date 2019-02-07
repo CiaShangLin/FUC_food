@@ -34,6 +34,7 @@ class DetailShopVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
     var shopEditImg = itemView.findViewById<ImageView>(R.id.shopEditImg)
 
     fun bind(shop_tag: String, model: Shop, position: Int, activity: DetailShopActivity) {
+
         when (shop_tag) {
             BreakfastShop.tag -> model as BreakfastShop
             DinnerShop.tag -> model as DinnerShop
