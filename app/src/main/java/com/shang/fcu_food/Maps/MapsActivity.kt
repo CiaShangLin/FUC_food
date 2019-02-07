@@ -47,9 +47,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback{
             else -> mMapListener.initGetLocation(con)
         }
 
-        val fcu = LatLng(24.178827, 120.646460)
-        mMap.addMarker(MarkerOptions().position(fcu).title("逢甲"))
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(fcu, 17f))
+       // val fcu = LatLng(24.178827, 120.646460)
+       // mMap.addMarker(MarkerOptions().position(fcu).title("逢甲"))
+        //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(fcu, 17f))
 
         mMap.setOnMyLocationButtonClickListener(mMapListener)
         mMapListener.mapUiSetting()

@@ -10,13 +10,12 @@ import android.support.design.widget.Snackbar
 import android.support.v4.content.ContextCompat
 import android.util.Log
 import android.view.View
+import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.*
 import com.shang.fcu_food.Data.*
-import com.shang.fcu_food.DataBind
 import com.shang.fcu_food.R
 import com.shang.fcu_food.Unit.GpsUnit
-import kotlinx.android.synthetic.main.activity_maps.*
 import org.jetbrains.anko.alert
 import org.jetbrains.anko.dimen
 import org.jetbrains.anko.noButton
@@ -57,23 +56,33 @@ class MapListener(var mMap: GoogleMap, var activity: MapsActivity) :
             SnackShop.tag -> shopList = SnackShop.allSnackShop.toMutableList()
         }
 
-        inputMarker(shopList)
+        inputMarker(shopList,position)
     }
 
-    private fun inputMarker(shopList: MutableList<Shop>) { //載入店家marker
+    private fun inputMarker(shopList: MutableList<Shop>,position: Int) { //載入店家marker
+        var markerList= mutableListOf<Marker>()
         for (shop in shopList) {
             var markerOptions =
                 MarkerOptions().position(shop.getLatLng())
                     .title(shop.name)
                     .icon(BitmapDescriptorFactory.fromBitmap(vectorToBitmap(activity,R.drawable.ic_shop)))
                     .snippet(shop.id.toString())
-            mMap.addMarker(markerOptions)
+            var marker=mMap.addMarker(markerOptions)
+            markerList.add(marker)
         }
-        info(shopList)
+
+        setInfoWindowAdapter(shopList)
+        moveToPositionMarker(markerList.get(position))
     }
 
-    private fun info(shopList: MutableList<Shop>){
+    private fun setInfoWindowAdapter(shopList: MutableList<Shop>){
         mMap.setInfoWindowAdapter(MyInfoWindowAdapter(activity,shopList))
+    }
+
+    private fun moveToPositionMarker(marker:Marker){
+        //理論上ID跟position會是一樣的
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(marker.position,17f))
+        marker.showInfoWindow()
     }
 
     //向量圖轉成Bitmap
@@ -82,8 +91,7 @@ class MapListener(var mMap: GoogleMap, var activity: MapsActivity) :
         var bitmap =
             Bitmap.createBitmap(drawable?.intrinsicWidth!!, drawable?.intrinsicHeight!!, Bitmap.Config.ARGB_8888)
         var canvas = Canvas(bitmap)
-        drawable.setBounds(0, 0, context.dimen(R.dimen.googlemap_icon_width)
-            , context.dimen(R.dimen.googlemap_icon_height))
+        drawable.setBounds(0, 0,canvas.width, canvas.height)
         drawable.draw(canvas)
 
         return bitmap
