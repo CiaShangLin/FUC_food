@@ -75,7 +75,7 @@
     <string name="Star">星數</string>
     <string name="Phone">聯絡電話</string>
 
-    <string-array name="userSetting_Picture">
+    <string-array name="userSetting_Title">
         <item>貓</item>
         <item>狗</item>
         <item>男生</item>

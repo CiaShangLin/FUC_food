@@ -1,16 +1,13 @@
 package com.shang.fcu_food.Dialog
 
+import android.content.Context
 import android.os.Bundle
 import android.support.design.widget.TextInputLayout
 import android.support.v4.app.DialogFragment
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.Button
-import android.widget.RadioGroup
-import android.widget.Spinner
+import android.widget.*
 import com.shang.fcu_food.Data.User
 import com.shang.fcu_food.R
 import com.shang.fcu_food.Unit.FirebaseUnits
@@ -41,9 +38,10 @@ class UserSettingDialog : DialogFragment() {
         var userSettingGenderRg = view.findViewById<RadioGroup>(R.id.userSettingGenderRg)
         var userSettingUpdateBt = view.findViewById<Button>(R.id.userSettingUpdateBt)
         var userSettingPictureSp = view.findViewById<Spinner>(R.id.userSettingPictureSp).apply {
-            this.adapter = ArrayAdapter.createFromResource(
-                context, R.array.userSetting_Picture, android.R.layout.simple_spinner_dropdown_item
-            )
+             /*this.adapter = ArrayAdapter.createFromResource(
+                 context, R.array.userSetting_Title, android.R.layout.simple_spinner_dropdown_item
+             )*/
+            this.adapter=MySpinnerAdapter(context)
         }
 
         return view
@@ -94,3 +92,4 @@ class UserSettingDialog : DialogFragment() {
     }
 
 }
+
