@@ -38,9 +38,6 @@ class UserSettingDialog : DialogFragment() {
         var userSettingGenderRg = view.findViewById<RadioGroup>(R.id.userSettingGenderRg)
         var userSettingUpdateBt = view.findViewById<Button>(R.id.userSettingUpdateBt)
         var userSettingPictureSp = view.findViewById<Spinner>(R.id.userSettingPictureSp).apply {
-             /*this.adapter = ArrayAdapter.createFromResource(
-                 context, R.array.userSetting_Title, android.R.layout.simple_spinner_dropdown_item
-             )*/
             this.adapter=MySpinnerAdapter(context)
         }
 
@@ -51,9 +48,7 @@ class UserSettingDialog : DialogFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         var user = FirebaseUnits.auth_uidToUser()
-        defaultName(user!!.name)
-        defaultGender(user!!.sex)
-        defaultPicture(user!!.picture)
+        defaultSetting(user!!)
 
         userSettingUpdateBt.setOnClickListener {
             var name = userSettingNameTvEt.editText?.text.toString()
@@ -72,23 +67,56 @@ class UserSettingDialog : DialogFragment() {
 
     }
 
-    //預設名字
-    fun defaultName(name: String?) {
-        userSettingNameTvEt.editText?.setText(name.toString())
-    }
+    fun defaultSetting(user:User){
+        //預設名字
+        userSettingNameTvEt.editText?.setText(user.name)
 
-    //預設性別
-    fun defaultGender(gender: String) {
-        if (gender.equals("man")) {
+        //預設性別
+        if (user.sex.equals("man")) {
             userSettingManRb.isChecked = true
         } else {
             userSettingWomanRb.isChecked = true
         }
+
+        //原先頭像
+        userSettingPictureSp.setSelection(user.picture.toInt() - 1)
     }
 
-    fun defaultPicture(picture: String) {
-        //原先頭像
-        userSettingPictureSp.setSelection(picture.toInt() - 1)
+
+    inner class MySpinnerAdapter(var context: Context) : BaseAdapter() {
+
+        var title: Array<String> = arrayOf()
+        var image: Array<Int> = arrayOf()
+
+        init {
+            title = context.resources.getStringArray(R.array.userSetting_Title)
+            image = arrayOf<Int>(R.drawable.ic_cat, R.drawable.ic_dog, R.drawable.ic_boy, R.drawable.ic_girl)
+        }
+
+        override fun getItem(p0: Int): Any {
+            return p0
+        }
+
+        override fun getItemId(p0: Int): Long {
+            return 0
+        }
+
+        override fun getCount(): Int {
+            return title.size
+        }
+
+
+        override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
+            var view = LayoutInflater.from(context).inflate(R.layout.spinner_user_setting, parent, false)
+            var name = view.findViewById<TextView>(R.id.userSettingNameSpTv)
+            var picture = view.findViewById<ImageView>(R.id.userSettingPictureSpImg)
+
+            name.setText(title[position])
+            picture.setImageResource(image[position])
+            return view
+        }
+
+
     }
 
 }

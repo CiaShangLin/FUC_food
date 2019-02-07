@@ -40,12 +40,6 @@ class SimpleShopVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
             RequestOptions().fitCenter()
         )
 
-        /*GlideApp.with(itemView.context)
-            .load(FirebaseUnits.storage_getImageRef(shop_tag, model.name, model.name))
-            .error(R.drawable.ic_shop)
-            .apply(RequestOptions().fitCenter())
-            .into(itemView.simpleShopImg)*/
-
         itemView.setOnClickListener {
             goDetailShop_Activity(itemView.context, shop_tag, position)
         }
