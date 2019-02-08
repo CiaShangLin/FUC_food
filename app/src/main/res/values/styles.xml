@@ -8,9 +8,14 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="dialog_theme" >
+    <style name="dialog_theme">
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowIsFloating">false</item>
+        <item name="android:windowFullscreen">false</item>
+        <item name="android:windowAnimationStyle">@style/DialogAnimation</item>
+    </style>
+
+    <style name="DialogAnimation" parent="android:Animation">
         <item name="android:windowEnterAnimation">@android:anim/fade_in</item>
         <item name="android:windowExitAnimation">@android:anim/fade_out</item>
     </style>

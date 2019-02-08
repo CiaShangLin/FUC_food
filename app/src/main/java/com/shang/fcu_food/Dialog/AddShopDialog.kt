@@ -144,4 +144,7 @@ class AddShopDialog : DialogFragment() {
     }
 
 
+    override fun onResume() {
+        super.onResume()
+    }
 }
