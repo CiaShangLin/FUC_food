@@ -69,7 +69,6 @@ class DetailShopActivity : AppCompatActivity() {
         linearLayoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         detailShopRecyc.layoutManager = linearLayoutManager
 
-
         var pagerSnapHelper = PagerSnapHelper()
         pagerSnapHelper.attachToRecyclerView(detailShopRecyc)
 
@@ -85,6 +84,12 @@ class DetailShopActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         (adapter as FirebaseRecyclerAdapter<Shop, DetailShopVH>).startListening()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        //確保切回來的是之前按的position
+        position = linearLayoutManager?.findFirstVisibleItemPosition().toInt()
     }
 
     override fun onDestroy() {

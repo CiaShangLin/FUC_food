@@ -20,6 +20,7 @@ import com.shang.fcu_food.R
 import com.shang.fcu_food.Unit.AdmobUnit
 import com.shang.fcu_food.Unit.FileStorageUnit
 import kotlinx.android.synthetic.main.cardview_detailshop.view.*
+import org.jetbrains.anko.toast
 
 class DetailShopVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
@@ -76,7 +77,6 @@ class DetailShopVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
         itemView.shopEditImg.setOnClickListener {
             EditShopDialog.getInstance(model, shop_tag).show(activity.supportFragmentManager, EditShopDialog.TAG)
         }
-
 
     }
 
