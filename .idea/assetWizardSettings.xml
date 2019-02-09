@@ -88,8 +88,8 @@
                         <option name="values">
                           <map>
                             <entry key="assetSourceType" value="FILE" />
-                            <entry key="outputName" value="ic_edit" />
-                            <entry key="sourceFile" value="C:\Users\Shang\Downloads\document.svg" />
+                            <entry key="outputName" value="ic_error" />
+                            <entry key="sourceFile" value="C:\Users\SERS\Downloads\error.svg" />
                           </map>
                         </option>
                       </PersistentState>

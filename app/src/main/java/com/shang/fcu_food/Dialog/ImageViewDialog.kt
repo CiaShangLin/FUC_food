@@ -57,6 +57,7 @@ class ImageViewDialog : DialogFragment() {
 
         GlideApp.with(context!!)
             .load(FirebaseUnits.storage_getImageRef(shop_tag!!, shop_name!!, image_name!!))
+            .error(R.drawable.ic_error)
             .into(dialogImg)
     }
 

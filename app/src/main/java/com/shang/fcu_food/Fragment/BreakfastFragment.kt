@@ -15,6 +15,8 @@ import com.shang.fcu_food.Data.Shop
 import com.shang.fcu_food.Main.SimpleShopAdapter
 import com.shang.fcu_food.Main.SimpleShopVH
 import com.shang.fcu_food.R
+import com.shang.fcu_food.Unit.AdmobUnit
+import kotlinx.android.synthetic.main.fragment_breakfast.*
 
 class BreakfastFragment : Fragment() {
 
