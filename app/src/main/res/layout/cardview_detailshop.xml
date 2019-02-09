@@ -40,7 +40,7 @@
                 android:layout_marginStart="8dp" android:textSize="20dp"
                 android:textColor="@android:color/black"
                 app:layout_constraintBottom_toBottomOf="@+id/imageView8" style="@style/cardview_small_textview"
-                android:ellipsize="end"/>
+                android:ellipsize="end" android:maxLines="1"/>
         <TextView
                 android:text="@string/Phone"
                 android:layout_width="wrap_content"
