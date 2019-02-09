@@ -48,8 +48,9 @@ class AddCommentDialog : DialogFragment() {
 
         var commentRatingBar = view.findViewById<RatingBar>(R.id.comment_RatingBar)
         var commentInputTextLayout = view.findViewById<TextInputLayout>(R.id.textInputLayout)
-        var adView=view.findViewById<AdView>(R.id.addcomment_adview)
-        AdmobUnit.getInstance(context!!)?.show(adView)
+        var addcomment_adview=view.findViewById<AdView>(R.id.addcomment_adview)
+
+        AdmobUnit.getInstance(context!!)?.show(addcomment_adview)
 
         var alertDialog = AlertDialog.Builder(context)
             .setTitle(R.string.CommentDialog_Title)

@@ -30,7 +30,6 @@ class DetailShopVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
     var shopMapIg = itemView.findViewById<ImageView>(R.id.shopMapIg)
     var shopMenu = itemView.findViewById<RecyclerView>(R.id.shopMenu)
     var shopPictureImg = itemView.findViewById<ImageView>(R.id.shopPictureImg)
-    var shopAdView = itemView.findViewById<AdView>(R.id.shopAdView)
     var shopEditImg = itemView.findViewById<ImageView>(R.id.shopEditImg)
 
     fun bind(shop_tag: String, model: Shop, position: Int, activity: DetailShopActivity) {
@@ -78,7 +77,7 @@ class DetailShopVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
             EditShopDialog.getInstance(model, shop_tag).show(activity.supportFragmentManager, EditShopDialog.TAG)
         }
 
-        AdmobUnit.getInstance(itemView.context)?.show(itemView.shopAdView)
+
     }
 
     //傳遞shop的id和type 還有position

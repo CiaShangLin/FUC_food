@@ -16,6 +16,7 @@ import com.google.firebase.database.ValueEventListener
 import com.shang.fcu_food.Data.*
 import com.shang.fcu_food.DataBind
 import com.shang.fcu_food.R
+import com.shang.fcu_food.Unit.AdmobUnit
 import kotlinx.android.synthetic.main.activity_detail_shop.*
 import org.jetbrains.anko.toast
 
@@ -72,6 +73,7 @@ class DetailShopActivity : AppCompatActivity() {
         var pagerSnapHelper = PagerSnapHelper()
         pagerSnapHelper.attachToRecyclerView(detailShopRecyc)
 
+        AdmobUnit.getInstance(this)?.show(detailShopAdView)
     }
 
     override fun onResume() {

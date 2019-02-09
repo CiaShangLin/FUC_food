@@ -8,14 +8,26 @@
         tools:context=".DetailMenu.DetailMenuActivity">
 
 
+    <com.google.android.gms.ads.AdView
+            xmlns:ads="http://schemas.android.com/apk/res-auto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            ads:adSize="BANNER"
+            ads:adUnitId="@string/admob_id_test"
+            android:id="@+id/detailMenuAdView"
+            android:layout_marginStart="8dp" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginEnd="8dp" app:layout_constraintEnd_toEndOf="parent" android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/detailMenuRecyc"/>
+
     <android.support.v7.widget.RecyclerView
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" android:id="@+id/detailMenuRecyc"
+            android:id="@+id/detailMenuRecyc"
             tools:listitem="@layout/cardview_detailmenu" app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintTop_toBottomOf="@+id/detailMenuTb"/>
+            app:layout_constraintTop_toBottomOf="@+id/detailMenuTb"
+            app:layout_constraintBottom_toBottomOf="parent"/>
     <android.support.v7.widget.Toolbar
             android:layout_width="0dp"
             android:layout_height="wrap_content"

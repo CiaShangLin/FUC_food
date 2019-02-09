@@ -13,6 +13,7 @@ import com.shang.fcu_food.Data.DataConstant
 import com.shang.fcu_food.Data.Menu
 import com.shang.fcu_food.Dialog.AddMenuDialog
 import com.shang.fcu_food.R
+import com.shang.fcu_food.Unit.AdmobUnit
 import kotlinx.android.synthetic.main.activity_detail_menu.*
 
 class DetailMenuActivity : AppCompatActivity() {
@@ -76,6 +77,8 @@ class DetailMenuActivity : AppCompatActivity() {
 
         var pagerSnapHelper = PagerSnapHelper()
         pagerSnapHelper.attachToRecyclerView(detailMenuRecyc)
+
+        AdmobUnit.getInstance(this)?.show(detailMenuAdView)
     }
 
     override fun onResume() {

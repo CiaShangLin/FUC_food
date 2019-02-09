@@ -101,6 +101,7 @@
                 android:id="@+id/shopMapIg"
                 app:layout_constraintTop_toBottomOf="@+id/shopPictureImg"
                 app:layout_constraintStart_toStartOf="@+id/shopPictureImg" android:layout_marginTop="4dp"/>
+
         <android.support.v7.widget.RecyclerView
                 android:layout_width="0dp"
                 android:layout_height="0dp"
@@ -110,16 +111,6 @@
                 app:layout_constraintBottom_toBottomOf="parent" android:id="@+id/shopMenu"
                 app:layout_constraintHorizontal_bias="0.0"
                 tools:listitem="@layout/cardview_simplemenu" android:layout_marginTop="8dp"/>
-        <com.google.android.gms.ads.AdView
-                xmlns:ads="http://schemas.android.com/apk/res-auto"
-                android:layout_width="36dp"
-                android:layout_height="36dp"
-                android:id="@+id/shopAdView"
-                ads:adSize="BANNER"
-                ads:adUnitId="@string/admob_id_test"
-                android:layout_marginTop="4dp"
-                ads:layout_constraintTop_toBottomOf="@+id/shopPictureImg"
-                ads:layout_constraintStart_toEndOf="@+id/shopMapIg" android:layout_marginStart="8dp"/>
         <ImageView
                 android:layout_width="36dp"
                 android:layout_height="36dp" app:srcCompat="@drawable/ic_shop_menu"

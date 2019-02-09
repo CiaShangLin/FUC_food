@@ -43,15 +43,6 @@ class DetailMenuVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
         itemView.menuCommentRecyc.layoutManager = LinearLayoutManager(itemView.context)
         itemView.menuCommentRecyc.adapter = CommentAdapter(model.usercomment)
 
-        /*GlideApp.with(itemView.context)
-            .load(
-                FirebaseUnits.storage_getImageRef(
-                    DetailMenuActivity.shop_type_tag, DetailMenuActivity.shop_name, model.name
-                )
-            )
-            .apply(RequestOptions().fitCenter())
-            .error(R.drawable.ic_breakfast)
-            .into(itemView.menuPictureImg) */
         FileStorageUnit.ImageLoader(
             itemView.context,
             DetailMenuActivity.shop_type_tag,
@@ -70,6 +61,6 @@ class DetailMenuVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
             ).show(activity.supportFragmentManager, ImageViewDialog.TAG)
         }
 
-        AdmobUnit.getInstance(itemView.context)?.show(itemView.menuAdView)
+        //AdmobUnit.getInstance(itemView.context)?.show(itemView.menuAdView)
     }
 }

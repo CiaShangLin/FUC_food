@@ -10,8 +10,8 @@ import com.shang.fcu_food.R
 
 class AdmobUnit {
     companion object {
-        var admobUnit: AdmobUnit? = null
-        var mInterstitialAd: InterstitialAd? = null
+        private var admobUnit: AdmobUnit? = null
+        private var mInterstitialAd: InterstitialAd? = null
         fun getInstance(context: Context): AdmobUnit? {
             if (admobUnit == null) {
                 admobUnit = AdmobUnit()
@@ -24,7 +24,7 @@ class AdmobUnit {
         }
     }
 
-    //cardview_detailshop cardview_detailmenu dialog_addcomment
+    //插頁 activity_detail_shop activity_detail_menu dialog_addcomment
     fun show(adView: AdView) {
         val adRequest = AdRequest.Builder().build()
         adView.loadAd(adRequest)
