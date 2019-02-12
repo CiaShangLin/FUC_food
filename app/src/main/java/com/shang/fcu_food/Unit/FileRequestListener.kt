@@ -30,14 +30,13 @@ class FileRequestListener(var file: File) : RequestListener<Drawable> {
         isFirstResource: Boolean
     ): Boolean {
         if (isFirstResource) {
-
-            if (!file.exists())  //沒有檔案的話
+            if (!file.exists()){    //沒有檔案的話
                 file.createNewFile()
-
-            (model as StorageReference).getFile(file).addOnSuccessListener {
-                Log.d(TAG, "成功下載:"+it.storage.name)
-            }.addOnFailureListener {
-                Log.d(TAG, "下載失敗:"+it.message)
+                (model as StorageReference).getFile(file).addOnSuccessListener {
+                    Log.d(TAG, "成功下載:"+it.storage.name)
+                }.addOnFailureListener {
+                    Log.d(TAG, "下載失敗:"+it.message)
+                }
             }
         }
 

@@ -2,6 +2,7 @@ package com.shang.fcu_food.Unit
 
 import android.content.Context
 import android.graphics.drawable.Drawable
+import android.support.v4.widget.CircularProgressDrawable
 import android.util.Log
 import android.widget.ImageView
 import com.bumptech.glide.load.DataSource
@@ -10,6 +11,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.Target
 import com.google.firebase.storage.StorageReference
 import com.shang.fcu_food.Main.GlideApp
+import com.shang.fcu_food.R
 import java.io.File
 
 class FileStorageUnit {
@@ -42,19 +44,25 @@ class FileStorageUnit {
         ) {
             var file_path = getPath(context, shop_tag, shop_name, name)
             var file = File(file_path)
+            var imageRef = FirebaseUnits.storage_getImageRef(shop_tag, shop_name, name)
             Log.d(TAG, "filePath:$file_path")
             Log.d(TAG, "fileExists:${file.exists()}")
 
-            if (file.exists()) {  //有檔案直接讀檔
-                GlideApp.with(context).load(file).error(errorDrawable).apply(options).into(target)
-            } else {
-                GlideApp.with(context)
-                    .load(FirebaseUnits.storage_getImageRef(shop_tag, shop_name, name))
-                    .addListener(FileRequestListener(file))
-                    .error(errorDrawable)
-                    .apply(options)
-                    .into(target)
-            }
+            GlideApp.with(context)
+                .load(if (file.exists()) file else imageRef)
+                .error(errorDrawable)
+                .addListener(FileRequestListener(file))
+                .placeholder(getLoadingDrawable(context))
+                .apply(options)
+                .into(target)
+        }
+
+        private fun getLoadingDrawable(context: Context): CircularProgressDrawable {
+            var circularProgressDrawable = CircularProgressDrawable(context)
+            circularProgressDrawable.strokeWidth = 5f
+            circularProgressDrawable.centerRadius = 60f
+            circularProgressDrawable.start()
+            return circularProgressDrawable
         }
 
     }
