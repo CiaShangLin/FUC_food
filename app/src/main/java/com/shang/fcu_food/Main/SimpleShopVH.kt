@@ -9,6 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.request.RequestOptions
 import com.shang.fcu_food.Data.*
+import com.shang.fcu_food.Data.shop.*
 import com.shang.fcu_food.DetailShop.DetailShopActivity
 import com.shang.fcu_food.R
 import com.shang.fcu_food.Unit.FileStorageUnit

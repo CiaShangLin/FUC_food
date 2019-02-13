@@ -1,8 +1,9 @@
-package com.shang.fcu_food.Data
+package com.shang.fcu_food.Data.shop
 
 import com.firebase.ui.database.FirebaseRecyclerOptions
-import com.firebase.ui.database.SnapshotParser
 import com.google.firebase.database.*
+import com.shang.fcu_food.Data.menu.BreakfastMenu
+import com.shang.fcu_food.Data.menu.Menu
 import com.shang.fcu_food.R
 
 class BreakfastShop : Shop() {

@@ -1,6 +1,8 @@
 package com.shang.fcu_food
 
 import com.shang.fcu_food.Data.*
+import com.shang.fcu_food.Data.menu.Menu
+import com.shang.fcu_food.Data.shop.*
 import org.junit.Assert
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue

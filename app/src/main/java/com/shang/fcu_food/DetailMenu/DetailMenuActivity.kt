@@ -4,12 +4,13 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.PagerSnapHelper
-import android.view.LayoutInflater
-import android.view.ViewGroup
 import com.firebase.ui.database.FirebaseRecyclerAdapter
-import com.firebase.ui.database.FirebaseRecyclerOptions
-import com.google.firebase.database.FirebaseDatabase
 import com.shang.fcu_food.Data.*
+import com.shang.fcu_food.Data.menu.*
+import com.shang.fcu_food.Data.shop.BreakfastShop
+import com.shang.fcu_food.Data.shop.DinnerShop
+import com.shang.fcu_food.Data.shop.DrinkShop
+import com.shang.fcu_food.Data.shop.SnackShop
 import com.shang.fcu_food.Dialog.AddMenuDialog
 import com.shang.fcu_food.R
 import com.shang.fcu_food.Unit.AdmobUnit

@@ -10,13 +10,11 @@ import android.view.ViewGroup
 import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.google.firebase.database.FirebaseDatabase
-import com.shang.fcu_food.Data.BreakfastShop
-import com.shang.fcu_food.Data.Shop
+import com.shang.fcu_food.Data.shop.BreakfastShop
+import com.shang.fcu_food.Data.shop.Shop
 import com.shang.fcu_food.Main.SimpleShopAdapter
 import com.shang.fcu_food.Main.SimpleShopVH
 import com.shang.fcu_food.R
-import com.shang.fcu_food.Unit.AdmobUnit
-import kotlinx.android.synthetic.main.fragment_breakfast.*
 
 class BreakfastFragment : Fragment() {
 
@@ -50,7 +48,8 @@ class BreakfastFragment : Fragment() {
             .setQuery(query, BreakfastShop::class.java)
             .build()
 
-        adapter=SimpleShopAdapter(options as FirebaseRecyclerOptions<Shop>,BreakfastShop.tag)
+        adapter=SimpleShopAdapter(options as FirebaseRecyclerOptions<Shop>,
+            BreakfastShop.tag)
 
         breakfastShop.layoutManager = GridLayoutManager(activity?.baseContext, 2)
         breakfastShop.adapter = adapter

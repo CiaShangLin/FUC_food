@@ -14,10 +14,10 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.*
 import com.shang.fcu_food.Data.*
+import com.shang.fcu_food.Data.shop.*
 import com.shang.fcu_food.R
 import com.shang.fcu_food.Unit.GpsUnit
 import org.jetbrains.anko.alert
-import org.jetbrains.anko.dimen
 import org.jetbrains.anko.noButton
 import org.jetbrains.anko.yesButton
 
@@ -59,7 +59,7 @@ class MapListener(var mMap: GoogleMap, var activity: MapsActivity) :
         inputMarker(shopList,position)
     }
 
-    private fun inputMarker(shopList: MutableList<Shop>,position: Int) { //載入店家marker
+    private fun inputMarker(shopList: MutableList<Shop>, position: Int) { //載入店家marker
         var markerList= mutableListOf<Marker>()
         for (shop in shopList) {
             var markerOptions =

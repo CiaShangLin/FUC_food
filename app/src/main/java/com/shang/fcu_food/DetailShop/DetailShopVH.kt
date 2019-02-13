@@ -5,22 +5,19 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.request.RequestOptions
-import com.google.android.gms.ads.AdView
 import com.shang.fcu_food.Data.*
+import com.shang.fcu_food.Data.shop.*
 import com.shang.fcu_food.DetailMenu.DetailMenuActivity
 import com.shang.fcu_food.Dialog.EditShopDialog
 import com.shang.fcu_food.Dialog.ImageViewDialog
 import com.shang.fcu_food.Maps.MapsActivity
 import com.shang.fcu_food.R
-import com.shang.fcu_food.Unit.AdmobUnit
 import com.shang.fcu_food.Unit.FileStorageUnit
 import kotlinx.android.synthetic.main.cardview_detailshop.view.*
-import org.jetbrains.anko.toast
 
 class DetailShopVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
 

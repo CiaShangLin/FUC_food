@@ -15,6 +15,7 @@ import android.widget.ImageView
 import android.widget.Spinner
 import com.google.android.gms.maps.model.LatLng
 import com.shang.fcu_food.Data.*
+import com.shang.fcu_food.Data.shop.*
 import com.shang.fcu_food.FirebaseCallback
 import com.shang.fcu_food.Main.GlideApp
 import com.shang.fcu_food.Maps.MapsActivity
@@ -31,7 +32,7 @@ class EditShopDialog : DialogFragment() {
 
         var editShopDialog: EditShopDialog? = null
 
-        fun getInstance(shop: Shop,shop_tag:String): EditShopDialog {
+        fun getInstance(shop: Shop, shop_tag:String): EditShopDialog {
             if (editShopDialog == null) {
                 editShopDialog = EditShopDialog()
             }
@@ -39,7 +40,7 @@ class EditShopDialog : DialogFragment() {
             return editShopDialog as EditShopDialog
         }
 
-        private fun getBundle(shop: Shop,shop_tag:String): Bundle = Bundle().apply {
+        private fun getBundle(shop: Shop, shop_tag:String): Bundle = Bundle().apply {
             this.putString("name", shop.name)
             this.putString("time", shop.time)
             this.putString("phone", shop.phone)

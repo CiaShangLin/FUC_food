@@ -1,4 +1,4 @@
-package com.shang.fcu_food.Data
+package com.shang.fcu_food.Data.shop
 
 import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.google.firebase.database.*
@@ -12,15 +12,15 @@ class DrinkShop : Shop() {
 
     override var errorDrawable: Int = R.drawable.ic_shop
     override fun getQuery(): Query {
-        var query = FirebaseDatabase.getInstance().getReference().child(DrinkShop.tag)
+        var query = FirebaseDatabase.getInstance().getReference().child(tag)
         query.addValueEventListener(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {}
 
             override fun onDataChange(snapshot: DataSnapshot) {
-                DrinkShop.allDrinkShop.clear()
+                allDrinkShop.clear()
                 for (data in snapshot.children) {
                     var drinkShop = data.getValue(DrinkShop::class.java)
-                    DrinkShop.allDrinkShop.add(drinkShop!!)
+                    allDrinkShop.add(drinkShop!!)
                 }
             }
         })

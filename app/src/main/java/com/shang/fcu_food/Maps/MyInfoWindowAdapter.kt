@@ -7,7 +7,7 @@ import android.view.View
 import android.widget.TextView
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.Marker
-import com.shang.fcu_food.Data.Shop
+import com.shang.fcu_food.Data.shop.Shop
 import com.shang.fcu_food.R
 
 class MyInfoWindowAdapter(var context: Context,var shopList: MutableList<Shop>) : GoogleMap.InfoWindowAdapter {

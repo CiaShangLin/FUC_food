@@ -2,22 +2,18 @@ package com.shang.fcu_food
 
 import android.content.Intent
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.v4.view.ViewPager
 import android.support.v7.widget.Toolbar
 import com.flyco.tablayout.SlidingTabLayout
-import com.google.firebase.FirebaseApp
-import com.shang.fcu_food.Data.BreakfastShop
+import com.shang.fcu_food.Data.shop.BreakfastShop
 import com.shang.fcu_food.Data.DataConstant
 import com.shang.fcu_food.DetailShop.DetailShopActivity
 import com.shang.fcu_food.Main.MainActivity
 import com.shang.fcu_food.Main.ViewPagerAdapter
 import com.shang.fcu_food.Unit.PermissionUnit
 import com.shang.fcu_food.Unit.PickPictureUnit
-import junit.framework.Assert.assertEquals
-import org.junit.After
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
@@ -25,13 +21,6 @@ import org.junit.runner.RunWith
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.shadows.ShadowAlertDialog
-import org.robolectric.shadows.ShadowDialog
-import org.robolectric.RuntimeEnvironment
-import org.robolectric.Shadows
-import org.robolectric.Shadows.shadowOf
-import org.robolectric.shadows.ShadowApplication
-
-
 
 
 @RunWith(RobolectricTestRunner::class)
@@ -118,7 +107,7 @@ class RoboTest {
 
         detailShopActivity.intent=Intent().apply{
             this.putExtras(Bundle().apply {
-                this.putString(DataConstant.SHOP_TYPE_TAG,BreakfastShop.tag)
+                this.putString(DataConstant.SHOP_TYPE_TAG, BreakfastShop.tag)
                 this.putInt(DataConstant.POSITION,0)
             })
         }

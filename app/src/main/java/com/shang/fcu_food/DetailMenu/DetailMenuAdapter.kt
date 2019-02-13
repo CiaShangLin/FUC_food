@@ -1,11 +1,10 @@
 package com.shang.fcu_food.DetailMenu
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.firebase.ui.database.FirebaseRecyclerOptions
-import com.shang.fcu_food.Data.*
+import com.shang.fcu_food.Data.menu.Menu
 import com.shang.fcu_food.R
 
 class DetailMenuAdapter(var activity: DetailMenuActivity, options: FirebaseRecyclerOptions<Menu>) :
@@ -17,11 +16,6 @@ class DetailMenuAdapter(var activity: DetailMenuActivity, options: FirebaseRecyc
     }
 
     override fun onBindViewHolder(holder: DetailMenuVH, position: Int, model: Menu) {
-        Log.d("TAG M", (model is Menu).toString())
-        Log.d("TAG B", (model is BreakfastMenu).toString())
-        Log.d("TAG Di", (model is DinnerMenu).toString())
-        Log.d("TAG Dr", (model is DrinkMenu).toString())
-        Log.d("TAG B", (model is SnackMenu).toString())
         holder.bind(position, model,activity)
     }
 

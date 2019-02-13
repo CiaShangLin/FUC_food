@@ -1,26 +1,25 @@
-package com.shang.fcu_food.Data
+package com.shang.fcu_food.Data.shop
 
 import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.google.firebase.database.*
 import com.shang.fcu_food.R
 
-class SnackShop : Shop() {
+class DinnerShop : Shop(){
     companion object {
-        val tag:String="snack"
-        var allSnackShop: MutableList<SnackShop> = mutableListOf<SnackShop>()
+        val tag:String="dinner"
+        var allDinnerShop: MutableList<DinnerShop> = mutableListOf<DinnerShop>()
     }
     override var errorDrawable:Int= R.drawable.ic_shop
-
     override fun getQuery(): Query {
-        var query = FirebaseDatabase.getInstance().getReference().child(SnackShop.tag)
+        var query = FirebaseDatabase.getInstance().getReference().child(tag)
         query.addValueEventListener(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {}
 
             override fun onDataChange(snapshot: DataSnapshot) {
-                SnackShop.allSnackShop.clear()
-                for (data in snapshot.children) {
-                    var snackShop = data.getValue(SnackShop::class.java)
-                    SnackShop.allSnackShop.add(snackShop!!)
+                allDinnerShop.clear()
+                for(data in snapshot.children){
+                    var dinnerShop=data.getValue(DinnerShop::class.java)
+                    allDinnerShop.add(dinnerShop!!)
                 }
             }
         })
@@ -28,9 +27,8 @@ class SnackShop : Shop() {
     }
 
     override fun getOption(): FirebaseRecyclerOptions<Shop> {
-        var options = FirebaseRecyclerOptions.Builder<SnackShop>()
-            .setQuery(getQuery()!!, SnackShop::class.java).build()
+        var options = FirebaseRecyclerOptions.Builder<DinnerShop>()
+            .setQuery(getQuery()!!, DinnerShop::class.java).build()
         return options as FirebaseRecyclerOptions<Shop>
     }
-
 }

@@ -1,12 +1,11 @@
-package com.shang.fcu_food.Data
+package com.shang.fcu_food.Data.menu
 
-import android.util.Log
 import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.Query
 import com.shang.fcu_food.R
 
-class DrinkMenu: Menu() {
+class DinnerMenu : Menu() {
     override var errorDrawable:Int= R.drawable.ic_boy
 
     override fun getQuery(shop_tag: String, shop_id: String): Query? {
@@ -17,8 +16,8 @@ class DrinkMenu: Menu() {
     }
 
     override fun getOption(shop_tag: String, shop_id: String): FirebaseRecyclerOptions<Menu>? {
-        var options = FirebaseRecyclerOptions.Builder<DrinkMenu>()
-            .setQuery(getQuery(shop_tag,shop_id)!!, DrinkMenu::class.java).build()
+        var options = FirebaseRecyclerOptions.Builder<DinnerMenu>()
+            .setQuery(getQuery(shop_tag,shop_id)!!, DinnerMenu::class.java).build()
         return options as FirebaseRecyclerOptions<Menu>
     }
 }

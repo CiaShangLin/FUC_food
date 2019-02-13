@@ -2,20 +2,16 @@ package com.shang.fcu_food.DetailShop
 
 import android.os.Bundle
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.request.RequestOptions
-import com.shang.fcu_food.Data.BreakfastMenu
 import com.shang.fcu_food.Data.DataConstant
-import com.shang.fcu_food.Data.Menu
-import com.shang.fcu_food.Main.GlideApp
+import com.shang.fcu_food.Data.menu.Menu
 import com.shang.fcu_food.R
 import com.shang.fcu_food.Unit.FileStorageUnit
-import com.shang.fcu_food.Unit.FirebaseUnits
 import kotlinx.android.synthetic.main.cardview_simplemenu.view.*
 
 class SimpleMenuAdapter(
