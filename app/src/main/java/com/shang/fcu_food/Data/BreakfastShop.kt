@@ -1,6 +1,7 @@
 package com.shang.fcu_food.Data
 
 import com.firebase.ui.database.FirebaseRecyclerOptions
+import com.firebase.ui.database.SnapshotParser
 import com.google.firebase.database.*
 import com.shang.fcu_food.R
 
@@ -10,11 +11,13 @@ class BreakfastShop : Shop() {
         var allBreakfastShop: MutableList<BreakfastShop> = mutableListOf<BreakfastShop>()
     }
 
-    override var menu: MutableList<Menu> = mutableListOf()
+    override var menu: MutableList<Menu> = mutableListOf<BreakfastMenu>().toMutableList()
     override var errorDrawable: Int = R.drawable.ic_shop
 
     override fun getQuery(): DatabaseReference? {
         var query = FirebaseDatabase.getInstance().getReference().child(tag)
+
+
         query.addValueEventListener(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {}
 
