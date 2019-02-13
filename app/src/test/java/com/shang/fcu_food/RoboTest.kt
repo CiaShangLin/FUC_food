@@ -6,10 +6,13 @@ import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.v4.view.ViewPager
 import android.support.v7.widget.Toolbar
+import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.flyco.tablayout.SlidingTabLayout
 import com.shang.fcu_food.Data.shop.BreakfastShop
 import com.shang.fcu_food.Data.DataConstant
+import com.shang.fcu_food.Data.shop.Shop
 import com.shang.fcu_food.DetailShop.DetailShopActivity
+import com.shang.fcu_food.DetailShop.DetailShopVH
 import com.shang.fcu_food.Main.MainActivity
 import com.shang.fcu_food.Main.ViewPagerAdapter
 import com.shang.fcu_food.Unit.PermissionUnit
@@ -20,6 +23,9 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
+import org.robolectric.RuntimeEnvironment
+import org.robolectric.Shadows.shadowOf
+import org.robolectric.shadows.ShadowActivity
 import org.robolectric.shadows.ShadowAlertDialog
 
 
@@ -102,18 +108,18 @@ class RoboTest {
     @Test
     fun DetailShopActivity_Test(){
 
-        var detailShopActivity
-                =Robolectric.buildActivity(DetailShopActivity::class.java).visible().get()
-
-        detailShopActivity.intent=Intent().apply{
+        var intent=Intent(mainActivity,DetailShopActivity::class.java).apply {
             this.putExtras(Bundle().apply {
                 this.putString(DataConstant.SHOP_TYPE_TAG, BreakfastShop.tag)
                 this.putInt(DataConstant.POSITION,0)
             })
         }
+        mainActivity.startActivity(intent)
 
-        Assert.assertEquals(BreakfastShop.tag,detailShopActivity.intent.extras.getString(DataConstant.SHOP_TYPE_TAG))
-        Assert.assertEquals(0,detailShopActivity.intent.extras.getInt(DataConstant.POSITION))
+        var detailShopActivity=shadowOf(RuntimeEnvironment.application).nextStartedActivity
+        Assert.assertEquals(BreakfastShop.tag,detailShopActivity.extras.getString(DataConstant.SHOP_TYPE_TAG))
+        Assert.assertEquals(0,detailShopActivity.extras.getInt(DataConstant.POSITION))
+
     }
 
 
