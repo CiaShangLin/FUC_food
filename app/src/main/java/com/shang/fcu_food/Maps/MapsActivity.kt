@@ -40,16 +40,15 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback{
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
 
+        val fcu = LatLng(24.178827, 120.646460)
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(fcu, 17f))
+
         mMapListener = MapListener(mMap, this@MapsActivity)
 
         when (intent.action) {
             DetailShopActivity::class.java.simpleName -> mMapListener.initShowShop(intent)
             else -> mMapListener.initGetLocation(con)
         }
-
-       // val fcu = LatLng(24.178827, 120.646460)
-       // mMap.addMarker(MarkerOptions().position(fcu).title("逢甲"))
-        //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(fcu, 17f))
 
         mMap.setOnMyLocationButtonClickListener(mMapListener)
         mMapListener.mapUiSetting()
