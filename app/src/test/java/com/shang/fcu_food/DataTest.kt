@@ -1,7 +1,7 @@
 package com.shang.fcu_food
 
 import com.shang.fcu_food.Data.*
-import com.shang.fcu_food.Data.menu.Menu
+import com.shang.fcu_food.Data.menu.*
 import com.shang.fcu_food.Data.shop.*
 import org.junit.Assert
 import org.junit.Assert.assertEquals
@@ -11,7 +11,7 @@ import org.junit.Test
 
 class DataTest {
     @Test
-    fun shopExtends() {
+    fun Shop_Test() {
         var breakfastShop = BreakfastShop()
         var dinnerShop = DinnerShop()
         var drinkShop = DrinkShop()
@@ -22,11 +22,11 @@ class DataTest {
         assertTrue(drinkShop is Shop)
         assertTrue(snackShop is Shop)
 
+        Assert.assertEquals(breakfastShop.errorDrawable, R.drawable.ic_shop)
+        Assert.assertEquals(dinnerShop.errorDrawable, R.drawable.ic_shop)
+        Assert.assertEquals(drinkShop.errorDrawable, R.drawable.ic_shop)
+        Assert.assertEquals(snackShop.errorDrawable, R.drawable.ic_shop)
 
-    }
-
-    @Test
-    fun shopTag_Check() {
         assertEquals("breakfast", BreakfastShop.tag)
         assertEquals("dinner", DinnerShop.tag)
         assertEquals("drink", DrinkShop.tag)
@@ -82,6 +82,23 @@ class DataTest {
         Assert.assertEquals("comment", map.get("comment"))
     }
 
+    @Test
+    fun Menu_Test() {
+        var breakfastMenu = BreakfastMenu()
+        var dinnerMenu = DinnerMenu()
+        var drinkMenu = DrinkMenu()
+        var snackMenu = SnackMenu()
+
+        Assert.assertEquals(breakfastMenu.errorDrawable, R.drawable.ic_breakfast)
+        Assert.assertEquals(dinnerMenu.errorDrawable, R.drawable.ic_dinner)
+        Assert.assertEquals(drinkMenu.errorDrawable, R.drawable.ic_drink)
+        Assert.assertEquals(snackMenu.errorDrawable, R.drawable.ic_snack)
+
+        Assert.assertTrue(breakfastMenu is Menu)
+        Assert.assertTrue(dinnerMenu is Menu)
+        Assert.assertTrue(drinkMenu is Menu)
+        Assert.assertTrue(snackMenu is Menu)
+    }
 
 
 }
