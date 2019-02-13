@@ -11,7 +11,7 @@ class DrinkShop : Shop() {
     }
 
     override var errorDrawable: Int = R.drawable.ic_shop
-    override fun getQuery(): DatabaseReference? {
+    override fun getQuery(): Query {
         var query = FirebaseDatabase.getInstance().getReference().child(DrinkShop.tag)
         query.addValueEventListener(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {}

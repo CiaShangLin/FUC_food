@@ -14,9 +14,8 @@ class BreakfastShop : Shop() {
     override var menu: MutableList<Menu> = mutableListOf<BreakfastMenu>().toMutableList()
     override var errorDrawable: Int = R.drawable.ic_shop
 
-    override fun getQuery(): DatabaseReference? {
+    override fun getQuery(): Query {
         var query = FirebaseDatabase.getInstance().getReference().child(tag)
-
 
         query.addValueEventListener(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {}
