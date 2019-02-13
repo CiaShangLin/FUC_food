@@ -1,5 +1,7 @@
 package com.shang.fcu_food.Data
 
+import com.firebase.ui.database.FirebaseRecyclerOptions
+import com.google.firebase.database.Query
 import com.shang.fcu_food.R
 
 open class Menu {
@@ -21,4 +23,12 @@ open class Menu {
     open var errorDrawable: Int = R.drawable.ic_breakfast
 
     constructor()
+
+    open fun getQuery(shop_tag:String,shop_id:String): Query? {
+        return null
+    }
+
+    open fun getOption(shop_tag:String,shop_id:String): FirebaseRecyclerOptions<Menu>? {
+        return null
+    }
 }
