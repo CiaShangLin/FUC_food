@@ -12,7 +12,7 @@ open class Shop {
     var address: String = ""        //地址 經緯度
     var phone: String = "尚無提供"         //電話
     var time: String = "尚無提供"          //營業時間
-    open var menu: MutableList<Menu> = mutableListOf()      //這個店的菜品
+    var menu: MutableList<Menu> = mutableListOf()      //這個店的菜品
     open var errorDrawable: Int = R.drawable.ic_shop  //錯誤圖片
 
     constructor()
