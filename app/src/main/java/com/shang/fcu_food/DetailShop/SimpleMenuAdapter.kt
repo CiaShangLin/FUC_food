@@ -10,6 +10,10 @@ import android.widget.TextView
 import com.bumptech.glide.request.RequestOptions
 import com.shang.fcu_food.Data.DataConstant
 import com.shang.fcu_food.Data.menu.Menu
+import com.shang.fcu_food.Data.shop.BreakfastShop
+import com.shang.fcu_food.Data.shop.DinnerShop
+import com.shang.fcu_food.Data.shop.DrinkShop
+import com.shang.fcu_food.Data.shop.SnackShop
 import com.shang.fcu_food.R
 import com.shang.fcu_food.Unit.FileStorageUnit
 import kotlinx.android.synthetic.main.cardview_simplemenu.view.*
@@ -63,7 +67,13 @@ class SimpleMenuVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
             shop_name,
             model.name,
             itemView.simpleMenuImg,
-            model.errorDrawable,
+            when (shop_tag) {
+                BreakfastShop.tag -> R.drawable.ic_breakfast
+                DinnerShop.tag -> R.drawable.ic_dinner
+                DrinkShop.tag -> R.drawable.ic_drink
+                SnackShop.tag -> R.drawable.ic_snack
+                else -> R.drawable.ic_breakfast
+            },
             RequestOptions().circleCrop()
         )
 

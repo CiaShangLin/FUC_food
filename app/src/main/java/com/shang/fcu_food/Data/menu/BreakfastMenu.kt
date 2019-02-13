@@ -7,7 +7,7 @@ import com.shang.fcu_food.Data.shop.BreakfastShop
 import com.shang.fcu_food.R
 
 class BreakfastMenu: Menu() {
-    override var errorDrawable:Int= R.drawable.ic_boy
+    override var errorDrawable:Int= R.drawable.ic_breakfast
 
     override fun getQuery(shop_tag: String, shop_id: String): Query? {
         var query=FirebaseDatabase.getInstance()

@@ -45,7 +45,7 @@ class DetailMenuVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
             DetailMenuActivity.shop_name,
             model.name,
             itemView.menuPictureImg,
-            R.drawable.ic_breakfast,
+            model.errorDrawable,
             RequestOptions().fitCenter()
         )
 
