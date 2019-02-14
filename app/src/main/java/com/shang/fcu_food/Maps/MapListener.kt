@@ -10,6 +10,7 @@ import android.support.design.widget.Snackbar
 import android.support.v4.content.ContextCompat
 import android.util.Log
 import android.view.View
+import com.airbnb.lottie.LottieAnimationView
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.*
@@ -29,10 +30,13 @@ class MapListener(var mMap: GoogleMap, var activity: MapsActivity) :
 
 
     //只為了取得經緯度
-    fun initGetLocation(con: View) {
+    fun initGetLocation(con: View,lottieView:LottieAnimationView) {
         mMap.setOnMapClickListener(this)
         Snackbar.make(con, "點擊地圖店家的大概位置", Snackbar.LENGTH_INDEFINITE)
-            .setAction("確認", View.OnClickListener { })
+            .setAction("確認", View.OnClickListener {
+                lottieView.cancelAnimation()
+                lottieView.visibility=View.GONE
+            })
             .setActionTextColor(Color.YELLOW)
             .show()
     }

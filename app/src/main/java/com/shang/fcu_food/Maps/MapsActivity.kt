@@ -46,8 +46,12 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback{
         mMapListener = MapListener(mMap, this@MapsActivity)
 
         when (intent.action) {
+            //顯示店家
             DetailShopActivity::class.java.simpleName -> mMapListener.initShowShop(intent)
-            else -> mMapListener.initGetLocation(con)
+            //只為了取得經緯度
+            else -> {
+                mMapListener.initGetLocation(con,clickLottieView)
+            }
         }
 
         mMap.setOnMyLocationButtonClickListener(mMapListener)
