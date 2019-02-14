@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.v4.content.ContextCompat
 import android.support.v4.view.ViewPager
+import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.Toolbar
 import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.flyco.tablayout.SlidingTabLayout
@@ -143,11 +144,16 @@ class RoboTest {
             ,menu_detailShop_recommend.title)
         Assert.assertTrue(menu_detailShop_recommend.isVisible)
 
-
         var menu_detailShop_search=detailShopTb.menu.findItem(R.id.menu_detailshop_search)
         Assert.assertEquals(detailShopActivity.resources.getString(R.string.Menu_DetailShop_Search)
             ,menu_detailShop_search.title)
         Assert.assertFalse(menu_detailShop_search.isVisible)
+
+        Assert.assertEquals(detailShopActivity.resources.getString(R.string.ShopInformation),detailShopTb.title)
+
+
+        detailShopActivity.adapter.startListening()
+        System.out.println(detailShopActivity.adapter?.itemCount)
 
     }
 
