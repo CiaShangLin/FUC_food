@@ -4,6 +4,7 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.support.design.widget.NavigationView
+import android.support.v4.content.ContextCompat
 import android.support.v4.view.ViewPager
 import android.support.v7.widget.Toolbar
 import com.firebase.ui.database.FirebaseRecyclerAdapter
@@ -16,6 +17,7 @@ import com.shang.fcu_food.DetailShop.DetailShopActivity
 import com.shang.fcu_food.DetailShop.DetailShopVH
 import com.shang.fcu_food.Main.MainActivity
 import com.shang.fcu_food.Main.ViewPagerAdapter
+import com.shang.fcu_food.Unit.AdmobUnit
 import com.shang.fcu_food.Unit.PermissionUnit
 import com.shang.fcu_food.Unit.PickPictureUnit
 import org.junit.Assert
@@ -38,6 +40,7 @@ class RoboTest {
     @Before
     fun setMainActivity() {
         mainActivity = Robolectric.buildActivity(MainActivity::class.java).create().visible().get()
+        FirebaseApp.initializeApp(mainActivity)
     }
 
 
@@ -125,14 +128,26 @@ class RoboTest {
             })
         }
 
-        FirebaseApp.initializeApp(mainActivity)
         //這裡應該是沒intent 所以shop沒有初始化抱錯
         var detailShopActivity =
-            Robolectric.buildActivity(DetailShopActivity::class.java,intent).visible().get()
+            Robolectric.buildActivity(DetailShopActivity::class.java,intent).create().get()
 
         Assert.assertEquals(BreakfastShop.tag, detailShopActivity.intent.extras.getString(DataConstant.SHOP_TYPE_TAG))
         Assert.assertEquals(0, detailShopActivity.intent.extras.getInt(DataConstant.POSITION))
 
+        var detailShopTb=detailShopActivity.findViewById<Toolbar>(R.id.detailShopTb)
+        Assert.assertEquals(2,detailShopTb.menu.size())
+
+        var menu_detailShop_recommend=detailShopTb.menu.findItem(R.id.menu_detailshop_recommend)
+        Assert.assertEquals(detailShopActivity.resources.getString(R.string.Menu_DetailShop_Recommend)
+            ,menu_detailShop_recommend.title)
+        Assert.assertTrue(menu_detailShop_recommend.isVisible)
+
+
+        var menu_detailShop_search=detailShopTb.menu.findItem(R.id.menu_detailshop_search)
+        Assert.assertEquals(detailShopActivity.resources.getString(R.string.Menu_DetailShop_Search)
+            ,menu_detailShop_search.title)
+        Assert.assertFalse(menu_detailShop_search.isVisible)
 
     }
 
