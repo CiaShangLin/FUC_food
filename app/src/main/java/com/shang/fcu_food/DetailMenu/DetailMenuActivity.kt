@@ -30,8 +30,8 @@ class DetailMenuActivity : AppCompatActivity() {
     }
 
     lateinit var menu: Menu
-    lateinit var adapter: FirebaseRecyclerAdapter<Menu, DetailMenuVH>
-    lateinit var options: Any
+    lateinit var adapter: DetailMenuAdapter
+    lateinit var linearLayoutManager: LinearLayoutManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,7 +54,10 @@ class DetailMenuActivity : AppCompatActivity() {
             when (it.itemId) {
                 R.id.menu_detailmenu_addMenu ->
                     AddMenuDialog.getInstance(shop_name).show(supportFragmentManager, AddMenuDialog.TAG)
-                R.id.menu_detailmenu_recommend -> recommend()
+                R.id.menu_detailmenu_recommend -> {
+                    position = (Math.random() * (detailMenuRecyc.adapter?.itemCount!!)).toInt()
+                    adapter.recommend(linearLayoutManager,position)
+                }
             }
             true
         }
@@ -69,8 +72,8 @@ class DetailMenuActivity : AppCompatActivity() {
 
         adapter = DetailMenuAdapter(this@DetailMenuActivity,menu.getOption(shop_type_tag, shop_id)!!)
 
-        var layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-        detailMenuRecyc.layoutManager = layoutManager
+        linearLayoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        detailMenuRecyc.layoutManager = linearLayoutManager
         detailMenuRecyc.adapter = adapter
 
         var pagerSnapHelper = PagerSnapHelper()

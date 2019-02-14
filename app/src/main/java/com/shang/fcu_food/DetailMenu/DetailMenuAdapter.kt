@@ -1,5 +1,6 @@
 package com.shang.fcu_food.DetailMenu
 
+import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.firebase.ui.database.FirebaseRecyclerAdapter
@@ -17,6 +18,11 @@ class DetailMenuAdapter(var activity: DetailMenuActivity, options: FirebaseRecyc
 
     override fun onBindViewHolder(holder: DetailMenuVH, position: Int, model: Menu) {
         holder.bind(position, model,activity)
+    }
+
+    //隨機推薦
+    fun recommend(manager: LinearLayoutManager, position: Int) {
+        manager.scrollToPositionWithOffset(position, 0)
     }
 
 }
