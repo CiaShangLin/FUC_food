@@ -21,9 +21,7 @@ class DetailShopActivity : AppCompatActivity() {
 
     lateinit var linearLayoutManager: LinearLayoutManager
     lateinit var adapter: DetailShopAdapter
-    lateinit var options: Any
     lateinit var shop: Shop
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
