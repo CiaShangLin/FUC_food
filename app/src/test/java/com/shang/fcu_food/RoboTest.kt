@@ -151,9 +151,8 @@ class RoboTest {
 
         Assert.assertEquals(detailShopActivity.resources.getString(R.string.ShopInformation),detailShopTb.title)
 
+        Assert.assertTrue(detailShopActivity.shop is BreakfastShop)
 
-        detailShopActivity.adapter.startListening()
-        System.out.println(detailShopActivity.adapter?.itemCount)
 
     }
 
