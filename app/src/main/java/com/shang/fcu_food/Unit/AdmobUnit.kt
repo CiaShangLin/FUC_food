@@ -24,6 +24,7 @@ class AdmobUnit {
         }
     }
 
+    //記得要去打開註解的程式碼 DetailMenuActivity , DetailShopActivity , MainActivity
     //插頁 activity_detail_shop activity_detail_menu dialog_addcomment
     fun show(adView: AdView) {
         val adRequest = AdRequest.Builder().build()

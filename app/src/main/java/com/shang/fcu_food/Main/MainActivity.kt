@@ -144,6 +144,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        AdmobUnit.getInstance(this)?.InterstitialAd_show()
+        //AdmobUnit.getInstance(this)?.InterstitialAd_show()
     }
 }
