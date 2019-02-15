@@ -159,7 +159,7 @@ class RoboTest {
     }
 
     @Test
-    fun AddCommentDialog_Test(fragmentManager:FragmentManager){
+    fun AddCommentDialog_Test(){
         Assert.assertEquals("AddCommentDialog",AddCommentDialog.TAG)
         Assert.assertEquals("MENU_ID",AddCommentDialog.MENU_ID)
         Assert.assertEquals("COMMENT_SIZE",AddCommentDialog.COMMENT_SIZE)
@@ -169,7 +169,8 @@ class RoboTest {
         Assert.assertEquals("0",addCommentDialog.arguments?.getString(AddCommentDialog.MENU_ID))
         Assert.assertEquals("0",addCommentDialog.arguments?.getString(AddCommentDialog.COMMENT_SIZE))
 
-        addCommentDialog.show(fragmentManager,AddCommentDialog.TAG)
+        addCommentDialog.show(mainActivity.supportFragmentManager,AddCommentDialog.TAG)
+        Assert.assertTrue(addCommentDialog.showsDialog)
 
     }
 
