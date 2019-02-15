@@ -103,7 +103,7 @@ class AddMenuDialog : DialogFragment() {
                     throw Exception("輸入錯誤")
                 }else{
                     progressDialog.show()
-                    FirebaseUnits.addTempData(ref, tempMenu, bitmapTobyte(bitmap), callback)
+                    FirebaseUnits.addTempData(ref, tempMenu,PickPictureUnit.bitmapToByte(bitmap), callback)
                 }
 
             } catch (e: Exception) {
@@ -126,20 +126,6 @@ class AddMenuDialog : DialogFragment() {
                 .load(data?.data)
                 .into(addMenuPictureIg)
         }
-    }
-
-    fun bitmapTobyte(bitmap: Bitmap?): ByteArray {
-        var byteArrayOutputStream = ByteArrayOutputStream()
-        if (bitmap == null) {
-            return byteArrayOf()
-        } else {
-            //有可能是長得或是橫的
-            var width = if (bitmap.width > bitmap.height) 720 else 480
-            var height = if (bitmap.height > bitmap.width) 720 else 480
-            var tempBitmap = Bitmap.createScaledBitmap(bitmap, width, height, true)
-            tempBitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream)
-        }
-        return byteArrayOutputStream.toByteArray()
     }
 
     override fun onResume() {
