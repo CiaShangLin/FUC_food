@@ -4,6 +4,7 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.support.design.widget.NavigationView
+import android.support.v4.app.FragmentManager
 import android.support.v4.content.ContextCompat
 import android.support.v4.view.ViewPager
 import android.support.v7.widget.RecyclerView
@@ -16,6 +17,7 @@ import com.shang.fcu_food.Data.DataConstant
 import com.shang.fcu_food.Data.shop.Shop
 import com.shang.fcu_food.DetailShop.DetailShopActivity
 import com.shang.fcu_food.DetailShop.DetailShopVH
+import com.shang.fcu_food.Dialog.AddCommentDialog
 import com.shang.fcu_food.Main.MainActivity
 import com.shang.fcu_food.Main.ViewPagerAdapter
 import com.shang.fcu_food.Unit.AdmobUnit
@@ -156,6 +158,20 @@ class RoboTest {
 
     }
 
+    @Test
+    fun AddCommentDialog_Test(fragmentManager:FragmentManager){
+        Assert.assertEquals("AddCommentDialog",AddCommentDialog.TAG)
+        Assert.assertEquals("MENU_ID",AddCommentDialog.MENU_ID)
+        Assert.assertEquals("COMMENT_SIZE",AddCommentDialog.COMMENT_SIZE)
+
+        var addCommentDialog=AddCommentDialog.getInstace("0","0")
+
+        Assert.assertEquals("0",addCommentDialog.arguments?.getString(AddCommentDialog.MENU_ID))
+        Assert.assertEquals("0",addCommentDialog.arguments?.getString(AddCommentDialog.COMMENT_SIZE))
+
+        addCommentDialog.show(fragmentManager,AddCommentDialog.TAG)
+
+    }
 
 
 }
