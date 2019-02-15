@@ -88,8 +88,6 @@ class AddMenuDialog : DialogFragment() {
 
         addMenuAddBt.setOnClickListener {
             try {
-
-
                 var ref = "tempMenu"
                 var menu_name = addMenuNameTvEt.editText?.text.toString()
                 var star = addMenuRatingBar.rating.toDouble()

@@ -5,6 +5,7 @@ import android.graphics.Bitmap
 import android.media.Rating
 import android.os.Bundle
 import android.support.design.widget.NavigationView
+import android.support.design.widget.TextInputLayout
 import android.support.v4.app.FragmentManager
 import android.support.v4.content.ContextCompat
 import android.support.v4.view.ViewPager
@@ -20,6 +21,7 @@ import com.shang.fcu_food.Data.shop.Shop
 import com.shang.fcu_food.DetailShop.DetailShopActivity
 import com.shang.fcu_food.DetailShop.DetailShopVH
 import com.shang.fcu_food.Dialog.AddCommentDialog
+import com.shang.fcu_food.Dialog.AddMenuDialog
 import com.shang.fcu_food.Main.MainActivity
 import com.shang.fcu_food.Main.ViewPagerAdapter
 import com.shang.fcu_food.Unit.AdmobUnit
@@ -37,6 +39,7 @@ import org.robolectric.RuntimeEnvironment
 import org.robolectric.Shadows.shadowOf
 import org.robolectric.shadows.ShadowActivity
 import org.robolectric.shadows.ShadowAlertDialog
+import org.robolectric.shadows.ShadowDialog
 
 
 @RunWith(RobolectricTestRunner::class)
@@ -159,7 +162,6 @@ class RoboTest {
 
         Assert.assertTrue(detailShopActivity.shop is BreakfastShop)
 
-
     }
 
     @Test
@@ -175,6 +177,19 @@ class RoboTest {
         Assert.assertNotNull(addCommentDialog)
 
         addCommentDialog.show(mainActivity.supportFragmentManager,AddCommentDialog.TAG)
+        addCommentDialog.dismiss()
+    }
+
+
+    fun AddMenuDialog_Test(supportFragmentManager:FragmentManager){
+        var addMenuDialog= AddMenuDialog.getInstance("TEST")
+        addMenuDialog.show(supportFragmentManager,AddMenuDialog.TAG)
+        Assert.assertEquals("TEST",addMenuDialog.arguments?.getString(DataConstant.SHOP_NAME))
+
+        var shadowDialog= ShadowDialog.getLatestDialog()
+        var addMenuNameTvEt=shadowDialog.findViewById<TextInputLayout>(R.id.addMenuNameTvEt)
+
+        Assert.assertNotNull(addMenuNameTvEt)
     }
 
 
