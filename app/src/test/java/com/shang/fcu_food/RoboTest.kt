@@ -2,6 +2,7 @@ package com.shang.fcu_food
 
 import android.content.Intent
 import android.graphics.Bitmap
+import android.media.Rating
 import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.v4.app.FragmentManager
@@ -9,6 +10,7 @@ import android.support.v4.content.ContextCompat
 import android.support.v4.view.ViewPager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.Toolbar
+import android.widget.RatingBar
 import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.flyco.tablayout.SlidingTabLayout
 import com.google.firebase.FirebaseApp
@@ -23,6 +25,8 @@ import com.shang.fcu_food.Main.ViewPagerAdapter
 import com.shang.fcu_food.Unit.AdmobUnit
 import com.shang.fcu_food.Unit.PermissionUnit
 import com.shang.fcu_food.Unit.PickPictureUnit
+import kotlinx.android.synthetic.main.dialog_addcomment.*
+import kotlinx.android.synthetic.main.dialog_addmenu.*
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
@@ -168,11 +172,12 @@ class RoboTest {
 
         Assert.assertEquals("0",addCommentDialog.arguments?.getString(AddCommentDialog.MENU_ID))
         Assert.assertEquals("0",addCommentDialog.arguments?.getString(AddCommentDialog.COMMENT_SIZE))
+        Assert.assertNotNull(addCommentDialog)
 
         addCommentDialog.show(mainActivity.supportFragmentManager,AddCommentDialog.TAG)
-        Assert.assertTrue(addCommentDialog.showsDialog)
-
     }
+
+
 
 
 }
