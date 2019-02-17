@@ -7,6 +7,7 @@ import com.shang.fcu_food.Data.menu.Menu
 import com.shang.fcu_food.R
 
 class BreakfastShop : Shop() {
+
     companion object {
         val tag: String = "breakfast"
         var allBreakfastShop: MutableList<BreakfastShop> = mutableListOf<BreakfastShop>()

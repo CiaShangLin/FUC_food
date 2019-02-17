@@ -6,13 +6,13 @@ import com.google.firebase.database.Query
 import com.shang.fcu_food.Data.menu.Menu
 import com.shang.fcu_food.R
 
-open class Shop {
+abstract open class Shop {
     var id: Int = -1                 //根結點 EX:1
     var name: String = ""          //店名
     var address: String = ""        //地址 經緯度
     var phone: String = "尚無提供"         //電話
     var time: String = "尚無提供"          //營業時間
-    var menu: MutableList<Menu> = mutableListOf()      //這個店的菜品
+    open var menu: MutableList<Menu> = mutableListOf()     //這個店的菜品
     open var errorDrawable: Int = R.drawable.ic_shop  //錯誤圖片
 
     constructor()

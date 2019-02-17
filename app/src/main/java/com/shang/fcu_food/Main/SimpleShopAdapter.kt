@@ -1,9 +1,12 @@
 package com.shang.fcu_food.Main
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.firebase.ui.database.FirebaseRecyclerOptions
+import com.shang.fcu_food.Data.menu.BreakfastMenu
+import com.shang.fcu_food.Data.menu.Menu
 import com.shang.fcu_food.Data.shop.Shop
 import com.shang.fcu_food.R
 
