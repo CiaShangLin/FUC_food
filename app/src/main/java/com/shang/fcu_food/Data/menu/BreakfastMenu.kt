@@ -3,7 +3,6 @@ package com.shang.fcu_food.Data.menu
 import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.Query
-import com.shang.fcu_food.Data.shop.BreakfastShop
 import com.shang.fcu_food.R
 
 class BreakfastMenu: Menu() {
@@ -11,7 +10,7 @@ class BreakfastMenu: Menu() {
 
     override fun getQuery(shop_tag: String, shop_id: String): Query? {
         var query=FirebaseDatabase.getInstance()
-        .getReference().child("${BreakfastShop.tag}/1/menu")
+        .getReference().child("$shop_tag/$shop_id/menu")
 
         return query
     }
