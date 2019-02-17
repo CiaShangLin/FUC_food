@@ -7,15 +7,15 @@ import com.shang.fcu_food.Data.menu.DinnerMenu
 import com.shang.fcu_food.Data.menu.Menu
 import com.shang.fcu_food.R
 
-class DinnerShop : Shop(){
+class DinnerShop() : Shop(){
     companion object {
         val tag:String="dinner"
         var allDinnerShop: MutableList<DinnerShop> = mutableListOf<DinnerShop>()
     }
     override var errorDrawable:Int= R.drawable.ic_shop
-
+    override var shop_tag: String = "dinner"
     override fun getQuery(): Query {
-        var query = FirebaseDatabase.getInstance().getReference().child(tag)
+        var query = FirebaseDatabase.getInstance().getReference().child(shop_tag)
         query.addValueEventListener(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {}
 

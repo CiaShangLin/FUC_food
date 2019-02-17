@@ -14,6 +14,7 @@ abstract open class Shop {
     var time: String = "尚無提供"          //營業時間
     open var menu: MutableList<Menu> = mutableListOf()     //這個店的菜品
     open var errorDrawable: Int = R.drawable.ic_shop  //錯誤圖片
+    abstract open var shop_tag: String //店的類型
 
     constructor()
 
@@ -34,18 +35,14 @@ abstract open class Shop {
         }
 
 
-    open fun getQuery(): Query? {
-        return null
-    }
+    abstract open fun getQuery(): Query
 
-    open fun getOption(): FirebaseRecyclerOptions<Shop>? {
-        return null
-    }
+    abstract open fun getOption(): FirebaseRecyclerOptions<Shop>
 
     fun getLatLng(): LatLng {
         //如果地址為空的話 他的size會是1
         var latlng: List<String> = address.split(",")
-        if (latlng.size==2) {
+        if (latlng.size == 2) {
             return LatLng(latlng?.get(0)!!.toDouble(), latlng.get(1).toDouble())
         }
         return LatLng(0.0, 0.0)

@@ -6,15 +6,16 @@ import com.shang.fcu_food.Data.menu.Menu
 import com.shang.fcu_food.Data.menu.SnackMenu
 import com.shang.fcu_food.R
 
-class SnackShop : Shop() {
+class SnackShop() : Shop() {
     companion object {
-        val tag:String="snack"
+        val tag: String = "snack"
         var allSnackShop: MutableList<SnackShop> = mutableListOf<SnackShop>()
     }
-    override var errorDrawable:Int= R.drawable.ic_shop
 
+    override var errorDrawable: Int = R.drawable.ic_shop
+    override var shop_tag: String = "snack"
     override fun getQuery(): Query {
-        var query = FirebaseDatabase.getInstance().getReference().child(tag)
+        var query = FirebaseDatabase.getInstance().getReference().child(shop_tag)
         query.addValueEventListener(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {}
 
