@@ -31,6 +31,7 @@ class MapListener(var mMap: GoogleMap, var activity: MapsActivity) :
 
     //只為了取得經緯度
     fun initGetLocation(con: View,lottieView:LottieAnimationView) {
+        lottieView.visibility=View.VISIBLE
         mMap.setOnMapClickListener(this)
         Snackbar.make(con, "點擊地圖店家的大概位置", Snackbar.LENGTH_INDEFINITE)
             .setAction("確認", View.OnClickListener {

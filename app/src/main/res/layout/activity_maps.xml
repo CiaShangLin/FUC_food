@@ -21,6 +21,7 @@
             app:lottie_fileName="clicklocation.json"
             app:lottie_loop="true"
             app:lottie_autoPlay="true"
+            android:visibility="gone"
             map:layout_constraintTop_toTopOf="parent" map:layout_constraintStart_toStartOf="parent"
             map:layout_constraintBottom_toBottomOf="parent" map:layout_constraintEnd_toEndOf="parent"
             android:id="@+id/clickLottieView"/>
