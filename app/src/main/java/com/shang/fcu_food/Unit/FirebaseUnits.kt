@@ -107,7 +107,7 @@ class FirebaseUnits {
 
             var database = FirebaseDatabase.getInstance().getReference().child(ref_path)
             var storage = FirebaseStorage
-                .getInstance().getReference(ref_path).child(fileName + fileName.hashCode() + ".jpeg")
+                .getInstance().getReference(ref_path).child(fileName + fileName.hashCode() + ".jpg")
             var database_status = false
             var storage_status = false
 

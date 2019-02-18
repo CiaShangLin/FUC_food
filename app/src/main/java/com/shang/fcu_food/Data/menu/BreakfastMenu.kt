@@ -3,6 +3,8 @@ package com.shang.fcu_food.Data.menu
 import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.Query
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
 import com.shang.fcu_food.R
 
 class BreakfastMenu: Menu() {
@@ -19,5 +21,9 @@ class BreakfastMenu: Menu() {
         var options = FirebaseRecyclerOptions.Builder<BreakfastMenu>()
             .setQuery(getQuery(shop_tag,shop_id)!!, BreakfastMenu::class.java).build()
         return options as FirebaseRecyclerOptions<Menu>
+    }
+
+    fun getRe(shop_tag: String,shop_name:String , shop_id: String):StorageReference{
+        return FirebaseStorage.getInstance().getReference(shop_tag).child(shop_name).child("$name.jpg")
     }
 }
