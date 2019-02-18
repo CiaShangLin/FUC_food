@@ -100,11 +100,10 @@ class MainActivity : AppCompatActivity() {
             if (NetworkDialog.checkNetworkStatus(this)) {   //網路已開啟
                 if(FirebaseUnits.checkHasAuth()){
                     FirebaseUnits.database_BindAllUser()  //取得所有使用者的資訊
-                    var adapter = ViewPagerAdapter(
+                    viewPager.adapter = ViewPagerAdapter(
                         supportFragmentManager,
                         resources.getStringArray(R.array.ShopType)
                     )
-                    viewPager.adapter = adapter
                     slidingTab.setViewPager(viewPager)
                 }else{
                     FirebaseUnits.auth_Login(this)
