@@ -17,7 +17,7 @@ class DetailMenuAdapter(var activity: DetailMenuActivity, options: FirebaseRecyc
     }
 
     override fun onBindViewHolder(holder: DetailMenuVH, position: Int, model: Menu) {
-        holder.bind(position, model,activity)
+        holder.bind(position, model, activity)
     }
 
     //隨機推薦

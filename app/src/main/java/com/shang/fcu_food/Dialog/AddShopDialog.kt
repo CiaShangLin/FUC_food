@@ -15,10 +15,7 @@ import android.widget.ImageView
 import android.widget.Spinner
 import com.google.android.gms.maps.model.LatLng
 import com.shang.fcu_food.Data.*
-import com.shang.fcu_food.Data.shop.BreakfastShop
-import com.shang.fcu_food.Data.shop.DinnerShop
-import com.shang.fcu_food.Data.shop.DrinkShop
-import com.shang.fcu_food.Data.shop.SnackShop
+import com.shang.fcu_food.Data.shop.*
 import com.shang.fcu_food.FirebaseCallback
 import com.shang.fcu_food.Main.GlideApp
 import com.shang.fcu_food.Maps.MapsActivity
@@ -42,11 +39,6 @@ class AddShopDialog : DialogFragment() {
         }
     }
 
-    val tag= arrayListOf<String>(
-        BreakfastShop.tag,
-        DinnerShop.tag,
-        SnackShop.tag,
-        DrinkShop.tag)
     var bitmap: Bitmap? = null
     lateinit var progressDialog: ProgressDialog
     var callback = object : FirebaseCallback {
@@ -97,7 +89,7 @@ class AddShopDialog : DialogFragment() {
         addShopAddBt.setOnClickListener {
             try {
                 var ref = "tempShop"
-                var tag = tag[addShopTagSp.selectedItemPosition]
+                var tag = Shop.SHOP_LIST[addShopTagSp.selectedItemPosition]
                 var shopName = addShopNameTvEt.editText?.text.toString()
                 var open = addShopOpenTvEt.editText?.text.toString()
                 var phone = addShopPhoneTvEt.editText?.text.toString()

@@ -10,9 +10,7 @@ import com.shang.fcu_food.Data.menu.Menu
 import com.shang.fcu_food.Data.shop.Shop
 import com.shang.fcu_food.R
 
-class SimpleShopAdapter(options: FirebaseRecyclerOptions<Shop>, var shop_tag: String) :
-    FirebaseRecyclerAdapter<Shop, SimpleShopVH>(options) {
-
+class SimpleShopAdapter(options: FirebaseRecyclerOptions<Shop>) : FirebaseRecyclerAdapter<Shop, SimpleShopVH>(options) {
 
     override fun onCreateViewHolder(parent: ViewGroup, position: Int): SimpleShopVH {
         var view = LayoutInflater.from(parent.context).inflate(R.layout.cardview_simpleshop, parent, false)
@@ -20,7 +18,7 @@ class SimpleShopAdapter(options: FirebaseRecyclerOptions<Shop>, var shop_tag: St
     }
 
     override fun onBindViewHolder(holder: SimpleShopVH, position: Int, model: Shop) {
-        holder.bind(position, model, shop_tag)
+        holder.bind(position, model)
     }
 
 }

@@ -50,7 +50,6 @@ class EditShopDialog : DialogFragment() {
     }
 
     var bitmap: Bitmap? = null
-    val tag = arrayListOf<String>(BreakfastShop.tag, DinnerShop.tag, SnackShop.tag, DrinkShop.tag)
     lateinit var progressDialog: ProgressDialog
     var callback = object : FirebaseCallback {
         override fun statusCallBack(database_status: Boolean, storage_status: Boolean) {
@@ -105,8 +104,7 @@ class EditShopDialog : DialogFragment() {
         editShopGoogleMapImg.setOnClickListener {
             startActivityForResult(Intent(activity, MapsActivity::class.java).apply {
                 this.action=EditShopDialog::class.java.simpleName
-            }
-                , MapsActivity.REQUEST_CODE_LATLNG)
+            }, MapsActivity.REQUEST_CODE_LATLNG)
         }
 
         editShopMenuImg.setOnClickListener {
@@ -116,7 +114,7 @@ class EditShopDialog : DialogFragment() {
         editShopBt.setOnClickListener {
             try {
                 var tempShop = TempShop(
-                    tag[editShopTagSp.selectedItemPosition],
+                    Shop.SHOP_LIST[editShopTagSp.selectedItemPosition],
                     editShopNameTvEt.editText?.text.toString(),
                     editShopPhoneTvEt.editText?.text.toString(),
                     editShopOpenTvEt.editText?.text.toString(),
@@ -158,6 +156,6 @@ class EditShopDialog : DialogFragment() {
 
     override fun onResume() {
         super.onResume()
-        editShopTagSp.setSelection(tag.indexOf(arguments?.getString("shop_tag")))
+        editShopTagSp.setSelection(Shop.SHOP_LIST.indexOf(arguments?.getString("shop_tag")))
     }
 }

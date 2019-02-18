@@ -16,7 +16,7 @@ import com.shang.fcu_food.Main.SimpleShopAdapter
 import com.shang.fcu_food.Main.SimpleShopVH
 import com.shang.fcu_food.R
 
-class DinnerFragment :Fragment() {
+class DinnerFragment : Fragment() {
 
 
     companion object {
@@ -31,7 +31,7 @@ class DinnerFragment :Fragment() {
         }
     }
 
-    lateinit var adapter: FirebaseRecyclerAdapter<Shop, SimpleShopVH>
+    lateinit var adapter: SimpleShopAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         var view = inflater.inflate(R.layout.fragment_dinner, container, false)
@@ -41,17 +41,12 @@ class DinnerFragment :Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        var dinnerShop = view.findViewById<RecyclerView>(R.id.dinnerRecyc)
-        var query = FirebaseDatabase.getInstance().getReference().child(DinnerShop.tag)
-        var options = FirebaseRecyclerOptions
-            .Builder<DinnerShop>()
-            .setQuery(query, DinnerShop::class.java)
-            .build()
+        var dinnerShop = DinnerShop()
+        var dinnerRecyc = view.findViewById<RecyclerView>(R.id.dinnerRecyc)
+        adapter = SimpleShopAdapter(dinnerShop.getOption())
 
-        adapter= SimpleShopAdapter(options as FirebaseRecyclerOptions<Shop>, DinnerShop.tag)
-
-        dinnerShop.layoutManager = GridLayoutManager(activity?.baseContext, 2) as RecyclerView.LayoutManager?
-        dinnerShop.adapter = adapter
+        dinnerRecyc.layoutManager = GridLayoutManager(activity?.baseContext, 2) as RecyclerView.LayoutManager?
+        dinnerRecyc.adapter = adapter
 
     }
 

@@ -30,12 +30,7 @@ class DetailShopActivity : AppCompatActivity() {
         if (intent.extras != null) {
             position = intent.extras.getInt(DataConstant.POSITION)
             shop_tag = intent.extras.getString(DataConstant.SHOP_TYPE_TAG)
-            when (shop_tag) {
-                BreakfastShop.tag -> shop = BreakfastShop()
-                DinnerShop.tag -> shop = DinnerShop()
-                SnackShop.tag -> shop = SnackShop()
-                DrinkShop.tag -> shop = DrinkShop()
-            }
+            shop = Shop.getShopType(shop_tag)!!
         }
 
         detailShopTb.inflateMenu(R.menu.menu_detailshop)
@@ -49,12 +44,13 @@ class DetailShopActivity : AppCompatActivity() {
             }
             true
         }
+
         detailShopTb.setNavigationIcon(R.drawable.ic_arrow_back)
         detailShopTb.setNavigationOnClickListener {
             finish()
         }
 
-        adapter = DetailShopAdapter(shop_tag, this, shop.getOption()!!)
+        adapter = DetailShopAdapter(this, shop.getOption())
         detailShopRecyc.adapter = adapter
 
         linearLayoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
@@ -74,7 +70,7 @@ class DetailShopActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        (adapter as FirebaseRecyclerAdapter<Shop, DetailShopVH>).startListening()
+        adapter.startListening()
     }
 
     override fun onStop() {
@@ -86,7 +82,7 @@ class DetailShopActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         //放在onStop裡的話　跳轉回來時他不會定位
-        (adapter as FirebaseRecyclerAdapter<Shop, DetailShopVH>).stopListening()
+        adapter.stopListening()
     }
 
     fun recommend() {

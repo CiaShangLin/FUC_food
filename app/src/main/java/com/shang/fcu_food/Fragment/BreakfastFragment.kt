@@ -18,7 +18,6 @@ import com.shang.fcu_food.R
 
 class BreakfastFragment : Fragment() {
 
-
     companion object {
         var breakfastFragment: BreakfastFragment? = null
 
@@ -30,7 +29,7 @@ class BreakfastFragment : Fragment() {
         }
     }
 
-    lateinit var adapter:FirebaseRecyclerAdapter<Shop, SimpleShopVH>
+    lateinit var adapter: SimpleShopAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         var view = inflater.inflate(R.layout.fragment_breakfast, container, false)
@@ -40,19 +39,14 @@ class BreakfastFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        var breakfastRecyc = view.findViewById<RecyclerView>(R.id.breakfastRecyc)
 
-        var breakfastShop = view.findViewById<RecyclerView>(R.id.breakfastRecyc)
-        var query = FirebaseDatabase.getInstance().getReference().child(BreakfastShop.tag)
-        var options = FirebaseRecyclerOptions
-            .Builder<BreakfastShop>()
-            .setQuery(query, BreakfastShop::class.java)
-            .build()
+        var breakfastShop = BreakfastShop()
 
-        adapter=SimpleShopAdapter(options as FirebaseRecyclerOptions<Shop>,
-            BreakfastShop.tag)
+        adapter = SimpleShopAdapter(breakfastShop.getOption())
 
-        breakfastShop.layoutManager = GridLayoutManager(activity?.baseContext, 2)
-        breakfastShop.adapter = adapter
+        breakfastRecyc.layoutManager = GridLayoutManager(activity?.baseContext, 2)
+        breakfastRecyc.adapter = adapter
 
         //Log.d("TAG", snapshots.getSnapshot(position).key + " " + model.name + " " + model.address)
     }

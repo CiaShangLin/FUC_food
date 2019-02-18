@@ -6,15 +6,16 @@ import com.shang.fcu_food.Data.menu.BreakfastMenu
 import com.shang.fcu_food.Data.menu.Menu
 import com.shang.fcu_food.R
 
-class BreakfastShop() : Shop() {
+class BreakfastShop : Shop() {
 
     companion object {
-        val tag: String = "breakfast"
+        //val tag: String = "breakfast"
         var allBreakfastShop: MutableList<BreakfastShop> = mutableListOf<BreakfastShop>()
     }
 
     override var errorDrawable: Int = R.drawable.ic_shop
-    override var shop_tag: String = "breakfast"
+    override var shop_tag: String = Shop.BREAKFAST_SHOP
+
     override fun getQuery(): Query {
         var query = FirebaseDatabase.getInstance().getReference().child(shop_tag)
 

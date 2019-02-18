@@ -55,10 +55,10 @@ class MapListener(var mMap: GoogleMap, var activity: MapsActivity) :
         }
 
         when (shop_tag) {
-            BreakfastShop.tag -> shopList = BreakfastShop.allBreakfastShop.toMutableList()
-            DinnerShop.tag -> shopList = DinnerShop.allDinnerShop.toMutableList()
-            DrinkShop.tag -> shopList = DrinkShop.allDrinkShop.toMutableList()
-            SnackShop.tag -> shopList = SnackShop.allSnackShop.toMutableList()
+            Shop.BREAKFAST_SHOP -> shopList = BreakfastShop.allBreakfastShop.toMutableList()
+            Shop.DINNER_SHOP -> shopList = DinnerShop.allDinnerShop.toMutableList()
+            Shop.DRINK_SHOP -> shopList = DrinkShop.allDrinkShop.toMutableList()
+            Shop.SNACK_SHOP-> shopList = SnackShop.allSnackShop.toMutableList()
         }
 
         inputMarker(shopList,position)

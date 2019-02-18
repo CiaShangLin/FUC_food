@@ -30,14 +30,7 @@ class DetailShopVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
     var shopPictureImg = itemView.findViewById<ImageView>(R.id.shopPictureImg)
     var shopEditImg = itemView.findViewById<ImageView>(R.id.shopEditImg)
 
-    fun bind(shop_tag: String, model: Shop, position: Int, activity: DetailShopActivity) {
-
-        when (shop_tag) {
-            BreakfastShop.tag -> model as BreakfastShop
-            DinnerShop.tag -> model as DinnerShop
-            SnackShop.tag -> model as SnackShop
-            DrinkShop.tag -> model as DrinkShop
-        }
+    fun bind(model: Shop, position: Int, activity: DetailShopActivity) {
 
         itemView.shopNameTv.text = model.name
         itemView.shopOpenTv.text = model.time
@@ -45,20 +38,20 @@ class DetailShopVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
         itemView.shopPhoneTv.text = model.phone
 
         FileStorageUnit.ImageLoader(
-            itemView.context, shop_tag, model.name, model.name
+            itemView.context, model.shop_tag, model.name, model.name
             , itemView.shopPictureImg, model.errorDrawable, RequestOptions()
         )
 
         itemView.shopMapIg.setOnClickListener {
             activity.startActivity(Intent(activity, MapsActivity::class.java).apply {
                 this.action = activity.javaClass.simpleName
-                this.putExtra(DataConstant.SHOP_TYPE_TAG, shop_tag)
+                this.putExtra(DataConstant.SHOP_TYPE_TAG, model.shop_tag)
                 this.putExtra(DataConstant.POSITION, position)
             })
         }
 
         itemView.shopPictureImg.setOnClickListener {
-            ImageViewDialog.getInstance(shop_tag, model.name, model.name)
+            ImageViewDialog.getInstance(model.shop_tag, model.name, model.name)
                 .show(activity.supportFragmentManager, ImageViewDialog.TAG)
         }
 
@@ -66,13 +59,13 @@ class DetailShopVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
         itemView.shopMenu.adapter =
                 SimpleMenuAdapter(
                     let { model.menu },
-                    shop_tag,
+                    model.shop_tag,
                     model.name,
-                    getItemClick(shop_tag, model.id.toString(), model.name, itemView.context)
+                    getItemClick(model.shop_tag, model.id.toString(), model.name, itemView.context)
                 )
 
         itemView.shopEditImg.setOnClickListener {
-            EditShopDialog.getInstance(model, shop_tag).show(activity.supportFragmentManager, EditShopDialog.TAG)
+            EditShopDialog.getInstance(model, model.shop_tag).show(activity.supportFragmentManager, EditShopDialog.TAG)
         }
 
     }

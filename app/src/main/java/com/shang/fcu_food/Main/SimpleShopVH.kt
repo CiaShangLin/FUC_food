@@ -20,20 +20,14 @@ class SimpleShopVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
     var simpleShopName: TextView = itemView.findViewById(R.id.simpleShopName)
     var simpleShopStar: TextView = itemView.findViewById(R.id.simpleShopStar)
 
-    fun bind(position: Int, model: Shop, shop_tag: String) {
+    fun bind(position: Int, model: Shop) {
 
-        when (shop_tag) {
-            BreakfastShop.tag -> model as BreakfastShop
-            DinnerShop.tag -> model as DinnerShop
-            SnackShop.tag -> model as SnackShop
-            DrinkShop.tag -> model as DrinkShop
-        }
         itemView.simpleShopName.text = model.name
         itemView.simpleShopStar.text = String.format("%.1f", model.star)
 
         FileStorageUnit.ImageLoader(
             itemView.context,
-            shop_tag,
+            model.shop_tag,
             model.name,
             model.name,
             itemView.simpleShopImg,
@@ -42,7 +36,7 @@ class SimpleShopVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
         )
 
         itemView.setOnClickListener {
-            goDetailShop_Activity(itemView.context, shop_tag, position)
+            goDetailShop_Activity(itemView.context, model.shop_tag, position)
         }
     }
 

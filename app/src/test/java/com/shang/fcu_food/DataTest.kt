@@ -27,10 +27,10 @@ class DataTest {
         Assert.assertEquals(drinkShop.errorDrawable, R.drawable.ic_shop)
         Assert.assertEquals(snackShop.errorDrawable, R.drawable.ic_shop)
 
-        assertEquals("breakfast", BreakfastShop.tag)
-        assertEquals("dinner", DinnerShop.tag)
-        assertEquals("drink", DrinkShop.tag)
-        assertEquals("snack", SnackShop.tag)
+        assertEquals("breakfast", Shop.BREAKFAST_SHOP)
+        assertEquals("dinner", Shop.DINNER_SHOP)
+        assertEquals("drink", Shop.DRINK_SHOP)
+        assertEquals("snack", Shop.SNACK_SHOP)
     }
 
     @Test

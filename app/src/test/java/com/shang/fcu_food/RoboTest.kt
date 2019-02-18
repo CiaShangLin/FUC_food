@@ -133,7 +133,7 @@ class RoboTest {
 
         var intent = Intent(mainActivity, DetailShopActivity::class.java).apply {
             this.putExtras(Bundle().apply {
-                this.putString(DataConstant.SHOP_TYPE_TAG, BreakfastShop.tag)
+                this.putString(DataConstant.SHOP_TYPE_TAG, Shop.BREAKFAST_SHOP)
                 this.putInt(DataConstant.POSITION, 0)
             })
         }
@@ -142,7 +142,7 @@ class RoboTest {
         var detailShopActivity =
             Robolectric.buildActivity(DetailShopActivity::class.java,intent).create().get()
 
-        Assert.assertEquals(BreakfastShop.tag, detailShopActivity.intent.extras.getString(DataConstant.SHOP_TYPE_TAG))
+        Assert.assertEquals(Shop.BREAKFAST_SHOP, detailShopActivity.intent.extras.getString(DataConstant.SHOP_TYPE_TAG))
         Assert.assertEquals(0, detailShopActivity.intent.extras.getInt(DataConstant.POSITION))
 
         var detailShopTb=detailShopActivity.findViewById<Toolbar>(R.id.detailShopTb)

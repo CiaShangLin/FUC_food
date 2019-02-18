@@ -7,6 +7,23 @@ import com.shang.fcu_food.Data.menu.Menu
 import com.shang.fcu_food.R
 
 abstract open class Shop {
+    companion object {
+        val BREAKFAST_SHOP = "breakfast"
+        val DINNER_SHOP = "dinner"
+        val DRINK_SHOP = "drink"
+        val SNACK_SHOP = "snack"
+        val SHOP_LIST = arrayOf(BREAKFAST_SHOP, DINNER_SHOP, SNACK_SHOP, DRINK_SHOP)
+        fun getShopType(shop_tag: String): Shop? {
+            when (shop_tag) {
+                BREAKFAST_SHOP -> return BreakfastShop()
+                DINNER_SHOP -> return DinnerShop()
+                DRINK_SHOP -> return DrinkShop()
+                SNACK_SHOP -> return SnackShop()
+            }
+            return null
+        }
+    }
+
     var id: Int = -1                 //根結點 EX:1
     var name: String = ""          //店名
     var address: String = ""        //地址 經緯度
@@ -33,7 +50,6 @@ abstract open class Shop {
             }
             return total / count
         }
-
 
     abstract open fun getQuery(): Query
 

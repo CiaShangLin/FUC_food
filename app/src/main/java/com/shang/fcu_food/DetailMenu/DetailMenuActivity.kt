@@ -7,10 +7,7 @@ import android.support.v7.widget.PagerSnapHelper
 import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.shang.fcu_food.Data.*
 import com.shang.fcu_food.Data.menu.*
-import com.shang.fcu_food.Data.shop.BreakfastShop
-import com.shang.fcu_food.Data.shop.DinnerShop
-import com.shang.fcu_food.Data.shop.DrinkShop
-import com.shang.fcu_food.Data.shop.SnackShop
+import com.shang.fcu_food.Data.shop.*
 import com.shang.fcu_food.Dialog.AddMenuDialog
 import com.shang.fcu_food.R
 import com.shang.fcu_food.Unit.AdmobUnit
@@ -22,7 +19,6 @@ class DetailMenuActivity : AppCompatActivity() {
     //update SHOP_TYPE_TAG+SHOP_ID+"menu"+menu_id+usercomment+"comment_size"
     companion object {
         val TAG = "DetailMenuActivity"
-
         var shop_type_tag: String = ""
         var shop_id: String = ""
         var position: Int = 0
@@ -56,21 +52,21 @@ class DetailMenuActivity : AppCompatActivity() {
                     AddMenuDialog.getInstance(shop_name).show(supportFragmentManager, AddMenuDialog.TAG)
                 R.id.menu_detailmenu_recommend -> {
                     position = (Math.random() * (detailMenuRecyc.adapter?.itemCount!!)).toInt()
-                    adapter.recommend(linearLayoutManager,position)
+                    adapter.recommend(linearLayoutManager, position)
                 }
             }
             true
         }
 
         menu = when (shop_type_tag) {
-            BreakfastShop.tag -> BreakfastMenu()
-            DinnerShop.tag -> DinnerMenu()
-            DrinkShop.tag -> DrinkMenu()
-            SnackShop.tag -> SnackMenu()
+            Shop.BREAKFAST_SHOP -> BreakfastMenu()
+            Shop.DINNER_SHOP -> DinnerMenu()
+            Shop.DRINK_SHOP -> DrinkMenu()
+            Shop.SNACK_SHOP -> SnackMenu()
             else -> Menu()
         }
 
-        adapter = DetailMenuAdapter(this@DetailMenuActivity,menu.getOption(shop_type_tag, shop_id)!!)
+        adapter = DetailMenuAdapter(this, menu.getOption(shop_type_tag, shop_id)!!)
 
         linearLayoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         detailMenuRecyc.layoutManager = linearLayoutManager
@@ -100,10 +96,7 @@ class DetailMenuActivity : AppCompatActivity() {
     fun recommend() { //隨機推薦
         //var position=linearLayoutManager?.findFirstVisibleItemPosition().toInt()
         //var shop =(adapter as FirebaseRecyclerAdapter<Shop, DetailShopVH>)?.getItem(position)
-        position = (Math.random() * (detailMenuRecyc.adapter?.itemCount!!)).toInt()
         //detailMenuRecyc.smoothScrollToPosition(position)
-        (detailMenuRecyc.layoutManager as LinearLayoutManager).scrollToPositionWithOffset(position, 0)
-
     }
 
 }
