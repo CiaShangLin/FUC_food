@@ -122,7 +122,7 @@ class EditShopDialog : DialogFragment() {
                     editShopAddressTvEt.editText?.text.toString()
                 )
                 progressDialog.show()
-                FirebaseUnits.addTempData("tempShop", tempShop, PickPictureUnit.bitmapToByte(bitmap), callback)
+                FirebaseUnits.addTempData(tempShop, PickPictureUnit.bitmapToByte(bitmap), callback)
             } catch (e: Exception) {
                 e.printStackTrace()
             }

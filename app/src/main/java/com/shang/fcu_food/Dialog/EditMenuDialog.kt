@@ -97,7 +97,6 @@ class EditMenuDialog : DialogFragment() {
         }
 
         editMenuBt.setOnClickListener {
-            var ref = "tempMenu"
             var shop_name = arguments?.getString(SHOP_NAME)
             var menu_name = editMenuNameTvEt.editText?.text.toString()
             var price = editMenuPirceTvEt.editText?.text.toString().toInt()
@@ -105,7 +104,7 @@ class EditMenuDialog : DialogFragment() {
             var tempMenu = TempMenu(shop_name!!, menu_name, price, uid!!)
 
             progressDialog.show()
-            FirebaseUnits.addTempData(ref, tempMenu, PickPictureUnit.bitmapToByte(bitmap), callback)
+            FirebaseUnits.addTempData(tempMenu, PickPictureUnit.bitmapToByte(bitmap), callback)
         }
 
     }

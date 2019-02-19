@@ -1,18 +1,21 @@
 package com.shang.fcu_food.Data
 
-class TempMenu {
-    var shopname: String = ""
-    var menuname: String = ""
+class TempMenu : TempData {
+
+    override var ref: String = "tempMenu"
+    override var uid: String = ""
+    override var shop_name: String = ""
+
+    var menu_name: String = ""
     var star: Double = 0.0
     var price: Int = 0
-    var uid: String = ""
-    var comment: String = ""
+    var comment: String = "沒有輸入"
 
     constructor()
     //新增菜單用
-    constructor(shopname: String, menuname: String, star: Double, price: Int, uid: String, comment: String) {
-        this.shopname = shopname
-        this.menuname = menuname
+    constructor(shop_name: String, menu_name: String, star: Double, price: Int, uid: String, comment: String) {
+        this.shop_name = shop_name
+        this.menu_name = menu_name
         this.star = star
         this.price = price
         this.uid = uid
@@ -20,9 +23,9 @@ class TempMenu {
     }
 
     //修改菜單用
-    constructor(shopname: String, menuname: String, price: Int, uid: String){
-        this.shopname = shopname
-        this.menuname = menuname
+    constructor(shop_name: String, menu_name: String, price: Int, uid: String) {
+        this.shop_name = shop_name
+        this.menu_name = menu_name
         this.price = price
         this.uid = uid
     }

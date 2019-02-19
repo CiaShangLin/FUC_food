@@ -89,7 +89,6 @@ class AddMenuDialog : DialogFragment() {
 
         addMenuAddBt.setOnClickListener {
             try {
-                var ref = "tempMenu"
                 var shop_name = addMenuShopNameTvEt.editText?.text.toString()
                 var menu_name = addMenuNameTvEt.editText?.text.toString()
                 var star = addMenuRatingBar.rating.toDouble()
@@ -102,7 +101,7 @@ class AddMenuDialog : DialogFragment() {
                     throw Exception("輸入錯誤")
                 } else {
                     progressDialog.show()
-                    FirebaseUnits.addTempData(ref, tempMenu, PickPictureUnit.bitmapToByte(bitmap), callback)
+                    FirebaseUnits.addTempData(tempMenu, PickPictureUnit.bitmapToByte(bitmap), callback)
                 }
 
             } catch (e: Exception) {

@@ -13,10 +13,7 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageMetadata
 import com.google.firebase.storage.StorageReference
-import com.shang.fcu_food.Data.TempMenu
-import com.shang.fcu_food.Data.TempShop
-import com.shang.fcu_food.Data.User
-import com.shang.fcu_food.Data.UserComment
+import com.shang.fcu_food.Data.*
 import com.shang.fcu_food.DataBind
 import com.shang.fcu_food.FirebaseCallback
 import com.shang.fcu_food.R
@@ -76,7 +73,7 @@ class FirebaseUnits {
         }
 
         //取得圖片的StorageReference
-        fun storage_getImageRef(shop_tag:String,shop_name:String,image_name:String):StorageReference{
+        fun storage_getImageRef(shop_tag: String, shop_name: String, image_name: String): StorageReference {
             return FirebaseStorage.getInstance().getReference(shop_tag).child(shop_name).child("$image_name.jpg")
         }
 
@@ -101,17 +98,17 @@ class FirebaseUnits {
             }
         }
 
-        fun addTempData(ref_path: String, value: Any, imageByte: ByteArray, callback: FirebaseCallback) {
-            var fileName: String = if (ref_path.equals("tempMenu"))
-                (value as TempMenu).menuname else (value as TempShop).shopname
+        fun addTempData(tempData: TempData, imageByte: ByteArray, callback: FirebaseCallback) {
+            var fileName: String = if (tempData.ref.equals("tempMenu"))
+                (tempData as TempMenu).menu_name else (tempData as TempShop).shop_name
 
-            var database = FirebaseDatabase.getInstance().getReference().child(ref_path)
+            var database = FirebaseDatabase.getInstance().getReference().child(tempData.ref)
             var storage = FirebaseStorage
-                .getInstance().getReference(ref_path).child(fileName + fileName.hashCode() + ".jpg")
+                .getInstance().getReference(tempData.ref).child(fileName + fileName.hashCode() + ".jpg")
             var database_status = false
             var storage_status = false
 
-            database.push().setValue(value).addOnSuccessListener {
+            database.push().setValue(tempData).addOnSuccessListener {
                 database_status = true
                 callback.statusCallBack(database_status, storage_status)
             }.addOnFailureListener {

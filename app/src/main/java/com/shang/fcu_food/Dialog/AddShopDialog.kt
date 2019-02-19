@@ -89,7 +89,6 @@ class AddShopDialog : DialogFragment() {
 
         addShopAddBt.setOnClickListener {
             try {
-                var ref = "tempShop"
                 var tag = Shop.SHOP_LIST[addShopTagSp.selectedItemPosition]
                 var shopName = addShopNameTvEt.editText?.text.toString()
                 var open = addShopOpenTvEt.editText?.text.toString()
@@ -100,7 +99,7 @@ class AddShopDialog : DialogFragment() {
                 if (!shopName.equals("")) {
                     progressDialog.show()
                     var tempShop = TempShop(tag!!, shopName, phone, open, uid!!, address)
-                    FirebaseUnits.addTempData(ref, tempShop, PickPictureUnit.bitmapToByte(bitmap), callback)
+                    FirebaseUnits.addTempData(tempShop, PickPictureUnit.bitmapToByte(bitmap), callback)
                 } else {
                     throw Exception("輸入不能為空")
                 }
