@@ -53,7 +53,7 @@
         <android.support.design.widget.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="店家名稱"/>
+                android:hint="@string/dialog_addshop_hint_ShopName"/>
     </android.support.design.widget.TextInputLayout>
     <android.support.design.widget.TextInputLayout
             android:layout_width="0dp"
@@ -66,7 +66,7 @@
         <android.support.design.widget.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="營業時間"/>
+                android:hint="@string/dialog_addshop_hint_Open"/>
     </android.support.design.widget.TextInputLayout>
     <android.support.design.widget.TextInputLayout
             android:layout_width="0dp"
@@ -79,7 +79,7 @@
         <android.support.design.widget.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="連絡電話"/>
+                android:hint="@string/dialog_addshop_hint_Phone"/>
     </android.support.design.widget.TextInputLayout>
     <android.support.design.widget.TextInputLayout
             android:layout_width="0dp"
@@ -92,7 +92,7 @@
         <android.support.design.widget.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="地點(點擊左邊圖示)"/>
+                android:hint="@string/dialog_addshop_hint_Adreess"/>
     </android.support.design.widget.TextInputLayout>
     <Spinner
             android:layout_width="wrap_content"

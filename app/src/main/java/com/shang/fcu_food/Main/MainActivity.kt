@@ -62,17 +62,16 @@ class MainActivity : AppCompatActivity() {
         toolbar.setNavigationIcon(R.drawable.ic_navigation)
         toolbar.inflateMenu(R.menu.menu_main)
         toolbar.setOnMenuItemClickListener {
-            when(it.itemId){
-                R.id.menu_main_addShop->{
-                    var loadingDouble=LoadingDialog()
-                    loadingDouble.show(supportFragmentManager,"")
-                   //AddShopDialog.getInstance().show(supportFragmentManager, AddShopDialog.TAG)
+            when (it.itemId) {
+                R.id.menu_main_addShop -> {
+                    AddShopDialog.getInstance().show(supportFragmentManager, AddShopDialog.TAG)
                 }
             }
             true
         }
 
-        val toggle = ActionBarDrawerToggle(this, drawer_layout, toolbar,
+        val toggle = ActionBarDrawerToggle(
+            this, drawer_layout, toolbar,
             R.string.app_name,
             R.string.app_name
         )
@@ -80,11 +79,11 @@ class MainActivity : AppCompatActivity() {
         toggle.syncState()
 
         nav_view.setNavigationItemSelectedListener {
-            when(it.itemId){
+            when (it.itemId) {
                 R.id.menu_user_setting ->
-                    UserSettingDialog.getInstance().show(supportFragmentManager,UserSettingDialog.TAG)
-                R.id.menu_question->
-                    alert(R.string.Menu_Question_Message,R.string.Menu_Question_Title).show()
+                    UserSettingDialog.getInstance().show(supportFragmentManager, UserSettingDialog.TAG)
+                R.id.menu_question ->
+                    alert(R.string.Menu_Question_Message, R.string.Menu_Question_Title).show()
                 R.id.menu_logout ->
                     AuthUI.getInstance().signOut(this).addOnCompleteListener {
                         toast("登出成功")
@@ -101,14 +100,14 @@ class MainActivity : AppCompatActivity() {
     fun init() {
         if (!PermissionUnit.checkPermission(this)) {        //已通過權限
             if (NetworkDialog.checkNetworkStatus(this)) {   //網路已開啟
-                if(FirebaseUnits.checkHasAuth()){
+                if (FirebaseUnits.checkHasAuth()) {
                     FirebaseUnits.database_BindAllUser()  //取得所有使用者的資訊
                     viewPager.adapter = ViewPagerAdapter(
                         supportFragmentManager,
                         resources.getStringArray(R.array.ShopType)
                     )
                     slidingTab.setViewPager(viewPager)
-                }else{
+                } else {
                     FirebaseUnits.auth_Login(this)
                 }
             } else {
@@ -132,10 +131,10 @@ class MainActivity : AppCompatActivity() {
             val response = IdpResponse.fromResultIntent(data)
             if (resultCode == Activity.RESULT_OK) {
                 init()
-                if(response?.isNewUser!!){
+                if (response?.isNewUser!!) {
                     FirebaseUnits.database_updateUser(User().getUser(FirebaseAuth.getInstance().currentUser!!))
                     toast("註冊成功")
-                }else{
+                } else {
                     toast("登入成功")
                 }
             } else {
