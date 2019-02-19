@@ -43,7 +43,6 @@ class AddMenuDialog : DialogFragment() {
 
     var bitmap: Bitmap? = null
     lateinit var progressDialog: ProgressDialog
-
     var callback = object : FirebaseCallback {
         override fun statusCallBack(database_status: Boolean, storage_status: Boolean) {
             if (database_status && storage_status) {
@@ -65,14 +64,9 @@ class AddMenuDialog : DialogFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         var view = inflater.inflate(R.layout.dialog_addmenu, container, false)
-        return view
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        var shop_name = arguments?.getString(DataConstant.SHOP_NAME)
-
+        var addMenuShopNameTvEt = view.findViewById<TextInputLayout>(R.id.addMenuShopNameTvEt).apply {
+            this.editText?.setText(arguments?.getString(DataConstant.SHOP_NAME))
+        }
         var addMenuNameTvEt = view.findViewById<TextInputLayout>(R.id.addMenuNameTvEt)
         var addMenuPriceTvEt = view.findViewById<TextInputLayout>(R.id.addMenuPriceTvEt)
         var addMenuCommentTvEt = view.findViewById<TextInputLayout>(R.id.addMenuCommentTvEt)
@@ -80,32 +74,39 @@ class AddMenuDialog : DialogFragment() {
         var addMenuPictureIg = view.findViewById<ImageView>(R.id.addMenuPictureIg)
         var addMenuAddBt = view.findViewById<Button>(R.id.addMenuAddBt)
 
-        progressDialog=ProgressDialog(context).apply {
+        progressDialog = ProgressDialog(context).apply {
             this.setCancelable(false)
             this.setTitle("上傳中...")
             this.setMessage("努力上傳中")
         }
 
+        return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+
         addMenuAddBt.setOnClickListener {
             try {
                 var ref = "tempMenu"
+                var shop_name = addMenuShopNameTvEt.editText?.text.toString()
                 var menu_name = addMenuNameTvEt.editText?.text.toString()
                 var star = addMenuRatingBar.rating.toDouble()
                 var price = addMenuPriceTvEt.editText?.text.toString().toInt()
                 var uid = FirebaseUnits.auth_getUser()?.uid
                 var comment = addMenuCommentTvEt.editText?.text.toString()
-                var tempMenu =
-                    TempMenu(shop_name!!, menu_name, star, price, uid!!, comment)
+                var tempMenu = TempMenu(shop_name, menu_name, star, price, uid!!, comment)
 
-                if(menu_name.length==0 || comment.length==0){
+                if (menu_name.length == 0 || comment.length == 0) {
                     throw Exception("輸入錯誤")
-                }else{
+                } else {
                     progressDialog.show()
-                    FirebaseUnits.addTempData(ref, tempMenu,PickPictureUnit.bitmapToByte(bitmap), callback)
+                    FirebaseUnits.addTempData(ref, tempMenu, PickPictureUnit.bitmapToByte(bitmap), callback)
                 }
 
             } catch (e: Exception) {
-                toast(e.message+"")
+                toast(e.message + "")
             }
         }
 
@@ -119,21 +120,10 @@ class AddMenuDialog : DialogFragment() {
 
         if (requestCode == PickPictureUnit.REQUEST_CODE) {
 
-            bitmap = PickPictureUnit.uriToBitmap(activity!!,data)
+            bitmap = PickPictureUnit.uriToBitmap(activity!!, data)
             GlideApp.with(context!!)
                 .load(data?.data)
                 .into(addMenuPictureIg)
-        }
-    }
-
-    override fun onResume() {
-        super.onResume()
-
-        var dialog = dialog
-        if (dialog != null) {
-            var width = ViewGroup.LayoutParams.MATCH_PARENT
-            var height = ViewGroup.LayoutParams.MATCH_PARENT
-            dialog.window.setLayout(width, height)
         }
     }
 
