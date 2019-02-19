@@ -12,6 +12,7 @@ import com.firebase.ui.auth.IdpResponse
 import com.google.firebase.auth.FirebaseAuth
 import com.shang.fcu_food.Data.User
 import com.shang.fcu_food.Dialog.AddShopDialog
+import com.shang.fcu_food.Dialog.LoadingDialog
 import com.shang.fcu_food.Dialog.NetworkDialog
 import com.shang.fcu_food.Dialog.UserSettingDialog
 import com.shang.fcu_food.R
@@ -63,7 +64,9 @@ class MainActivity : AppCompatActivity() {
         toolbar.setOnMenuItemClickListener {
             when(it.itemId){
                 R.id.menu_main_addShop->{
-                   AddShopDialog.getInstance().show(supportFragmentManager, AddShopDialog.TAG)
+                    var loadingDouble=LoadingDialog()
+                    loadingDouble.show(supportFragmentManager,"")
+                   //AddShopDialog.getInstance().show(supportFragmentManager, AddShopDialog.TAG)
                 }
             }
             true

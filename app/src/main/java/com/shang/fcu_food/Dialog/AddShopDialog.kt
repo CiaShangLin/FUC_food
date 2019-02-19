@@ -23,6 +23,7 @@ import com.shang.fcu_food.R
 import com.shang.fcu_food.Unit.FirebaseUnits
 import com.shang.fcu_food.Unit.PickPictureUnit
 import kotlinx.android.synthetic.main.dialog_addshop.*
+import kotlinx.android.synthetic.main.dialog_addshop.view.*
 import org.jetbrains.anko.support.v4.toast
 
 class AddShopDialog : DialogFragment() {
