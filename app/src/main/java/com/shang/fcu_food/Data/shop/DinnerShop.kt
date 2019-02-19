@@ -16,6 +16,7 @@ class DinnerShop : Shop(){
     override var errorDrawable:Int= R.drawable.ic_shop
     override var shop_tag: String = Shop.DINNER_SHOP
 
+
     override fun getQuery(): Query {
         var query = FirebaseDatabase.getInstance().getReference().child(shop_tag)
         query.addValueEventListener(object : ValueEventListener {

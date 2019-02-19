@@ -25,11 +25,12 @@ open class Menu {
 
     constructor()
 
-    open fun getQuery(shop_tag: String, shop_id: String): Query? {
+    open fun getQuery(shop_tag: String, shop_id: String): Query?{
         return null
     }
 
-    open fun getOption(shop_tag: String, shop_id: String): FirebaseRecyclerOptions<Menu>? {
+    open fun getOption(shop_tag: String, shop_id: String): FirebaseRecyclerOptions<Menu>?{
         return null
     }
+
 }

@@ -2,6 +2,7 @@ package com.shang.fcu_food.Data.shop
 
 import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.google.firebase.database.*
+import com.shang.fcu_food.Data.menu.DrinkMenu
 import com.shang.fcu_food.Data.menu.Menu
 import com.shang.fcu_food.Data.menu.SnackMenu
 import com.shang.fcu_food.R
@@ -14,6 +15,7 @@ class SnackShop : Shop() {
 
     override var errorDrawable: Int = R.drawable.ic_shop
     override var shop_tag: String = Shop.SNACK_SHOP
+
 
     override fun getQuery(): Query {
         var query = FirebaseDatabase.getInstance().getReference().child(shop_tag)

@@ -63,7 +63,7 @@ class DetailMenuActivity : AppCompatActivity() {
             Shop.DINNER_SHOP -> DinnerMenu()
             Shop.DRINK_SHOP -> DrinkMenu()
             Shop.SNACK_SHOP -> SnackMenu()
-            else -> Menu()
+            else -> BreakfastMenu()
         }
 
         adapter = DetailMenuAdapter(this, menu.getOption(shop_type_tag, shop_id)!!)

@@ -8,16 +8,15 @@ import com.shang.fcu_food.R
 class DinnerMenu : Menu() {
     override var errorDrawable:Int= R.drawable.ic_dinner
 
-    override fun getQuery(shop_tag: String, shop_id: String): Query? {
+    override fun getQuery(shop_tag: String, shop_id: String): Query {
         var query=FirebaseDatabase.getInstance()
             .getReference().child("$shop_tag/$shop_id/menu")
-
         return query
     }
 
-    override fun getOption(shop_tag: String, shop_id: String): FirebaseRecyclerOptions<Menu>? {
+    override fun getOption(shop_tag: String, shop_id: String): FirebaseRecyclerOptions<Menu> {
         var options = FirebaseRecyclerOptions.Builder<DinnerMenu>()
-            .setQuery(getQuery(shop_tag,shop_id)!!, DinnerMenu::class.java).build()
+            .setQuery(getQuery(shop_tag,shop_id), DinnerMenu::class.java).build()
         return options as FirebaseRecyclerOptions<Menu>
     }
 }
