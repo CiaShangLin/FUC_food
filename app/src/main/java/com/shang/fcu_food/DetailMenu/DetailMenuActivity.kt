@@ -9,6 +9,7 @@ import com.shang.fcu_food.Data.*
 import com.shang.fcu_food.Data.menu.*
 import com.shang.fcu_food.Data.shop.*
 import com.shang.fcu_food.Dialog.AddMenuDialog
+import com.shang.fcu_food.Dialog.EditMenuDialog
 import com.shang.fcu_food.R
 import com.shang.fcu_food.Unit.AdmobUnit
 import kotlinx.android.synthetic.main.activity_detail_menu.*
@@ -51,6 +52,11 @@ class DetailMenuActivity : AppCompatActivity() {
                 R.id.menu_detailmenu_recommend -> {
                     position = (Math.random() * (detailMenuRecyc.adapter?.itemCount!!)).toInt()
                     adapter.recommend(linearLayoutManager, position)
+                }
+                R.id.menu_detailmenu_editMenu->{
+                    var menu=adapter.getItem(linearLayoutManager?.findFirstVisibleItemPosition().toInt())
+                    var editMenuDialog=EditMenuDialog.getInstance(shop_name,menu.name,menu.price)
+                    editMenuDialog.show(supportFragmentManager,EditMenuDialog.TAG)
                 }
             }
             true
@@ -95,6 +101,7 @@ class DetailMenuActivity : AppCompatActivity() {
         //var position=linearLayoutManager?.findFirstVisibleItemPosition().toInt()
         //var shop =(adapter as FirebaseRecyclerAdapter<Shop, DetailShopVH>)?.getItem(position)
         //detailMenuRecyc.smoothScrollToPosition(position)
+
     }
 
 }

@@ -2,8 +2,8 @@
 <menu xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:android="http://schemas.android.com/apk/res/android">
 
 
-
-
+    <item android:title="修改菜單" app:showAsAction="always" android:icon="@drawable/ic_edit"
+          android:id="@+id/menu_detailmenu_editMenu"/>
     <item android:title="@string/Menu_DetailShop_Recommend" android:id="@+id/menu_detailmenu_recommend"
           android:icon="@drawable/ic_recommend" app:showAsAction="always"/>
 </menu>

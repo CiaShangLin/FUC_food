@@ -20,7 +20,7 @@
             app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
             app:layout_constraintTop_toTopOf="parent" android:text="@string/dialog_addshop_Title"
             android:textSize="28dp"
-            android:textColor="@android:color/black" android:layout_marginTop="16dp"/>
+            android:textColor="@android:color/black" android:layout_marginTop="16dp" android:textStyle="italic"/>
     <Button
             android:text="新增"
             android:layout_width="wrap_content"

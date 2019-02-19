@@ -9,6 +9,7 @@ class TempMenu {
     var comment: String = ""
 
     constructor()
+    //新增菜單用
     constructor(shopname: String, menuname: String, star: Double, price: Int, uid: String, comment: String) {
         this.shopname = shopname
         this.menuname = menuname
@@ -16,6 +17,14 @@ class TempMenu {
         this.price = price
         this.uid = uid
         this.comment = comment
+    }
+
+    //修改菜單用
+    constructor(shopname: String, menuname: String, price: Int, uid: String){
+        this.shopname = shopname
+        this.menuname = menuname
+        this.price = price
+        this.uid = uid
     }
 
 

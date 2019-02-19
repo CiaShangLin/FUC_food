@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                             xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <TextView
+            android:text="修改菜單資訊"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView12"
+            android:textColor="@android:color/black" android:textSize="28dp" android:layout_marginStart="8dp"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginTop="16dp"
+            app:layout_constraintTop_toTopOf="parent" android:textStyle="italic"/>
+    <ImageView
+            android:layout_width="36dp"
+            android:layout_height="36dp" app:srcCompat="@drawable/ic_menu"
+            android:id="@+id/imageView32" android:layout_marginTop="24dp"
+            app:layout_constraintTop_toBottomOf="@+id/textView12" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="16dp"/>
+    <ImageView
+            android:layout_width="36dp"
+            android:layout_height="36dp" app:srcCompat="@drawable/ic_dollar"
+            android:id="@+id/imageView33" android:layout_marginTop="32dp"
+            app:layout_constraintTop_toBottomOf="@+id/imageView32" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="16dp"/>
+    <android.support.design.widget.TextInputLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@+id/imageView32" android:layout_marginStart="8dp"
+            app:layout_constraintTop_toTopOf="@+id/imageView32"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView32" android:id="@+id/editMenuNameTvEt"
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp">
+
+        <android.support.design.widget.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+        />
+    </android.support.design.widget.TextInputLayout>
+    <android.support.design.widget.TextInputLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@+id/imageView33" android:layout_marginStart="8dp"
+            app:layout_constraintTop_toTopOf="@+id/imageView33"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView33" android:id="@+id/editMenuPirceTvEt"
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp">
+
+        <android.support.design.widget.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+        />
+    </android.support.design.widget.TextInputLayout>
+    <Button
+            android:text="提交修正"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/editMenuBt" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+            style="@style/dialog_button"
+            app:layout_constraintBottom_toBottomOf="@+id/editMenuPictureImg"/>
+    <ImageView
+            android:layout_width="72dp"
+            android:layout_height="72dp" app:srcCompat="@drawable/ic_add"
+            android:id="@+id/editMenuPictureImg"
+            android:background="@android:color/darker_gray"
+            app:layout_constraintTop_toBottomOf="@+id/textView13" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="16dp" android:scaleType="center"/>
+    <TextView
+            android:text="菜品照片"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView13"
+            app:layout_constraintStart_toStartOf="@+id/editMenuPictureImg"
+            app:layout_constraintEnd_toEndOf="@+id/editMenuPictureImg" android:textColor="@android:color/black"
+            android:layout_marginTop="32dp" app:layout_constraintTop_toBottomOf="@+id/imageView33"/>
+    <TextView
+            android:text="@string/Add_Message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView14" android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@+id/editMenuPictureImg" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="16dp" android:textColor="@android:color/black" android:textSize="18dp"/>
+</android.support.constraint.ConstraintLayout>
