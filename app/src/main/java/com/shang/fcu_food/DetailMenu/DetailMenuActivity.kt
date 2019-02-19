@@ -48,8 +48,6 @@ class DetailMenuActivity : AppCompatActivity() {
         }
         detailMenuTb.setOnMenuItemClickListener {
             when (it.itemId) {
-                R.id.menu_detailmenu_addMenu ->
-                    AddMenuDialog.getInstance(shop_name).show(supportFragmentManager, AddMenuDialog.TAG)
                 R.id.menu_detailmenu_recommend -> {
                     position = (Math.random() * (detailMenuRecyc.adapter?.itemCount!!)).toInt()
                     adapter.recommend(linearLayoutManager, position)

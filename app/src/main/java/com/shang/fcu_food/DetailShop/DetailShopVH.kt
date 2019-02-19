@@ -12,6 +12,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.shang.fcu_food.Data.*
 import com.shang.fcu_food.Data.shop.*
 import com.shang.fcu_food.DetailMenu.DetailMenuActivity
+import com.shang.fcu_food.Dialog.AddMenuDialog
 import com.shang.fcu_food.Dialog.EditShopDialog
 import com.shang.fcu_food.Dialog.ImageViewDialog
 import com.shang.fcu_food.Maps.MapsActivity
@@ -29,6 +30,7 @@ class DetailShopVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
     var shopMenu = itemView.findViewById<RecyclerView>(R.id.shopMenu)
     var shopPictureImg = itemView.findViewById<ImageView>(R.id.shopPictureImg)
     var shopEditImg = itemView.findViewById<ImageView>(R.id.shopEditImg)
+    var shopAddMenuImg = itemView.findViewById<ImageView>(R.id.shopAddMenuImg)
 
     fun bind(model: Shop, position: Int, activity: DetailShopActivity) {
 
@@ -37,11 +39,9 @@ class DetailShopVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
         itemView.shopStarTv.text = String.format("%.1f", model.star)
         itemView.shopPhoneTv.text = model.phone
 
-        FileStorageUnit.ImageLoader(
-            itemView.context, model.shop_tag, model.name, model.name
-            , itemView.shopPictureImg, model.errorDrawable, RequestOptions()
-        )
 
+
+        //Google Map
         itemView.shopMapIg.setOnClickListener {
             activity.startActivity(Intent(activity, MapsActivity::class.java).apply {
                 this.action = activity.javaClass.simpleName
@@ -50,11 +50,19 @@ class DetailShopVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
             })
         }
 
+        //店家圖片
         itemView.shopPictureImg.setOnClickListener {
             ImageViewDialog.getInstance(model.shop_tag, model.name, model.name)
                 .show(activity.supportFragmentManager, ImageViewDialog.TAG)
         }
 
+        //店家圖片讀取
+        FileStorageUnit.ImageLoader(
+            itemView.context, model.shop_tag, model.name, model.name
+            , itemView.shopPictureImg, model.errorDrawable, RequestOptions()
+        )
+
+        //下面的Menu
         itemView.shopMenu.layoutManager = GridLayoutManager(itemView.context, 2)
         itemView.shopMenu.adapter =
                 SimpleMenuAdapter(
@@ -64,8 +72,14 @@ class DetailShopVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
                     getItemClick(model.shop_tag, model.id.toString(), model.name, itemView.context)
                 )
 
+        //修改店家
         itemView.shopEditImg.setOnClickListener {
             EditShopDialog.getInstance(model, model.shop_tag).show(activity.supportFragmentManager, EditShopDialog.TAG)
+        }
+
+        //新增菜單
+        itemView.shopAddMenuImg.setOnClickListener {
+            AddMenuDialog.getInstance(model.name).show(activity.supportFragmentManager, AddMenuDialog.TAG)
         }
 
     }

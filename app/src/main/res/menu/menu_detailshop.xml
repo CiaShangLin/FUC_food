@@ -3,6 +3,7 @@
 
     <item android:title="@string/Menu_DetailShop_Search" android:icon="@drawable/ic_search" app:showAsAction="always"
           android:id="@+id/menu_detailshop_search" android:visible="false"/>
+
     <item android:title="@string/Menu_DetailShop_Recommend" android:id="@+id/menu_detailshop_recommend"
           app:showAsAction="always" android:icon="@drawable/ic_recommend"/>
 
