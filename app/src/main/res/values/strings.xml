@@ -45,6 +45,9 @@
     <string name="dialog_addshop_hint_Adreess">地址(點擊左邊圖示)</string>
     <string name="dialog_addshop_hint_Open">營業時間(可不輸入)</string>
 
+    <string name="dialog_addmenu_hint_MenuName">菜品名稱</string>
+    <string name="dialog_addmenu_hint_Price">價錢</string>
+    <string name="dialog_addmenu_hint_Commnet">評論(例如:好吃)</string>
 
     <string-array name="dialog_addshop_tagSpinner">
         <item>早餐</item>
