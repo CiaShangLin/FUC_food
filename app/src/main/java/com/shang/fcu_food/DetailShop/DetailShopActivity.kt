@@ -16,12 +16,12 @@ import org.jetbrains.anko.toast
 
 class DetailShopActivity : AppCompatActivity() {
 
-    var position: Int = 0
-    var shop_tag: String = ""
+    private var position: Int = 0
+    private var shop_tag: String = ""
 
-    lateinit var linearLayoutManager: LinearLayoutManager
-    lateinit var adapter: DetailShopAdapter
-    lateinit var shop: Shop
+    private lateinit var linearLayoutManager: LinearLayoutManager
+    private lateinit var adapter: DetailShopAdapter
+    private lateinit var shop: Shop
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

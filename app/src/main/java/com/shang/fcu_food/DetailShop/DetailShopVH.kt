@@ -39,8 +39,6 @@ class DetailShopVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
         itemView.shopStarTv.text = String.format("%.1f", model.star)
         itemView.shopPhoneTv.text = model.phone
 
-
-
         //Google Map
         itemView.shopMapIg.setOnClickListener {
             activity.startActivity(Intent(activity, MapsActivity::class.java).apply {
