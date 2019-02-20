@@ -19,7 +19,7 @@ import com.shang.fcu_food.R
 class DrinkFragment : Fragment() {
 
     companion object {
-        var drinkFragment: DrinkFragment? = null
+        private var drinkFragment: DrinkFragment? = null
 
         fun getInstance(): DrinkFragment {
             if (drinkFragment == null) {

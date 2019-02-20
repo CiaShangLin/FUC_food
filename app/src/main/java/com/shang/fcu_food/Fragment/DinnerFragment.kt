@@ -20,7 +20,7 @@ class DinnerFragment : Fragment() {
 
 
     companion object {
-        var dinnerFragment: DinnerFragment? = null
+        private var dinnerFragment: DinnerFragment? = null
 
         fun getInstance(): DinnerFragment {
             if (dinnerFragment == null) {
