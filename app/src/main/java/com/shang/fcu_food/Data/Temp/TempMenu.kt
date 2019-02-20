@@ -1,4 +1,4 @@
-package com.shang.fcu_food.Data
+package com.shang.fcu_food.Data.Temp
 
 class TempMenu : TempData {
 

@@ -11,16 +11,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
-import com.google.android.gms.maps.model.LatLng
-import com.shang.fcu_food.Data.TempMenu
+import com.shang.fcu_food.Data.Temp.TempMenu
 import com.shang.fcu_food.FirebaseCallback
 import com.shang.fcu_food.Main.GlideApp
-import com.shang.fcu_food.Maps.MapsActivity
 import com.shang.fcu_food.R
 import com.shang.fcu_food.Unit.FirebaseUnits
 import com.shang.fcu_food.Unit.PickPictureUnit
 import kotlinx.android.synthetic.main.dialog_editmenu.*
-import kotlinx.android.synthetic.main.dialog_editshop.*
 import org.jetbrains.anko.support.v4.toast
 
 class EditMenuDialog : DialogFragment() {

@@ -14,7 +14,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.Spinner
 import com.google.android.gms.maps.model.LatLng
-import com.shang.fcu_food.Data.*
+import com.shang.fcu_food.Data.Temp.TempShop
 import com.shang.fcu_food.Data.shop.*
 import com.shang.fcu_food.FirebaseCallback
 import com.shang.fcu_food.Main.GlideApp
@@ -23,7 +23,6 @@ import com.shang.fcu_food.R
 import com.shang.fcu_food.Unit.FirebaseUnits
 import com.shang.fcu_food.Unit.PickPictureUnit
 import kotlinx.android.synthetic.main.dialog_addshop.*
-import kotlinx.android.synthetic.main.dialog_addshop.view.*
 import org.jetbrains.anko.support.v4.toast
 
 class AddShopDialog : DialogFragment() {

@@ -14,7 +14,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.Spinner
 import com.google.android.gms.maps.model.LatLng
-import com.shang.fcu_food.Data.*
+import com.shang.fcu_food.Data.Temp.TempShop
 import com.shang.fcu_food.Data.shop.*
 import com.shang.fcu_food.FirebaseCallback
 import com.shang.fcu_food.Main.GlideApp

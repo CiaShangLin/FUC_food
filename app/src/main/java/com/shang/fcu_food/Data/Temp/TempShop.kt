@@ -1,6 +1,6 @@
-package com.shang.fcu_food.Data
+package com.shang.fcu_food.Data.Temp
 
-class TempShop :TempData{
+class TempShop : TempData {
 
     override var ref: String="tempShop"
     override var uid: String = ""

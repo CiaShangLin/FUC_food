@@ -1,4 +1,4 @@
-package com.shang.fcu_food.Data
+package com.shang.fcu_food.Data.Temp
 
 open abstract class TempData {
     abstract var ref:String

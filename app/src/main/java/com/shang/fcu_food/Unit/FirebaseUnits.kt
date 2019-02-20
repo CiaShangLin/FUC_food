@@ -14,6 +14,9 @@ import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageMetadata
 import com.google.firebase.storage.StorageReference
 import com.shang.fcu_food.Data.*
+import com.shang.fcu_food.Data.Temp.TempData
+import com.shang.fcu_food.Data.Temp.TempMenu
+import com.shang.fcu_food.Data.Temp.TempShop
 import com.shang.fcu_food.DataBind
 import com.shang.fcu_food.FirebaseCallback
 import com.shang.fcu_food.R
