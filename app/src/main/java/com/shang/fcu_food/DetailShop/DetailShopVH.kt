@@ -72,7 +72,7 @@ class DetailShopVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         //修改店家
         itemView.shopEditImg.setOnClickListener {
-            EditShopDialog.getInstance(model, model.shop_tag).show(activity.supportFragmentManager, EditShopDialog.TAG)
+            EditShopDialog.getInstance(model).show(activity.supportFragmentManager, EditShopDialog.TAG)
         }
 
         //新增菜單

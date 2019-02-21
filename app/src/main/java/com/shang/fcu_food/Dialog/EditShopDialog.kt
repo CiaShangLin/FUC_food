@@ -35,20 +35,20 @@ class EditShopDialog : DialogFragment() {
         private val SHOP_TAG: String = "SHOP_TAG"
 
         private var editShopDialog: EditShopDialog? = null
-        fun getInstance(shop: Shop, shop_tag: String): EditShopDialog {
+        fun getInstance(shop: Shop): EditShopDialog {
             if (editShopDialog == null) {
                 editShopDialog = EditShopDialog()
             }
-            editShopDialog?.arguments = getBundle(shop, shop_tag)
+            editShopDialog?.arguments = getBundle(shop)
             return editShopDialog as EditShopDialog
         }
 
-        private fun getBundle(shop: Shop, shop_tag: String): Bundle = Bundle().apply {
+        private fun getBundle(shop: Shop): Bundle = Bundle().apply {
             this.putString(NAME, shop.name)
             this.putString(TIME, shop.time)
             this.putString(PHONE, shop.phone)
             this.putString(ADDRESS, shop.address)
-            this.putString(SHOP_TAG, shop_tag)
+            this.putString(SHOP_TAG, shop.shop_tag)
         }
     }
 
