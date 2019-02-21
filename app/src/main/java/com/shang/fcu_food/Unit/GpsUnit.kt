@@ -30,20 +30,5 @@ class GpsUnit {
             }
         }
 
-        fun returnLocation(activity: MapsActivity, latlng:LatLng){
-            activity.alert("確定是這裡嗎?\n$latlng.", "確認地點") {
-                yesButton {
-                    var intent = Intent().apply {
-                        this.putExtra(MapsActivity.LATLNG, latlng)
-                    }
-                    activity.setResult(MapsActivity.REQUEST_CODE_LATLNG, intent)
-                    activity.finish()
-                }
-                noButton {
-
-                }
-            }.show()
-        }
-
     }
 }
