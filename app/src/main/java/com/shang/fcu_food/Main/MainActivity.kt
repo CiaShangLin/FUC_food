@@ -2,11 +2,13 @@ package com.shang.fcu_food.Main
 
 import android.app.Activity
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.Handler
 import android.os.Message
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.IdpResponse
 import com.google.firebase.auth.FirebaseAuth
@@ -19,6 +21,7 @@ import com.shang.fcu_food.R
 import com.shang.fcu_food.Unit.AdmobUnit
 import com.shang.fcu_food.Unit.FirebaseUnits
 import com.shang.fcu_food.Unit.PermissionUnit
+import com.shang.fcu_food.Unit.VersionCheckUnit
 import kotlinx.android.synthetic.main.drawer_layout.*
 import kotlinx.android.synthetic.main.toolbar_layout.*
 import org.jetbrains.anko.alert
@@ -31,6 +34,9 @@ class MainActivity : AppCompatActivity() {
         override fun handleMessage(msg: Message?) {
             when (msg?.what) {
                 NetworkDialog.NETWORK_STATUS -> init()
+                VersionCheckUnit.VERSION_CHECK_NEW -> {  //目前是新版本
+                    loadView()
+                }
             }
         }
     }
@@ -39,6 +45,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+
+        Log.d("TAG", "oncreate")
         /*lottie.addAnimatorListener(object :Animator.AnimatorListener{
             override fun onAnimationRepeat(p0: Animator?) {
 
@@ -97,25 +105,30 @@ class MainActivity : AppCompatActivity() {
         init()
     }
 
-    fun init() {
+    private fun init() {
         if (!PermissionUnit.checkPermission(this)) {        //已通過權限
             if (NetworkDialog.checkNetworkStatus(this)) {   //網路已開啟
-                if (FirebaseUnits.checkHasAuth()) {
-                    FirebaseUnits.database_BindAllUser()  //取得所有使用者的資訊
-                    viewPager.adapter = ViewPagerAdapter(
-                        supportFragmentManager,
-                        resources.getStringArray(R.array.ShopType)
-                    )
-                    slidingTab.setViewPager(viewPager)
-                } else {
-                    FirebaseUnits.auth_Login(this)
-                }
+                VersionCheckUnit.checkVersion(this, handler)
             } else {
                 NetworkDialog.getInstance(handler)
                     .show(supportFragmentManager, NetworkDialog.TAG)
             }
         }
     }
+
+    private fun loadView() {
+        if (FirebaseUnits.checkHasAuth()) {
+            FirebaseUnits.database_BindAllUser()  //取得所有使用者的資訊
+            viewPager.adapter = ViewPagerAdapter(
+                supportFragmentManager,
+                resources.getStringArray(R.array.ShopType)
+            )
+            slidingTab.setViewPager(viewPager)
+        } else {
+            FirebaseUnits.auth_Login(this)
+        }
+    }
+
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
