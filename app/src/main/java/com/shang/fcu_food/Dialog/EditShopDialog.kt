@@ -16,7 +16,6 @@ import android.widget.Spinner
 import com.google.android.gms.maps.model.LatLng
 import com.shang.fcu_food.Data.Temp.TempShop
 import com.shang.fcu_food.Data.shop.*
-import com.shang.fcu_food.FirebaseCallback
 import com.shang.fcu_food.Main.GlideApp
 import com.shang.fcu_food.Maps.MapsActivity
 import com.shang.fcu_food.R
@@ -29,29 +28,33 @@ class EditShopDialog : DialogFragment() {
 
     companion object {
         val TAG = "EditShopDialog"
+        private val NAME: String = "NAME"
+        private val TIME: String = "TIME"
+        private val PHONE: String = "PHONE"
+        private val ADDRESS: String = "ADDRESS"
+        private val SHOP_TAG: String = "SHOP_TAG"
 
-        var editShopDialog: EditShopDialog? = null
-
-        fun getInstance(shop: Shop, shop_tag:String): EditShopDialog {
+        private var editShopDialog: EditShopDialog? = null
+        fun getInstance(shop: Shop, shop_tag: String): EditShopDialog {
             if (editShopDialog == null) {
                 editShopDialog = EditShopDialog()
             }
-            editShopDialog?.arguments = getBundle(shop,shop_tag)
+            editShopDialog?.arguments = getBundle(shop, shop_tag)
             return editShopDialog as EditShopDialog
         }
 
-        private fun getBundle(shop: Shop, shop_tag:String): Bundle = Bundle().apply {
-            this.putString("name", shop.name)
-            this.putString("time", shop.time)
-            this.putString("phone", shop.phone)
-            this.putString("address", shop.address)
-            this.putString("shop_tag", shop_tag)
+        private fun getBundle(shop: Shop, shop_tag: String): Bundle = Bundle().apply {
+            this.putString(NAME, shop.name)
+            this.putString(TIME, shop.time)
+            this.putString(PHONE, shop.phone)
+            this.putString(ADDRESS, shop.address)
+            this.putString(SHOP_TAG, shop_tag)
         }
     }
 
-    var bitmap: Bitmap? = null
-    lateinit var progressDialog: ProgressDialog
-    var callback = object : FirebaseCallback {
+    private var bitmap: Bitmap? = null
+    private lateinit var progressDialog: ProgressDialog
+    private var callback = object : FirebaseCallback {
         override fun statusCallBack(database_status: Boolean, storage_status: Boolean) {
             if (database_status && storage_status) {
                 toast("新增成功")
@@ -90,10 +93,10 @@ class EditShopDialog : DialogFragment() {
             this.setMessage("努力上傳中")
         }
 
-        editShopNameTvEt.editText?.setText(arguments?.getString("name"))
-        editShopOpenTvEt.editText?.setText(arguments?.getString("time"))
-        editShopPhoneTvEt.editText?.setText(arguments?.getString("phone"))
-        editShopAddressTvEt.editText?.setText(arguments?.getString("address"))
+        editShopNameTvEt.editText?.setText(arguments?.getString(NAME))
+        editShopOpenTvEt.editText?.setText(arguments?.getString(TIME))
+        editShopPhoneTvEt.editText?.setText(arguments?.getString(PHONE))
+        editShopAddressTvEt.editText?.setText(arguments?.getString(ADDRESS))
 
         return view
     }
@@ -103,7 +106,7 @@ class EditShopDialog : DialogFragment() {
 
         editShopGoogleMapImg.setOnClickListener {
             startActivityForResult(Intent(activity, MapsActivity::class.java).apply {
-                this.action=EditShopDialog::class.java.simpleName
+                this.action = EditShopDialog::class.java.simpleName
             }, MapsActivity.REQUEST_CODE_LATLNG)
         }
 
@@ -156,6 +159,6 @@ class EditShopDialog : DialogFragment() {
 
     override fun onResume() {
         super.onResume()
-        editShopTagSp.setSelection(Shop.SHOP_LIST.indexOf(arguments?.getString("shop_tag")))
+        editShopTagSp.setSelection(Shop.SHOP_LIST.indexOf(arguments?.getString(SHOP_TAG)))
     }
 }

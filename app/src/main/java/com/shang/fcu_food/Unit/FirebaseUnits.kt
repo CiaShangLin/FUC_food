@@ -18,7 +18,7 @@ import com.shang.fcu_food.Data.Temp.TempData
 import com.shang.fcu_food.Data.Temp.TempMenu
 import com.shang.fcu_food.Data.Temp.TempShop
 import com.shang.fcu_food.DataBind
-import com.shang.fcu_food.FirebaseCallback
+import com.shang.fcu_food.Dialog.FirebaseCallback
 import com.shang.fcu_food.R
 import org.jetbrains.anko.toast
 

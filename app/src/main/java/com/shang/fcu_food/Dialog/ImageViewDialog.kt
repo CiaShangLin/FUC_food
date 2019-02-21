@@ -17,25 +17,28 @@ class ImageViewDialog : DialogFragment() {
 
     companion object {
         val TAG = "ImageViewDialog"
-        val NAME = "NAME"
+        private val NAME = "NAME"
 
-        var imageViewDialog: DialogFragment? = null
+        private var imageViewDialog: DialogFragment? = null
 
         fun getInstance(shop_tag: String, shop_name: String, name: String): ImageViewDialog {
-            var bundle = Bundle().apply {
+            if (imageViewDialog == null) {
+                imageViewDialog = ImageViewDialog()
+            }
+            imageViewDialog?.arguments = Bundle().apply {
                 this.putString(DataConstant.SHOP_TYPE_TAG, shop_tag)
                 this.putString(DataConstant.SHOP_NAME, shop_name)
                 this.putString(NAME, name)
             }
 
-            if (imageViewDialog == null) {
-                imageViewDialog = ImageViewDialog()
-            }
-            imageViewDialog?.arguments = bundle
             return imageViewDialog as ImageViewDialog
         }
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setStyle(DialogFragment.STYLE_NORMAL, R.style.dialog_theme)
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         var view = inflater.inflate(R.layout.dialog_imageview, container, false)
@@ -61,15 +64,5 @@ class ImageViewDialog : DialogFragment() {
             .into(dialogImg)
     }
 
-    override fun onResume() {
-        super.onResume()
-
-        var dialog = dialog
-        if (dialog != null) {
-            var width = ViewGroup.LayoutParams.MATCH_PARENT
-            var height = ViewGroup.LayoutParams.MATCH_PARENT
-            dialog.window.setLayout(width, height)
-        }
-    }
 
 }

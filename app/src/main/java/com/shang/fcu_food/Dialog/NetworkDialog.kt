@@ -20,8 +20,8 @@ class NetworkDialog : DialogFragment() {
         val NETWORK_STATUS: Int = 400
         val TAG = "NetworkDialog"
 
-        lateinit var handler: Handler
-        var networkDialog: NetworkDialog? = null
+        private lateinit var handler: Handler
+        private var networkDialog: NetworkDialog? = null
 
         fun getInstance(handler: Handler): NetworkDialog {
             if (networkDialog == null) {

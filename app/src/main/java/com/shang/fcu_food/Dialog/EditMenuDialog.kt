@@ -12,7 +12,6 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import com.shang.fcu_food.Data.Temp.TempMenu
-import com.shang.fcu_food.FirebaseCallback
 import com.shang.fcu_food.Main.GlideApp
 import com.shang.fcu_food.R
 import com.shang.fcu_food.Unit.FirebaseUnits
@@ -45,9 +44,9 @@ class EditMenuDialog : DialogFragment() {
 
     }
 
-    var bitmap: Bitmap? = null
-    lateinit var progressDialog: ProgressDialog
-    var callback = object : FirebaseCallback {
+    private var bitmap: Bitmap? = null
+    private lateinit var progressDialog: ProgressDialog
+    private var callback = object : FirebaseCallback {
         override fun statusCallBack(database_status: Boolean, storage_status: Boolean) {
             if (database_status && storage_status) {
                 toast("新增成功")

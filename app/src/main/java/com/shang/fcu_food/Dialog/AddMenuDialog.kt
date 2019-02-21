@@ -14,7 +14,6 @@ import android.widget.ImageView
 import android.widget.RatingBar
 import com.shang.fcu_food.Data.DataConstant
 import com.shang.fcu_food.Data.Temp.TempMenu
-import com.shang.fcu_food.FirebaseCallback
 import com.shang.fcu_food.Main.GlideApp
 import com.shang.fcu_food.R
 import com.shang.fcu_food.Unit.FirebaseUnits
@@ -26,23 +25,22 @@ class AddMenuDialog : DialogFragment() {
 
     companion object {
         val TAG = "AddMenuDialog"
+        private var addMenuDialog: AddMenuDialog? = null
 
-        var addMenuDialog: AddMenuDialog? = null
         fun getInstance(shopName: String): AddMenuDialog {
-            var bundle = Bundle().apply {
-                this.putString(DataConstant.SHOP_NAME, shopName)
-            }
             if (addMenuDialog == null) {
                 addMenuDialog = AddMenuDialog()
             }
-            addMenuDialog?.arguments = bundle
+            addMenuDialog?.arguments = Bundle().apply {
+                this.putString(DataConstant.SHOP_NAME, shopName)
+            }
             return addMenuDialog!!
         }
     }
 
-    var bitmap: Bitmap? = null
-    lateinit var progressDialog: ProgressDialog
-    var callback = object : FirebaseCallback {
+    private var bitmap: Bitmap? = null
+    private lateinit var progressDialog: ProgressDialog
+    private var callback = object : FirebaseCallback {
         override fun statusCallBack(database_status: Boolean, storage_status: Boolean) {
             if (database_status && storage_status) {
                 toast("新增成功")

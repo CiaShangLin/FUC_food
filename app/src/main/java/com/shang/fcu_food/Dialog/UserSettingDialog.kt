@@ -18,7 +18,7 @@ class UserSettingDialog : DialogFragment() {
 
     companion object {
         val TAG = "UserSettingDialog"
-        var userSettingDialog: UserSettingDialog? = null
+        private var userSettingDialog: UserSettingDialog? = null
         fun getInstance(): UserSettingDialog {
             if (userSettingDialog == null) {
                 userSettingDialog = UserSettingDialog()
@@ -67,7 +67,7 @@ class UserSettingDialog : DialogFragment() {
 
     }
 
-    fun defaultSetting(user:User){
+    private fun defaultSetting(user:User){
         //預設名字
         userSettingNameTvEt.editText?.setText(user.name)
 
@@ -85,8 +85,8 @@ class UserSettingDialog : DialogFragment() {
 
     inner class MySpinnerAdapter(var context: Context) : BaseAdapter() {
 
-        var title: Array<String> = arrayOf()
-        var image: Array<Int> = arrayOf()
+        private var title: Array<String> = arrayOf()
+        private var image: Array<Int> = arrayOf()
 
         init {
             title = context.resources.getStringArray(R.array.userSetting_Title)

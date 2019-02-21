@@ -16,7 +16,6 @@ import android.widget.Spinner
 import com.google.android.gms.maps.model.LatLng
 import com.shang.fcu_food.Data.Temp.TempShop
 import com.shang.fcu_food.Data.shop.*
-import com.shang.fcu_food.FirebaseCallback
 import com.shang.fcu_food.Main.GlideApp
 import com.shang.fcu_food.Maps.MapsActivity
 import com.shang.fcu_food.R
@@ -29,7 +28,7 @@ class AddShopDialog : DialogFragment() {
 
     companion object {
         val TAG = "AddShopDialog"
-        var addShopDialog: AddShopDialog? = null
+        private var addShopDialog: AddShopDialog? = null
 
         fun getInstance(): AddShopDialog {
             if (addShopDialog == null) {
@@ -39,9 +38,9 @@ class AddShopDialog : DialogFragment() {
         }
     }
 
-    var bitmap: Bitmap? = null
-    lateinit var progressDialog: ProgressDialog
-    var callback = object : FirebaseCallback {
+    private var bitmap: Bitmap? = null
+    private lateinit var progressDialog: ProgressDialog
+    private var callback = object : FirebaseCallback {
         override fun statusCallBack(database_status: Boolean, storage_status: Boolean) {
             if (database_status && storage_status) {
                 toast("新增成功")
@@ -142,8 +141,4 @@ class AddShopDialog : DialogFragment() {
 
     }
 
-
-    override fun onResume() {
-        super.onResume()
-    }
 }

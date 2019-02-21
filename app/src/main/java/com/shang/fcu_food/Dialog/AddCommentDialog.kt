@@ -19,19 +19,18 @@ class AddCommentDialog : DialogFragment() {
 
     companion object {
         val TAG: String = "AddCommentDialog"
-        val MENU_ID: String = "MENU_ID"
-        val COMMENT_SIZE: String = "COMMENT_SIZE"
-        var commentDialog: AddCommentDialog? = null
+        private val MENU_ID: String = "MENU_ID"
+        private val COMMENT_SIZE: String = "COMMENT_SIZE"
+        private var commentDialog: AddCommentDialog? = null
 
         fun getInstace(menu_id: String, comment_size: String): AddCommentDialog {
-            var bundle = Bundle()
-            bundle.putString(MENU_ID, menu_id)
-            bundle.putString(COMMENT_SIZE, comment_size)
-
             if (commentDialog == null) {
                 commentDialog = AddCommentDialog()
             }
-            commentDialog?.arguments = bundle
+            commentDialog?.arguments = Bundle().apply {
+                this.putString(MENU_ID, menu_id)
+                this.putString(COMMENT_SIZE, comment_size)
+            }
             return commentDialog!!
         }
     }
