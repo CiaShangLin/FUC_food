@@ -36,7 +36,7 @@ class CommentVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
 
     fun bind(position: Int, model: UserComment) {
-        itemView.commentNameTv.setText(getName(model.uid))
+        itemView.commentNameTv.setText(model.getUserName(model.uid))
         itemView.commentContentTv.setText(model.comment)
         itemView.commentStarTv.setText(model.star.toString())
 
@@ -51,24 +51,7 @@ class CommentVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
             }
         }
 
-        itemView.commentImg.setImageResource(getPicture(model.uid))
+        itemView.commentImg.setImageResource(model.getUserPicture(model.uid))
     }
 
-    fun getName(uid: String): String {
-        var name = DataBind.allUser.get(uid)?.name
-        if (name != null)
-            return name
-        return "小明"
-    }
-
-    fun getPicture(uid: String): Int {
-        var user = DataBind.allUser.get(uid)
-        when (user?.picture) {
-            "1" -> return R.drawable.ic_cat
-            "2" -> return R.drawable.ic_dog
-            "3" -> return R.drawable.ic_boy
-            "4" -> return R.drawable.ic_girl
-        }
-        return R.drawable.ic_user
-    }
 }

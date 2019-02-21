@@ -1,5 +1,8 @@
 package com.shang.fcu_food.Data
 
+import com.shang.fcu_food.DataBind
+import com.shang.fcu_food.R
+
 class UserComment {
     var uid: String = ""           //使用者的UID或是帳號
     var comment: String = ""      //使用者給予的評價
@@ -19,5 +22,23 @@ class UserComment {
         map.put("star",star)
         map.put("comment",comment)
         return map
+    }
+
+    fun getUserName(uid:String):String{
+        var name = DataBind.allUser.get(uid)?.name
+        if (name != null)
+            return name
+        return "小明"
+    }
+
+    fun getUserPicture(uid: String): Int {
+        var user = DataBind.allUser.get(uid)
+        when (user?.picture) {
+            "1" -> return R.drawable.ic_cat
+            "2" -> return R.drawable.ic_dog
+            "3" -> return R.drawable.ic_boy
+            "4" -> return R.drawable.ic_girl
+        }
+        return R.drawable.ic_user
     }
 }
