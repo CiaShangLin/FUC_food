@@ -25,10 +25,6 @@ import org.jetbrains.anko.yesButton
 class MapListener(var mMap: GoogleMap, var activity: MapsActivity) :
     GoogleMap.OnMapClickListener, GoogleMap.OnMyLocationButtonClickListener {
 
-
-    val TAG: String = "MapsActivity"
-
-
     //只為了取得經緯度
     fun initGetLocation(con: View,lottieView:LottieAnimationView) {
         lottieView.visibility=View.VISIBLE
@@ -51,7 +47,7 @@ class MapListener(var mMap: GoogleMap, var activity: MapsActivity) :
         if (intent != null) {
             position = intent.getIntExtra(DataConstant.POSITION, 0)
             shop_tag = intent.getStringExtra(DataConstant.SHOP_TYPE_TAG)
-            Log.v(TAG, "position:$position shoptag:$shop_tag")
+            Log.v(MapsActivity.TAG, "position:$position shoptag:$shop_tag")
         }
 
         when (shop_tag) {

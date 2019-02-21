@@ -19,13 +19,14 @@ import org.jetbrains.anko.toast
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback{
 
     companion object {
+        val TAG: String = "MapsActivity"
         val LATLNG = "LATLNG"
         val REQUEST_CODE_LATLNG: Int = 200
     }
 
-    val TAG: String = "MapsActivity"
+
     private lateinit var mMap: GoogleMap
-    lateinit var mMapListener: MapListener
+    private lateinit var mMapListener: MapListener
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
