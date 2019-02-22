@@ -27,10 +27,13 @@ class VersionCheckUnit {
                     }
 
                     override fun onDataChange(p0: DataSnapshot) {
-                        var versionCode =
+                        var versionCode =  //目前App的版本
                             context.packageManager.getPackageInfo(context.packageName, 0).versionCode.toString()
-                        var version = p0.getValue(Version::class.java)
-                        if (version?.release.equals(versionCode)) {
+                        var version = p0.getValue(Version::class.java)!!      //firebase上的版本
+                        var flag =//假設使用者先更新好了 但我的version還沒上去更新
+                            (version?.release.equals(versionCode)) || (versionCode.toInt() > version.release.toInt())
+
+                        if (flag) {
                             handler.handleMessage(Message().apply {
                                 this.what = VERSION_CHECK_NEW
                             })
