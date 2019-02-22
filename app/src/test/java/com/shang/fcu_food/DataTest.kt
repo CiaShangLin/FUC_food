@@ -1,8 +1,13 @@
 package com.shang.fcu_food
 
+import com.google.firebase.FirebaseApp
 import com.shang.fcu_food.Data.*
+import com.shang.fcu_food.Data.Temp.TempData
+import com.shang.fcu_food.Data.Temp.TempMenu
+import com.shang.fcu_food.Data.Temp.TempShop
 import com.shang.fcu_food.Data.menu.*
 import com.shang.fcu_food.Data.shop.*
+import com.shang.fcu_food.Main.MainActivity
 import org.junit.Assert
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
@@ -42,7 +47,7 @@ class DataTest {
     }
 
     @Test
-    fun Menu_Check() {
+    fun Menu_TEST() {
         var menu = Menu()
         Assert.assertEquals("0.0", menu.star.toString()) //用浮點數比較會有不準的問題
         menu.usercomment = mutableListOf<UserComment>().apply {
@@ -53,6 +58,21 @@ class DataTest {
             this.add(UserComment("uid", "comment", "5"))
         }
         Assert.assertEquals("3.0", menu.star.toString())
+
+        var breakfastMenu = BreakfastMenu()
+        var dinnerMenu = DinnerMenu()
+        var drinkMenu = DrinkMenu()
+        var snackMenu = SnackMenu()
+
+        Assert.assertEquals(breakfastMenu.errorDrawable, R.drawable.ic_breakfast)
+        Assert.assertEquals(dinnerMenu.errorDrawable, R.drawable.ic_dinner)
+        Assert.assertEquals(drinkMenu.errorDrawable, R.drawable.ic_drink)
+        Assert.assertEquals(snackMenu.errorDrawable, R.drawable.ic_snack)
+
+        Assert.assertTrue(breakfastMenu is Menu)
+        Assert.assertTrue(dinnerMenu is Menu)
+        Assert.assertTrue(drinkMenu is Menu)
+        Assert.assertTrue(snackMenu is Menu)
     }
 
     @Test
@@ -80,25 +100,18 @@ class DataTest {
         Assert.assertEquals("uid", map.get("uid"))
         Assert.assertEquals("1.0", map.get("star").toString())
         Assert.assertEquals("comment", map.get("comment"))
+
+        //假設沒有取道user的資料
+        Assert.assertEquals("小明", userComment.getUserName("uid"))
+        Assert.assertEquals(R.drawable.ic_user, userComment.getUserPicture("uid"))
     }
 
     @Test
-    fun Menu_Test() {
-        var breakfastMenu = BreakfastMenu()
-        var dinnerMenu = DinnerMenu()
-        var drinkMenu = DrinkMenu()
-        var snackMenu = SnackMenu()
-
-        Assert.assertEquals(breakfastMenu.errorDrawable, R.drawable.ic_breakfast)
-        Assert.assertEquals(dinnerMenu.errorDrawable, R.drawable.ic_dinner)
-        Assert.assertEquals(drinkMenu.errorDrawable, R.drawable.ic_drink)
-        Assert.assertEquals(snackMenu.errorDrawable, R.drawable.ic_snack)
-
-        Assert.assertTrue(breakfastMenu is Menu)
-        Assert.assertTrue(dinnerMenu is Menu)
-        Assert.assertTrue(drinkMenu is Menu)
-        Assert.assertTrue(snackMenu is Menu)
+    fun TempData_Test(){
+        var tempShop=TempShop()
+        var tempMenu= TempMenu()
+        Assert.assertTrue(tempMenu is TempData)
+        Assert.assertTrue(tempShop is TempData)
     }
-
 
 }
