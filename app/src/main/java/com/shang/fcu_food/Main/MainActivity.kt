@@ -112,7 +112,11 @@ class MainActivity : AppCompatActivity() {
     private fun init() {
         if (!PermissionUnit.checkPermission(this)) {        //已通過權限
             if (NetworkDialog.checkNetworkStatus(this)) {   //網路已開啟
-                VersionCheckUnit.checkVersion(this, handler)  //檢查版本
+                if (FirebaseUnits.checkHasAuth()) {       //檢查是否已登入帳號
+                    VersionCheckUnit.checkVersion(this, handler)  //檢查版本
+                } else {
+                    FirebaseUnits.auth_Login(this)
+                }
             } else {
                 NetworkDialog.getInstance(handler)
                     .show(supportFragmentManager, NetworkDialog.TAG)
@@ -121,16 +125,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun loadView() {
-        if (FirebaseUnits.checkHasAuth()) {       //檢查是否已登入帳號
-            FirebaseUnits.database_BindAllUser()  //取得所有使用者的資訊
-            viewPager.adapter = ViewPagerAdapter(
-                supportFragmentManager,
-                resources.getStringArray(R.array.ShopType)
-            )
-            slidingTab.setViewPager(viewPager)
-        } else {
-            FirebaseUnits.auth_Login(this)
-        }
+        FirebaseUnits.database_BindAllUser()  //取得所有使用者的資訊
+        viewPager.adapter = ViewPagerAdapter(
+            supportFragmentManager,
+            resources.getStringArray(R.array.ShopType)
+        )
+        slidingTab.setViewPager(viewPager)
     }
 
 
@@ -162,6 +162,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        //AdmobUnit.getInstance(this)?.InterstitialAd_show()
+        AdmobUnit.getInstance(this)?.InterstitialAd_show()
     }
 }

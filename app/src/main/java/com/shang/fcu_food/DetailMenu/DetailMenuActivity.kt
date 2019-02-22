@@ -79,7 +79,8 @@ class DetailMenuActivity : AppCompatActivity() {
         var pagerSnapHelper = PagerSnapHelper()
         pagerSnapHelper.attachToRecyclerView(detailMenuRecyc)
 
-        //AdmobUnit.getInstance(this)?.show(detailMenuAdView)
+        AdmobUnit.getInstance(this)?.show(detailMenuAdView)
+        AdmobUnit.getInstance(this)?.show(detailMenuAdView2)
     }
 
     override fun onResume() {

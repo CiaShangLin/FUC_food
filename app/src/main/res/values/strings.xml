@@ -3,6 +3,7 @@
 
 
     <string name="admob_id">ca-app-pub-3596318314144695/8124027094</string>
+    <string name="admob_id2">ca-app-pub-3596318314144695/8995617413</string>
     <string name="admob_id_test">ca-app-pub-3940256099942544/6300978111</string>
 
     <string name="admob_interstitial_test">ca-app-pub-3940256099942544/1033173712</string>

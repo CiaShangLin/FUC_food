@@ -5,6 +5,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Handler
 import android.os.Message
+import android.util.Log
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -32,7 +33,6 @@ class VersionCheckUnit {
                         var version = p0.getValue(Version::class.java)!!      //firebase上的版本
                         var flag =//假設使用者先更新好了 但我的version還沒上去更新
                             (version?.release.equals(versionCode)) || (versionCode.toInt() > version.release.toInt())
-
                         if (flag) {
                             handler.handleMessage(Message().apply {
                                 this.what = VERSION_CHECK_NEW

@@ -14,8 +14,8 @@ android {
         applicationId "com.shang.fcu_food"
         minSdkVersion 18
         targetSdkVersion 28
-        versionCode 7
-        versionName "2.3"
+        versionCode 8
+        versionName "3"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         android.defaultConfig.vectorDrawables.useSupportLibrary = true
         multiDexEnabled true
