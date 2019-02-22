@@ -19,6 +19,7 @@ class SimpleShopVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
     var simpleShopImg: ImageView = itemView.findViewById<ImageView>(R.id.simpleShopImg)
     var simpleShopName: TextView = itemView.findViewById(R.id.simpleShopName)
     var simpleShopStar: TextView = itemView.findViewById(R.id.simpleShopStar)
+    var simpleShopPositionTv:TextView=itemView.findViewById(R.id.simpleShopPositionTv)
 
     fun bind(position: Int, model: Shop) {
 
@@ -38,6 +39,8 @@ class SimpleShopVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
         itemView.setOnClickListener {
             goDetailShop_Activity(itemView.context, model.shop_tag, position)
         }
+
+        itemView.simpleShopPositionTv.setText((position+1).toString())
     }
 
     fun goDetailShop_Activity(context: Context, shop_tag: String, position: Int) {

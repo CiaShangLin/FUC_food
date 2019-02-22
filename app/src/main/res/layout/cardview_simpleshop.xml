@@ -38,8 +38,8 @@
                 android:id="@+id/simpleShopImg" app:layout_constraintTop_toTopOf="parent"
                 android:scaleType="fitXY" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
                 app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
-                android:layout_marginTop="4dp" android:layout_marginBottom="4dp"
-                app:layout_constraintBottom_toTopOf="@+id/divider"/>
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp" app:layout_constraintBottom_toTopOf="@+id/divider"/>
 
         <ImageView
                 android:layout_width="@dimen/cardview_small_icon_width"
@@ -57,6 +57,16 @@
                 app:layout_constraintTop_toBottomOf="@+id/simpleShopImg" app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="2dp"
                 android:layout_marginStart="2dp"/>
+        <TextView
+                android:text="11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/simpleShopPositionTv"
+                app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
+                android:textSize="18dp"
+                android:textColor="@color/fui_bgAnonymous" android:background="@drawable/text_background"
+                android:textStyle="bold"
+                android:layout_marginTop="4dp"/>
     </android.support.constraint.ConstraintLayout>
 
 </android.support.v7.widget.CardView>
