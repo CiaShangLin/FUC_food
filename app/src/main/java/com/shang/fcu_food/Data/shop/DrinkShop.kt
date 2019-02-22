@@ -8,7 +8,6 @@ import com.shang.fcu_food.R
 
 class DrinkShop : Shop() {
     companion object {
-        //val tag: String = "drink"
         var allDrinkShop: MutableList<DrinkShop> = mutableListOf<DrinkShop>()
     }
 
