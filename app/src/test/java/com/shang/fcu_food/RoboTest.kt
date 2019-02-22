@@ -65,7 +65,6 @@ class RoboTest {
         Assert.assertEquals(toolbar.menu.size(), 1)
         Assert.assertTrue(toolbar.menu.findItem(R.id.menu_main_addShop).isVisible)
         Assert.assertTrue(toolbar.menu.findItem(R.id.menu_main_addShop).isEnabled)
-
     }
 
     @Test

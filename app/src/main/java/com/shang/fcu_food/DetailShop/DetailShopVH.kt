@@ -27,10 +27,11 @@ class DetailShopVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
     var shopOpenTv = itemView.findViewById<TextView>(R.id.shopOpenTv)
     var shopStarTv = itemView.findViewById<TextView>(R.id.shopStarTv)
     var shopMapIg = itemView.findViewById<ImageView>(R.id.shopMapIg)
-    var shopMenu = itemView.findViewById<RecyclerView>(R.id.shopMenu)
+    var shopMenuRecyc = itemView.findViewById<RecyclerView>(R.id.shopMenuRecyc)
     var shopPictureImg = itemView.findViewById<ImageView>(R.id.shopPictureImg)
     var shopEditImg = itemView.findViewById<ImageView>(R.id.shopEditImg)
     var shopAddMenuImg = itemView.findViewById<ImageView>(R.id.shopAddMenuImg)
+    var shopMenuImg=itemView.findViewById<ImageView>(R.id.shopMenuImg)
 
     fun bind(model: Shop, position: Int, activity: DetailShopActivity) {
 
@@ -61,8 +62,8 @@ class DetailShopVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
         )
 
         //下面的Menu
-        itemView.shopMenu.layoutManager = GridLayoutManager(itemView.context, 2)
-        itemView.shopMenu.adapter =
+        itemView.shopMenuRecyc.layoutManager = GridLayoutManager(itemView.context, 2)
+        itemView.shopMenuRecyc.adapter =
                 SimpleMenuAdapter(
                     let { model.menu },
                     model.shop_tag,
@@ -80,6 +81,10 @@ class DetailShopVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
             AddMenuDialog.getInstance(model.name).show(activity.supportFragmentManager, AddMenuDialog.TAG)
         }
 
+        itemView.shopMenuImg.setOnClickListener {
+            ImageViewDialog.getInstance(model.shop_tag,model.name,"菜單")
+                .show(activity.supportFragmentManager,ImageViewDialog.TAG)
+        }
     }
 
     //傳遞shop的id和type 還有position

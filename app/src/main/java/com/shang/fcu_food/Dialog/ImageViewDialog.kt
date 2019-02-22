@@ -1,7 +1,9 @@
 package com.shang.fcu_food.Dialog
 
+import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.DialogFragment
+import android.support.v4.widget.CircularProgressDrawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -61,7 +63,16 @@ class ImageViewDialog : DialogFragment() {
         GlideApp.with(context!!)
             .load(FirebaseUnits.storage_getImageRef(shop_tag!!, shop_name!!, image_name!!))
             .error(R.drawable.ic_error)
+            .placeholder(getLoadingDrawable(context!!))
             .into(dialogImg)
+    }
+
+    private fun getLoadingDrawable(context: Context): CircularProgressDrawable {
+        var circularProgressDrawable = CircularProgressDrawable(context)
+        circularProgressDrawable.strokeWidth = 5f
+        circularProgressDrawable.centerRadius = 60f
+        circularProgressDrawable.start()
+        return circularProgressDrawable
     }
 
 
