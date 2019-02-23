@@ -22,13 +22,13 @@ import com.shang.fcu_food.DetailShop.DetailShopActivity
 import com.shang.fcu_food.DetailShop.DetailShopVH
 import com.shang.fcu_food.Dialog.AddCommentDialog
 import com.shang.fcu_food.Dialog.AddMenuDialog
+import com.shang.fcu_food.Dialog.AddShopDialog
 import com.shang.fcu_food.Main.MainActivity
 import com.shang.fcu_food.Main.ViewPagerAdapter
-import com.shang.fcu_food.Unit.AdmobUnit
-import com.shang.fcu_food.Unit.PermissionUnit
-import com.shang.fcu_food.Unit.PickPictureUnit
+import com.shang.fcu_food.Unit.*
 import kotlinx.android.synthetic.main.dialog_addcomment.*
 import kotlinx.android.synthetic.main.dialog_addmenu.*
+import kotlinx.android.synthetic.main.dialog_addshop.*
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
@@ -125,6 +125,21 @@ class RoboTest {
         Assert.assertNotNull(PickPictureUnit.bitmapToByte(bitmap))
     }
 
+    @Test
+    fun VersionCheckUnit_Test(){
+        Assert.assertEquals(180,VersionCheckUnit.VERSION_CHECK_NEW)
+    }
+
+    @Test
+    fun GpsUnit_Test(){
+        Assert.assertEquals(100,GpsUnit.GPS_UNIT_REQUESTCODE)
+    }
+
+    @Test
+    fun FirebaseUnits_Test(){
+        Assert.assertEquals(100,FirebaseUnits.AUTH_RQEUESTCODE)
+    }
+
 
     @Test
     fun DetailShopActivity_Test() {
@@ -157,7 +172,6 @@ class RoboTest {
         Assert.assertFalse(menu_detailShop_search.isVisible)
 
         Assert.assertEquals(detailShopActivity.resources.getString(R.string.ShopInformation),detailShopTb.title)
-
     }
 
     @Test
@@ -175,18 +189,5 @@ class RoboTest {
         addCommentDialog.show(mainActivity.supportFragmentManager,AddCommentDialog.TAG)
         addCommentDialog.dismiss()
     }
-
-
-    fun AddMenuDialog_Test(supportFragmentManager:FragmentManager){
-        var addMenuDialog= AddMenuDialog.getInstance("TEST")
-        addMenuDialog.show(supportFragmentManager,AddMenuDialog.TAG)
-        Assert.assertEquals("TEST",addMenuDialog.arguments?.getString(DataConstant.SHOP_NAME))
-
-        var shadowDialog= ShadowDialog.getLatestDialog()
-        var addMenuNameTvEt=shadowDialog.findViewById<TextInputLayout>(R.id.addMenuNameTvEt)
-
-        Assert.assertNotNull(addMenuNameTvEt)
-    }
-
 
 }

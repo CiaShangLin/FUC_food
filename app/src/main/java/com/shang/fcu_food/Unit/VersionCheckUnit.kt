@@ -17,8 +17,6 @@ class VersionCheckUnit {
 
     companion object {
         val VERSION_CHECK_NEW = 180
-        val VERSION_CHECK_OLD = 150
-        val VERSION_ERROR = 404
 
         fun checkVersion(context: Context, handler: Handler) {
             var verison = FirebaseDatabase.getInstance().getReference("version")

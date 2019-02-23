@@ -7,7 +7,9 @@ import com.shang.fcu_food.Data.Temp.TempMenu
 import com.shang.fcu_food.Data.Temp.TempShop
 import com.shang.fcu_food.Data.menu.*
 import com.shang.fcu_food.Data.shop.*
+import com.shang.fcu_food.Dialog.AddShopDialog
 import com.shang.fcu_food.Main.MainActivity
+import kotlinx.android.synthetic.main.dialog_addshop.*
 import org.junit.Assert
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
