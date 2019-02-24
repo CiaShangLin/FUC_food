@@ -1,9 +1,6 @@
 package com.shang.fcu_food.Unit
 
 import android.app.Activity
-import android.content.Context
-import android.os.Handler
-import android.os.Message
 import android.support.v4.app.FragmentActivity
 import android.util.Log
 import com.firebase.ui.auth.AuthUI
@@ -23,7 +20,6 @@ import com.shang.fcu_food.Data.Temp.TempShop
 import com.shang.fcu_food.DataBind
 import com.shang.fcu_food.Dialog.FirebaseCallback
 import com.shang.fcu_food.R
-import com.shang.fcu_food.Version
 import org.jetbrains.anko.toast
 
 class FirebaseUnits {

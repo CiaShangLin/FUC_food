@@ -5,12 +5,11 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Handler
 import android.os.Message
-import android.util.Log
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import com.shang.fcu_food.Version
+import com.shang.fcu_food.Data.Version
 import org.jetbrains.anko.alert
 
 class VersionCheckUnit {

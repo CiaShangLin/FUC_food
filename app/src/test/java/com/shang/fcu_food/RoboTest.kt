@@ -2,44 +2,29 @@ package com.shang.fcu_food
 
 import android.content.Intent
 import android.graphics.Bitmap
-import android.media.Rating
 import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.design.widget.TextInputLayout
-import android.support.v4.app.FragmentManager
-import android.support.v4.content.ContextCompat
 import android.support.v4.view.ViewPager
-import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.Toolbar
-import android.widget.RatingBar
-import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.flyco.tablayout.SlidingTabLayout
 import com.google.firebase.FirebaseApp
-import com.shang.fcu_food.Data.shop.BreakfastShop
 import com.shang.fcu_food.Data.DataConstant
 import com.shang.fcu_food.Data.shop.Shop
 import com.shang.fcu_food.DetailShop.DetailShopActivity
-import com.shang.fcu_food.DetailShop.DetailShopVH
 import com.shang.fcu_food.Dialog.AddCommentDialog
-import com.shang.fcu_food.Dialog.AddMenuDialog
 import com.shang.fcu_food.Dialog.AddShopDialog
 import com.shang.fcu_food.Main.MainActivity
 import com.shang.fcu_food.Main.ViewPagerAdapter
 import com.shang.fcu_food.Unit.*
-import kotlinx.android.synthetic.main.dialog_addcomment.*
-import kotlinx.android.synthetic.main.dialog_addmenu.*
-import kotlinx.android.synthetic.main.dialog_addshop.*
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
-import org.robolectric.RuntimeEnvironment
-import org.robolectric.Shadows.shadowOf
-import org.robolectric.shadows.ShadowActivity
+import org.robolectric.annotation.Config
 import org.robolectric.shadows.ShadowAlertDialog
-import org.robolectric.shadows.ShadowDialog
 
 
 @RunWith(RobolectricTestRunner::class)
@@ -49,7 +34,7 @@ class RoboTest {
 
     @Before
     fun setMainActivity() {
-        mainActivity = Robolectric.buildActivity(MainActivity::class.java).create().visible().get()
+        mainActivity = Robolectric.buildActivity(MainActivity::class.java).create().get()
         FirebaseApp.initializeApp(mainActivity)
     }
 
@@ -105,7 +90,6 @@ class RoboTest {
         )
         viewPager.adapter = adapter
         slidingTab.setViewPager(viewPager)
-
         Assert.assertEquals(4, adapter.count)
         Assert.assertEquals(4, slidingTab.tabCount)
         Assert.assertEquals("早餐", adapter.title[0])

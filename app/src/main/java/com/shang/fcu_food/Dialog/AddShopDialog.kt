@@ -24,6 +24,7 @@ import com.shang.fcu_food.Unit.PickPictureUnit
 import kotlinx.android.synthetic.main.dialog_addshop.*
 import org.jetbrains.anko.support.v4.toast
 
+
 class AddShopDialog : DialogFragment() {
 
     companion object {

@@ -35,6 +35,8 @@ class AddCommentDialog : DialogFragment() {
         }
     }
 
+
+
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         var view = LayoutInflater.from(context).inflate(R.layout.dialog_addcomment, null)
 
@@ -49,7 +51,7 @@ class AddCommentDialog : DialogFragment() {
         var commentInputTextLayout = view.findViewById<TextInputLayout>(R.id.textInputLayout)
         var addcomment_adview=view.findViewById<AdView>(R.id.addcomment_adview)
 
-        AdmobUnit.getInstance(context!!)?.show(addcomment_adview)
+        //AdmobUnit.getInstance(context!!)?.show(addcomment_adview)
 
         var alertDialog = AlertDialog.Builder(context)
             .setTitle(R.string.CommentDialog_Title)
