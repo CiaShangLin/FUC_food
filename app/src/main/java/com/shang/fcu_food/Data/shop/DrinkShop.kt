@@ -1,6 +1,7 @@
 package com.shang.fcu_food.Data.shop
 
 import com.firebase.ui.database.FirebaseRecyclerOptions
+import com.firebase.ui.database.SnapshotParser
 import com.google.firebase.database.*
 import com.shang.fcu_food.Data.menu.DrinkMenu
 import com.shang.fcu_food.Data.menu.Menu
@@ -13,7 +14,7 @@ class DrinkShop : Shop() {
 
     override var errorDrawable: Int = R.drawable.ic_shop
     override var shop_tag: String = Shop.DRINK_SHOP
-
+    override var menu: MutableList<Menu> = mutableListOf<DrinkMenu>().toMutableList()
 
     override fun getQuery(): Query {
         var query = FirebaseDatabase.getInstance().getReference().child(shop_tag)
@@ -33,7 +34,21 @@ class DrinkShop : Shop() {
 
     override fun getOption(): FirebaseRecyclerOptions<Shop> {
         var options = FirebaseRecyclerOptions.Builder<DrinkShop>()
-            .setQuery(getQuery()!!, DrinkShop::class.java).build()
+            .setQuery(getQuery()!!, getSnapParser()as SnapshotParser<DrinkShop>).build()
         return options as FirebaseRecyclerOptions<Shop>
     }
+
+    override fun getSnapParser(): SnapshotParser<Shop> {
+        var snapshotParser = SnapshotParser<Shop> {
+            var drinkShop = it.getValue(DrinkShop::class.java)
+            var drinkMenu = mutableListOf<DrinkMenu>()
+            it.child("menu").children.forEach {
+                drinkMenu.add(it.getValue(DrinkMenu::class.java)!!)
+            }
+            drinkShop?.menu = drinkMenu.toMutableList()
+            drinkShop!!
+        }
+        return snapshotParser
+    }
+
 }

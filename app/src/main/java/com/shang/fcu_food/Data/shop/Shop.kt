@@ -1,6 +1,7 @@
 package com.shang.fcu_food.Data.shop
 
 import com.firebase.ui.database.FirebaseRecyclerOptions
+import com.firebase.ui.database.SnapshotParser
 import com.google.android.gms.maps.model.LatLng
 import com.google.firebase.database.Exclude
 import com.google.firebase.database.Query
@@ -55,6 +56,8 @@ abstract open class Shop {
     abstract open fun getQuery(): Query
 
     abstract open fun getOption(): FirebaseRecyclerOptions<Shop>
+
+    abstract open fun getSnapParser():SnapshotParser<Shop>
 
     fun getLatLng(): LatLng {
         //如果地址為空的話 他的size會是1
