@@ -8,7 +8,7 @@ import com.google.firebase.database.Query
 import com.shang.fcu_food.Data.menu.Menu
 import com.shang.fcu_food.R
 
-abstract open class Shop {
+abstract open class Shop : FirebaseShop {
     companion object {
         val BREAKFAST_SHOP = "breakfast"
         val DINNER_SHOP = "dinner"
@@ -31,7 +31,7 @@ abstract open class Shop {
     var address: String = ""        //地址 經緯度
     var phone: String = "尚無提供"         //電話
     var time: String = "尚無提供"          //營業時間
-    open var menu: MutableList<Menu>  = mutableListOf()    //這個店的菜品
+    open var menu: MutableList<Menu> = mutableListOf()    //這個店的菜品
     open var errorDrawable: Int = R.drawable.ic_shop  //錯誤圖片
     abstract open var shop_tag: String //店的類型
 
@@ -53,11 +53,11 @@ abstract open class Shop {
             return total / count
         }
 
-    abstract open fun getQuery(): Query
+    abstract override fun getQuery(): Query
 
-    abstract open fun getOption(): FirebaseRecyclerOptions<Shop>
+    abstract override open fun getOption(): FirebaseRecyclerOptions<Shop>
 
-    abstract open fun getSnapParser():SnapshotParser<Shop>
+    abstract override open fun getSnapParser(): SnapshotParser<Shop>
 
     fun getLatLng(): LatLng {
         //如果地址為空的話 他的size會是1

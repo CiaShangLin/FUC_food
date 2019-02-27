@@ -21,7 +21,7 @@ class DetailShopActivity : AppCompatActivity() {
 
     private lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var adapter: DetailShopAdapter
-    private lateinit var shop: Shop
+    private lateinit var firebaseShop:FirebaseShop
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,7 +30,7 @@ class DetailShopActivity : AppCompatActivity() {
         if (intent.extras != null) {
             position = intent.extras.getInt(DataConstant.POSITION)
             shop_tag = intent.extras.getString(DataConstant.SHOP_TYPE_TAG)
-            shop = Shop.getShopType(shop_tag)!!
+            firebaseShop = Shop.getShopType(shop_tag)!!
         }
 
         detailShopTb.inflateMenu(R.menu.menu_detailshop)
@@ -50,7 +50,7 @@ class DetailShopActivity : AppCompatActivity() {
             finish()
         }
 
-        adapter = DetailShopAdapter(this, shop.getOption())
+        adapter = DetailShopAdapter(this, firebaseShop.getOption())
         detailShopRecyc.adapter = adapter
 
         linearLayoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
