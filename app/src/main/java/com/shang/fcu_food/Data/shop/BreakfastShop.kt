@@ -27,6 +27,7 @@ class BreakfastShop : Shop() {
 
             override fun onDataChange(snapshot: DataSnapshot) {
                 allBreakfastShop.clear()
+
                 for (data in snapshot.children) {
                     var breakfastShop = data.getValue(BreakfastShop::class.java)
                     allBreakfastShop.add(breakfastShop!!)
@@ -42,7 +43,7 @@ class BreakfastShop : Shop() {
         return options as FirebaseRecyclerOptions<Shop>
     }
 
-     override fun getSnapParser(): SnapshotParser<Shop> {
+    override fun getSnapParser(): SnapshotParser<Shop> {
         var snapshotParser = SnapshotParser<Shop> {
             var breakfastShop = it.getValue(BreakfastShop::class.java)
             var breakfastMenu = mutableListOf<BreakfastMenu>()

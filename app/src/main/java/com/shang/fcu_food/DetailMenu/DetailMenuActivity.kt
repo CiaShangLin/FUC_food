@@ -26,7 +26,7 @@ class DetailMenuActivity : AppCompatActivity() {
         var shop_name: String = ""
     }
 
-    lateinit var menu: Menu
+    lateinit var firebaseMenu: FirebaseMenu
     lateinit var adapter: DetailMenuAdapter
     lateinit var linearLayoutManager: LinearLayoutManager
 
@@ -62,7 +62,7 @@ class DetailMenuActivity : AppCompatActivity() {
             true
         }
 
-        menu = when (shop_type_tag) {
+        firebaseMenu = when (shop_type_tag) {
             Shop.BREAKFAST_SHOP -> BreakfastMenu()
             Shop.DINNER_SHOP -> DinnerMenu()
             Shop.DRINK_SHOP -> DrinkMenu()
@@ -70,7 +70,7 @@ class DetailMenuActivity : AppCompatActivity() {
             else -> BreakfastMenu()
         }
 
-        adapter = DetailMenuAdapter(this, menu.getOption(shop_type_tag, shop_id)!!)
+        adapter = DetailMenuAdapter(this, firebaseMenu.getOption(shop_type_tag, shop_id)!!)
 
         linearLayoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         detailMenuRecyc.layoutManager = linearLayoutManager

@@ -5,7 +5,7 @@ import com.google.firebase.database.Query
 import com.shang.fcu_food.Data.UserComment
 import com.shang.fcu_food.R
 
-open class Menu {
+open class Menu : FirebaseMenu {
     var id: Int = -1
     var name: String = ""       //菜名
     var star: Double = 0.0       //這項菜的平均星數 從User裡算出來
@@ -25,11 +25,11 @@ open class Menu {
 
     constructor()
 
-    open fun getQuery(shop_tag: String, shop_id: String): Query?{
+    override fun getQuery(shop_tag: String, shop_id: String): Query?{
         return null
     }
 
-    open fun getOption(shop_tag: String, shop_id: String): FirebaseRecyclerOptions<Menu>?{
+    override fun getOption(shop_tag: String, shop_id: String): FirebaseRecyclerOptions<Menu>?{
         return null
     }
 
