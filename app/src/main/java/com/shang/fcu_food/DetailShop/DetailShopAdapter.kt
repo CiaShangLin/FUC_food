@@ -11,7 +11,8 @@ import com.shang.fcu_food.Data.shop.DinnerShop
 import com.shang.fcu_food.Data.shop.Shop
 import com.shang.fcu_food.R
 
-class DetailShopAdapter(var activity: DetailShopActivity, options: FirebaseRecyclerOptions<Shop>
+class DetailShopAdapter(
+    var activity: DetailShopActivity, options: FirebaseRecyclerOptions<Shop>
 ) : FirebaseRecyclerAdapter<Shop, DetailShopVH>(options) {
 
 
@@ -22,7 +23,8 @@ class DetailShopAdapter(var activity: DetailShopActivity, options: FirebaseRecyc
     }
 
     override fun onBindViewHolder(holder: DetailShopVH, position: Int, model: Shop) {
-        holder.bind(model ,position, activity)
+
+        holder.bind(model, position, activity)
     }
 
     //隨機推薦

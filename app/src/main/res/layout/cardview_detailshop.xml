@@ -6,8 +6,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" app:cardElevation="8dp" app:cardCornerRadius="8dp"
         app:cardBackgroundColor="@color/browser_actions_bg_grey" android:layout_margin="4dp"
-        android:foreground="?android:attr/selectableItemBackground"
-        android:clickable="true">
+        android:clickable="true" android:id="@+id/shopCardView">
 
 
     <android.support.constraint.ConstraintLayout

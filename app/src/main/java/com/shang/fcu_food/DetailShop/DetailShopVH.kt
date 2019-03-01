@@ -85,6 +85,8 @@ class DetailShopVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
             ImageViewDialog.getInstance(model.shop_tag,model.name,"菜單")
                 .show(activity.supportFragmentManager,ImageViewDialog.TAG)
         }
+
+
     }
 
     //傳遞shop的id和type 還有position

@@ -64,13 +64,7 @@ class SimpleMenuVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
             shop_name,
             model.name,
             itemView.simpleMenuImg,
-            when (shop_tag) {
-                Shop.BREAKFAST_SHOP -> R.drawable.ic_breakfast
-                Shop.DINNER_SHOP -> R.drawable.ic_dinner
-                Shop.DRINK_SHOP -> R.drawable.ic_drink
-                Shop.SNACK_SHOP -> R.drawable.ic_snack
-                else -> R.drawable.ic_breakfast
-            },
+            model.errorDrawable,
             RequestOptions().circleCrop()
         )
 
