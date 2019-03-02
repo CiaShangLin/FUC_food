@@ -4,7 +4,9 @@ import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.firebase.ui.database.SnapshotParser
 import com.google.android.gms.maps.model.LatLng
 import com.google.firebase.database.Exclude
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.Query
+import com.google.firebase.storage.FirebaseStorage
 import com.shang.fcu_food.Data.menu.Menu
 import com.shang.fcu_food.R
 
@@ -58,6 +60,8 @@ abstract open class Shop : FirebaseShop {
     abstract override open fun getOption(): FirebaseRecyclerOptions<Shop>
 
     abstract override open fun getSnapParser(): SnapshotParser<Shop>
+
+
 
     fun getLatLng(): LatLng {
         //如果地址為空的話 他的size會是1
