@@ -56,11 +56,6 @@ class DetailShopVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
         }
 
         //店家圖片讀取
-        /*FileStorageUnit.ImageLoader(
-            itemView.context, model.shop_tag, model.name, model.name
-            , itemView.shopPictureImg, model.errorDrawable, RequestOptions()
-        )*/
-
         FileStorageUnit.ImageLoader(
             itemView.context,
             itemView.shopPictureImg,

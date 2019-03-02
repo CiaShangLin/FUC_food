@@ -58,17 +58,7 @@ class SimpleMenuVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
             onItemClick.onItemClick(bundle)
         }
 
-
-        /*FileStorageUnit.ImageLoader(
-            itemView.context,
-            shop_tag,
-            shop_name,
-            model.name,
-            itemView.simpleMenuImg,
-            model.errorDrawable,
-            RequestOptions().circleCrop()
-        )*/
-
+        //Menu圖片讀取
         FileStorageUnit.ImageLoader(
             itemView.context,
             itemView.simpleMenuImg,

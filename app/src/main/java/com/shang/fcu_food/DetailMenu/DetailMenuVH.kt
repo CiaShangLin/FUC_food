@@ -39,16 +39,7 @@ class DetailMenuVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
         itemView.menuCommentRecyc.layoutManager = LinearLayoutManager(itemView.context)
         itemView.menuCommentRecyc.adapter = CommentAdapter(model.usercomment)
 
-        /*FileStorageUnit.ImageLoader(
-            itemView.context,
-            DetailMenuActivity.shop_type_tag,
-            DetailMenuActivity.shop_name,
-            model.name,
-            itemView.menuPictureImg,
-            model.errorDrawable,
-            RequestOptions().fitCenter()
-        )*/
-
+        //Menu圖片讀取
         FileStorageUnit.ImageLoader(
             itemView.context,
             itemView.menuPictureImg,

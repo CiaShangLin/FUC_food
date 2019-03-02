@@ -26,16 +26,7 @@ class SimpleShopVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
         itemView.simpleShopName.text = model.name
         itemView.simpleShopStar.text = String.format("%.1f", model.star)
 
-        FileStorageUnit.ImageLoader(
-            itemView.context,
-            model.shop_tag,
-            model.name,
-            model.name,
-            itemView.simpleShopImg,
-            model.errorDrawable,
-            RequestOptions().fitCenter()
-        )
-
+        //店家圖片讀取
         FileStorageUnit.ImageLoader(
             itemView.context,
             itemView.simpleShopImg,
