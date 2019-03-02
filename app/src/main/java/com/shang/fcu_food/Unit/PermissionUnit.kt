@@ -7,7 +7,10 @@ import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
 import android.util.Log
 
-class PermissionUnit {
+
+
+class PermissionUnit{
+
 
     companion object {
         val TAG = "PermissionUnit"
@@ -24,11 +27,15 @@ class PermissionUnit {
 
             var noList = arrayListOf<String>()
             for (permission in permissionArray) {
-                if (ContextCompat.checkSelfPermission(activity.baseContext, permission) != PackageManager.PERMISSION_GRANTED) {
+                if (ContextCompat.checkSelfPermission(
+                        activity.baseContext,
+                        permission
+                    ) != PackageManager.PERMISSION_GRANTED
+                ) {
                     noList.add(permission)
                 }
             }
-            Log.v(TAG,"未通過權限數量:"+noList.size)
+            Log.v(TAG, "未通過權限數量:" + noList.size)
 
             if (noList.size != 0) {
                 ActivityCompat.requestPermissions(activity, noList.toArray(arrayOf()), 1)
