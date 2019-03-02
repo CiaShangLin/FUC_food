@@ -34,16 +34,17 @@ class DrinkShop : Shop() {
 
     override fun getOption(): FirebaseRecyclerOptions<Shop> {
         var options = FirebaseRecyclerOptions.Builder<DrinkShop>()
-            .setQuery(getQuery()!!, getSnapParser()as SnapshotParser<DrinkShop>).build()
+            .setQuery(getQuery()!!, getSnapParser() as SnapshotParser<DrinkShop>).build()
         return options as FirebaseRecyclerOptions<Shop>
     }
 
     override fun getSnapParser(): SnapshotParser<Shop> {
         var snapshotParser = SnapshotParser<Shop> {
-            var drinkShop = it.getValue(DrinkShop::class.java)
+            var drinkShop = it.getValue(DrinkShop::class.java)!!
             var drinkMenu = mutableListOf<DrinkMenu>()
             it.child("menu").children.forEach {
-                drinkMenu.add(it.getValue(DrinkMenu::class.java)!!)
+                var menu = it.getValue(DrinkMenu::class.java)!!
+                drinkMenu.add(menu)
             }
             drinkShop?.menu = drinkMenu.toMutableList()
             drinkShop!!

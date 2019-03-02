@@ -42,10 +42,11 @@ class DinnerShop : Shop(){
 
     override fun getSnapParser(): SnapshotParser<Shop> {
         var snapshotParser = SnapshotParser<Shop> {
-            var dinnerShop = it.getValue(DinnerShop::class.java)
+            var dinnerShop = it.getValue(DinnerShop::class.java)!!
             var dinnerMenu = mutableListOf<DinnerMenu>()
             it.child("menu").children.forEach {
-                dinnerMenu.add(it.getValue(DinnerMenu::class.java)!!)
+                var menu = it.getValue(DinnerMenu::class.java)!!
+                dinnerMenu.add(menu)
             }
             dinnerShop?.menu = dinnerMenu.toMutableList()
             dinnerShop!!

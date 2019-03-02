@@ -1,14 +1,20 @@
 package com.shang.fcu_food.Data.shop
 
+import android.content.Context
 import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.firebase.ui.database.SnapshotParser
 import com.google.firebase.database.*
+import com.google.firebase.storage.StorageReference
 import com.shang.fcu_food.Data.menu.BreakfastMenu
 import com.shang.fcu_food.Data.menu.Menu
 import com.shang.fcu_food.Data.menu.SnackMenu
+import com.shang.fcu_food.FirebaseFactory
 import com.shang.fcu_food.R
+import com.shang.fcu_food.Unit.FileStorageUnit
+import java.io.File
 
 class BreakfastShop : Shop() {
+
 
     companion object {
         var allBreakfastShop: MutableList<BreakfastShop> = mutableListOf<BreakfastShop>()
@@ -45,14 +51,17 @@ class BreakfastShop : Shop() {
 
     override fun getSnapParser(): SnapshotParser<Shop> {
         var snapshotParser = SnapshotParser<Shop> {
-            var breakfastShop = it.getValue(BreakfastShop::class.java)
+            var breakfastShop = it.getValue(BreakfastShop::class.java)!!
             var breakfastMenu = mutableListOf<BreakfastMenu>()
             it.child("menu").children.forEach {
-                breakfastMenu.add(it.getValue(BreakfastMenu::class.java)!!)
+                var menu = it.getValue(BreakfastMenu::class.java)!!
+                breakfastMenu.add(menu)
             }
             breakfastShop?.menu = breakfastMenu.toMutableList()
             breakfastShop!!
         }
         return snapshotParser
     }
+
+
 }

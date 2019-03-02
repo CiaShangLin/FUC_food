@@ -10,4 +10,5 @@ class MyFirebaseStorage {
     fun storage_getImageRef(shop_tag: String, shop_name: String, image_name: String): StorageReference {
         return firebaseStorage.getReference(shop_tag).child(shop_name).child("$image_name.jpg")
     }
+
 }

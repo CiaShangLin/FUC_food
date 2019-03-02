@@ -13,6 +13,7 @@ import com.shang.fcu_food.Data.menu.Menu
 import com.shang.fcu_food.Data.shop.*
 import com.shang.fcu_food.R
 import com.shang.fcu_food.Unit.FileStorageUnit
+import kotlinx.android.synthetic.main.activity_maps.view.*
 import kotlinx.android.synthetic.main.cardview_simplemenu.view.*
 
 class SimpleMenuAdapter(
@@ -58,12 +59,21 @@ class SimpleMenuVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
         }
 
 
-        FileStorageUnit.ImageLoader(
+        /*FileStorageUnit.ImageLoader(
             itemView.context,
             shop_tag,
             shop_name,
             model.name,
             itemView.simpleMenuImg,
+            model.errorDrawable,
+            RequestOptions().circleCrop()
+        )*/
+
+        FileStorageUnit.ImageLoader(
+            itemView.context,
+            itemView.simpleMenuImg,
+            model.getFile(itemView.context, shop_tag, shop_name),
+            model.getStorageRef(shop_tag, shop_name),
             model.errorDrawable,
             RequestOptions().circleCrop()
         )

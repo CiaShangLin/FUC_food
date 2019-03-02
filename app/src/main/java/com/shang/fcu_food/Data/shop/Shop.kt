@@ -1,5 +1,6 @@
 package com.shang.fcu_food.Data.shop
 
+import android.content.Context
 import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.firebase.ui.database.SnapshotParser
 import com.google.android.gms.maps.model.LatLng
@@ -7,8 +8,12 @@ import com.google.firebase.database.Exclude
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.Query
 import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
 import com.shang.fcu_food.Data.menu.Menu
+import com.shang.fcu_food.FirebaseFactory
 import com.shang.fcu_food.R
+import com.shang.fcu_food.Unit.FileStorageUnit
+import java.io.File
 
 abstract open class Shop : FirebaseShop {
     companion object {
@@ -61,7 +66,13 @@ abstract open class Shop : FirebaseShop {
 
     abstract override open fun getSnapParser(): SnapshotParser<Shop>
 
+    fun getFile(context: Context): File {
+        return FileStorageUnit.createFile(context, shop_tag, name, name)
+    }
 
+    fun getStorageRef(): StorageReference {
+        return FirebaseFactory.getMyFirebaseStorage().storage_getImageRef(shop_tag, name, name)
+    }
 
     fun getLatLng(): LatLng {
         //如果地址為空的話 他的size會是1

@@ -5,9 +5,11 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.Query
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
+import com.shang.fcu_food.Data.shop.Shop
 import com.shang.fcu_food.R
 
 class BreakfastMenu: Menu() {
+
     override var errorDrawable:Int= R.drawable.ic_breakfast
 
     override fun getQuery(shop_tag: String, shop_id: String): Query {

@@ -3,9 +3,11 @@ package com.shang.fcu_food.Data.menu
 import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.Query
+import com.shang.fcu_food.Data.shop.Shop
 import com.shang.fcu_food.R
 
 class SnackMenu : Menu() {
+
     override var errorDrawable: Int = R.drawable.ic_snack
 
     override fun getQuery(shop_tag: String, shop_id: String): Query {

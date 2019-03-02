@@ -31,7 +31,7 @@ class DetailShopVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
     var shopPictureImg = itemView.findViewById<ImageView>(R.id.shopPictureImg)
     var shopEditImg = itemView.findViewById<ImageView>(R.id.shopEditImg)
     var shopAddMenuImg = itemView.findViewById<ImageView>(R.id.shopAddMenuImg)
-    var shopMenuImg=itemView.findViewById<ImageView>(R.id.shopMenuImg)
+    var shopMenuImg = itemView.findViewById<ImageView>(R.id.shopMenuImg)
 
     fun bind(model: Shop, position: Int, activity: DetailShopActivity) {
 
@@ -56,20 +56,29 @@ class DetailShopVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
         }
 
         //店家圖片讀取
-        FileStorageUnit.ImageLoader(
+        /*FileStorageUnit.ImageLoader(
             itemView.context, model.shop_tag, model.name, model.name
             , itemView.shopPictureImg, model.errorDrawable, RequestOptions()
+        )*/
+
+        FileStorageUnit.ImageLoader(
+            itemView.context,
+            itemView.shopPictureImg,
+            model.getFile(itemView.context),
+            model.getStorageRef(),
+            model.errorDrawable,
+            RequestOptions()
         )
 
         //下面的Menu
         itemView.shopMenuRecyc.layoutManager = GridLayoutManager(itemView.context, 2)
         itemView.shopMenuRecyc.adapter =
-                SimpleMenuAdapter(
-                    let { model.menu },
-                    model.shop_tag,
-                    model.name,
-                    getItemClick(model.shop_tag, model.id.toString(), model.name, itemView.context)
-                )
+            SimpleMenuAdapter(
+                let { model.menu },
+                model.shop_tag,
+                model.name,
+                getItemClick(model.shop_tag, model.id.toString(), model.name, itemView.context)
+            )
 
         //修改店家
         itemView.shopEditImg.setOnClickListener {
@@ -82,8 +91,8 @@ class DetailShopVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
         }
 
         itemView.shopMenuImg.setOnClickListener {
-            ImageViewDialog.getInstance(model.shop_tag,model.name,"菜單")
-                .show(activity.supportFragmentManager,ImageViewDialog.TAG)
+            ImageViewDialog.getInstance(model.shop_tag, model.name, "菜單")
+                .show(activity.supportFragmentManager, ImageViewDialog.TAG)
         }
 
 

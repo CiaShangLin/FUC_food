@@ -1,10 +1,15 @@
 package com.shang.fcu_food.Data.menu
 
+import android.content.Context
 import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.google.firebase.database.Query
 import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
 import com.shang.fcu_food.Data.UserComment
+import com.shang.fcu_food.FirebaseFactory
 import com.shang.fcu_food.R
+import com.shang.fcu_food.Unit.FileStorageUnit
+import java.io.File
 
 open class Menu : FirebaseMenu {
     var id: Int = -1
@@ -26,12 +31,20 @@ open class Menu : FirebaseMenu {
 
     constructor()
 
-    override fun getQuery(shop_tag: String, shop_id: String): Query?{
+    override fun getQuery(shop_tag: String, shop_id: String): Query? {
         return null
     }
 
-    override fun getOption(shop_tag: String, shop_id: String): FirebaseRecyclerOptions<Menu>?{
+    override fun getOption(shop_tag: String, shop_id: String): FirebaseRecyclerOptions<Menu>? {
         return null
+    }
+
+    fun getFile(context: Context, shop_tag: String, shop_name: String): File {
+        return FileStorageUnit.createFile(context, shop_tag, shop_name, name)
+    }
+
+    fun getStorageRef(shop_tag: String, shop_name: String): StorageReference {
+        return FirebaseFactory.getMyFirebaseStorage().storage_getImageRef(shop_tag, shop_name, name)
     }
 
 }
