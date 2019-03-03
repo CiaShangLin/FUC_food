@@ -19,7 +19,9 @@ class ImageViewDialog : DialogFragment() {
 
     companion object {
         val TAG = "ImageViewDialog"
-        private val NAME = "NAME"
+        private val SHOP_TAG = "SHOP_TAG"
+        private val SHOP_NAME = "SHOP_NAME"
+        private val IMAGE_NAME = "IMAGE_NAME"
 
         private var imageViewDialog: DialogFragment? = null
 
@@ -28,9 +30,9 @@ class ImageViewDialog : DialogFragment() {
                 imageViewDialog = ImageViewDialog()
             }
             imageViewDialog?.arguments = Bundle().apply {
-                this.putString(DataConstant.SHOP_TYPE_TAG, shop_tag)
-                this.putString(DataConstant.SHOP_NAME, shop_name)
-                this.putString(NAME, name)
+                this.putString(SHOP_TAG, shop_tag)
+                this.putString(SHOP_NAME, shop_name)
+                this.putString(IMAGE_NAME, name)
             }
 
             return imageViewDialog as ImageViewDialog
@@ -50,9 +52,9 @@ class ImageViewDialog : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        var shop_tag = arguments?.getString(DataConstant.SHOP_TYPE_TAG)
-        var shop_name = arguments?.getString(DataConstant.SHOP_NAME)
-        var image_name = arguments?.getString(NAME)
+        var shop_tag = arguments?.getString(SHOP_TAG)
+        var shop_name = arguments?.getString(SHOP_NAME)
+        var image_name = arguments?.getString(IMAGE_NAME)
 
         var dialogImg = view.findViewById<ImageView>(R.id.dialog_image)
         var closeBt = view.findViewById<ImageButton>(R.id.closeImgBt)
