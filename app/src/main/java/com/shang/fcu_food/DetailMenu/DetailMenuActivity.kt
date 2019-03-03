@@ -21,7 +21,7 @@ class DetailMenuActivity : AppCompatActivity() {
     companion object {
         val TAG = "DetailMenuActivity"
         var shop_type_tag: String = ""
-        var shop_id: String = ""
+        var shop_id: Int = -1
         var position: Int = 0
         var shop_name: String = ""
     }
@@ -38,7 +38,7 @@ class DetailMenuActivity : AppCompatActivity() {
         if (intent != null) {
             shop_name = intent.getString(DataConstant.SHOP_NAME)
             shop_type_tag = intent.getString(DataConstant.SHOP_TYPE_TAG)
-            shop_id = intent.getString(DataConstant.SHOP_ID)
+            shop_id = intent.getInt(DataConstant.SHOP_ID)
             position = intent.getInt(DataConstant.POSITION)
         }
 
@@ -53,10 +53,10 @@ class DetailMenuActivity : AppCompatActivity() {
                     position = (Math.random() * (detailMenuRecyc.adapter?.itemCount!!)).toInt()
                     adapter.recommend(linearLayoutManager, position)
                 }
-                R.id.menu_detailmenu_editMenu->{
-                    var menu=adapter.getItem(linearLayoutManager?.findFirstVisibleItemPosition().toInt())
-                    var editMenuDialog=EditMenuDialog.getInstance(shop_name,menu.name,menu.price)
-                    editMenuDialog.show(supportFragmentManager,EditMenuDialog.TAG)
+                R.id.menu_detailmenu_editMenu -> {
+                    var menu = adapter.getItem(linearLayoutManager?.findFirstVisibleItemPosition().toInt())
+                    var editMenuDialog = EditMenuDialog.getInstance(shop_name, menu.name, menu.price)
+                    editMenuDialog.show(supportFragmentManager, EditMenuDialog.TAG)
                 }
             }
             true
@@ -70,7 +70,7 @@ class DetailMenuActivity : AppCompatActivity() {
             else -> BreakfastMenu()
         }
 
-        adapter = DetailMenuAdapter(this, firebaseMenu.getOption(shop_type_tag, shop_id)!!)
+        adapter = DetailMenuAdapter(this, firebaseMenu.getOption(shop_type_tag, shop_name, shop_id)!!)
 
         linearLayoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         detailMenuRecyc.layoutManager = linearLayoutManager

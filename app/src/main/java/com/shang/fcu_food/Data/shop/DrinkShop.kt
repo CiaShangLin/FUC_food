@@ -44,6 +44,9 @@ class DrinkShop : Shop() {
             var drinkMenu = mutableListOf<DrinkMenu>()
             it.child("menu").children.forEach {
                 var menu = it.getValue(DrinkMenu::class.java)!!
+                menu.shop_id=drinkShop.id
+                menu.shop_name=drinkShop.name
+                menu.shop_tag = drinkShop.shop_tag
                 drinkMenu.add(menu)
             }
             drinkShop?.menu = drinkMenu.toMutableList()

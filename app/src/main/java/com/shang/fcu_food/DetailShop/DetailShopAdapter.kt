@@ -23,7 +23,6 @@ class DetailShopAdapter(
     }
 
     override fun onBindViewHolder(holder: DetailShopVH, position: Int, model: Shop) {
-
         holder.bind(model, position, activity)
     }
 

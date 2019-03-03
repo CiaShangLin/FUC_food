@@ -72,7 +72,7 @@ class DetailShopVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
                 let { model.menu },
                 model.shop_tag,
                 model.name,
-                getItemClick(model.shop_tag, model.id.toString(), model.name, itemView.context)
+                getItemClick(model.shop_tag, model.id, model.name, itemView.context)
             )
 
         //修改店家
@@ -94,12 +94,12 @@ class DetailShopVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
     }
 
     //傳遞shop的id和type 還有position
-    fun getItemClick(tag: String, id: String, name: String, context: Context): OnItemClickHandler {
+    fun getItemClick(tag: String, id: Int, name: String, context: Context): OnItemClickHandler {
         var itemClick = object : OnItemClickHandler {
             override fun onItemClick(bundle: Bundle) {
                 bundle.putString(DataConstant.SHOP_NAME, name)
                 bundle.putString(DataConstant.SHOP_TYPE_TAG, tag)
-                bundle.putString(DataConstant.SHOP_ID, id)
+                bundle.putInt(DataConstant.SHOP_ID, id)
                 var intent = Intent(context, DetailMenuActivity::class.java).apply { this.putExtras(bundle) }
                 context.startActivity(intent)
             }

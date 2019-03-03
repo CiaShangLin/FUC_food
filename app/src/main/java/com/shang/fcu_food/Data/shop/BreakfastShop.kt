@@ -1,6 +1,7 @@
 package com.shang.fcu_food.Data.shop
 
 import android.content.Context
+import android.util.Log
 import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.firebase.ui.database.SnapshotParser
 import com.google.firebase.database.*
@@ -55,6 +56,9 @@ class BreakfastShop : Shop() {
             var breakfastMenu = mutableListOf<BreakfastMenu>()
             it.child("menu").children.forEach {
                 var menu = it.getValue(BreakfastMenu::class.java)!!
+                menu.shop_id = breakfastShop.id
+                menu.shop_name = breakfastShop.name
+                menu.shop_tag = breakfastShop.shop_tag
                 breakfastMenu.add(menu)
             }
             breakfastShop?.menu = breakfastMenu.toMutableList()
