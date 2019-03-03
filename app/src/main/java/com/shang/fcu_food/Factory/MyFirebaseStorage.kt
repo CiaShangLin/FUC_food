@@ -1,4 +1,4 @@
-package com.shang.fcu_food
+package com.shang.fcu_food.Factory
 
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference

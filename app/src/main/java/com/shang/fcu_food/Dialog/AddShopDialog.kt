@@ -16,10 +16,10 @@ import android.widget.Spinner
 import com.google.android.gms.maps.model.LatLng
 import com.shang.fcu_food.Data.Temp.TempShop
 import com.shang.fcu_food.Data.shop.*
+import com.shang.fcu_food.Factory.FirebaseFactory
 import com.shang.fcu_food.Main.GlideApp
 import com.shang.fcu_food.Maps.MapsActivity
 import com.shang.fcu_food.R
-import com.shang.fcu_food.Unit.FirebaseUnits
 import com.shang.fcu_food.Unit.PickPictureUnit
 import kotlinx.android.synthetic.main.dialog_addshop.*
 import org.jetbrains.anko.support.v4.toast
@@ -93,12 +93,12 @@ class AddShopDialog : DialogFragment() {
                 var open = addShopOpenTvEt.editText?.text.toString()
                 var phone = addShopPhoneTvEt.editText?.text.toString()
                 var address = addShopAddressTvEt.editText?.text.toString()
-                var uid = FirebaseUnits.auth_getUser()?.uid
+                var uid = FirebaseFactory.getMyFirebaseAuth().auth_getUser()?.uid
 
                 if (!shopName.equals("")) {
                     progressDialog.show()
                     var tempShop = TempShop(tag!!, shopName, phone, open, uid!!, address)
-                    FirebaseUnits.addTempData(tempShop, PickPictureUnit.bitmapToByte(bitmap), callback)
+                    FirebaseFactory.getMyFirebaseDatabase().addTempData(tempShop, PickPictureUnit.bitmapToByte(bitmap), callback)
                 } else {
                     throw Exception("輸入不能為空")
                 }

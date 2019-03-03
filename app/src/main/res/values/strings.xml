@@ -85,4 +85,7 @@
         <item>男生</item>
         <item>女生</item>
     </string-array>
+
+    <string name="usersetting_update">更新成功</string>
+    <string name="usersetting_register">註冊成功</string>
 </resources>

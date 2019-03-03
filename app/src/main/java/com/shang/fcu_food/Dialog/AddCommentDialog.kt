@@ -10,10 +10,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.widget.RatingBar
 import com.google.android.gms.ads.AdView
-import com.shang.fcu_food.DetailMenu.DetailMenuActivity
+import com.shang.fcu_food.Factory.FirebaseFactory
 import com.shang.fcu_food.R
-import com.shang.fcu_food.Unit.AdmobUnit
-import com.shang.fcu_food.Unit.FirebaseUnits
 
 class AddCommentDialog : DialogFragment() {
 
@@ -65,11 +63,11 @@ class AddCommentDialog : DialogFragment() {
                 override fun onClick(p0: DialogInterface?, p1: Int) {
                     var length = commentInputTextLayout.editText?.text?.length
                     if (length!! >= 0 && length <= 50) {
-                        FirebaseUnits.database_addCommemt(
+                        FirebaseFactory.getMyFirebaseDatabase().database_addCommemt(
                             ref,
                             commentRatingBar.rating.toString(),
                             commentInputTextLayout.editText?.text.toString(),
-                            FirebaseUnits.auth_getUser()?.uid!!,
+                            FirebaseFactory.getMyFirebaseAuth().auth_getUser()?.uid!!,
                             activity!!
                         )
                     }

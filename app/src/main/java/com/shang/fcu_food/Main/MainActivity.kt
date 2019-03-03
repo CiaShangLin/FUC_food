@@ -2,31 +2,20 @@ package com.shang.fcu_food.Main
 
 import android.app.Activity
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.Handler
 import android.os.Message
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.IdpResponse
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
 import com.shang.fcu_food.Data.User
-import com.shang.fcu_food.Data.menu.BreakfastMenu
-import com.shang.fcu_food.Data.shop.BreakfastShop
 import com.shang.fcu_food.Dialog.AddShopDialog
-import com.shang.fcu_food.Dialog.LoadingDialog
 import com.shang.fcu_food.Dialog.NetworkDialog
 import com.shang.fcu_food.Dialog.UserSettingDialog
-import com.shang.fcu_food.FirebaseFactory
+import com.shang.fcu_food.Factory.FirebaseFactory
 import com.shang.fcu_food.R
-import com.shang.fcu_food.Unit.AdmobUnit
-import com.shang.fcu_food.Unit.FirebaseUnits
 import com.shang.fcu_food.Unit.PermissionUnit
 import com.shang.fcu_food.Unit.VersionCheckUnit
 import kotlinx.android.synthetic.main.drawer_layout.*
@@ -94,10 +83,10 @@ class MainActivity : AppCompatActivity() {
     private fun init() {
         if (!PermissionUnit.checkPermission(this)) {        //已通過權限
             if (NetworkDialog.checkNetworkStatus(this)) {   //網路已開啟
-                if (FirebaseUnits.checkHasAuth()) {       //檢查是否已登入帳號
+                if (FirebaseFactory.getMyFirebaseAuth().checkHasAuth()) {       //檢查是否已登入帳號
                     VersionCheckUnit.checkVersion(this, handler)  //檢查版本
                 } else {
-                    FirebaseUnits.auth_Login(this)
+                    FirebaseFactory.getMyFirebaseAuth().auth_Login(this)
                 }
             } else {
                 NetworkDialog.getInstance(handler)
@@ -107,7 +96,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun loadView() {
-        FirebaseUnits.database_BindAllUser()  //取得所有使用者的資訊
+        FirebaseFactory.getMyFirebaseDatabase().database_BindAllUser()  //取得所有使用者的資訊
         viewPager.adapter = ViewPagerAdapter(
             supportFragmentManager,
             resources.getStringArray(R.array.ShopType)
@@ -126,13 +115,16 @@ class MainActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (requestCode == FirebaseUnits.AUTH_RQEUESTCODE) {
+        if (requestCode == FirebaseFactory.getMyFirebaseAuth().AUTH_RQEUESTCODE) {
             val response = IdpResponse.fromResultIntent(data)
             if (resultCode == Activity.RESULT_OK) {
                 init()
                 if (response?.isNewUser!!) {
-                    FirebaseUnits.database_updateUser(User().getUser(FirebaseAuth.getInstance().currentUser!!))
-                    toast("註冊成功")
+                    FirebaseFactory.getMyFirebaseDatabase()
+                        .database_updateUser(
+                            User().getUser(FirebaseAuth.getInstance().currentUser!!)
+                            , this, R.string.usersetting_register
+                        )
                 } else {
                     toast("登入成功")
                 }

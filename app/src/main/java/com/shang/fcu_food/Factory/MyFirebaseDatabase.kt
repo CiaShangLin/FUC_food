@@ -1,4 +1,4 @@
-package com.shang.fcu_food
+package com.shang.fcu_food.Factory
 
 import android.content.Context
 import android.support.v4.app.FragmentActivity
@@ -14,7 +14,9 @@ import com.shang.fcu_food.Data.Temp.TempMenu
 import com.shang.fcu_food.Data.Temp.TempShop
 import com.shang.fcu_food.Data.User
 import com.shang.fcu_food.Data.UserComment
+import com.shang.fcu_food.DataBind
 import com.shang.fcu_food.Dialog.FirebaseCallback
+import com.shang.fcu_food.R
 import org.jetbrains.anko.toast
 
 class MyFirebaseDatabase {

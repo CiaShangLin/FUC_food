@@ -4,13 +4,10 @@ import android.content.Context
 import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.firebase.ui.database.SnapshotParser
 import com.google.android.gms.maps.model.LatLng
-import com.google.firebase.database.Exclude
-import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.Query
-import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.shang.fcu_food.Data.menu.Menu
-import com.shang.fcu_food.FirebaseFactory
+import com.shang.fcu_food.Factory.FirebaseFactory
 import com.shang.fcu_food.R
 import com.shang.fcu_food.Unit.FileStorageUnit
 import java.io.File

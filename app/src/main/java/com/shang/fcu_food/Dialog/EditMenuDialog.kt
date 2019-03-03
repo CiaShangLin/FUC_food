@@ -12,9 +12,9 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import com.shang.fcu_food.Data.Temp.TempMenu
+import com.shang.fcu_food.Factory.FirebaseFactory
 import com.shang.fcu_food.Main.GlideApp
 import com.shang.fcu_food.R
-import com.shang.fcu_food.Unit.FirebaseUnits
 import com.shang.fcu_food.Unit.PickPictureUnit
 import kotlinx.android.synthetic.main.dialog_editmenu.*
 import org.jetbrains.anko.support.v4.toast
@@ -96,11 +96,11 @@ class EditMenuDialog : DialogFragment() {
             var shop_name = arguments?.getString(SHOP_NAME)
             var menu_name = editMenuNameTvEt.editText?.text.toString()
             var price = editMenuPirceTvEt.editText?.text.toString().toInt()
-            var uid = FirebaseUnits.auth_getUser()?.uid
+            var uid = FirebaseFactory.getMyFirebaseAuth().auth_getUser()?.uid
             var tempMenu = TempMenu(shop_name!!, menu_name, price, uid!!)
 
             progressDialog.show()
-            FirebaseUnits.addTempData(tempMenu, PickPictureUnit.bitmapToByte(bitmap), callback)
+            FirebaseFactory.getMyFirebaseDatabase().addTempData(tempMenu, PickPictureUnit.bitmapToByte(bitmap), callback)
         }
 
     }

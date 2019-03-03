@@ -14,9 +14,9 @@ import android.widget.ImageView
 import android.widget.RatingBar
 import com.shang.fcu_food.Data.DataConstant
 import com.shang.fcu_food.Data.Temp.TempMenu
+import com.shang.fcu_food.Factory.FirebaseFactory
 import com.shang.fcu_food.Main.GlideApp
 import com.shang.fcu_food.R
-import com.shang.fcu_food.Unit.FirebaseUnits
 import com.shang.fcu_food.Unit.PickPictureUnit
 import kotlinx.android.synthetic.main.dialog_addmenu.*
 import org.jetbrains.anko.support.v4.toast
@@ -90,7 +90,7 @@ class AddMenuDialog : DialogFragment() {
                 var menu_name = addMenuNameTvEt.editText?.text.toString()
                 var star = addMenuRatingBar.rating.toDouble()
                 var price = addMenuPriceTvEt.editText?.text.toString().toInt()
-                var uid = FirebaseUnits.auth_getUser()?.uid
+                var uid = FirebaseFactory.getMyFirebaseAuth().auth_getUser()?.uid
                 var comment = addMenuCommentTvEt.editText?.text.toString()
                 var tempMenu = TempMenu(shop_name, menu_name, star, price, uid!!, comment)
 
@@ -98,7 +98,7 @@ class AddMenuDialog : DialogFragment() {
                     throw Exception("輸入錯誤")
                 } else {
                     progressDialog.show()
-                    FirebaseUnits.addTempData(tempMenu, PickPictureUnit.bitmapToByte(bitmap), callback)
+                    FirebaseFactory.getMyFirebaseDatabase().addTempData(tempMenu, PickPictureUnit.bitmapToByte(bitmap), callback)
                 }
 
             } catch (e: Exception) {

@@ -16,10 +16,10 @@ import android.widget.Spinner
 import com.google.android.gms.maps.model.LatLng
 import com.shang.fcu_food.Data.Temp.TempShop
 import com.shang.fcu_food.Data.shop.*
+import com.shang.fcu_food.Factory.FirebaseFactory
 import com.shang.fcu_food.Main.GlideApp
 import com.shang.fcu_food.Maps.MapsActivity
 import com.shang.fcu_food.R
-import com.shang.fcu_food.Unit.FirebaseUnits
 import com.shang.fcu_food.Unit.PickPictureUnit
 import kotlinx.android.synthetic.main.dialog_editshop.*
 import org.jetbrains.anko.support.v4.toast
@@ -121,11 +121,11 @@ class EditShopDialog : DialogFragment() {
                     editShopNameTvEt.editText?.text.toString(),
                     editShopPhoneTvEt.editText?.text.toString(),
                     editShopOpenTvEt.editText?.text.toString(),
-                    FirebaseUnits.auth_getUser()?.uid!!,
+                    FirebaseFactory.getMyFirebaseAuth().auth_getUser()?.uid!!,
                     editShopAddressTvEt.editText?.text.toString()
                 )
                 progressDialog.show()
-                FirebaseUnits.addTempData(tempShop, PickPictureUnit.bitmapToByte(bitmap), callback)
+                FirebaseFactory.getMyFirebaseDatabase().addTempData(tempShop, PickPictureUnit.bitmapToByte(bitmap), callback)
             } catch (e: Exception) {
                 e.printStackTrace()
             }

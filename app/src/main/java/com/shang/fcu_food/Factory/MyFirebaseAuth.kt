@@ -1,14 +1,15 @@
-package com.shang.fcu_food
+package com.shang.fcu_food.Factory
 
 import android.app.Activity
 import com.firebase.ui.auth.AuthUI
-import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.shang.fcu_food.Data.User
-import com.shang.fcu_food.Unit.FirebaseUnits
+import com.shang.fcu_food.DataBind
 
 class MyFirebaseAuth {
+
+    val AUTH_RQEUESTCODE = 100
     private val firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
 
     fun checkHasAuth(): Boolean {  //檢查是否已經登入
@@ -23,7 +24,7 @@ class MyFirebaseAuth {
             AuthUI.getInstance()
                 .createSignInIntentBuilder()
                 .setAvailableProviders(providers)
-                .build(), FirebaseUnits.AUTH_RQEUESTCODE
+                .build(), AUTH_RQEUESTCODE
         )
     }
 

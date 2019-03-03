@@ -1,18 +1,11 @@
 package com.shang.fcu_food.Data.shop
 
-import android.content.Context
-import android.util.Log
 import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.firebase.ui.database.SnapshotParser
 import com.google.firebase.database.*
-import com.google.firebase.storage.StorageReference
 import com.shang.fcu_food.Data.menu.BreakfastMenu
 import com.shang.fcu_food.Data.menu.Menu
-import com.shang.fcu_food.Data.menu.SnackMenu
-import com.shang.fcu_food.FirebaseFactory
 import com.shang.fcu_food.R
-import com.shang.fcu_food.Unit.FileStorageUnit
-import java.io.File
 
 class BreakfastShop : Shop() {
 

@@ -9,10 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.ImageView
-import com.shang.fcu_food.Data.DataConstant
+import com.shang.fcu_food.Factory.FirebaseFactory
 import com.shang.fcu_food.Main.GlideApp
 import com.shang.fcu_food.R
-import com.shang.fcu_food.Unit.FirebaseUnits
 
 //點擊圖片後放大用
 class ImageViewDialog : DialogFragment() {
@@ -63,7 +62,7 @@ class ImageViewDialog : DialogFragment() {
         }
 
         GlideApp.with(context!!)
-            .load(FirebaseUnits.storage_getImageRef(shop_tag!!, shop_name!!, image_name!!))
+            .load(FirebaseFactory.getMyFirebaseStorage().storage_getImageRef(shop_tag!!, shop_name!!, image_name!!))
             .error(R.drawable.ic_error)
             .placeholder(getLoadingDrawable(context!!))
             .into(dialogImg)

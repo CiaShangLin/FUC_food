@@ -9,10 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import com.shang.fcu_food.Data.User
+import com.shang.fcu_food.Factory.FirebaseFactory
 import com.shang.fcu_food.R
-import com.shang.fcu_food.Unit.FirebaseUnits
 import kotlinx.android.synthetic.main.dialog_user_setting.*
-import org.jetbrains.anko.support.v4.toast
 
 class UserSettingDialog : DialogFragment() {
 
@@ -47,7 +46,7 @@ class UserSettingDialog : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        var user = FirebaseUnits.auth_uidToUser()
+        var user = FirebaseFactory.getMyFirebaseAuth().auth_uidToUser()
         defaultSetting(user!!)
 
         userSettingUpdateBt.setOnClickListener {
@@ -60,8 +59,7 @@ class UserSettingDialog : DialogFragment() {
             var picture = (userSettingPictureSp.selectedItemPosition + 1).toString()
             var updateUser = User(user.uid, name, picture, gender)
 
-            FirebaseUnits.database_updateUser(updateUser)
-            toast("更新成功")
+            FirebaseFactory.getMyFirebaseDatabase().database_updateUser(updateUser,context!!,R.string.usersetting_update)
             dismiss()
         }
 
