@@ -31,8 +31,10 @@ class DetailMenuVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
         itemView.menuCommentTv.setText("${model.usercomment.size}人")
         itemView.menuAddCommentBt.setOnClickListener {
             AddCommentDialog.getInstace(
-                model.id.toString(),
-                model.usercomment.size.toString()
+                model.shop_tag,
+                model.shop_id,
+                model.id,
+                model.usercomment.size
             ).show(activity.supportFragmentManager, AddCommentDialog.TAG)
         }
 
@@ -43,16 +45,16 @@ class DetailMenuVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
         FileStorageUnit.ImageLoader(
             itemView.context,
             itemView.menuPictureImg,
-            model.getFile(itemView.context, DetailMenuActivity.shop_type_tag, DetailMenuActivity.shop_name),
-            model.getStorageRef( DetailMenuActivity.shop_type_tag, DetailMenuActivity.shop_name),
+            model.getFile(itemView.context, model.shop_tag, model.shop_name),
+            model.getStorageRef( model.shop_tag, model.shop_name),
             model.errorDrawable,
             RequestOptions().fitCenter()
         )
 
         itemView.menuPictureImg.setOnClickListener {
             ImageViewDialog.getInstance(
-                DetailMenuActivity.shop_type_tag,
-                DetailMenuActivity.shop_name,
+                model.shop_tag,
+                model.shop_name,
                 model.name
             ).show(activity.supportFragmentManager, ImageViewDialog.TAG)
         }

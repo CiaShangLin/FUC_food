@@ -23,6 +23,9 @@ class DetailMenuAdapter(var activity: DetailMenuActivity, options: FirebaseRecyc
     //隨機推薦
     fun recommend(manager: LinearLayoutManager, position: Int) {
         manager.scrollToPositionWithOffset(position, 0)
+        //var position=linearLayoutManager?.findFirstVisibleItemPosition().toInt()
+        //var shop =(adapter as FirebaseRecyclerAdapter<Shop, DetailShopVH>)?.getItem(position)
+        //detailMenuRecyc.smoothScrollToPosition(position)
     }
 
 }

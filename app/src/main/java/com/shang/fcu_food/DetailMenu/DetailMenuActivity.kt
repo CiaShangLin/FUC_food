@@ -18,13 +18,13 @@ class DetailMenuActivity : AppCompatActivity() {
 
     //店家類型TAG 店家的KEY 點選位置POSITION
     //update SHOP_TYPE_TAG+SHOP_ID+"menu"+menu_id+usercomment+"comment_size"
-    companion object {
-        val TAG = "DetailMenuActivity"
-        var shop_type_tag: String = ""
-        var shop_id: Int = -1
-        var position: Int = 0
-        var shop_name: String = ""
-    }
+
+    val TAG = "DetailMenuActivity"
+    lateinit var shop_type_tag: String
+    var shop_id: Int = -1
+    var position: Int = 0
+    lateinit var shop_name: String
+
 
     lateinit var firebaseMenu: FirebaseMenu
     lateinit var adapter: DetailMenuAdapter
@@ -96,13 +96,6 @@ class DetailMenuActivity : AppCompatActivity() {
     override fun onStop() {
         super.onStop()
         adapter.stopListening()
-    }
-
-    fun recommend() { //隨機推薦
-        //var position=linearLayoutManager?.findFirstVisibleItemPosition().toInt()
-        //var shop =(adapter as FirebaseRecyclerAdapter<Shop, DetailShopVH>)?.getItem(position)
-        //detailMenuRecyc.smoothScrollToPosition(position)
-
     }
 
 }
