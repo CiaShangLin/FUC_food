@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.GridLayoutManager
+import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.widget.ImageView
@@ -12,6 +13,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.shang.fcu_food.Data.*
 import com.shang.fcu_food.Data.shop.*
 import com.shang.fcu_food.DetailMenu.DetailMenuActivity
+import com.shang.fcu_food.DetailPlaceAdapter
 import com.shang.fcu_food.Dialog.AddMenuDialog
 import com.shang.fcu_food.Dialog.EditShopDialog
 import com.shang.fcu_food.Dialog.ImageViewDialog
@@ -78,6 +80,8 @@ class DetailShopVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
         //修改店家
         itemView.shopEditImg.setOnClickListener {
             EditShopDialog.getInstance(model).show(activity.supportFragmentManager, EditShopDialog.TAG)
+            //itemView.shopMenuRecyc.layoutManager= LinearLayoutManager(itemView.context)
+            //itemView.shopMenuRecyc.adapter=DetailPlaceAdapter()
         }
 
         //新增菜單

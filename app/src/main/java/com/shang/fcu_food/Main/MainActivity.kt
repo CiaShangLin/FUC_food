@@ -122,7 +122,7 @@ class MainActivity : AppCompatActivity() {
                 if (response?.isNewUser!!) {
                     FirebaseFactory.getMyFirebaseDatabase()
                         .database_updateUser(
-                            User().getUser(FirebaseAuth.getInstance().currentUser!!)
+                            User().getUser(FirebaseFactory.getMyFirebaseAuth().auth_getUser()!!)
                             , this, R.string.usersetting_register
                         )
                 } else {
