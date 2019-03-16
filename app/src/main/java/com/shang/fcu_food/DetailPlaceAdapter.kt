@@ -8,17 +8,18 @@ import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
 
-class DetailPlaceAdapter : RecyclerView.Adapter<DetailPlaceAdapter.DetailPlaceVH>() {
+class DetailPlaceAdapter(var reviews:DetailPlace) : RecyclerView.Adapter<DetailPlaceAdapter.DetailPlaceVH>() {
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): DetailPlaceVH {
         var view = LayoutInflater.from(p0.context).inflate(R.layout.cardview_detailplace, p0, false)
         return DetailPlaceVH(view)
     }
 
     override fun getItemCount(): Int {
-        return 1
+        return reviews.result.reviews.size
     }
 
-    override fun onBindViewHolder(p0: DetailPlaceVH, p1: Int) {
+    override fun onBindViewHolder(holder: DetailPlaceVH, position: Int) {
+        holder.detailPlaceCommentTv.setText(reviews.result.reviews.get(position).text)
 
     }
 
