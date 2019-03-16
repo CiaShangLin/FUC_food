@@ -18,8 +18,6 @@ import kotlinx.android.synthetic.main.cardview_simplemenu.view.*
 
 class SimpleMenuAdapter(
     var menuList: MutableList<Menu>,
-    var shop_tag: String,
-    var shop_name: String,
     var onItemClick: OnItemClickHandler
 ) : RecyclerView.Adapter<SimpleMenuVH>() {
 
@@ -31,7 +29,7 @@ class SimpleMenuAdapter(
     override fun getItemCount(): Int = menuList.size
 
     override fun onBindViewHolder(holder: SimpleMenuVH, position: Int) {
-        holder.bind(position, menuList.get(position), shop_tag, shop_name, onItemClick)
+        holder.bind(position, menuList.get(position),onItemClick)
     }
 }
 
@@ -44,8 +42,6 @@ class SimpleMenuVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
     fun bind(
         position: Int,
         model: Menu,
-        shop_tag: String,
-        shop_name: String,
         onItemClick: OnItemClickHandler
     ) {
         itemView.simpleMenuName.text = model.name
@@ -62,8 +58,8 @@ class SimpleMenuVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
         FileStorageUnit.ImageLoader(
             itemView.context,
             itemView.simpleMenuImg,
-            model.getFile(itemView.context, shop_tag, shop_name),
-            model.getStorageRef(shop_tag, shop_name),
+            model.getFile(itemView.context),
+            model.getStorageRef(),
             model.errorDrawable,
             RequestOptions().circleCrop()
         )

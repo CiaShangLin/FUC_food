@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -13,16 +14,19 @@ import com.bumptech.glide.request.RequestOptions
 import com.shang.fcu_food.Data.*
 import com.shang.fcu_food.Data.shop.*
 import com.shang.fcu_food.DetailMenu.DetailMenuActivity
+import com.shang.fcu_food.DetailPlace
 import com.shang.fcu_food.DetailPlaceAdapter
 import com.shang.fcu_food.Dialog.AddMenuDialog
 import com.shang.fcu_food.Dialog.EditShopDialog
 import com.shang.fcu_food.Dialog.ImageViewDialog
+import com.shang.fcu_food.GooglePlace
 import com.shang.fcu_food.Maps.MapsActivity
 import com.shang.fcu_food.R
 import com.shang.fcu_food.Unit.FileStorageUnit
 import kotlinx.android.synthetic.main.cardview_detailshop.view.*
+import org.jetbrains.anko.runOnUiThread
 
-class DetailShopVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
+class DetailShopVH(itemView: View) : RecyclerView.ViewHolder(itemView), GooglePlace.ChangeGooglePlace {
 
     var shopNameTv = itemView.findViewById<TextView>(R.id.shopNameTv)
     var shopPhoneTv = itemView.findViewById<TextView>(R.id.shopPhoneTv)
@@ -70,18 +74,16 @@ class DetailShopVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
         //下面的Menu
         itemView.shopMenuRecyc.layoutManager = GridLayoutManager(itemView.context, 2)
         itemView.shopMenuRecyc.adapter =
-            SimpleMenuAdapter(
-                let { model.menu },
-                model.shop_tag,
-                model.name,
+            SimpleMenuAdapter(model.menu,
                 getItemClick(model.shop_tag, model.id, model.name, itemView.context)
             )
 
         //修改店家
         itemView.shopEditImg.setOnClickListener {
-            EditShopDialog.getInstance(model).show(activity.supportFragmentManager, EditShopDialog.TAG)
-            //itemView.shopMenuRecyc.layoutManager= LinearLayoutManager(itemView.context)
-            //itemView.shopMenuRecyc.adapter=DetailPlaceAdapter()
+            //EditShopDialog.getInstance(model).show(activity.supportFragmentManager, EditShopDialog.TAG)
+            var googlePlace = GooglePlace.getInstance(this)
+            googlePlace.getGooglePlaceData(position.toString())
+
         }
 
         //新增菜單
@@ -111,5 +113,15 @@ class DetailShopVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
         return itemClick
     }
 
+    //取得異步google place資料
+    override fun changeGooglePlace(reviews: DetailPlace) {
+        itemView.context.runOnUiThread {
+            itemView.shopMenuRecyc.adapter = DetailPlaceAdapter(reviews)
+            itemView.shopMenuRecyc.layoutManager = LinearLayoutManager(itemView.context)
+        }
+    }
 
+    var a=fun():Int{
+        return  1
+    }
 }

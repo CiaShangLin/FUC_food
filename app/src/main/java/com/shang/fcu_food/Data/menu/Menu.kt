@@ -49,11 +49,11 @@ open class Menu : FirebaseMenu {
         return null
     }
 
-    fun getFile(context: Context, shop_tag: String, shop_name: String): File {
+    fun getFile(context: Context): File {
         return FileStorageUnit.createFile(context, shop_tag, shop_name, name)
     }
 
-    fun getStorageRef(shop_tag: String, shop_name: String): StorageReference {
+    fun getStorageRef(): StorageReference {
         return FirebaseFactory.getMyFirebaseStorage().storage_getImageRef(shop_tag, shop_name, name)
     }
 

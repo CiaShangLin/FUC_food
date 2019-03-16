@@ -45,8 +45,8 @@ class DetailMenuVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
         FileStorageUnit.ImageLoader(
             itemView.context,
             itemView.menuPictureImg,
-            model.getFile(itemView.context, model.shop_tag, model.shop_name),
-            model.getStorageRef( model.shop_tag, model.shop_name),
+            model.getFile(itemView.context),
+            model.getStorageRef(),
             model.errorDrawable,
             RequestOptions().fitCenter()
         )
