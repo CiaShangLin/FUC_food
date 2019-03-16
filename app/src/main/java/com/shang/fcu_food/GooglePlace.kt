@@ -1,6 +1,5 @@
 package com.shang.fcu_food
 
-import android.util.Log
 import com.google.gson.Gson
 import okhttp3.*
 import java.io.IOException
@@ -9,7 +8,7 @@ import java.io.IOException
 class GooglePlace {
 
     interface ChangeGooglePlace {
-        fun changeGooglePlace(reviews:DetailPlace)
+        fun changeGooglePlace(reviews: DetailPlace?)
     }
 
     companion object {
@@ -29,23 +28,26 @@ class GooglePlace {
         val KEY = "key=AIzaSyBw-VTxtdZFwJMqwW4ClRF25lbEKQZZJdE"
         val LANGUAGE = "language=zh-TW"
         val FIELDS = "fields=reviews"
-        var URL = "https://maps.googleapis.com/maps/api/place/details/json?placeid=ChIJkY1jlDwWaTQRjvikydg66Bc&$FIELDS&$LANGUAGE&$KEY"
+        var URL = "https://maps.googleapis.com/maps/api/place/details/json?placeid=$place_id&$FIELDS&$LANGUAGE&$KEY"
 
-        var okHttpClient=OkHttpClient()
-        var request=Request.Builder().url(URL).build()
-        okHttpClient.newCall(request).enqueue(object :Callback{
+        var okHttpClient = OkHttpClient()
+        var request = Request.Builder().url(URL).build()
+        okHttpClient.newCall(request).enqueue(object : Callback {
             override fun onResponse(call: Call, response: Response) {
-                var reviews= Gson().fromJson<DetailPlace>(response.body()?.string(),DetailPlace::class.java)
-                ChangeGooglePlace?.changeGooglePlace(reviews)
+                var body = response.body()?.string()
+                var detailPlace = Gson().fromJson<DetailPlace>(body, DetailPlace::class.java)
+                if(detailPlace.status.equals("OK")){
+                    ChangeGooglePlace?.changeGooglePlace(detailPlace)
+                }else{
+                    ChangeGooglePlace?.changeGooglePlace(null)
+                }
             }
 
             override fun onFailure(call: Call, e: IOException) {
-
+                ChangeGooglePlace?.changeGooglePlace(null)
             }
 
         })
-
-
     }
 
 
