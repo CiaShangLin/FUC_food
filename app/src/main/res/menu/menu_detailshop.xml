@@ -1,10 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:title="@string/Menu_DetailShop_Search" android:icon="@drawable/ic_search" app:showAsAction="always"
-          android:id="@+id/menu_detailshop_search" android:visible="false"/>
+    <item android:title="more" android:id="@+id/menu_more"
+          app:showAsAction="always"
+          android:icon="@drawable/ic_more_vert_black_24dp">
+        <menu>
+            <item android:title="@string/Menu_DetailShop_Search"
+                  android:icon="@drawable/ic_search"
+                  app:showAsAction="always"
+                  android:id="@+id/menu_detailshop_search"
+                  android:visible="false"/>
 
-    <item android:title="@string/Menu_DetailShop_Recommend" android:id="@+id/menu_detailshop_recommend"
-          app:showAsAction="always" android:icon="@drawable/ic_recommend"/>
+            <item android:title="@string/Menu_DetailShop_Recommend"
+                  android:id="@+id/menu_detailshop_recommend"
+                  app:showAsAction="ifRoom"
+                  android:icon="@drawable/ic_recommend"/>
+            <item android:title="店家菜單"
+                  android:id="@+id/menu_detailshop_showMenu"
+                  app:showAsAction="ifRoom"
+                  android:icon="@drawable/ic_shop_menu"/>
+            <item android:title="店家位置"
+                  android:id="@+id/menu_detailshop_googleMap"
+                  app:showAsAction="ifRoom"
+                  android:icon="@drawable/ic_googlemap"/>
+            <item android:title="新增菜單"
+                  android:id="@+id/menu_detailshop_addMenu"
+                  app:showAsAction="ifRoom"
+                  android:icon="@drawable/ic_add_menu"/>
+            <item android:title="修改菜單"
+                  android:id="@+id/menu_detailshop_editShop"
+                  app:showAsAction="ifRoom"
+                  android:icon="@drawable/ic_edit"/>
+
+        </menu>
+    </item>
+
 
 </menu>

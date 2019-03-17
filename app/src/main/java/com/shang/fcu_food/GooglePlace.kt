@@ -36,11 +36,8 @@ class GooglePlace {
             override fun onResponse(call: Call, response: Response) {
                 var body = response.body()?.string()
                 var detailPlace = Gson().fromJson<DetailPlace>(body, DetailPlace::class.java)
-                if(detailPlace.status.equals("OK")){
-                    ChangeGooglePlace?.changeGooglePlace(detailPlace)
-                }else{
-                    ChangeGooglePlace?.changeGooglePlace(null)
-                }
+                var stutas=if(detailPlace.status.equals("OK")) detailPlace else null
+                ChangeGooglePlace?.changeGooglePlace(stutas)
             }
 
             override fun onFailure(call: Call, e: IOException) {

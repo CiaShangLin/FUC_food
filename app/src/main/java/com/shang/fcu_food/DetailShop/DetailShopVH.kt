@@ -16,6 +16,7 @@ import com.shang.fcu_food.DetailMenu.DetailMenuActivity
 import com.shang.fcu_food.DetailPlace
 import com.shang.fcu_food.DetailPlaceAdapter
 import com.shang.fcu_food.Dialog.AddMenuDialog
+import com.shang.fcu_food.Dialog.EditShopDialog
 import com.shang.fcu_food.Dialog.ImageViewDialog
 import com.shang.fcu_food.GooglePlace
 import com.shang.fcu_food.Maps.MapsActivity
@@ -31,12 +32,8 @@ class DetailShopVH(itemView: View) : RecyclerView.ViewHolder(itemView), GooglePl
     var shopPhoneTv = itemView.findViewById<TextView>(R.id.shopPhoneTv)
     var shopOpenTv = itemView.findViewById<TextView>(R.id.shopOpenTv)
     var shopStarTv = itemView.findViewById<TextView>(R.id.shopStarTv)
-    var shopMapIg = itemView.findViewById<ImageView>(R.id.shopMapIg)
     var shopMenuRecyc = itemView.findViewById<RecyclerView>(R.id.shopMenuRecyc)
     var shopPictureImg = itemView.findViewById<ImageView>(R.id.shopPictureImg)
-    var shopEditImg = itemView.findViewById<ImageView>(R.id.shopEditImg)
-    var shopAddMenuImg = itemView.findViewById<ImageView>(R.id.shopAddMenuImg)
-    var shopMenuImg = itemView.findViewById<ImageView>(R.id.shopMenuImg)
 
     fun bind(model: Shop, position: Int, activity: DetailShopActivity) {
 
@@ -44,15 +41,6 @@ class DetailShopVH(itemView: View) : RecyclerView.ViewHolder(itemView), GooglePl
         itemView.shopOpenTv.text = model.time
         itemView.shopStarTv.text = String.format("%.1f", model.star)
         itemView.shopPhoneTv.text = model.phone
-
-        //Google Map
-        itemView.shopMapIg.setOnClickListener {
-            activity.startActivity(Intent(activity, MapsActivity::class.java).apply {
-                this.action = activity.javaClass.simpleName
-                this.putExtra(DataConstant.SHOP_TYPE_TAG, model.shop_tag)
-                this.putExtra(DataConstant.POSITION, position)
-            })
-        }
 
         //店家圖片
         itemView.shopPictureImg.setOnClickListener {
@@ -70,30 +58,13 @@ class DetailShopVH(itemView: View) : RecyclerView.ViewHolder(itemView), GooglePl
             RequestOptions()
         )
 
-        //下面的Menu
+        //下面的RecycMenu
         itemView.shopMenuRecyc.layoutManager = GridLayoutManager(itemView.context, 2)
         itemView.shopMenuRecyc.adapter =
             SimpleMenuAdapter(
                 model.menu,
                 getItemClick(model.shop_tag, model.id, model.name, itemView.context)
             )
-
-        //修改店家
-        itemView.shopEditImg.setOnClickListener {
-            //EditShopDialog.getInstance(model).show(activity.supportFragmentManager, EditShopDialog.TAG)
-            var googlePlace = GooglePlace.getInstance(this)
-            googlePlace.getGooglePlaceData(position.toString())
-        }
-
-        //新增菜單
-        itemView.shopAddMenuImg.setOnClickListener {
-            AddMenuDialog.getInstance(model.name).show(activity.supportFragmentManager, AddMenuDialog.TAG)
-        }
-
-        itemView.shopMenuImg.setOnClickListener {
-            ImageViewDialog.getInstance(model.shop_tag, model.name, "菜單")
-                .show(activity.supportFragmentManager, ImageViewDialog.TAG)
-        }
 
 
     }
@@ -121,7 +92,7 @@ class DetailShopVH(itemView: View) : RecyclerView.ViewHolder(itemView), GooglePl
             }
         }else{
             itemView.context.runOnUiThread {
-                this.toast("NULL")
+                this.toast("Google Map上沒有這家店")
             }
         }
     }

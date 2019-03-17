@@ -21,7 +21,7 @@ class DetailShopActivity : AppCompatActivity() {
 
     private lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var adapter: DetailShopAdapter
-    private lateinit var firebaseShop:FirebaseShop
+    private lateinit var firebaseShop: FirebaseShop
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +41,12 @@ class DetailShopActivity : AppCompatActivity() {
                     position = (Math.random() * (detailShopRecyc.adapter)?.itemCount!!).toInt()
                     adapter.recommend(linearLayoutManager, position)
                 }
+                R.id.menu_detailshop_showMenu,
+                R.id.menu_detailshop_googleMap,
+                R.id.menu_detailshop_addMenu,
+                R.id.menu_detailshop_editShop -> {
+                    adapter.detailShopTbClick(linearLayoutManager?.findFirstVisibleItemPosition().toInt(),it.itemId)
+                }
             }
             true
         }
@@ -59,7 +65,8 @@ class DetailShopActivity : AppCompatActivity() {
         var pagerSnapHelper = PagerSnapHelper()
         pagerSnapHelper.attachToRecyclerView(detailShopRecyc)
 
-       // AdmobUnit.getInstance(this)?.show(detailShopAdView)
+
+        // AdmobUnit.getInstance(this)?.show(detailShopAdView)
         //AdmobUnit.getInstance(this)?.show(detailShopAdView2)
     }
 

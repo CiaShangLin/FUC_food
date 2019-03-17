@@ -30,8 +30,6 @@ class DetailPlaceAdapter(var detailPlace: DetailPlace) : RecyclerView.Adapter<De
                 .load(reviews.profile_photo_url)
                 .into(holder.detailPlacePictureImg)
         }
-
-
     }
 
     inner class DetailPlaceVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
