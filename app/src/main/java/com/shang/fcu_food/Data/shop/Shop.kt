@@ -38,6 +38,8 @@ abstract open class Shop : FirebaseShop {
     open var menu: MutableList<Menu> = mutableListOf()    //這個店的菜品
     open var errorDrawable: Int = R.drawable.ic_shop  //錯誤圖片
     abstract open var shop_tag: String //店的類型
+    var place_id: String = ""   //Google Place ID
+
 
     constructor()
 

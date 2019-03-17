@@ -6,8 +6,10 @@ import android.os.Bundle
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.support.v7.widget.SwitchCompat
 import android.view.View
 import android.widget.ImageView
+import android.widget.Switch
 import android.widget.TextView
 import com.bumptech.glide.request.RequestOptions
 import com.shang.fcu_food.Data.DataConstant
@@ -22,6 +24,7 @@ import com.shang.fcu_food.GooglePlace
 import com.shang.fcu_food.Maps.MapsActivity
 import com.shang.fcu_food.R
 import com.shang.fcu_food.Unit.FileStorageUnit
+import kotlinx.android.synthetic.main.activity_maps.view.*
 import kotlinx.android.synthetic.main.cardview_detailshop.view.*
 import org.jetbrains.anko.runOnUiThread
 import org.jetbrains.anko.toast
@@ -34,6 +37,7 @@ class DetailShopVH(itemView: View) : RecyclerView.ViewHolder(itemView), GooglePl
     var shopStarTv = itemView.findViewById<TextView>(R.id.shopStarTv)
     var shopMenuRecyc = itemView.findViewById<RecyclerView>(R.id.shopMenuRecyc)
     var shopPictureImg = itemView.findViewById<ImageView>(R.id.shopPictureImg)
+    var shopCommentSw = itemView.findViewById<SwitchCompat>(R.id.shopCommentSw)
 
     fun bind(model: Shop, position: Int, activity: DetailShopActivity) {
 
@@ -60,22 +64,30 @@ class DetailShopVH(itemView: View) : RecyclerView.ViewHolder(itemView), GooglePl
 
         //下面的RecycMenu
         itemView.shopMenuRecyc.layoutManager = GridLayoutManager(itemView.context, 2)
-        itemView.shopMenuRecyc.adapter =
-            SimpleMenuAdapter(
-                model.menu,
-                getItemClick(model.shop_tag, model.id, model.name, itemView.context)
-            )
+        itemView.shopMenuRecyc.adapter = SimpleMenuAdapter(model.menu, getItemClick(model, itemView.context))
+
+        itemView.shopCommentSw.setOnClickListener {
+            if (itemView.shopCommentSw.isChecked) {
+                itemView.shopCommentSw.setText("Google")
+                var googlePlace = GooglePlace.getInstance(this)
+                googlePlace.getGooglePlaceData(model.place_id)
+            } else {
+                itemView.shopCommentSw.setText("Food甲")
+                itemView.shopMenuRecyc.layoutManager = GridLayoutManager(itemView.context, 2)
+                itemView.shopMenuRecyc.adapter = SimpleMenuAdapter(model.menu, getItemClick(model, itemView.context))
+            }
+        }
 
 
     }
 
     //傳遞shop的id和type 還有position
-    fun getItemClick(tag: String, id: Int, name: String, context: Context): OnItemClickHandler {
+    fun getItemClick(shop: Shop, context: Context): OnItemClickHandler {
         var itemClick = object : OnItemClickHandler {
             override fun onItemClick(bundle: Bundle) {
-                bundle.putString(DataConstant.SHOP_NAME, name)
-                bundle.putString(DataConstant.SHOP_TYPE_TAG, tag)
-                bundle.putInt(DataConstant.SHOP_ID, id)
+                bundle.putString(DataConstant.SHOP_NAME, shop.name)
+                bundle.putString(DataConstant.SHOP_TYPE_TAG, shop.shop_tag)
+                bundle.putInt(DataConstant.SHOP_ID, shop.id)
                 var intent = Intent(context, DetailMenuActivity::class.java).apply { this.putExtras(bundle) }
                 context.startActivity(intent)
             }
@@ -85,27 +97,16 @@ class DetailShopVH(itemView: View) : RecyclerView.ViewHolder(itemView), GooglePl
 
     //取得異步google place資料
     override fun changeGooglePlace(detailPlace: DetailPlace?) {
-        if(detailPlace!=null){
+        if (detailPlace != null) {
             itemView.context.runOnUiThread {
                 itemView.shopMenuRecyc.adapter = DetailPlaceAdapter(detailPlace!!)
                 itemView.shopMenuRecyc.layoutManager = LinearLayoutManager(itemView.context)
             }
-        }else{
+        } else {
             itemView.context.runOnUiThread {
                 this.toast("Google Map上沒有這家店")
             }
         }
     }
 
-    var a = fun(): Int {
-        return 1
-    }
-
-    val plus: (Int, Int) -> Int = { firstNumber, secondNumber ->
-        firstNumber + secondNumber
-    }
-
-    fun aa(plus: Int) {
-
-    }
 }

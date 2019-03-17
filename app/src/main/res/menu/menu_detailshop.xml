@@ -22,7 +22,7 @@
             <item android:title="店家位置"
                   android:id="@+id/menu_detailshop_googleMap"
                   app:showAsAction="ifRoom"
-                  android:icon="@drawable/ic_googlemap"/>
+                  android:icon="@drawable/ic_google_map"/>
             <item android:title="新增菜單"
                   android:id="@+id/menu_detailshop_addMenu"
                   app:showAsAction="ifRoom"

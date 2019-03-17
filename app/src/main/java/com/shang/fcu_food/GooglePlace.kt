@@ -1,5 +1,7 @@
 package com.shang.fcu_food
 
+import android.content.Context
+import android.support.v4.widget.CircularProgressDrawable
 import com.google.gson.Gson
 import okhttp3.*
 import java.io.IOException
@@ -28,7 +30,7 @@ class GooglePlace {
         val KEY = "key=AIzaSyBw-VTxtdZFwJMqwW4ClRF25lbEKQZZJdE"
         val LANGUAGE = "language=zh-TW"
         val FIELDS = "fields=reviews"
-        var URL = "https://maps.googleapis.com/maps/api/place/details/json?placeid=$place_id&$FIELDS&$LANGUAGE&$KEY"
+        val URL = "https://maps.googleapis.com/maps/api/place/details/json?placeid=ChIJkY1jlDwWaTQRjvikydg66Bc&$FIELDS&$LANGUAGE&$KEY"
 
         var okHttpClient = OkHttpClient()
         var request = Request.Builder().url(URL).build()
@@ -45,6 +47,8 @@ class GooglePlace {
             }
 
         })
+
+
     }
 
 

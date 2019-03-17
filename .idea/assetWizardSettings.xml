@@ -87,8 +87,9 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="outputName" value="ic_more_vert_black_24dp" />
-                            <entry key="sourceFile" value="C:\Users\Shang\Downloads\snack.svg" />
+                            <entry key="assetSourceType" value="FILE" />
+                            <entry key="outputName" value="ic_restaurant" />
+                            <entry key="sourceFile" value="C:\Users\Shang\Downloads\restaurant.svg" />
                           </map>
                         </option>
                       </PersistentState>
