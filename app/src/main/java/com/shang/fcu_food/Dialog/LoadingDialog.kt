@@ -9,7 +9,18 @@ import android.view.View
 import android.view.ViewGroup
 import com.shang.fcu_food.R
 
-class LoadingDialog: DialogFragment() {
+class LoadingDialog : DialogFragment() {
+
+    companion object {
+        val TAG: String = "LoadingDialog"
+        private var loadingDialog: LoadingDialog? = null
+        fun getInstance(): LoadingDialog {
+            if (loadingDialog == null) {
+                loadingDialog = LoadingDialog()
+            }
+            return loadingDialog as LoadingDialog
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -17,7 +28,7 @@ class LoadingDialog: DialogFragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.dialog_loading,container,false)
+        return inflater.inflate(R.layout.dialog_loading, container, false)
     }
 
     override fun onResume() {

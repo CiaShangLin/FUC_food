@@ -1,24 +1,22 @@
 package com.shang.fcu_food
 
-import android.content.Context
-import android.support.v4.widget.CircularProgressDrawable
+import android.util.Log
 import com.google.gson.Gson
+import io.reactivex.Observable
+import io.reactivex.ObservableEmitter
+import io.reactivex.ObservableOnSubscribe
+import io.reactivex.Observer
+import io.reactivex.android.schedulers.AndroidSchedulers
 import okhttp3.*
 import java.io.IOException
+import java.lang.NullPointerException
 
 
 class GooglePlace {
 
-    interface ChangeGooglePlace {
-        fun changeGooglePlace(reviews: DetailPlace?)
-    }
-
     companion object {
-
         private var googlePlace: GooglePlace? = null
-        private var ChangeGooglePlace: ChangeGooglePlace? = null
-        fun getInstance(changeGooglePlace: ChangeGooglePlace): GooglePlace {
-            this.ChangeGooglePlace = changeGooglePlace
+        fun getInstance(): GooglePlace {
             if (googlePlace == null) {
                 googlePlace = GooglePlace()
             }
@@ -26,11 +24,12 @@ class GooglePlace {
         }
     }
 
-    fun getGooglePlaceData(place_id: String) {
+    fun getGooglePlaceData(place_id: String, observer: Observer<DetailPlace>) {
         val KEY = "key=AIzaSyBw-VTxtdZFwJMqwW4ClRF25lbEKQZZJdE"
         val LANGUAGE = "language=zh-TW"
         val FIELDS = "fields=reviews"
-        val URL = "https://maps.googleapis.com/maps/api/place/details/json?placeid=ChIJkY1jlDwWaTQRjvikydg66Bc&$FIELDS&$LANGUAGE&$KEY"
+        val URL =
+            "https://maps.googleapis.com/maps/api/place/details/json?placeid=&ChIJkY1jlDwWaTQRjvikydg66Bc$FIELDS&$LANGUAGE&$KEY"
 
         var okHttpClient = OkHttpClient()
         var request = Request.Builder().url(URL).build()
@@ -38,12 +37,25 @@ class GooglePlace {
             override fun onResponse(call: Call, response: Response) {
                 var body = response.body()?.string()
                 var detailPlace = Gson().fromJson<DetailPlace>(body, DetailPlace::class.java)
-                var stutas=if(detailPlace.status.equals("OK")) detailPlace else null
-                ChangeGooglePlace?.changeGooglePlace(stutas)
+
+                Observable.create(object : ObservableOnSubscribe<DetailPlace> {
+                    override fun subscribe(emitter: ObservableEmitter<DetailPlace>) {
+                        if (detailPlace.status.equals("OK"))
+                            emitter.onNext(detailPlace)
+                        else emitter.onError(NullPointerException())
+                        emitter.onComplete()
+                    }
+                }).subscribeOn(AndroidSchedulers.mainThread())
+                    .subscribe(observer)
             }
 
             override fun onFailure(call: Call, e: IOException) {
-                ChangeGooglePlace?.changeGooglePlace(null)
+                Observable.create(object : ObservableOnSubscribe<DetailPlace> {
+                    override fun subscribe(emitter: ObservableEmitter<DetailPlace>) {
+                        emitter.onError(e)
+                    }
+                }).subscribeOn(AndroidSchedulers.mainThread())
+                    .subscribe(observer)
             }
 
         })

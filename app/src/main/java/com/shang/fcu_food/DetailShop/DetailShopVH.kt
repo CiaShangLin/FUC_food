@@ -7,9 +7,9 @@ import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.SwitchCompat
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
-import android.widget.Switch
 import android.widget.TextView
 import com.bumptech.glide.request.RequestOptions
 import com.shang.fcu_food.Data.DataConstant
@@ -17,19 +17,19 @@ import com.shang.fcu_food.Data.shop.Shop
 import com.shang.fcu_food.DetailMenu.DetailMenuActivity
 import com.shang.fcu_food.DetailPlace
 import com.shang.fcu_food.DetailPlaceAdapter
-import com.shang.fcu_food.Dialog.AddMenuDialog
-import com.shang.fcu_food.Dialog.EditShopDialog
 import com.shang.fcu_food.Dialog.ImageViewDialog
+import com.shang.fcu_food.Dialog.LoadingDialog
 import com.shang.fcu_food.GooglePlace
-import com.shang.fcu_food.Maps.MapsActivity
 import com.shang.fcu_food.R
 import com.shang.fcu_food.Unit.FileStorageUnit
-import kotlinx.android.synthetic.main.activity_maps.view.*
+import io.reactivex.Observer
+import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.cardview_detailshop.view.*
 import org.jetbrains.anko.runOnUiThread
 import org.jetbrains.anko.toast
+import io.reactivex.functions.Consumer
 
-class DetailShopVH(itemView: View) : RecyclerView.ViewHolder(itemView), GooglePlace.ChangeGooglePlace {
+class DetailShopVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     var shopNameTv = itemView.findViewById<TextView>(R.id.shopNameTv)
     var shopPhoneTv = itemView.findViewById<TextView>(R.id.shopPhoneTv)
@@ -69,8 +69,22 @@ class DetailShopVH(itemView: View) : RecyclerView.ViewHolder(itemView), GooglePl
         itemView.shopCommentSw.setOnClickListener {
             if (itemView.shopCommentSw.isChecked) {
                 itemView.shopCommentSw.setText("Google")
-                var googlePlace = GooglePlace.getInstance(this)
-                googlePlace.getGooglePlaceData(model.place_id)
+                GooglePlace.getInstance().getGooglePlaceData(model.place_id, object : Observer<DetailPlace> {
+                    override fun onComplete() {
+                        LoadingDialog.getInstance().dismiss()
+                    }
+                    override fun onSubscribe(d: Disposable) {
+                        LoadingDialog.getInstance().show(activity.supportFragmentManager,LoadingDialog.TAG)
+                    }
+                    override fun onNext(t: DetailPlace) {
+                        itemView.shopMenuRecyc.adapter = DetailPlaceAdapter(t)
+                        itemView.shopMenuRecyc.layoutManager = LinearLayoutManager(itemView.context)
+                    }
+                    override fun onError(e: Throwable) {
+                        itemView.context.toast("Google地圖沒有這家店")
+                        LoadingDialog.getInstance().dismiss()
+                    }
+                })
             } else {
                 itemView.shopCommentSw.setText("Food甲")
                 itemView.shopMenuRecyc.layoutManager = GridLayoutManager(itemView.context, 2)
@@ -95,18 +109,5 @@ class DetailShopVH(itemView: View) : RecyclerView.ViewHolder(itemView), GooglePl
         return itemClick
     }
 
-    //取得異步google place資料
-    override fun changeGooglePlace(detailPlace: DetailPlace?) {
-        if (detailPlace != null) {
-            itemView.context.runOnUiThread {
-                itemView.shopMenuRecyc.adapter = DetailPlaceAdapter(detailPlace!!)
-                itemView.shopMenuRecyc.layoutManager = LinearLayoutManager(itemView.context)
-            }
-        } else {
-            itemView.context.runOnUiThread {
-                this.toast("Google Map上沒有這家店")
-            }
-        }
-    }
 
 }
