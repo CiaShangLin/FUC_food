@@ -7,7 +7,6 @@ import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.SwitchCompat
-import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -22,6 +21,7 @@ import com.shang.fcu_food.R
 import com.shang.fcu_food.Unit.FileStorageUnit
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
+import io.reactivex.functions.Consumer
 import kotlinx.android.synthetic.main.cardview_detailshop.view.*
 import org.jetbrains.anko.toast
 
@@ -58,9 +58,7 @@ class DetailShopVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
             RequestOptions()
         )
 
-        //下面的RecycMenu
-        itemView.shopMenuRecyc.layoutManager = GridLayoutManager(itemView.context, 2)
-        itemView.shopMenuRecyc.adapter = SimpleMenuAdapter(model.menu, getItemClick(model, itemView.context))
+        showMenuAdapter(model)
 
         itemView.shopCommentSw.setOnClickListener {
             if (itemView.shopCommentSw.isChecked) {
@@ -69,13 +67,16 @@ class DetailShopVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
                     override fun onComplete() {
                         LoadingDialog.getInstance().dismiss()
                     }
+
                     override fun onSubscribe(d: Disposable) {
-                        LoadingDialog.getInstance().show(activity.supportFragmentManager,LoadingDialog.TAG)
+                        LoadingDialog.getInstance().show(activity.supportFragmentManager, LoadingDialog.TAG)
                     }
+
                     override fun onNext(t: DetailPlace) {
                         itemView.shopMenuRecyc.adapter = DetailPlaceAdapter(t)
                         itemView.shopMenuRecyc.layoutManager = LinearLayoutManager(itemView.context)
                     }
+
                     override fun onError(e: Throwable) {
                         itemView.context.toast("Google地圖沒有這家店")
                         LoadingDialog.getInstance().dismiss()
@@ -83,27 +84,28 @@ class DetailShopVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
                 })
             } else {
                 itemView.shopCommentSw.setText("Food甲")
-                itemView.shopMenuRecyc.layoutManager = GridLayoutManager(itemView.context, 2)
-                itemView.shopMenuRecyc.adapter = SimpleMenuAdapter(model.menu, getItemClick(model, itemView.context))
+                showMenuAdapter(model)
             }
         }
 
 
     }
 
-    //傳遞shop的id和type 還有position
-    fun getItemClick(shop: Shop, context: Context): OnItemClickHandler {
-        var itemClick = object : OnItemClickHandler {
-            override fun onItemClick(bundle: Bundle) {
-                bundle.putString(DataConstant.SHOP_NAME, shop.name)
-                bundle.putString(DataConstant.SHOP_TYPE_TAG, shop.shop_tag)
-                bundle.putInt(DataConstant.SHOP_ID, shop.id)
-                var intent = Intent(context, DetailMenuActivity::class.java).apply { this.putExtras(bundle) }
-                context.startActivity(intent)
+    //下面的RecycMenu
+    fun showMenuAdapter(model: Shop) {
+        itemView.shopMenuRecyc.layoutManager = GridLayoutManager(itemView.context, 2)
+        itemView.shopMenuRecyc.adapter = SimpleMenuAdapter(model.menu, object : Consumer<Int> {
+            override fun accept(position: Int) {
+                var bundle = Bundle().apply {
+                    putString(DataConstant.SHOP_NAME, model.name)
+                    putString(DataConstant.SHOP_TYPE_TAG, model.shop_tag)
+                    putInt(DataConstant.SHOP_ID, model.id)
+                    putInt(DataConstant.POSITION, position)
+                }
+                var intent = Intent(itemView.context, DetailMenuActivity::class.java).apply { this.putExtras(bundle) }
+                itemView.context.startActivity(intent)
             }
-        }
-        return itemClick
+        })
     }
-
 
 }

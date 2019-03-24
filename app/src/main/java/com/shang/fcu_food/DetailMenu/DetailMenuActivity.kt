@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.PagerSnapHelper
+import android.util.Log
 import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.shang.fcu_food.Data.*
 import com.shang.fcu_food.Data.menu.*
@@ -40,6 +41,7 @@ class DetailMenuActivity : AppCompatActivity() {
             shop_type_tag = intent.getString(DataConstant.SHOP_TYPE_TAG)
             shop_id = intent.getInt(DataConstant.SHOP_ID)
             position = intent.getInt(DataConstant.POSITION)
+            Log.d(TAG,"shop_name:$shop_name shop_type_tag:$shop_type_tag shop_id:$shop_id position:$position")
         }
 
         detailMenuTb.inflateMenu(R.menu.menu_detailmenu)

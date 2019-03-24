@@ -13,12 +13,16 @@ import com.shang.fcu_food.Data.menu.Menu
 import com.shang.fcu_food.Data.shop.*
 import com.shang.fcu_food.R
 import com.shang.fcu_food.Unit.FileStorageUnit
-import kotlinx.android.synthetic.main.activity_maps.view.*
+import io.reactivex.Observable
+import io.reactivex.ObservableEmitter
+import io.reactivex.ObservableOnSubscribe
+import io.reactivex.functions.Consumer
 import kotlinx.android.synthetic.main.cardview_simplemenu.view.*
+
 
 class SimpleMenuAdapter(
     var menuList: MutableList<Menu>,
-    var onItemClick: OnItemClickHandler
+    var consumer: Consumer<Int>
 ) : RecyclerView.Adapter<SimpleMenuVH>() {
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): SimpleMenuVH {
@@ -29,7 +33,7 @@ class SimpleMenuAdapter(
     override fun getItemCount(): Int = menuList.size
 
     override fun onBindViewHolder(holder: SimpleMenuVH, position: Int) {
-        holder.bind(position, menuList.get(position),onItemClick)
+        holder.bind(position, menuList.get(position),consumer)
     }
 }
 
@@ -39,19 +43,16 @@ class SimpleMenuVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
     var simpleMenuStar = itemView.findViewById<TextView>(R.id.simpleMenuStar)
     var simpleMenuImg = itemView.findViewById<ImageView>(R.id.simpleMenuImg)
 
-    fun bind(
-        position: Int,
-        model: Menu,
-        onItemClick: OnItemClickHandler
-    ) {
+    fun bind(position: Int, model: Menu, consumer: Consumer<Int>) {
         itemView.simpleMenuName.text = model.name
         itemView.simpleMenuPrice.text = model.price.toString() + "元"
         itemView.simpleMenuStar.text = String.format("%.1f", model.star)
         itemView.setOnClickListener {
-            var bundle = Bundle().apply {
-                this.putInt(DataConstant.POSITION, position)
-            }
-            onItemClick.onItemClick(bundle)
+            Observable.create(object :ObservableOnSubscribe<Int>{
+                override fun subscribe(emitter: ObservableEmitter<Int>) {
+                    emitter.onNext(position)
+                }
+            }).subscribe(consumer)
         }
 
         //Menu圖片讀取
@@ -63,7 +64,6 @@ class SimpleMenuVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
             model.errorDrawable,
             RequestOptions().circleCrop()
         )
-
     }
 
 }
