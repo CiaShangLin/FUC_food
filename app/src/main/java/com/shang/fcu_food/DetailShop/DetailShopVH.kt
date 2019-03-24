@@ -15,19 +15,15 @@ import com.bumptech.glide.request.RequestOptions
 import com.shang.fcu_food.Data.DataConstant
 import com.shang.fcu_food.Data.shop.Shop
 import com.shang.fcu_food.DetailMenu.DetailMenuActivity
-import com.shang.fcu_food.DetailPlace
-import com.shang.fcu_food.DetailPlaceAdapter
+import com.shang.fcu_food.Data.DetailPlace
 import com.shang.fcu_food.Dialog.ImageViewDialog
 import com.shang.fcu_food.Dialog.LoadingDialog
-import com.shang.fcu_food.GooglePlace
 import com.shang.fcu_food.R
 import com.shang.fcu_food.Unit.FileStorageUnit
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.cardview_detailshop.view.*
-import org.jetbrains.anko.runOnUiThread
 import org.jetbrains.anko.toast
-import io.reactivex.functions.Consumer
 
 class DetailShopVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
 

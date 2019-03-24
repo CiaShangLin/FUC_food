@@ -1,7 +1,8 @@
-package com.shang.fcu_food
+package com.shang.fcu_food.DetailShop
 
 import android.util.Log
 import com.google.gson.Gson
+import com.shang.fcu_food.Data.DetailPlace
 import io.reactivex.Observable
 import io.reactivex.ObservableEmitter
 import io.reactivex.ObservableOnSubscribe
@@ -18,7 +19,8 @@ class GooglePlace {
         private var googlePlace: GooglePlace? = null
         fun getInstance(): GooglePlace {
             if (googlePlace == null) {
-                googlePlace = GooglePlace()
+                googlePlace =
+                    GooglePlace()
             }
             return googlePlace as GooglePlace
         }
@@ -28,8 +30,7 @@ class GooglePlace {
         val KEY = "key=AIzaSyBw-VTxtdZFwJMqwW4ClRF25lbEKQZZJdE"
         val LANGUAGE = "language=zh-TW"
         val FIELDS = "fields=reviews"
-        val URL =
-            "https://maps.googleapis.com/maps/api/place/details/json?placeid=ChIJkY1jlDwWaTQRjvikydg66Bc$FIELDS&$LANGUAGE&$KEY"
+        val URL = "https://maps.googleapis.com/maps/api/place/details/json?placeid=$place_id&$FIELDS&$LANGUAGE&$KEY"
 
         var okHttpClient = OkHttpClient()
         var request = Request.Builder().url(URL).build()

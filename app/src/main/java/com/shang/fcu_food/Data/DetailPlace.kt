@@ -1,4 +1,4 @@
-package com.shang.fcu_food
+package com.shang.fcu_food.Data
 
 data class DetailPlace(
     val result: Result,

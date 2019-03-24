@@ -1,4 +1,4 @@
-package com.shang.fcu_food
+package com.shang.fcu_food.DetailShop
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -7,7 +7,9 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
+import com.shang.fcu_food.Data.DetailPlace
 import com.shang.fcu_food.Main.GlideApp
+import com.shang.fcu_food.R
 
 class DetailPlaceAdapter(var detailPlace: DetailPlace) : RecyclerView.Adapter<DetailPlaceAdapter.DetailPlaceVH>() {
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): DetailPlaceVH {
