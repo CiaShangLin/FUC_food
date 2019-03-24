@@ -29,7 +29,7 @@ class GooglePlace {
         val LANGUAGE = "language=zh-TW"
         val FIELDS = "fields=reviews"
         val URL =
-            "https://maps.googleapis.com/maps/api/place/details/json?placeid=&ChIJkY1jlDwWaTQRjvikydg66Bc$FIELDS&$LANGUAGE&$KEY"
+            "https://maps.googleapis.com/maps/api/place/details/json?placeid=ChIJkY1jlDwWaTQRjvikydg66Bc$FIELDS&$LANGUAGE&$KEY"
 
         var okHttpClient = OkHttpClient()
         var request = Request.Builder().url(URL).build()
