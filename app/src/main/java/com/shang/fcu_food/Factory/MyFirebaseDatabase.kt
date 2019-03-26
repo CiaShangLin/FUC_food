@@ -17,6 +17,11 @@ import com.shang.fcu_food.Data.UserComment
 import com.shang.fcu_food.DataBind
 import com.shang.fcu_food.Dialog.FirebaseCallback
 import com.shang.fcu_food.R
+import io.reactivex.Emitter
+import io.reactivex.Observable
+import io.reactivex.ObservableEmitter
+import io.reactivex.ObservableOnSubscribe
+import io.reactivex.functions.Function
 import org.jetbrains.anko.toast
 
 class MyFirebaseDatabase {
@@ -73,13 +78,24 @@ class MyFirebaseDatabase {
             .getInstance().getReference(tempData.ref).child(fileName + fileName.hashCode() + ".jpg")
         var database_status = false
         var storage_status = false
+        var functionMap = object : Function<List<Boolean>, Boolean> {
+            override fun apply(list: List<Boolean>): Boolean? {
+                if(list[0] && list[1])
+                    return true
+                else if(!list[0] && !list[1])
+                    return false
+                return null
+            }
+        }
 
         database.push().setValue(tempData).addOnSuccessListener {
             database_status = true
             callback.statusCallBack(database_status, storage_status)
+            //Observable.just(listOf(database_status, storage_status)).map(functionMap).subscribe()
         }.addOnFailureListener {
             database_status = false
             callback.statusCallBack(database_status, storage_status)
+            //Observable.just(listOf(database_status, storage_status)).map(functionMap).subscribe()
         }
 
         if (imageByte.size != 0) {  //代表有上傳照片
@@ -87,13 +103,16 @@ class MyFirebaseDatabase {
             storage.putBytes(imageByte, metadata).addOnSuccessListener {
                 storage_status = true
                 callback.statusCallBack(database_status, storage_status)
+                //Observable.just(listOf(database_status, storage_status)).map(functionMap).subscribe()
             }.addOnFailureListener {
                 storage_status = false
                 callback.statusCallBack(database_status, storage_status)
+                //Observable.just(listOf(database_status, storage_status)).map(functionMap).subscribe()
             }
         } else {
             storage_status = true
             callback.statusCallBack(database_status, storage_status)
+            //Observable.just(listOf(database_status, storage_status)).map(functionMap).subscribe()
         }
     }
 

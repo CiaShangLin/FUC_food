@@ -12,6 +12,7 @@ import android.widget.ImageView
 import com.shang.fcu_food.Factory.FirebaseFactory
 import com.shang.fcu_food.Main.GlideApp
 import com.shang.fcu_food.R
+import org.jetbrains.anko.imageBitmap
 
 //點擊圖片後放大用
 class ImageViewDialog : DialogFragment() {
@@ -66,6 +67,8 @@ class ImageViewDialog : DialogFragment() {
             .error(R.drawable.ic_error)
             .placeholder(getLoadingDrawable(context!!))
             .into(dialogImg)
+
+
     }
 
     private fun getLoadingDrawable(context: Context): CircularProgressDrawable {

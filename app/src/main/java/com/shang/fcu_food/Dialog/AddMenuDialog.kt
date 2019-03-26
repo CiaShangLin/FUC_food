@@ -18,6 +18,7 @@ import com.shang.fcu_food.Factory.FirebaseFactory
 import com.shang.fcu_food.Main.GlideApp
 import com.shang.fcu_food.R
 import com.shang.fcu_food.Unit.PickPictureUnit
+import io.reactivex.functions.Consumer
 import kotlinx.android.synthetic.main.dialog_addmenu.*
 import org.jetbrains.anko.support.v4.toast
 
@@ -49,6 +50,19 @@ class AddMenuDialog : DialogFragment() {
             } else if (database_status == false && storage_status == false) {
                 progressDialog.dismiss()
                 toast("新增失敗")
+            }
+        }
+    }
+    private var consumer = object : Consumer<Boolean?> {
+        override fun accept(accept: Boolean?) {
+            if (accept != null) {
+                if (accept) {
+                    toast("新增成功")
+                    dismiss()
+                } else {
+                    toast("新增失敗")
+                }
+                progressDialog.dismiss()
             }
         }
     }
@@ -98,7 +112,8 @@ class AddMenuDialog : DialogFragment() {
                     throw Exception("輸入錯誤")
                 } else {
                     progressDialog.show()
-                    FirebaseFactory.getMyFirebaseDatabase().addTempData(tempMenu, PickPictureUnit.bitmapToByte(bitmap), callback)
+                    FirebaseFactory.getMyFirebaseDatabase()
+                        .addTempData(tempMenu, PickPictureUnit.bitmapToByte(bitmap), callback)
                 }
 
             } catch (e: Exception) {

@@ -11,7 +11,7 @@ import com.google.firebase.storage.StorageReference
 import java.io.File
 
 class FileRequestListener(var file: File) : RequestListener<Drawable> {
-    val TAG="FileRequestListener"
+    val TAG = "FileRequestListener"
 
     override fun onLoadFailed(
         e: GlideException?,
@@ -30,12 +30,12 @@ class FileRequestListener(var file: File) : RequestListener<Drawable> {
         isFirstResource: Boolean
     ): Boolean {
         if (isFirstResource) {
-            if (!file.exists()){    //沒有檔案的話
+            if (!file.exists()) {    //沒有檔案的話
                 file.createNewFile()
                 (model as StorageReference).getFile(file).addOnSuccessListener {
-                    Log.d(TAG, "成功下載:"+it.storage.name)
+                    Log.d(TAG, "成功下載:" + it.storage.name)
                 }.addOnFailureListener {
-                    Log.d(TAG, "下載失敗:"+it.message)
+                    Log.d(TAG, "下載失敗:" + it.message)
                 }
             }
         }
