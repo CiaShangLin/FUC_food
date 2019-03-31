@@ -66,7 +66,7 @@ class DetailShopActivity : AppCompatActivity() {
         pagerSnapHelper.attachToRecyclerView(detailShopRecyc)
 
 
-        // AdmobUnit.getInstance(this)?.show(detailShopAdView)
+        //AdmobUnit.getInstance(this)?.show(detailShopAdView)
         //AdmobUnit.getInstance(this)?.show(detailShopAdView2)
     }
 

@@ -19,6 +19,7 @@ import com.shang.fcu_food.Dialog.NetworkDialog
 import com.shang.fcu_food.Dialog.UserSettingDialog
 import com.shang.fcu_food.Factory.FirebaseFactory
 import com.shang.fcu_food.R
+import com.shang.fcu_food.Unit.AdmobUnit
 import com.shang.fcu_food.Unit.PermissionUnit
 import com.shang.fcu_food.Unit.VersionCheckUnit
 import kotlinx.android.synthetic.main.drawer_layout.*

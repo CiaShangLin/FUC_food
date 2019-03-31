@@ -12,6 +12,7 @@ import android.widget.RatingBar
 import com.google.android.gms.ads.AdView
 import com.shang.fcu_food.Factory.FirebaseFactory
 import com.shang.fcu_food.R
+import com.shang.fcu_food.Unit.AdmobUnit
 
 class AddCommentDialog : DialogFragment() {
 
