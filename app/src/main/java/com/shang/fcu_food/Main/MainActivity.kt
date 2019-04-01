@@ -8,11 +8,8 @@ import android.os.Handler
 import android.os.Message
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.IdpResponse
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.FirebaseDatabase
 import com.shang.fcu_food.Data.User
 import com.shang.fcu_food.Dialog.AddShopDialog
 import com.shang.fcu_food.Dialog.NetworkDialog
@@ -26,7 +23,6 @@ import kotlinx.android.synthetic.main.drawer_layout.*
 import kotlinx.android.synthetic.main.toolbar_layout.*
 import org.jetbrains.anko.alert
 import org.jetbrains.anko.toast
-import java.io.File
 
 
 class MainActivity : AppCompatActivity() {

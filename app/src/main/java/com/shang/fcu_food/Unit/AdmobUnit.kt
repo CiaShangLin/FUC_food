@@ -17,7 +17,7 @@ class AdmobUnit {
                 admobUnit = AdmobUnit()
                 MobileAds.initialize(context, "ca-app-pub-3596318314144695~8650129956")
                 mInterstitialAd = InterstitialAd(context)
-                mInterstitialAd?.setAdUnitId(context.resources.getString(R.string.admob_interstitial_test))
+                mInterstitialAd?.setAdUnitId(context.resources.getString(R.string.admob_interstitial))
                 mInterstitialAd?.loadAd(AdRequest.Builder().build())
             }
             return admobUnit

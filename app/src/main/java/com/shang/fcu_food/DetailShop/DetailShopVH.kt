@@ -60,7 +60,7 @@ class DetailShopVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         showMenuAdapter(model)
 
-        itemView.shopCommentSw.setOnClickListener {
+        /*itemView.shopCommentSw.setOnClickListener {
             if (itemView.shopCommentSw.isChecked) {
                 itemView.shopCommentSw.setText("Google")
                 GooglePlace.getInstance().getGooglePlaceData(model.place_id, object : Observer<DetailPlace> {
@@ -86,7 +86,7 @@ class DetailShopVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
                 itemView.shopCommentSw.setText("Food甲")
                 showMenuAdapter(model)
             }
-        }
+        }*/
 
 
     }
