@@ -26,13 +26,13 @@ QR CODE:<p>
 > * 隨機推薦店家和隨機推薦菜品
 
 # 圖片展示:
-|![早餐](app/image/早餐.png = 520x360)|![晚餐](app/image/晚餐.png = 520x360)
-|![小吃](app/image/小吃.png = 520x360)|![飲料](app/image/飲料.png = 520x360)
-|![抽屜](app/image/抽屜.png = 520x360)|![使用者設定](app/image/使用者設定.png = 520x360)
-|![店家資訊](app/image/店家資訊.png = 520x360)|![新增店家](app/image/新增店家.png = 520x360)
-|![修改店家](app/image/修改店家.png = 520x360)|![GoogleMap](app/image/GoogleMap.png = 520x360)
-|![菜單資訊.](app/image/菜單資訊.png = 520x360)|![新增菜單](app/image/新增菜單.png = 520x360)
-![發表評論](app/image/發表評論.png = 520x360)
+|![早餐](app/image/早餐.png)|![晚餐](app/image/晚餐.png)
+|![小吃](app/image/小吃.png )|![飲料](app/image/飲料.png )
+|![抽屜](app/image/抽屜.png )|![使用者設定](app/image/使用者設定.png)
+|![店家資訊](app/image/店家資訊.png )|![新增店家](app/image/新增店家.png)
+|![修改店家](app/image/修改店家.png )|![GoogleMap](app/image/GoogleMap.png )
+|![菜單資訊.](app/image/菜單資訊.png )|![新增菜單](app/image/新增菜單.png )
+![發表評論](app/image/發表評論.png )
 
 
 
