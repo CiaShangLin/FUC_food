@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Food甲</string>
 
+
+
     <string name="menu_main_addShop">新增店家</string>
 
     <string name="networkTv">請打開網路或是WIFI</string>
