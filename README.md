@@ -26,7 +26,7 @@ QR CODE:<p>
 > * 隨機推薦店家和隨機推薦菜品
 
 # 圖片展示:
-|<img src=app/image/早餐.jpg height="540" width=30% >|![晚餐](app/image/晚餐.png)
+|<img src=../app/image/早餐.jpg height="540" width=30% >|![晚餐](app/image/晚餐.png)
 |![小吃](app/image/小吃.png )|![飲料](app/image/飲料.png )
 |![抽屜](app/image/抽屜.png )|![使用者設定](app/image/使用者設定.png)
 |![店家資訊](app/image/店家資訊.png )|![新增店家](app/image/新增店家.png)
